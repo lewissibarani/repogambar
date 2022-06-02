@@ -12,14 +12,14 @@
     <!-- Logo End -->
 
     <!-- Language Switch Start -->
-    <div class="language-switch-container">
+    <!-- <div class="language-switch-container">
         <button class="btn btn-empty language-button dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">EN</button>
         <div class="dropdown-menu">
             <a href="#" class="dropdown-item">DE</a>
             <a href="#" class="dropdown-item active">EN</a>
             <a href="#" class="dropdown-item">ES</a>
         </div>
-    </div>
+    </div> -->
     <!-- Language Switch End -->
 
     <!-- User Menu Start -->
@@ -130,12 +130,12 @@
                 <i data-acorn-icon="search" data-acorn-size="18"></i>
             </a>
         </li>
-        <li class="list-inline-item">
+        <!-- <li class="list-inline-item">
             <a href="#" id="pinButton" class="pin-button">
                 <i data-acorn-icon="lock-on" class="unpin" data-acorn-size="18"></i>
                 <i data-acorn-icon="lock-off" class="pin" data-acorn-size="18"></i>
             </a>
-        </li>
+        </li> -->
         <li class="list-inline-item">
             <a href="#" id="colorButton">
                 <i data-acorn-icon="light-on" class="light" data-acorn-size="18"></i>
@@ -187,15 +187,21 @@
     <div class="menu-container flex-grow-1">
         <ul id="menu" class="menu">
             <li>
-                <a href="/Horizontal">
-                    <i data-acorn-icon="grid-2" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Horizontal</span>
+                <a href="/Dashboard">
+                    <i data-acorn-icon="home" class="icon" data-acorn-size="18"></i>
+                    <span class="label">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="/Vertical">
-                    <i data-acorn-icon="grid-3" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Vertical</span>
+                    <i data-acorn-icon="database" class="icon" data-acorn-size="18"></i>
+                    <span class="label">Kelola Gambar</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Kontribusi">
+                    <i data-acorn-icon="camera" class="icon" data-acorn-size="18"></i>
+                    <span class="label">Halaman Kontributor</span>
                 </a>
             </li>
         </ul>
