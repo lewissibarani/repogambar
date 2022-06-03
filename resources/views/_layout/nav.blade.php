@@ -111,7 +111,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Pages/Authentication/Login">
                                 <i data-acorn-icon="logout" class="me-2" data-acorn-size="17"></i>
                                 <span class="align-middle">Logout</span>
                             </a>

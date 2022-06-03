@@ -29,3 +29,15 @@ Route::view('/Dashboard', 'dashboard');
 Route::view('/Kelolagambar', 'kelolagambar');
 Route::view('/Kontributor', 'kontributor');
 
+Route::prefix('Pages')->group(function () {
+    Route::view('/', 'pages/index');
+
+    Route::prefix('Authentication')->group(function () {
+        Route::view('/', 'pages/authentication/index');
+        Route::view('Login', 'pages/authentication/login');
+        Route::view('Register', 'pages/authentication/register');
+        Route::view('ForgotPassword', 'pages/authentication/forgot_password');
+        Route::view('ResetPassword', 'pages/authentication/reset_password');
+    });
+
+});
