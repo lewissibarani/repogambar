@@ -20,11 +20,11 @@
         <div class="w-100 w-lg-75 w-xxl-50">
             <div>
                 <div class="mb-5">
-                    <h1 class="display-3 text-white">Repositori Gambar</h1>
+                    <h1 class="display-3 text-white">Gudang Gambar</h1>
                     <h1 class="display-3 text-white">Badan Pusat Statistik</h1>
                 </div>
                 <p class="h6 text-white lh-1-5 mb-5">
-                    Website portal penyedia aset digital visual Shutterstock dan Freepic untuk seluruh pegawai Badan Pusat Statistik
+                    Website portal penyedia aset digital visual Shutterstock dan Freepik untuk seluruh pegawai Badan Pusat Statistik
                 </p>
                 <div class="mb-5">
                     <a class="btn btn-lg btn-outline-white" href="/">Learn More</a>
