@@ -43,14 +43,14 @@
                 </a>
             </div>
             <div class="mb-5">
-                <h2 class="cta-1 mb-0 text-primary">Welcome,</h2>
-                <h2 class="cta-1 text-primary">let's get started!</h2>
+                <h2 class="cta-1 mb-0 text-primary">Selamat Datang,</h2>
+                <!-- <h2 class="cta-1 text-primary">let's get started!</h2> -->
             </div>
             <div class="mb-5">
-                <p class="h6">Please use your credentials to login.</p>
+                <p class="h6">Silahkan login terlebih dahulu</p>
                 <p class="h6">
-                    If you are not a member, please
-                    <a href="/Pages/Authentication/Register">register</a>
+                    Jika belum memiliki akun, silahkan
+                    <a href="/Pages/Authentication/Register">daftar</a>
                     .
                 </p>
             </div>

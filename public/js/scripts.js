@@ -68,7 +68,7 @@
   // Settings initialization
   _initSettings() {
     if (typeof Settings !== 'undefined') {
-      const settings = new Settings({attributes: {placement: 'horizontal', color: 'light-red' }, showSettings: true, storagePrefix: 'acorn-starter-project-'});
+      const settings = new Settings({attributes: {placement: 'horizontal', color: 'light-blue' }, showSettings: true, storagePrefix: 'acorn-starter-project-'});
     }
   }
 
