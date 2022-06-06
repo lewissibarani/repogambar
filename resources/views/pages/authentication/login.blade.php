@@ -26,9 +26,9 @@
                 <p class="h6 text-white lh-1-5 mb-5">
                     Website portal penyedia aset digital visual Shutterstock dan Freepik untuk seluruh pegawai Badan Pusat Statistik
                 </p>
-                <div class="mb-5">
+                <!-- <div class="mb-5">
                     <a class="btn btn-lg btn-outline-white" href="/">Learn More</a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // index routing via Route feature
-Route::redirect('/', '/Horizontal');
+Route::redirect('/', '/Dashboard/Beranda');
 
 
 /*
@@ -25,9 +25,15 @@ Route::redirect('/', '/Horizontal');
 */
 Route::view('/Horizontal', 'horizontal');
 Route::view('/Vertical', 'vertical');
-Route::view('/Dashboard', 'dashboard');
 Route::view('/Kelolagambar', 'kelolagambar');
 Route::view('/Kontributor', 'kontributor');
+
+Route::prefix('Dashboard')->group(function () {
+    Route::view('/', 'dashboard/dashboard');
+    Route::view('Beranda', 'dashboard/dashboard');
+    Route::view('Permintaan Gambar', 'dashboard/permintaan_gambar');
+    Route::view('Hasil Pencarian', 'dashboard/hasilpencarian');
+});
 
 Route::prefix('Pages')->group(function () {
     Route::view('/', 'pages/index');

@@ -1,5 +1,9 @@
 @php
-    $html_tag_data = ["override"=>'{ "attributes" : { "placement" : "horizontal", "layout":"boxed" }, "storagePrefix" : "starter-project", "showSettings" : false }'];
+    $html_tag_data = ["override"=>'{ "attributes" : 
+        { "placement" : "horizontal", 
+          "layout":"boxed",
+          "color": "light-blue"
+        }, "storagePrefix" : "starter-project", "showSettings" : false }'];
 $title = 'Horizontal Starter Page';
 $description= 'An empty page with a boxed horizontal layout.';
 $breadcrumbs = ["/"=>"Home"]
@@ -34,7 +38,6 @@ $breadcrumbs = ["/"=>"Home"]
         <!-- Content Start -->
         <div class="card mb-2">
             <div class="card-body h-100">
-            Test    
             {{ $description }}
             </div>
         </div>
