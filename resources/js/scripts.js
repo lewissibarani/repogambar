@@ -65,6 +65,71 @@
     }
   }
 
+  // Plugin pages initialization
+  _initPlugins() {
+    // carousels.js initialization
+    if (typeof Carousels !== 'undefined') {
+      const carousels = new Carousels();
+    }
+    // charts.js initialization
+    if (typeof Charts !== 'undefined') {
+      const charts = new Charts();
+    }
+    // contextmenu.js initialization
+    if (typeof ContextMenu !== 'undefined') {
+      const contextMenu = new ContextMenu();
+    }
+    // lightbox.js initialization
+    if (typeof Lightbox !== 'undefined') {
+      const lightbox = new Lightbox();
+    }
+
+    // lists.js initialization
+    if (typeof Lists !== 'undefined') {
+      const lists = new Lists();
+    }
+    // notifies.js initialization
+    if (typeof Notifies !== 'undefined') {
+      const notifies = new Notifies();
+    }
+    // players.js initialization
+    if (typeof Players !== 'undefined') {
+      const players = new Players();
+    }
+    // progressbars.js initialization
+    if (typeof ProgressBars !== 'undefined') {
+      const progressBars = new ProgressBars();
+    }
+    // shortcuts.js initialization
+    if (typeof Shortcuts !== 'undefined') {
+      const shortcuts = new Shortcuts();
+    }
+    // sortables.js initialization
+    if (typeof Sortables !== 'undefined') {
+      const sortables = new Sortables();
+    }
+    // datatable.editablerows.js initialization
+    if (typeof EditableRows !== 'undefined') {
+      const editableRows = new EditableRows();
+    }
+    // datatable.editableboxed.js initialization
+    if (typeof EditableBoxed !== 'undefined') {
+      const editableBoxed = new EditableBoxed();
+    }
+    // datatable.ajax.js initialization
+    if (typeof RowsAjax !== 'undefined') {
+      const rowsAjax = new RowsAjax();
+    }
+    // datatable.serverside.js initialization
+    if (typeof RowsServerSide !== 'undefined') {
+      const rowsServerSide = new RowsServerSide();
+    }
+    // datatable.serverside.js initialization
+    if (typeof BoxedVariations !== 'undefined') {
+      const boxedVariations = new BoxedVariations();
+    }
+  }
+
   // Settings initialization
   _initSettings() {
     if (typeof Settings !== 'undefined') {
