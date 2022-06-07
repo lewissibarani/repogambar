@@ -190,15 +190,15 @@
                 </a>
             </li>
             <li>
-                <a href="/Vertical">
-                    <i data-acorn-icon="database" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Kelola Gambar</span>
-                </a>
-            </li>
-            <li>
                 <a href="/Kontribusi">
                     <i data-acorn-icon="camera" class="icon" data-acorn-size="18"></i>
                     <span class="label">Halaman Kontributor</span>
+                </a>
+            </li>
+            <li>
+                <a href="/KelolaGambar/Index">
+                    <i data-acorn-icon="notebook-1" class="icon" data-acorn-size="18"></i>
+                    <span class="label">Permintaan Gambar</span>
                 </a>
             </li>
         </ul>

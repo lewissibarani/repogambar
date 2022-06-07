@@ -25,14 +25,17 @@ Route::redirect('/', '/Dashboard/Beranda');
 */
 Route::view('/Horizontal', 'horizontal');
 Route::view('/Vertical', 'vertical');
-Route::view('/Kelolagambar', 'kelolagambar');
-Route::view('/Kontributor', 'kontributor');
 
 Route::prefix('Dashboard')->group(function () {
     Route::view('/', 'dashboard/dashboard');
     Route::view('Beranda', 'dashboard/dashboard');
-    Route::view('Permintaan Gambar', 'dashboard/permintaan_gambar');
     Route::view('Hasil Pencarian', 'dashboard/hasilpencarian');
+});
+Route::prefix('KelolaGambar')->group(function () {
+    Route::view('/', 'kelolagambar/index');
+    Route::view('Index', 'kelolagambar/index');
+    Route::view('Create', 'kelolagambar/create');
+    Route::view('Update', 'kelolagambar/update');
 });
 
 Route::prefix('Pages')->group(function () {
