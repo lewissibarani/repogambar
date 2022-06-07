@@ -40,25 +40,25 @@
                             <!-- Default Start -->
                             <section class="scroll-section" id="default">
                                 <!-- Button Trigger -->
-                                <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#addEditModal">
                                     <i data-acorn-icon="plus"></i>
                                     <span>Tambah Baru</span>
                                 </button>
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelDefault" aria-hidden="true">
-                                    @include('kelolagambar.form')
-                                </div>
                             </section>
                             <!-- Default End -->
 
                             <!-- Check Button Start -->
-                            <div class="btn-group ms-1 check-all-container">
+                            <!-- <div class="btn-group ms-1 check-all-container">
                                 <div class="btn btn-outline-primary btn-custom-control p-0 ps-3 pe-2" id="datatableCheckAllButton">
-                <span class="form-check float-end">
-                  <input type="checkbox" class="form-check-input" id="datatableCheckAll" />
-                </span>
-                                </div>
-                                <button
+                             
+                                <span class="form-check float-end">
+                                <input type="checkbox" class="form-check-input" id="datatableCheckAll" />
+                                </span>
+                            -->
+                        </div>
+                                <!-- <button
                                         type="button"
                                         class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
                                         data-bs-offset="0,3"
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="dropdown-divider"></div>
                                     <button class="dropdown-item disabled delete-datatable" type="button">Delete</button>
-                                </div>
+                                </div> -->
                             </div>
                             <!-- Check Button End -->
                         </div>
@@ -107,21 +107,9 @@
 
                         <div class="col-sm-12 col-md-7 col-lg-9 col-xxl-10 text-end mb-1">
                             <div class="d-inline-block me-0 me-sm-3 float-start float-md-none">
-                                <!-- Add Button Start -->
-                                <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow add-datatable"
-                                        data-bs-delay="0"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Add"
-                                        type="button"
-                                >
-                                    <i data-acorn-icon="plus"></i>
-                                </button>
-                                <!-- Add Button End -->
 
                                 <!-- Edit Button Start -->
-                                <button
+                                <!-- <button
                                         class="btn btn-icon btn-icon-only btn-foreground-alternate shadow edit-datatable disabled"
                                         data-bs-delay="0"
                                         data-bs-toggle="tooltip"
@@ -130,11 +118,11 @@
                                         type="button"
                                 >
                                     <i data-acorn-icon="edit"></i>
-                                </button>
+                                </button> -->
                                 <!-- Edit Button End -->
 
                                 <!-- Delete Button Start -->
-                                <button
+                                <!-- <button
                                         class="btn btn-icon btn-icon-only btn-foreground-alternate shadow disabled delete-datatable"
                                         data-bs-delay="0"
                                         data-bs-toggle="tooltip"
@@ -143,12 +131,12 @@
                                         type="button"
                                 >
                                     <i data-acorn-icon="bin"></i>
-                                </button>
+                                </button> -->
                                 <!-- Delete Button End -->
                             </div>
                             <div class="d-inline-block">
                                 <!-- Print Button Start -->
-                                <button
+                                <!-- <button
                                         class="btn btn-icon btn-icon-only btn-foreground-alternate shadow datatable-print"
                                         data-bs-delay="0"
                                         data-datatable="#datatableRowsAjax"
@@ -158,7 +146,7 @@
                                         type="button"
                                 >
                                     <i data-acorn-icon="print"></i>
-                                </button>
+                                </button> -->
                                 <!-- Print Button End -->
 
                                 <!-- Export Dropdown Start -->
@@ -212,12 +200,12 @@
                         <table id="datatableRowsAjax" class="data-table nowrap w-100">
                             <thead>
                             <tr>
-                                <th class="text-muted text-small text-uppercase">Name</th>
-                                <th class="text-muted text-small text-uppercase">Sales</th>
-                                <th class="text-muted text-small text-uppercase">Stock</th>
-                                <th class="text-muted text-small text-uppercase">Category</th>
-                                <th class="text-muted text-small text-uppercase">Tag</th>
-                                <th class="empty">&nbsp;</th>
+                                <th class="text-muted text-small text-uppercase">ID Permintaan</th>
+                                <th class="text-muted text-small text-uppercase">Link</th>
+                                <th class="text-muted text-small text-uppercase">Kegunaan</th>
+                                <th class="text-muted text-small text-uppercase">Waktu</th>
+                                <th class="text-muted text-small text-uppercase">Status</th>
+                                <!-- <th class="empty">&nbsp;</th> -->
                             </tr>
                             </thead>
                         </table>
@@ -227,66 +215,25 @@
                 <!-- Content End -->
 
                 <!-- Add Edit Modal Start -->
-                <!-- <div class="modal modal-right fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                <div class="modal modal-right large fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modalTitle">Add New</h5>
+                                <h5 class="modal-title" id="modalTitle">Form Permintaan Gambar</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form>
-                                    <div class="mb-3">
-                                        <label class="form-label">Name</label>
-                                        <input name="Name" type="text" class="form-control" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Sales</label>
-                                        <input name="Sales" type="number" class="form-control" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Stock</label>
-                                        <input name="Stock" type="number" class="form-control" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Category</label>
-                                        <div class="form-check">
-                                            <input type="radio" id="category1" name="Category" value="Whole Wheat" class="form-check-input" />
-                                            <label class="form-check-label" for="category1">Whole Wheat</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="radio" id="category2" name="Category" value="Sourdough" class="form-check-input" />
-                                            <label class="form-check-label" for="category2">Sourdough</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="radio" id="category3" name="Category" value="Multigrain" class="form-check-input" />
-                                            <label class="form-check-label" for="category3">Multigrain</label>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Tag</label>
-                                        <div class="form-check">
-                                            <input type="radio" id="tag1" name="Tag" value="New" class="form-check-input" />
-                                            <label class="form-check-label" for="tag1">New</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="radio" id="tag2" name="Tag" value="Sale" class="form-check-input" />
-                                            <label class="form-check-label" for="tag2">Sale</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="radio" id="tag3" name="Tag" value="Done" class="form-check-input" />
-                                            <label class="form-check-label" for="tag3">Done</label>
-                                        </div>
-                                    </div>
+                                    @include('KelolaGambar.form');
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" id="addEditConfirmButton">Add</button>
+                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
+                                <button type="button" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <!-- Add Edit Modal End -->
 
             </div>

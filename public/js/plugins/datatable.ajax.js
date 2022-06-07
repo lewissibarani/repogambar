@@ -49,7 +49,8 @@
         order: [], // Clearing default order
         sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
         pageLength: 10,
-        columns: [{data: 'Name'}, {data: 'Sales'}, {data: 'Stock'}, {data: 'Category'}, {data: 'Tag'}, {data: 'Check'}],
+        columns: [{data: 'Name'}, {data: 'Sales'}, {data: 'Stock'}, {data: 'Category'}, {data: 'Tag'}],
+        // {data: 'Check'}
         language: {
           paginate: {
             previous: '<i class="cs-chevron-left"></i>',
@@ -70,20 +71,49 @@
               return '<a class="list-item-heading body" href="#">' + data + '</a>';
             },
           },
+          // Memotong Tetx agar tidak terlalu panjang
+          {
+            targets: 1,
+            render: function (data) {
+              if (data.length > 5) {
+                return '<a class="" href="'+ data +'">' + data.substring(0, 20) + '...'+ '</a>';
+             } else {
+                return '<a class="" href="'+ data +'">' + data + '</a>';
+             }
+              
+            }
+
+          },
+
           // Adding Tag content as a span with a badge class
           {
             targets: 4,
             render: function (data, type, row, meta) {
-              return '<span class="badge bg-outline-primary">' + data + '</span>';
+              const status=null;
+              switch (data) {
+                case 0:
+                  status = "<span class='badge bg-outline-primary'>Diproses</span>";
+                  break;
+                case 1:
+                  status = "<span class='badge bg-outline-primary'>Ditolak</span>";
+                  break;
+                case 2:
+                  status = "<span class='badge bg-outline-primary'>Selesai</span>";
+                  break;
+                default:
+                  status = "<span class='badge bg-outline-primary'>Duplikasi</span>";
+                  break;
+              }
+              return status;
             },
           },
-          // Adding checkbox for Check column
-          {
-            targets: 5,
-            render: function (data, type, row, meta) {
-              return '<div class="form-check float-end mt-1"><input type="checkbox" class="form-check-input"></div>';
-            },
-          },
+          // // Adding checkbox for Check column
+          // {
+          //   targets: 5,
+          //   render: function (data, type, row, meta) {
+          //     return '<div class="form-check float-end mt-1"><input type="checkbox" class="form-check-input"></div>';
+          //   },
+          // },
         ],
       });
     }
@@ -156,11 +186,11 @@
     }
   
     // Direct click from row title
-    _onEditRowClick(rowToEdit) {
-      this._rowToEdit = rowToEdit; // Passed from DatatableExtend via callback from settings
-      this._showModal('edit', 'Edit', 'Done');
-      this._setForm();
-    }
+    // _onEditRowClick(rowToEdit) {
+    //   this._rowToEdit = rowToEdit; // Passed from DatatableExtend via callback from settings
+    //   this._showModal('edit', 'Edit', 'Done');
+    //   this._setForm();
+    // }
   
     // Edit button inside th modal click
     _editRowFromModal() {
@@ -188,7 +218,7 @@
   
     // + Add New or just + button from top side click
     _onAddRowClick() {
-      this._showModal('add', 'Add New', 'Add');
+      this._showModal('add', 'Formulir Permintaan Gambar', 'Kirim');
     }
   
     // Showing modal for an objective, add or edit
