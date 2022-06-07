@@ -30,7 +30,7 @@
                         </div>
                         <div class="w-100 d-md-none"></div>
                         <div class="col col-md-auto d-flex align-items-start justify-content-end">
-                            <a href="/Dashboard/Permintaan Gambar" class="btn btn-outline-primary btn-icon btn-icon-start ms-1 w-100 w-md-auto">
+                            <a href="/KelolaGambar/Index" class="btn btn-outline-primary btn-icon btn-icon-start ms-1 w-100 w-md-auto">
                                 <i data-acorn-icon="plus"></i>
                                 <span>Buat Permintaan Gambar</span>
                             </a>

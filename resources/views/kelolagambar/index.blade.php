@@ -1,8 +1,8 @@
 @php
     $html_tag_data = [];
-    $title = 'Ajax Rows Datatables';
+    $title = 'Daftar Permintaan Gambar';
     $description= 'A table enhancing plug-in for the jQuery Javascript library, adding sorting, paging and filtering abilities to plain HTML tables with minimal effort.';
-    $breadcrumbs = ["/"=>"Home","/Interface"=>"Interface","/Interface/Plugins"=>"Plugins","/Interface/Plugins/Datatables"=>"Datatables"]
+    $breadcrumbs = ["/"=>"Home","/KelolaGambar/Index"=>"Daftar Permintaan Gambar"]
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
@@ -40,25 +40,13 @@
                             <!-- Default Start -->
                             <section class="scroll-section" id="default">
                                 <!-- Button Trigger -->
-                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <i data-acorn-icon="plus"></i>
                                     <span>Tambah Baru</span>
                                 </button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelDefault" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabelDefault">Modal title</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">...</div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @include('kelolagambar.form')
                                 </div>
                             </section>
                             <!-- Default End -->
@@ -237,6 +225,69 @@
                     <!-- Table End -->
                 </div>
                 <!-- Content End -->
+
+                <!-- Add Edit Modal Start -->
+                <!-- <div class="modal modal-right fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalTitle">Add New</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label class="form-label">Name</label>
+                                        <input name="Name" type="text" class="form-control" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Sales</label>
+                                        <input name="Sales" type="number" class="form-control" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Stock</label>
+                                        <input name="Stock" type="number" class="form-control" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Category</label>
+                                        <div class="form-check">
+                                            <input type="radio" id="category1" name="Category" value="Whole Wheat" class="form-check-input" />
+                                            <label class="form-check-label" for="category1">Whole Wheat</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" id="category2" name="Category" value="Sourdough" class="form-check-input" />
+                                            <label class="form-check-label" for="category2">Sourdough</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" id="category3" name="Category" value="Multigrain" class="form-check-input" />
+                                            <label class="form-check-label" for="category3">Multigrain</label>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Tag</label>
+                                        <div class="form-check">
+                                            <input type="radio" id="tag1" name="Tag" value="New" class="form-check-input" />
+                                            <label class="form-check-label" for="tag1">New</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" id="tag2" name="Tag" value="Sale" class="form-check-input" />
+                                            <label class="form-check-label" for="tag2">Sale</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" id="tag3" name="Tag" value="Done" class="form-check-input" />
+                                            <label class="form-check-label" for="tag3">Done</label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" id="addEditConfirmButton">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- Add Edit Modal End -->
 
             </div>
         </div>
