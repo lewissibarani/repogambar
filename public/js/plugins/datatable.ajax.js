@@ -28,6 +28,7 @@
   
       // Add or edit modal
       this._addEditModal;
+      
   
       // Datatable single item height
       this._staticHeight = 62;
@@ -49,7 +50,7 @@
         order: [], // Clearing default order
         sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
         pageLength: 10,
-        columns: [{data: 'Name'}, {data: 'Sales'}, {data: 'Stock'}, {data: 'Category'}, {data: 'Tag'}],
+        columns: [{data: 'idPermintaan'}, {data: 'link'}, {data: 'kegunaan'}, {data: 'waktu'}, {data: 'status'}],
         // {data: 'Check'}
         language: {
           paginate: {
@@ -68,7 +69,8 @@
           {
             targets: 0,
             render: function (data, type, row, meta) {
-              return '<a class="list-item-heading body" href="#">' + data + '</a>';
+              
+              return '<a class="list-item-heading body" data-bs-toggle="modal" href="#previewModal">' + data + '</a>';
             },
           },
           // Memotong Tetx agar tidak terlalu panjang
@@ -76,9 +78,9 @@
             targets: 1,
             render: function (data) {
               if (data.length > 5) {
-                return '<a class="" href="'+ data +'">' + data.substring(0, 20) + '...'+ '</a>';
+                return '<a class="" href="'+ data +' " target="_blank" rel="noopener noreferrer">' + data.substring(0, 30) + '...'+ '</a>';
              } else {
-                return '<a class="" href="'+ data +'">' + data + '</a>';
+                return '<a class="" href="'+ data +' " target="_blank" rel="noopener noreferrer">' + data + '</a>';
              }
               
             }
@@ -89,19 +91,19 @@
           {
             targets: 4,
             render: function (data, type, row, meta) {
-              const status=null;
+              let status;
               switch (data) {
                 case 0:
                   status = "<span class='badge bg-outline-primary'>Diproses</span>";
                   break;
                 case 1:
-                  status = "<span class='badge bg-outline-primary'>Ditolak</span>";
+                  status = "<span class='badge rounded-pill bg-danger'>Ditolak</span>";
                   break;
                 case 2:
-                  status = "<span class='badge bg-outline-primary'>Selesai</span>";
+                  status = "<span class='badge rounded-pill bg-primary'>Selesai</span>";
                   break;
                 default:
-                  status = "<span class='badge bg-outline-primary'>Duplikasi</span>";
+                  status = "<span class='badge rounded-pill bg-warning'>Duplikasi</span>";
                   break;
               }
               return status;
@@ -185,13 +187,21 @@
       this._onEditRowClick(this._datatable.row(selected[0][0]));
     }
   
-    // Direct click from row title
+    // // Direct click from row title
     // _onEditRowClick(rowToEdit) {
     //   this._rowToEdit = rowToEdit; // Passed from DatatableExtend via callback from settings
     //   this._showModal('edit', 'Edit', 'Done');
     //   this._setForm();
     // }
-  
+
+    // Direct click from row title
+    _onEditRowClick(rowToEdit) {
+      this._rowToEdit = rowToEdit; // Passed from DatatableExtend via callback from settings
+
+      // this._showPreviewModal('edit', 'Edit', 'Done');
+      this._setPreviewForm();
+    }
+
     // Edit button inside th modal click
     _editRowFromModal() {
       const data = this._rowToEdit.data();
@@ -241,6 +251,14 @@
       if (document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
         document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
       }
+    }
+
+    // Filling the modal form data
+    _setPreviewForm() {
+      const data = this._rowToEdit.data();
+      document.querySelector('.previewLink').innerHTML = data.idPermintaan;
+      document.querySelector('.previewWaktu').innerHTML = data.waktu;
+      document.querySelector('.previewStatus').innerHTML = data.status;
     }
   
     // Getting form values from the fields to pass to datatable

@@ -41,8 +41,8 @@
                             <section class="scroll-section" id="default">
                                 <!-- Button Trigger -->
                                 <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" 
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#addEditModal">
+                                data-bs-toggle="modal"        
+                                data-bs-target="#addEditModal">
                                     <i data-acorn-icon="plus"></i>
                                     <span>Tambah Baru</span>
                                 </button>
@@ -224,12 +224,24 @@
                             </div>
                             <div class="modal-body">
                                 <form>
-                                    @include('KelolaGambar.form');
+                                    @include('KelolaGambar.form')
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
                                 <button type="button" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Edit Modal End -->
+
+                <!-- Add Edit Modal Start -->
+                <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg rounded">
+                        <div class="modal-content">
+                            <div class="">
+                                @include('KelolaGambar.preview')
                             </div>
                         </div>
                     </div>
