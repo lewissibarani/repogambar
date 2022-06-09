@@ -70,7 +70,7 @@
             targets: 0,
             render: function (data, type, row, meta) {
               
-              return '<a class="list-item-heading body" data-bs-toggle="modal" href="#previewModal">' + data + '</a>';
+              return '<a class="list-item-heading body" target="_blank" rel="noopener noreferrer" href="/Admin/Index">' + data + '</a>';
             },
           },
           // Memotong Tetx agar tidak terlalu panjang

@@ -29,13 +29,21 @@ Route::view('/Vertical', 'vertical');
 Route::prefix('Dashboard')->group(function () {
     Route::view('/', 'dashboard/dashboard');
     Route::view('Beranda', 'dashboard/dashboard');
-    Route::view('Hasil Pencarian', 'dashboard/hasilpencarian');
+    Route::view('HasilPencarian', 'dashboard/hasilpencarian');
+    Route::view('DetailGambar', 'dashboard/detailgambar');
 });
+
 Route::prefix('KelolaGambar')->group(function () {
     Route::view('/', 'kelolagambar/index');
     Route::view('Index', 'kelolagambar/index');
     Route::view('Create', 'kelolagambar/create');
     Route::view('Update', 'kelolagambar/update');
+});
+
+Route::prefix('Admin')->group(function () {
+    Route::view('/', 'admin/index');
+    Route::view('Index', 'admin/index');
+    Route::view('View', 'admin/view');
 });
 
 Route::prefix('Pages')->group(function () {

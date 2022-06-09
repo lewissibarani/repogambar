@@ -1,8 +1,17 @@
 <section class="scroll-section" id="labelSize">
     <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-3 col-form-label">Judul</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="colFormLabel" />
+            <div id="passwordHelpBlock" class="form-text">
+                Tuliskan judul gambar yang seuai dengan gambar yang diminta. Tulis dalam bahasa Indonesia.
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-3 col-form-label">Link</label>
         <div class="col-sm-9">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="Link Shuttertock atau Freepik..." />
+            <input type="text" class="form-control" id="colFormLabel" placeholder="Link Shuttertock atau Freepik..." />
             <div id="passwordHelpBlock" class="form-text">
                 Hanya bisa satu link gambar untuk satu permintaan.
             </div>
@@ -23,7 +32,16 @@
     <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-3 col-form-label">Lainnya</label>
         <div class="col-sm-9">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="Link Shuttertock atau Freepik..." />
+            <textarea class="form-control" id="colFormLabel"></textarea>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-3 col-form-label">Tags</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="colFormLabel" />
+            <div id="passwordHelpBlock" class="form-text">
+                Isikan dengan tag yang berkaitan dengan gambar yang diminta.
+            </div>
         </div>
     </div>
 </section>

@@ -18,7 +18,7 @@
 
 @section('js_page')
     <script src="/js/cs/datatable.extend.js"></script>
-    <script src="/js/plugins/datatable.ajax.js"></script>
+    <script src="/js/admin/datatable.admin.js"></script>
 @endsection
 
 @section('content')
@@ -201,10 +201,10 @@
                             <thead>
                             <tr>
                                 <th class="text-muted text-small text-uppercase">ID Permintaan</th>
-                                <th class="text-muted text-small text-uppercase">Link</th>
-                                <th class="text-muted text-small text-uppercase">Kegunaan</th>
-                                <th class="text-muted text-small text-uppercase">Waktu</th>
-                                <th class="text-muted text-small text-uppercase">Status</th>
+                                <th class="text-muted text-small text-uppercase">Pembuat Order</th>
+                                <th class="text-muted text-small text-uppercase">No Handphone</th>
+                                <th class="text-muted text-small text-uppercase">e-mail</th>
+                                <th class="text-muted text-small text-uppercase">Aksi</th>
                                 <!-- <th class="empty">&nbsp;</th> -->
                             </tr>
                             </thead>

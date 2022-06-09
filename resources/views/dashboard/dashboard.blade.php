@@ -49,7 +49,7 @@
                     <i data-acorn-icon="search" class="text-primary me-1"></i>    
                     </span>
                     <input type="text" placeholder="Kata kunci pencarian..." class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-                        <a href="/Dashboard/Hasil Pencarian" class="btn btn-icon btn-icon-start btn-primary stretched-link">
+                        <a href="/Dashboard/HasilPencarian" class="btn btn-icon btn-icon-start btn-primary stretched-link">
                                 <i data-acorn-icon="chevron-right"></i>
                                 <span>Cari Gambar</span>
                         </a>
@@ -67,18 +67,18 @@
                             <img src="/img/product/small/product-6.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">Basic Introduction to Bread Making</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">34</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">15 Min</span>
                                         </div>
                                     </div>
@@ -91,18 +91,18 @@
                             <img src="/img/product/small/product-3.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">14 Facts About Sugar Products</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">53</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">10 Min</span>
                                         </div>
                                     </div>
@@ -115,18 +115,18 @@
                             <img src="/img/product/small/product-4.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">Apple Cake Recipe for Starters</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">115</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">30 Min</span>
                                         </div>
                                     </div>
@@ -139,18 +139,18 @@
                             <img src="/img/product/small/product-10.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">A Complete Guide to Mix Dough for the Molds</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">329</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">45 Min</span>
                                         </div>
                                     </div>
@@ -163,18 +163,18 @@
                             <img src="/img/product/small/product-2.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">10 Secrets Every Southern Baker Knows</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">43</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">15 Min</span>
                                         </div>
                                     </div>
@@ -187,18 +187,18 @@
                             <img src="/img/product/small/product-1.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">Recipes for Sweet and Healty Treats</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">5</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">10 Min</span>
                                         </div>
                                     </div>
@@ -211,18 +211,18 @@
                             <img src="/img/product/small/product-9.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">Better Ways to Mix Dough for the Molds</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">94</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">15 Min</span>
                                         </div>
                                     </div>
@@ -235,18 +235,18 @@
                             <img src="/img/product/small/product-5.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">Basic Introduction for Dough Molding</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">77</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">20 Min</span>
                                         </div>
                                     </div>
@@ -259,18 +259,18 @@
                             <img src="/img/product/small/product-7.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">A Complete Guide to Mix Dough for the Molds</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">64</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">15 Min</span>
                                         </div>
                                     </div>
@@ -283,18 +283,18 @@
                             <img src="/img/product/small/product-3.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">Introduction to Baking Cakes</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">80</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">15 Min</span>
                                         </div>
                                     </div>
@@ -307,18 +307,18 @@
                             <img src="/img/product/small/product-4.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">Apple Cake Recipe for Starters</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">52</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">15 Min</span>
                                         </div>
                                     </div>
@@ -331,18 +331,18 @@
                             <img src="/img/product/small/product-10.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">A Complete Guide to Mix Dough for the Molds</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">26</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">30 Min</span>
                                         </div>
                                     </div>
@@ -355,18 +355,18 @@
                             <img src="/img/product/small/product-6.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">Basic Introduction to Bread Making</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">12</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">45 Min</span>
                                         </div>
                                     </div>
@@ -379,18 +379,18 @@
                             <img src="/img/product/small/product-3.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">14 Facts About Sugar Products</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">22</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">10 Min</span>
                                         </div>
                                     </div>
@@ -403,18 +403,18 @@
                             <img src="/img/product/small/product-2.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">10 Secrets Every Southern Baker Knows</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">54</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">15 Min</span>
                                         </div>
                                     </div>
@@ -427,18 +427,18 @@
                             <img src="/img/product/small/product-1.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">Recipes for Sweet and Healty Treats</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">108</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">15 Min</span>
                                         </div>
                                     </div>
@@ -451,18 +451,18 @@
                             <img src="/img/product/small/product-7.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">Introduction to Baking Cakes</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">28</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">30 Min</span>
                                         </div>
                                     </div>
@@ -475,18 +475,18 @@
                             <img src="/img/product/small/product-4.webp" class="card-img-top sh-19" alt="card image" />
                             <div class="card-body">
                                 <h5 class="heading mb-3">
-                                    <a href="/Pages/Blog/Detail" class="body-link stretched-link">
+                                    <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
                                         <span class="clamp-line sh-5" data-line="2">Better Ways to Mix Dough for the Molds</span>
                                     </a>
                                 </h5>
                                 <div>
                                     <div class="row g-0">
                                         <div class="col-auto pe-3">
-                                            <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">16</span>
                                         </div>
                                         <div class="col">
-                                            <i data-acorn-icon="clock" class="text-primary me-1" data-acorn-size="15"></i>
+                                            <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
                                             <span class="align-middle">20 Min</span>
                                         </div>
                                     </div>

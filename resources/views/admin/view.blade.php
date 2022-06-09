@@ -18,7 +18,7 @@
 
 @section('js_page')
     <script src="/js/cs/datatable.extend.js"></script>
-    <script src="/js/plugins/datatable.ajax.js"></script>
+    <script src="/js/admin/datatable.admin.js"></script>
 @endsection
 
 @section('content')
@@ -35,54 +35,6 @@
                         </div>
                         <!-- Title End -->
 
-                        <!-- Top Buttons Start -->
-                        <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
-                            <!-- Default Start -->
-                            <section class="scroll-section" id="default">
-                                <!-- Button Trigger -->
-                                <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" 
-                                data-bs-toggle="modal"        
-                                data-bs-target="#addEditModal">
-                                    <i data-acorn-icon="plus"></i>
-                                    <span>Tambah Baru</span>
-                                </button>
-                            </section>
-                            <!-- Default End -->
-
-                            <!-- Check Button Start -->
-                            <!-- <div class="btn-group ms-1 check-all-container">
-                                <div class="btn btn-outline-primary btn-custom-control p-0 ps-3 pe-2" id="datatableCheckAllButton">
-                             
-                                <span class="form-check float-end">
-                                <input type="checkbox" class="form-check-input" id="datatableCheckAll" />
-                                </span>
-                            -->
-                        </div>
-                                <!-- <button
-                                        type="button"
-                                        class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
-                                        data-bs-offset="0,3"
-                                        data-bs-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        data-submenu
-                                ></button>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <div class="dropdown dropstart dropdown-submenu">
-                                        <button class="dropdown-item dropdown-toggle tag-datatable caret-absolute disabled" type="button">Tag</button>
-                                        <div class="dropdown-menu">
-                                            <button class="dropdown-item tag-done" type="button">Done</button>
-                                            <button class="dropdown-item tag-new" type="button">New</button>
-                                            <button class="dropdown-item tag-sale" type="button">Sale</button>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item disabled delete-datatable" type="button">Delete</button>
-                                </div> -->
-                            </div>
-                            <!-- Check Button End -->
-                        </div>
-                        <!-- Top Buttons End -->
                     </div>
                 </div>
                 <!-- Title and Top Buttons End -->
@@ -201,10 +153,10 @@
                             <thead>
                             <tr>
                                 <th class="text-muted text-small text-uppercase">ID Permintaan</th>
-                                <th class="text-muted text-small text-uppercase">Link</th>
-                                <th class="text-muted text-small text-uppercase">Kegunaan</th>
-                                <th class="text-muted text-small text-uppercase">Waktu</th>
-                                <th class="text-muted text-small text-uppercase">Status</th>
+                                <th class="text-muted text-small text-uppercase">Pembuat Order</th>
+                                <th class="text-muted text-small text-uppercase">No Handphone</th>
+                                <th class="text-muted text-small text-uppercase">e-mail</th>
+                                <th class="text-muted text-small text-uppercase">Aksi</th>
                                 <!-- <th class="empty">&nbsp;</th> -->
                             </tr>
                             </thead>
