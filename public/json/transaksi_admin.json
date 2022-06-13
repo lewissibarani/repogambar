@@ -5,47 +5,56 @@
             "author" : "Fadil Rifkiyudha",
             "idPermintaan": "#7100001",
             "link": "https://www.shutterstock.com/image-vector/coal-mining-industry-transportation-set-infographics-556679503",
-            "path" : "https://www.shutterstock.com/image-vector/coal-mining-industry-transportation-set-infographics-556679503",
             "kegunaan": "Pembuatan Infografis",
             "waktu": "Tue, 07 Jun 2022 06:41",
             "status": 0 ,
             "alasanTolak" : "",
-            "catatan": ""
+            "catatan": "",
+            "noHp" : "0878787879898",
+            "eMail" : "fadil.r@bps.go.id",
+            "satker" : "Biro Humas dan Hukum"
         },
         {
             "judul" : "Markets in Bruges",
             "author" : "Josef Christofel",
             "idPermintaan": "#7100002",
             "link": "https://www.shutterstock.com/image-vector/coal-mining-industry-transportation-set-infographics-556679503",
-            "path" : "https://www.shutterstock.com/image-vector/coal-mining-industry-transportation-set-infographics-556679503",
             "kegunaan": "Pembuatan Infografis",
             "waktu": "Tue, 07 Jun 2022 06:41",
             "status": 1 ,
             "alasanTolak" : "Link gambar tidak bisa diakses",
-            "catatan": ""
+            "catatan": "",
+            "noHp" : "0878787879898",
+            "eMail" : "josef.christofel@bps.go.id",
+            "satker" : "Direktorat Diseminasi Statistik"
         },
         {
             "judul" : "Fresh Veggies",
             "author" : "Irza Annasya",
             "idPermintaan": "#7100003",
             "link": "https://www.shutterstock.com/image-vector/coal-mining-industry-transportation-set-infographics-556679503",
-            "path" : "https://www.shutterstock.com/image-vector/coal-mining-industry-transportation-set-infographics-556679503",
             "kegunaan": "Pembuatan Cover DDA",
             "waktu": "Tue, 07 Jun 2022 06:41",
             "status": 2 ,
             "alasanTolak" : "",
-            "catatan": ""
+            "catatan": "",
+            "noHp" : "0878787879898",
+            "eMail" : "irza@bps.go.id",
+            "satker" : "BPS Provinsi Papua Barat"
         },
         {
             "judul" : "Veggies For Sale",
             "author" : "Ayu Kartika",
             "idPermintaan": "#7100004",
             "link": "1245",
-            "path" : "https://www.shutterstock.com/image-vector/coal-mining-industry-transportation-set-infographics-556679503",
             "kegunaan": "Pembuatan Cover DDA",
             "waktu": "Tue, 07 Jun 2022 06:41",
+            "status": 0 ,
             "alasanTolak" : "",
-            "catatan": "Gambar ini dapat digunakan untuk kegiatan Sensus Pertanian."
+            "catatan": "Gambar ini dapat digunakan untuk kegiatan Sensus Pertanian.",
+            "noHp" : "0878787879898",
+            "eMail" : "fadil.r@bps.go.id",
+            "satker" : "Biro Humas dan Hukum"
         }
     ]
 }

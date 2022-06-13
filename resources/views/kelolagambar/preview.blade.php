@@ -16,8 +16,9 @@
             <p class="card-text"><span class="font-weight-bold">Status: </span><span class="previewStatus"></span></p>
             <p class="card-text"><span class="previewAlasanTolak"></span></p>
             <p class="card-text"><span class="previewCatatan"></span></p>
-            <div class="card mb-5">
-                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Ok</button>
+            <div class="mb-5">
+                <span class="tombolDownload">
+                </span>
             </div>
         </div>
     </div>

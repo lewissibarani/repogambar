@@ -152,15 +152,15 @@
                                 <!-- Export Dropdown Start -->
                                 <div class="d-inline-block datatable-export" data-datatable="#datatableRowsAjax">
                                     <button class="btn p-0" data-bs-toggle="dropdown" type="button" data-bs-offset="0,3">
-                  <span
-                          class="btn btn-icon btn-icon-only btn-foreground-alternate shadow dropdown"
-                          data-bs-delay="0"
-                          data-bs-placement="top"
-                          data-bs-toggle="tooltip"
-                          title="Export"
-                  >
-                    <i data-acorn-icon="download"></i>
-                  </span>
+                                        <span
+                                                class="btn btn-icon btn-icon-only btn-foreground-alternate shadow dropdown"
+                                                data-bs-delay="0"
+                                                data-bs-placement="top"
+                                                data-bs-toggle="tooltip"
+                                                title="Export"
+                                        >
+                                            <i data-acorn-icon="download"></i>
+                                        </span>
                                     </button>
                                     <div class="dropdown-menu shadow dropdown-menu-end">
                                         <button class="dropdown-item export-copy" type="button">Copy</button>
@@ -202,6 +202,7 @@
                             <tr>
                                 <th class="text-muted text-small text-uppercase">ID Permintaan</th>
                                 <th class="text-muted text-small text-uppercase">Pembuat Order</th>
+                                <th class="text-muted text-small text-uppercase">Satuan Kerja</th>
                                 <th class="text-muted text-small text-uppercase">No Handphone</th>
                                 <th class="text-muted text-small text-uppercase">e-mail</th>
                                 <th class="text-muted text-small text-uppercase">Aksi</th>

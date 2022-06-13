@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGambarTable extends Migration
+class CreateStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreateGambarTable extends Migration
      */
     public function up()
     {
-        Schema::create('gambar', function (Blueprint $table) {
+        Schema::create('status', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->longText('link');
-            $table->longText('path');
-            $table->string('idKegunaan');
-            $table->string('idUser');
-            $table->string('metadata');
-            $table->longText('catatan');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ class CreateGambarTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gambar');
+        Schema::dropIfExists('status');
     }
 }

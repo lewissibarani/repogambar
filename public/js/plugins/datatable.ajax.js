@@ -292,7 +292,26 @@
         }
       document.querySelector('.previewAlasanTolak').innerHTML = alasanTolak;
       //--Alasan Ditolak end
-      
+      document.querySelector('.previewLink').innerHTML = data.link;
+
+      //--Alasan Ditolak Start
+      let downloadButton;
+        switch (data.status) {
+          case 2:
+            downloadButton =  '<a class="btn btn-sm btn-icon btn-primary"'+
+                                      'data-bs-toggle="tooltip"'+
+                                      'title="Download Gambar"'+
+                                      'href="'+ data.path +'">'+
+                                  '<i data-acorn-icon="download"></i> Download'+
+                              '</a>';
+            break;
+          default:
+            downloadButton = "";
+            break;
+        }
+      document.querySelector('.tombolDownload').innerHTML = downloadButton;
+      //--Alasan Ditolak end
+
       document.querySelector('.previewCatatan').innerHTML = "<span class='font-weight-bold'>Catatan: </span>"+ data.catatan;
     }
   

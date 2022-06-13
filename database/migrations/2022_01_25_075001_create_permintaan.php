@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSearchresultTranscation extends Migration
+class CreatePermintaan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,16 @@ class CreateSearchresultTranscation extends Migration
      */
     public function up()
     {
-        Schema::create('searchresult_transcation', function (Blueprint $table) {
+        Schema::create('permintaan', function (Blueprint $table) {
             $table->id();
+            $table->string('kodePermintaan');
+            $table->string('idGambar');
+            $table->string('idStatus');
+            $table->string('idKegunaan');
+            $table->longText('alasanDitolak');
             $table->timestamps();
+            
+            
         });
     }
 
@@ -26,6 +33,6 @@ class CreateSearchresultTranscation extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('searchresult_transcation');
+        Schema::dropIfExists('permintaan');
     }
 }

@@ -46,11 +46,11 @@
         scrollX: true,
         buttons: ['copy', 'excel', 'csv', 'print'],
         info: false,
-        ajax: '/json/products.json',
+        ajax: '/json/transaksi_admin.json',
         order: [], // Clearing default order
         sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
         pageLength: 10,
-        columns: [{data: 'idPermintaan'}, {data: 'link'}, {data: 'kegunaan'}, {data: 'waktu'}, {data: 'status'}],
+        columns: [{data: 'idPermintaan'}, {data: 'author'}, { data: 'satker'},{data: 'noHp'}, {data: 'eMail'}, {data: 'status'}],
         // {data: 'Check'}
         language: {
           paginate: {
@@ -73,41 +73,22 @@
               return '<a class="list-item-heading body" target="_blank" rel="noopener noreferrer" href="/Admin/Index">' + data + '</a>';
             },
           },
-          // Memotong Tetx agar tidak terlalu panjang
+
           {
             targets: 1,
             render: function (data) {
-              if (data.length > 5) {
-                return '<a class="" href="'+ data +' " target="_blank" rel="noopener noreferrer">' + data.substring(0, 30) + '...'+ '</a>';
-             } else {
-                return '<a class="" href="'+ data +' " target="_blank" rel="noopener noreferrer">' + data + '</a>';
-             }
-              
+            return  '<div class="row g-0">'+
+                      '<div class="col-auto">'+
+                          '<div class="sw-5 me-3">'+
+                              '<img src="/img/profile/profile-1.webp" class="img-fluid rounded-xl" alt="thumb" />'+
+                          '</div>'+
+                      '</div>'+
+                      '<div class="col d-flex align-items-center">'+
+                          '<a href="#"> '+ data +'</a>'+
+                      '</div>'+
+                    '</div>';          
             }
 
-          },
-
-          // Adding Tag content as a span with a badge class
-          {
-            targets: 4,
-            render: function (data, type, row, meta) {
-              let status;
-              switch (data) {
-                case 0:
-                  status = "<span class='badge bg-outline-primary'>Diproses</span>";
-                  break;
-                case 1:
-                  status = "<span class='badge rounded-pill bg-danger'>Ditolak</span>";
-                  break;
-                case 2:
-                  status = "<span class='badge rounded-pill bg-primary'>Selesai</span>";
-                  break;
-                default:
-                  status = "<span class='badge rounded-pill bg-warning'>Duplikasi</span>";
-                  break;
-              }
-              return status;
-            },
           },
           // // Adding checkbox for Check column
           // {

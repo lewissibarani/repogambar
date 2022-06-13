@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->longText('aboutme');
             $table->string('satker');
             $table->longText('interest');
-            $table->string('nohp');
+            $table->string('noHp');
             $table->rememberToken();
             $table->string('level');
             $table->timestamps();
