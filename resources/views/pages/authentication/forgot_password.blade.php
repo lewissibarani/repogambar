@@ -1,6 +1,6 @@
 @php
-    $title = 'Login Page';
-    $description = 'Login Page'
+    $title = 'Forgot Password Page';
+    $description = 'Forgot Password Page'
 @endphp
 @extends('layout_full',['title'=>$title, 'description'=>$description])
 @section('css')
@@ -12,7 +12,7 @@
 @endsection
 
 @section('js_page')
-    <script src="/js/pages/auth.login.js"></script>
+    <script src="/js/pages/auth.forgotpassword.js"></script>
 @endsection
 
 @section('content_left')
@@ -20,15 +20,16 @@
         <div class="w-100 w-lg-75 w-xxl-50">
             <div>
                 <div class="mb-5">
-                    <h1 class="display-3 text-white">Gudang Gambar</h1>
-                    <h1 class="display-3 text-white">Badan Pusat Statistik</h1>
+                    <h1 class="display-3 text-white">Multiple Niches</h1>
+                    <h1 class="display-3 text-white">Ready for Your Project</h1>
                 </div>
                 <p class="h6 text-white lh-1-5 mb-5">
-                    Website portal penyedia aset digital visual Shutterstock dan Freepik untuk seluruh pegawai Badan Pusat Statistik
+                    Dynamically target high-payoff intellectual capital for customized technologies. Objectively integrate emerging core competencies before
+                    process-centric communities...
                 </p>
-                <!-- <div class="mb-5">
+                <div class="mb-5">
                     <a class="btn btn-lg btn-outline-white" href="/">Learn More</a>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
@@ -43,29 +44,24 @@
                 </a>
             </div>
             <div class="mb-5">
-                <h2 class="cta-1 mb-0 text-primary">Selamat Datang,</h2>
-                <!-- <h2 class="cta-1 text-primary">let's get started!</h2> -->
+                <h2 class="cta-1 mb-0 text-primary">Password is gone?</h2>
+                <h2 class="cta-1 text-primary">Let's reset it!</h2>
             </div>
             <div class="mb-5">
-                <p class="h6">Silahkan login terlebih dahulu</p>
+                <p class="h6">Please enter your email to receive a link to reset your password.</p>
                 <p class="h6">
-                    Jika belum memiliki akun, silahkan
-                    <a href="register">daftar</a>
+                    If you are a member, please
+                    <a href="/Pages/Authentication/Login">login</a>
                     .
                 </p>
             </div>
             <div>
-                <form id="loginForm" class="tooltip-end-bottom" novalidate>
+                <form id="forgotPasswordForm" class="tooltip-end-bottom" novalidate>
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="email"></i>
-                        <input class="form-control" placeholder="Email" name="email" />
+                        <input class="form-control" placeholder="Email" name="forgotPasswordEmail" />
                     </div>
-                    <div class="mb-3 filled form-group tooltip-end-top">
-                        <i data-acorn-icon="lock-off"></i>
-                        <input class="form-control pe-7" name="password" type="password" placeholder="Password" />
-                        <a class="text-small position-absolute t-3 e-3" href="/Pages/Authentication/ForgotPassword">Forgot?</a>
-                    </div>
-                    <button type="submit" class="btn btn-lg btn-primary">Login</button>
+                    <button type="submit" class="btn btn-lg btn-primary">Send Reset Email</button>
                 </form>
             </div>
         </div>
