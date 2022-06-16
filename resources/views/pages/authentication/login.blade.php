@@ -57,9 +57,14 @@
             <div>
                 <form id="loginForm" class="tooltip-end-bottom" action="login" method="POST" novalidate>
                     @csrf
+                    @error('email')
+                    <div class="mb-3 text-danger">
+                        {{$message}}
+                    </div>
+                    @enderror
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="email"></i>
-                        <input class="form-control" placeholder="Email" name="email" />
+                        <input class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" />
                     </div>
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="lock-off"></i>
