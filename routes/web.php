@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\DashboardsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // index routing via Route feature
-Route::redirect('/', '/Dashboard/Beranda');
+// Route::redirect('/', '/Dashboard/Beranda');
 
 
 /*
@@ -23,15 +23,16 @@ Route::redirect('/', '/Dashboard/Beranda');
 |--------------------------------------------------------------------------
 |
 */
+
+    Route::prefix('Dashboard')->group(function () {
+        Route::get('/', [DashboardsController::class, 'dashboard'])->middleware('auth');
+        Route::get('Beranda', [DashboardsController::class, 'dashboard'])->middleware('auth');
+        Route::get('HasilPencarian', [DashboardsController::class, 'hasilPencarian'])->middleware('auth');
+        Route::get('DetailGambar', [DashboardsController::class, 'viewGambar'])->middleware('auth');
+    });
+
 Route::view('/Horizontal', 'horizontal');
 Route::view('/Vertical', 'vertical');
-
-Route::prefix('Dashboard')->group(function () {
-    Route::view('/', 'dashboard/dashboard');
-    Route::view('Beranda', 'dashboard/dashboard');
-    Route::view('HasilPencarian', 'dashboard/hasilpencarian');
-    Route::view('DetailGambar', 'dashboard/detailgambar');
-});
 
 Route::prefix('KelolaGambar')->group(function () {
     Route::view('/', 'kelolagambar/index');
@@ -45,7 +46,6 @@ Route::prefix('Admin')->group(function () {
     Route::view('Index', 'admin/index');
     Route::view('View', 'admin/view');
 });
-
 
 Route::prefix('Pages')->group(function () {
     Route::view('/', 'pages/index');

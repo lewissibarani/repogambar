@@ -24,9 +24,11 @@
 
     <!-- User Menu Start -->
     <div class="user-container d-flex">
+
+        @auth
         <a href="#" class="d-flex user position-relative" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img class="profile" alt="profile" src="/img/profile/profile-9.webp" />
-            <div class="name">Lisa Jackson</div>
+            <div class="name">{{ Auth::user()->name }}</div>
         </a>
         <div class="dropdown-menu dropdown-menu-end user-menu wide">
             <!-- <div class="row mb-3 ms-0 me-0">
@@ -108,15 +110,27 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/login">
+                            <form id="logoutForm" action="{{route('logout')}}" method="post">
+                            @csrf
+                                <a onclick="document.getElementById('logoutForm').submit();">
+                                    <i data-acorn-icon="logout" class="me-2" data-acorn-size="17"></i>
+                                    <span class="align-middle">Logout</span>
+                                </a>
+                            </form>
+                            <!-- <a href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
                                 <i data-acorn-icon="logout" class="me-2" data-acorn-size="17"></i>
                                 <span class="align-middle">Logout</span>
-                            </a>
+                            </a> -->
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+        @else
+
+        @endauth
     </div>
     <!-- User Menu End -->
 

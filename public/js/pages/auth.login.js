@@ -33,17 +33,17 @@ class AuthLogin {
       },
     };
     jQuery(form).validate(validateOptions);
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      if (jQuery(form).valid()) {
-        const formValues = {
-          email: form.querySelector('[name="email"]').value,
-          password: form.querySelector('[name="password"]').value,
-        };
-        console.log(formValues);
-        return;
-      }
-    });
+    // form.addEventListener('submit', (event) => {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    //   if (jQuery(form).valid()) {
+    //     const formValues = {
+    //       email: form.querySelector('[name="email"]').value,
+    //       password: form.querySelector('[name="password"]').value,
+    //     };
+    //     console.log(formValues);
+    //     return;
+    //   }
+    // });
   }
 }

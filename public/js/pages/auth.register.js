@@ -21,28 +21,28 @@ class AuthRegister {
     }
     const validateOptions = {
       rules: {
-        registerEmail: {
+        email: {
           required: true,
           email: true,
         },
-        registerPassword: {
+        password: {
           required: true,
           minlength: 6,
           regex: /[a-z].*[0-9]|[0-9].*[a-z]/i,
         },
-        registerName: {
+        name: {
           required: true,
         },
       },
       messages: {
-        registerEmail: {
+        email: {
           email: 'Your email address must be in correct format!',
         },
-        registerPassword: {
+        password: {
           minlength: 'Password must be at least {0} characters!',
           regex: 'Password must contain a letter and a number!',
         },
-        registerName: {
+        name: {
           required: 'Please enter your name!',
         },
       },

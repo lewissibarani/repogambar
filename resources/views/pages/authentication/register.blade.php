@@ -54,27 +54,27 @@
                 </p>
             </div>
             <div>
-                <form id="registerForm" class="tooltip-end-bottom" action="register" method="post" novalidate>
+                <form id="registerForm" class="tooltip-end-bottom" action="register" method="POST" novalidate>
                     @csrf
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="user"></i>
-                        <input class="form-control" placeholder="Name" name="registerName" />
+                        <input class="form-control" placeholder="Nama User" name="name" />
                     </div>
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="email"></i>
-                        <input class="form-control" placeholder="Email" name="registerEmail" />
+                        <input class="form-control" placeholder="Email" name="email" />
                     </div>
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="lock-off"></i>
-                        <input class="form-control" name="registerPassword" type="password" placeholder="Password" />
+                        <input class="form-control" name="password" type="password" placeholder="Password" />
                     </div>
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="phone"></i>
-                        <input class="form-control" placeholder="No Handphone" name="registerNoHp" />
+                        <input class="form-control" placeholder="No Handphone" name="nohp" />
                     </div>
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="building-large"></i>
-                        <input class="form-control" placeholder="Satuan Kerja" name="registerSatker" />
+                        <input class="form-control" placeholder="Satuan Kerja" name="satker" />
                     </div>
                     <button type="submit" class="btn btn-lg btn-primary">Signup</button>
                 </form>

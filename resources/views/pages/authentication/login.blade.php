@@ -20,7 +20,7 @@
         <div class="w-100 w-lg-75 w-xxl-50">
             <div>
                 <div class="mb-5">
-                    <h1 class="display-3 text-white">Gudang Gambar</h1>
+                    <h1 class="display-3 text-white">SIMRAD</h1>
                     <h1 class="display-3 text-white">Badan Pusat Statistik</h1>
                 </div>
                 <p class="h6 text-white lh-1-5 mb-5">
@@ -50,12 +50,13 @@
                 <p class="h6">Silahkan login terlebih dahulu</p>
                 <p class="h6">
                     Jika belum memiliki akun, silahkan
-                    <a href="register">daftar</a>
+                    <a href="{{route('register')}}">daftar</a>
                     .
                 </p>
             </div>
             <div>
-                <form id="loginForm" class="tooltip-end-bottom" novalidate>
+                <form id="loginForm" class="tooltip-end-bottom" action="login" method="POST" novalidate>
+                    @csrf
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="email"></i>
                         <input class="form-control" placeholder="Email" name="email" />
