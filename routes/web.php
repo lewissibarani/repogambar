@@ -58,3 +58,5 @@ Route::prefix('Pages')->group(function () {
     });
 
 });
+
+require __DIR__.'/auth.php';
