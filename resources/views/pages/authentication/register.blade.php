@@ -1,6 +1,6 @@
 @php
-    $title = 'Login Page';
-    $description = 'Login Page'
+    $title = 'Daftar Akun';
+    $description = 'Daftar Akun'
 @endphp
 @extends('layout_full',['title'=>$title, 'description'=>$description])
 @section('css')
@@ -12,7 +12,7 @@
 @endsection
 
 @section('js_page')
-    <script src="/js/pages/auth.login.js"></script>
+    <script src="/js/pages/auth.register.js"></script>
 @endsection
 
 @section('content_left')
@@ -44,28 +44,39 @@
             </div>
             <div class="mb-5">
                 <h2 class="cta-1 mb-0 text-primary">Selamat Datang,</h2>
-                <!-- <h2 class="cta-1 text-primary">let's get started!</h2> -->
             </div>
             <div class="mb-5">
-                <p class="h6">Silahkan login terlebih dahulu</p>
+                <p class="h6">Silahkan gunakan formulir dibawah untuk daftar.</p>
                 <p class="h6">
-                    Jika belum memiliki akun, silahkan
-                    <a href="register">daftar</a>
+                    Jika sudah punya akun, silahkan
+                    <a href="login">login</a>
                     .
                 </p>
             </div>
             <div>
-                <form id="loginForm" class="tooltip-end-bottom" novalidate>
+                <form id="registerForm" class="tooltip-end-bottom" action="register" method="post" novalidate>
+                    @csrf
+                    <div class="mb-3 filled form-group tooltip-end-top">
+                        <i data-acorn-icon="user"></i>
+                        <input class="form-control" placeholder="Name" name="registerName" />
+                    </div>
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="email"></i>
-                        <input class="form-control" placeholder="Email" name="email" />
+                        <input class="form-control" placeholder="Email" name="registerEmail" />
                     </div>
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="lock-off"></i>
-                        <input class="form-control pe-7" name="password" type="password" placeholder="Password" />
-                        <a class="text-small position-absolute t-3 e-3" href="/Pages/Authentication/ForgotPassword">Forgot?</a>
+                        <input class="form-control" name="registerPassword" type="password" placeholder="Password" />
                     </div>
-                    <button type="submit" class="btn btn-lg btn-primary">Login</button>
+                    <div class="mb-3 filled form-group tooltip-end-top">
+                        <i data-acorn-icon="phone"></i>
+                        <input class="form-control" placeholder="No Handphone" name="registerNoHp" />
+                    </div>
+                    <div class="mb-3 filled form-group tooltip-end-top">
+                        <i data-acorn-icon="building-large"></i>
+                        <input class="form-control" placeholder="Satuan Kerja" name="registerSatker" />
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-primary">Signup</button>
                 </form>
             </div>
         </div>

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use SebastianBergmann\Environment\Console;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        return view('pages.authentication.register');
     }
 
     /**
@@ -34,21 +35,27 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'registerName' => ['required', 'string', 'max:255'],
+            'registerEmail' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'registerPassword' => ['required', 'confirmed'],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        dd('Registerasi Berhasil');
+        // $user = User::create([
+        //     'name' => $request->registerName,
+        //     'email' => $request->registerNemail,
+        //     'password' => Hash::make($request->registerPassword),
+        //     'noHp' => $request->registerNoHp,
+        //     'email' => $request->registerEmail,
+        //     'satker' => $request->registerSatker,
+        //     'level' => '0',
+        // ]);
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
+        
+        // return redirect(RouteServiceProvider::HOME);
 
-        return redirect(RouteServiceProvider::HOME);
     }
 }
