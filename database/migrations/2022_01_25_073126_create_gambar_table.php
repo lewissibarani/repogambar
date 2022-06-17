@@ -22,7 +22,6 @@ class CreateGambarTable extends Migration
             $table->string('idUser');
             $table->string('metadata');
             $table->longText('catatan');
-            $table->timestamps();
         });
     }
 
