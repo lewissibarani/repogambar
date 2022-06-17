@@ -14,7 +14,7 @@ use App\Http\Controllers\DashboardsController;
 */
 
 // index routing via Route feature
-// Route::redirect('/', '/Dashboard/Beranda');
+Route::redirect('/', '/Dashboard/Beranda');
 
 
 /*
@@ -23,14 +23,16 @@ use App\Http\Controllers\DashboardsController;
 |--------------------------------------------------------------------------
 |
 */
+Route::middleware('auth')->group(function () {
+    Route::redirect('/', '/Dashboard/Beranda');
 
     Route::prefix('Dashboard')->group(function () {
-        Route::get('/', [DashboardsController::class, 'dashboard'])->middleware('auth');
-        Route::get('Beranda', [DashboardsController::class, 'dashboard'])->middleware('auth');
-        Route::get('HasilPencarian', [DashboardsController::class, 'hasilPencarian'])->middleware('auth');
-        Route::get('DetailGambar', [DashboardsController::class, 'viewGambar'])->middleware('auth');
+        Route::get('/', [DashboardsController::class, 'dashboard']);
+        Route::get('Beranda', [DashboardsController::class, 'dashboard']);
+        Route::get('HasilPencarian', [DashboardsController::class, 'hasilPencarian']);
+        Route::get('DetailGambar', [DashboardsController::class, 'viewGambar']);
     });
-
+});
 Route::view('/Horizontal', 'horizontal');
 Route::view('/Vertical', 'vertical');
 
