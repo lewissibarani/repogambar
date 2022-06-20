@@ -22,10 +22,12 @@
         <div class="col-sm-9">
             <select id="inputState" class="form-select">
                 <option selected>Pilih...</option>
-                <option value="1">Cover Publikasi Daerah Dalam Angka</option>
-                <option value="2">Infografis</option>
-                <option value="3">Pembatas Bab Publikasi</option>
-                <option value="4">Lainnya...</option>
+                @foreach ($Kegunaan as $kegunaan)
+                    <option value="{{ $kegunaan->id }}">{{ $kegunaan->kegunaan }}</option> 
+                @endforeach
+                <option value="1">Infografis</option>
+                <option value="2">Pembatas Bab Publikasi</option>
+                <option value="3">Lainnya...</option>
             </select>
         </div>
     </div>

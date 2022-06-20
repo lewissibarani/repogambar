@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardsController;
+use App\Http\Controllers\KelolaGambarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,13 +34,14 @@ Route::middleware('auth')->group(function () {
         Route::get('DetailGambar', [DashboardsController::class, 'viewGambar']);
     });
 });
-Route::view('/Horizontal', 'horizontal');
-Route::view('/Vertical', 'vertical');
+
+// Route::view('/Horizontal', 'horizontal');
+// Route::view('/Vertical', 'vertical');
 
 Route::prefix('KelolaGambar')->group(function () {
-    Route::view('/', 'kelolagambar/index');
-    Route::view('Index', 'kelolagambar/index');
-    Route::view('Create', 'kelolagambar/create');
+    Route::get('/', [KelolaGambarController::class, 'index']);
+    Route::get('Index',[KelolaGambarController::class, 'index']);
+    // Route::view('Index', 'kelolagambar/index');
     Route::view('Update', 'kelolagambar/update');
 });
 

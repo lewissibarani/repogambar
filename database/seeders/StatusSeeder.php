@@ -4,6 +4,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\Status;
 
 use Illuminate\Database\Seeder;
 
@@ -16,8 +17,20 @@ class StatusSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('status')->insert([
-            'status' => 'Diproses'
+        Status::create([
+            'status' => 'Diproses',
+        ]);
+
+        Status::create([
+            'status' => 'Ditolak',
+        ]);
+
+        Status::create([
+            'status' => 'Selesai',
+        ]);
+
+        Status::create([
+            'status' => 'Duplikat',
         ]);
     }
 }
