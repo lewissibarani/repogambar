@@ -33,6 +33,15 @@ class AuthRegister {
         name: {
           required: true,
         },
+        kodesatker: {
+          required: true,
+        },
+        satker: {
+          required: true,
+        },
+        nohp:{
+          required: true,
+        }
       },
       messages: {
         email: {
@@ -45,6 +54,15 @@ class AuthRegister {
         name: {
           required: 'Please enter your name!',
         },
+        kodesatker: {
+          required: 'Harap isi kode satkermu',
+        },
+        satker: {
+          required: 'Harap isi nama satkermu',
+        },
+        nohp:{
+          required: 'Field ini wajid diisi',
+        }
       },
     };
     jQuery(form).validate(validateOptions);

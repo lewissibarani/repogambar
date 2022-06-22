@@ -40,6 +40,7 @@ class RegisteredUserController extends Controller
             'password' => ['required'],
             'nohp' => ['required'],
             'satker' => ['required'],
+            'kodesatker' => ['required'],
         ]);
 
         $user = User::create([
@@ -47,6 +48,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'nohp' => $request->nohp,
+            'kodesatker' => $request->kodesatker,
             'satker' => $request->satker,
             'level' => '0',
         ]);

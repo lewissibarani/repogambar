@@ -13,9 +13,9 @@ class AddLevelTable extends Migration
      */
     public function up()
     {
-        Schema::table('level_users', function (Blueprint $table) {
-            $table->string('level');
-        });
+        // Schema::table('level_users', function (Blueprint $table) {
+        //     $table->string('level');
+        // });
     }
 
     /**

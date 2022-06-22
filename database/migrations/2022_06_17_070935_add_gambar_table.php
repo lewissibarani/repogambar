@@ -13,15 +13,15 @@ class AddGambarTable extends Migration
      */
     public function up()
     {
-        Schema::table('gambar', function (Blueprint $table) {
-            $table->string('judul');
-            $table->longText('link');
-            $table->longText('path');
-            $table->string('idKegunaan');
-            $table->string('idUser');
-            $table->string('metadata');
-            $table->longText('catatan');
-        });
+        // Schema::table('gambar', function (Blueprint $table) {
+        //     $table->string('judul');
+        //     $table->longText('link');
+        //     $table->longText('path');
+        //     $table->string('idKegunaan');
+        //     $table->string('idUser');
+        //     $table->string('metadata');
+        //     $table->longText('catatan');
+        // });
     }
 
     /**

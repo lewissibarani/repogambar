@@ -42,11 +42,11 @@
                     <div class="logo-default"></div>
                 </a>
             </div>
+            <!-- <div class="mb-5">
+                <h2 class="cta-1 mb-0 text-primary">Selamat Datang,</h2> 
+            </div> -->
             <div class="mb-5">
-                <h2 class="cta-1 mb-0 text-primary">Selamat Datang,</h2>
-            </div>
-            <div class="mb-5">
-                <p class="h6">Silahkan gunakan formulir dibawah untuk daftar.</p>
+                <!-- <p class="h6">Silahkan gunakan formulir dibawah untuk daftar.</p> -->
                 <p class="h6">
                     Jika sudah punya akun, silahkan
                     <a href="login">login</a>
@@ -56,6 +56,11 @@
             <div>
                 <form id="registerForm" class="tooltip-end-bottom" action="register" method="POST" novalidate>
                     @csrf
+                    @error('email')
+                    <div class="mb-3 text-danger">
+                        {{$message}}
+                    </div>
+                    @enderror
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="user"></i>
                         <input class="form-control" placeholder="Nama User" name="name" />
@@ -71,6 +76,10 @@
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="phone"></i>
                         <input class="form-control" placeholder="No Handphone" name="nohp" />
+                    </div>
+                    <div class="mb-3 filled form-group tooltip-end-top">
+                        <i data-acorn-icon="building-small"></i>
+                        <input class="form-control" placeholder="Kode Satuan Kerja" name="kodesatker" />
                     </div>
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="building-large"></i>

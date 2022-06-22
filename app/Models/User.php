@@ -22,6 +22,7 @@ class User extends Authenticatable
         'password',
         'nohp',
         'email',
+        'kodesatker',
         'satker',
         'level',
         'interest',

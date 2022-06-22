@@ -13,9 +13,9 @@ class AddCurrentTimestampPermintaanTable extends Migration
      */
     public function up()
     {
-        Schema::table('permintaan', function (Blueprint $table) {
-            $table->timestamp(column:'created_at')->useCurrent->change();
-        });
+        // Schema::table('permintaan', function (Blueprint $table) {
+        //     $table->timestamp(column:'created_at')->useCurrent->change();
+        // });
     }
 
     /**

@@ -18,12 +18,9 @@ class KelolaGambarController extends Controller
      */
     public function index ()
     {
-        $data=Transaksi::get();
-        $test = $data->kegunaan;
-        // Transaksi::where('idUserPeminta', Auth::id())->get();
+        $data = Transaksi::where('idUserPeminta', Auth::id())->get();
         $json = json_encode(array(
-            "data" =>$data,
-            "kegunaan"=>$test));
+            "data" =>$data));
         if (file_put_contents(public_path()."/json/kelolagambar.json", $json))
         $Kegunaan = Kegunaan::all();
         return view('kelolagambar.index', compact('Kegunaan'));
