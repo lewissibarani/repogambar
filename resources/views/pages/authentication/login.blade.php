@@ -62,6 +62,12 @@
                         {{$message}}
                     </div>
                     @enderror
+
+                    @error('password')
+                    <div class="mb-3 text-danger">
+                        {{$message}}
+                    </div>
+                    @enderror
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="email"></i>
                         <input class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" />

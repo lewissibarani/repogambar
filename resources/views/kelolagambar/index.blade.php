@@ -14,7 +14,10 @@
     <script src="/js/vendor/bootstrap-submenu.js"></script>
     <script src="/js/vendor/datatables.min.js"></script>
     <script src="/js/vendor/mousetrap.min.js"></script>
+    <script src="/js/vendor/jquery.validate/jquery.validate.min.js"></script>
+    <script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
 @endsection
+
 
 @section('js_page')
     <script src="/js/cs/datatable.extend.js"></script>
@@ -223,14 +226,31 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form id="createGambarForm" action="{{route('kelolagambar.store')}}" method="POST" novalidate>
+                                @csrf
+                                @error('judulPermintaan')
+                                <div class="mb-3 text-danger">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                                @error('idkegunaan')
+                                <div class="mb-3 text-danger">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                                @error('linkPermintaan')
+                                <div class="mb-3 text-danger">
+                                    {{$message}}
+                                </div>
+                                @enderror
                                     @include('KelolaGambar.form')
-                                </form>
+                                
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
-                                <button type="button" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
+                                <button type="submit" class="btn btn-primary" >Kirim</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>

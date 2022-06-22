@@ -37,6 +37,7 @@
       this._addListeners();
       this._extend();
       this._initBootstrapModal();
+      this._initForm();
     }
   
     // Creating datatable instance. Table data is provided by json/products.json file and loaded via ajax
@@ -46,11 +47,11 @@
         scrollX: true,
         buttons: ['copy', 'excel', 'csv', 'print'],
         info: false,
-        ajax: '/json/products.json',
+        ajax: '/json/kelolagambar.json',
         order: [], // Clearing default order
         sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
         pageLength: 10,
-        columns: [{data: 'idPermintaan'}, {data: 'link'}, {data: 'kegunaan'}, {data: 'waktu'}, {data: 'status'}],
+        columns: [{data: 'id'}, {data: 'linkPermintaan'}, {data: 'idKegunaan'}, {data: 'created_at'}, {data: 'idStatus'}],
         // {data: 'Check'}
         language: {
           paginate: {
@@ -70,7 +71,7 @@
             targets: 0,
             render: function (data, type, row, meta) {
               
-              return '<a class="list-item-heading body" data-bs-toggle="modal" href="#previewModal">' + data + '</a>';
+              return '<a class= data-bs-toggle="modal" href="#previewModal"> ' + data + '</a>';
             },
           },
           // Memotong Tetx agar tidak terlalu panjang
@@ -93,13 +94,13 @@
             render: function (data, type, row, meta) {
               let status;
               switch (data) {
-                case 0:
+                case 1:
                   status = "<span class='badge bg-outline-primary'>Diproses</span>";
                   break;
-                case 1:
+                case 2:
                   status = "<span class='badge rounded-pill bg-danger'>Ditolak</span>";
                   break;
-                case 2:
+                case 3:
                   status = "<span class='badge rounded-pill bg-primary'>Selesai</span>";
                   break;
                 default:
@@ -109,23 +110,16 @@
               return status;
             },
           },
-          // // Adding checkbox for Check column
-          // {
-          //   targets: 5,
-          //   render: function (data, type, row, meta) {
-          //     return '<div class="form-check float-end mt-1"><input type="checkbox" class="form-check-input"></div>';
-          //   },
-          // },
         ],
       });
     }
   
     _addListeners() {
       // Listener for confirm button on the edit/add modal
-      document.getElementById('addEditConfirmButton').addEventListener('click', this._addEditFromModalClick.bind(this));
+      // document.getElementById('addEditConfirmButton').addEventListener('click', this._addEditFromModalClick.bind(this));
   
       // Listener for add buttons
-      document.querySelectorAll('.add-datatable').forEach((el) => el.addEventListener('click', this._onAddRowClick.bind(this)));
+      // document.querySelectorAll('.add-datatable').forEach((el) => el.addEventListener('click', this._onAddRowClick.bind(this)));
   
       // Listener for delete buttons
       document.querySelectorAll('.delete-datatable').forEach((el) => el.addEventListener('click', this._onDeleteClick.bind(this)));
@@ -168,15 +162,15 @@
       document.querySelector('.dataTables_scrollBody').style.height = this._staticHeight * pageLength + 'px';
     }
   
-    // Add or edit button inside the modal click
-    _addEditFromModalClick(event) {
-      if (this._currentState === 'add') {
-        this._addNewRowFromModal();
-      } else {
-        this._editRowFromModal();
-      }
-      this._addEditModal.hide();
-    }
+    // // Add or edit button inside the modal click
+    // _addEditFromModalClick(event) {
+    //   if (this._currentState === 'add') {
+    //     this._addNewRowFromModal();
+    //   } else {
+    //     this._editRowFromModal();
+    //   }
+    //   this._addEditModal.hide();
+    // }
   
     // Top side edit icon click
     _onEditButtonClick(event) {
@@ -203,21 +197,21 @@
     }
 
     // Edit button inside th modal click
-    _editRowFromModal() {
-      const data = this._rowToEdit.data();
-      const formData = Object.assign(data, this._getFormData());
-      this._datatable.row(this._rowToEdit).data(formData).draw();
-      this._datatableExtend.unCheckAllRows();
-      this._datatableExtend.controlCheckAll();
-    }
+    // _editRowFromModal() {
+    //   const data = this._rowToEdit.data();
+    //   const formData = Object.assign(data, this._getFormData());
+    //   this._datatable.row(this._rowToEdit).data(formData).draw();
+    //   this._datatableExtend.unCheckAllRows();
+    //   this._datatableExtend.controlCheckAll();
+    // }
   
     // Add button inside th modal click
-    _addNewRowFromModal() {
-      const data = this._getFormData();
-      this._datatable.row.add(data).draw();
-      this._datatableExtend.unCheckAllRows();
-      this._datatableExtend.controlCheckAll();
-    }
+    // _addNewRowFromModal() {
+    //   const data = this._getFormData();
+    //   this._datatable.row.add(data).draw();
+    //   this._datatableExtend.unCheckAllRows();
+    //   this._datatableExtend.controlCheckAll();
+    // }
   
     // Delete icon click
     _onDeleteClick() {
@@ -226,18 +220,18 @@
       this._datatableExtend.controlCheckAll();
     }
   
-    // + Add New or just + button from top side click
-    _onAddRowClick() {
-      this._showModal('add', 'Formulir Permintaan Gambar', 'Kirim');
-    }
+    // // + Add New or just + button from top side click
+    // _onAddRowClick() {
+    //   this._showModal('add', 'Formulir Permintaan Gambar', 'Kirim');
+    // }
   
     // Showing modal for an objective, add or edit
-    _showModal(objective, title, button) {
-      this._addEditModal.show();
-      this._currentState = objective;
-      document.getElementById('modalTitle').innerHTML = title;
-      document.getElementById('addEditConfirmButton').innerHTML = button;
-    }
+    // _showModal(objective, title, button) {
+    //   this._addEditModal.show();
+    //   this._currentState = objective;
+    //   document.getElementById('modalTitle').innerHTML = title;
+    //   document.getElementById('addEditConfirmButton').innerHTML = button;
+    // }
   
     // Filling the modal form data
     _setForm() {
@@ -316,20 +310,20 @@
     }
   
     // Getting form values from the fields to pass to datatable
-    _getFormData() {
-      const data = {};
-      data.Name = document.querySelector('#addEditModal input[name=Name]').value;
-      data.Sales = document.querySelector('#addEditModal input[name=Sales]').value;
-      data.Stock = document.querySelector('#addEditModal input[name=Stock]').value;
-      data.Category = document.querySelector('#addEditModal input[name=Category]:checked')
-        ? document.querySelector('#addEditModal input[name=Category]:checked').value || ''
-        : '';
-      data.Tag = document.querySelector('#addEditModal input[name=Tag]:checked')
-        ? document.querySelector('#addEditModal input[name=Tag]:checked').value || ''
-        : '';
-      data.Check = '';
-      return data;
-    }
+    // _getFormData() {
+    //   const data = {};
+    //   data.Name = document.querySelector('#addEditModal input[name=Name]').value;
+    //   data.Sales = document.querySelector('#addEditModal input[name=Sales]').value;
+    //   data.Stock = document.querySelector('#addEditModal input[name=Stock]').value;
+    //   data.Category = document.querySelector('#addEditModal input[name=Category]:checked')
+    //     ? document.querySelector('#addEditModal input[name=Category]:checked').value || ''
+    //     : '';
+    //   data.Tag = document.querySelector('#addEditModal input[name=Tag]:checked')
+    //     ? document.querySelector('#addEditModal input[name=Tag]:checked').value || ''
+    //     : '';
+    //   data.Check = '';
+    //   return data;
+    // }
   
     // Clearing modal form
     _clearModalForm() {
@@ -369,6 +363,52 @@
     _onNoneSelect() {
       document.querySelectorAll('.delete-datatable').forEach((el) => el.classList.add('disabled'));
       document.querySelectorAll('.tag-datatable').forEach((el) => el.classList.add('disabled'));
+    }
+
+    _initForm() {
+      const form = document.getElementById('createGambarForm');
+      if (!form) {
+        return;
+      }
+      const validateOptions = {
+        rules: {
+          judul: {
+            required: true,
+          },
+          link: {
+            required: true,
+          },
+          kegunaan: {
+            required: true,
+          },
+        },
+        messages: {
+          judul: {
+            required: 'Judul harus diisi',
+          },
+          link: {
+            required: 'Link harus diisi',
+          },
+          kegunaan: {
+            required: 'Harap pilih penggunaan',
+          },
+        },
+      };
+      jQuery(form).validate(validateOptions);
+  
+      // form.addEventListener('submit', (event) => {
+      //   event.preventDefault();
+      //   event.stopPropagation();
+      //   if (jQuery(form).valid()) {
+      //     const formValues = {
+      //       email: form.querySelector('[name="registerEmail"]').value,
+      //       password: form.querySelector('[name="registerPassword"]').value,
+      //       name: form.querySelector('[name="registerName"]').value,
+      //     };
+      //     console.log(formValues);
+      //     return;
+      //   }
+      // });
     }
   }
   

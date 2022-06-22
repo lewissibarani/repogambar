@@ -14,4 +14,8 @@ class Kegunaan extends Model
     protected $fillable = [
         'kegunaan',
     ];
+    public function transaksi()
+    {
+        return $this->hasOne('App\Models\Transaksi','idKegunaan');
+    }
 }

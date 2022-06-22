@@ -180,6 +180,7 @@
     if (typeof TimePickerControls !== 'undefined') {
       const timePickerControls = new TimePickerControls();
     }
+    
   }
 
   // Plugin pages initialization
@@ -268,6 +269,10 @@
     // auth.register.js initialization
     if (typeof AuthRegister !== 'undefined') {
       const authRegister = new AuthRegister();
+    }
+    // datatable.ajax.js initialization
+    if (typeof CreateGambar !== 'undefined') {
+      const createGambar = new CreateGambar();
     }
     // auth.forgotpassword.js initialization
     if (typeof AuthForgotPassword !== 'undefined') {

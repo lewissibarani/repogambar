@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kegunaan;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use DB;
+
 
 class KelolaGambarController extends Controller
 {
@@ -14,7 +18,15 @@ class KelolaGambarController extends Controller
      */
     public function index ()
     {
-        return view('kelolagambar.index',compact('data'));
+        $data=Transaksi::get();
+        $test = $data->kegunaan;
+        // Transaksi::where('idUserPeminta', Auth::id())->get();
+        $json = json_encode(array(
+            "data" =>$data,
+            "kegunaan"=>$test));
+        if (file_put_contents(public_path()."/json/kelolagambar.json", $json))
+        $Kegunaan = Kegunaan::all();
+        return view('kelolagambar.index', compact('Kegunaan'));
     }
 
     /**
@@ -35,7 +47,22 @@ class KelolaGambarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $idpeminta= Auth::id();
+        $request->validate([
+            'judulPermintaan' => ['required'],
+            'linkPermintaan' => ['required'],
+            'idkegunaan' => ['required'],
+        ]);
+        DB::table('permintaan')->insert([
+            'judulPermintaan' => $request->judulPermintaan,
+            'linkPermintaan' => $request->linkPermintaan,
+            'idkegunaan' => $request->idkegunaan,
+            'idUserPeminta' => $idpeminta,
+            'idStatus' => 1,
+            'created_at' => date('d-m-y h:i:s')
+        ]);
+
+        return redirect()->route('kelolagambar.index')->withStatus(__('Permintaan Berhasil Dibuat.'));
     }
 
     /**

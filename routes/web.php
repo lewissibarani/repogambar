@@ -40,8 +40,8 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('KelolaGambar')->group(function () {
     Route::get('/', [KelolaGambarController::class, 'index']);
-    Route::get('Index',[KelolaGambarController::class, 'index']);
-    // Route::view('Index', 'kelolagambar/index');
+    Route::get('Index',[KelolaGambarController::class, 'index'])->name('kelolagambar.index');
+    Route::post('Store', [KelolaGambarController::class, 'store'])->name('kelolagambar.store');
     Route::view('Update', 'kelolagambar/update');
 });
 
@@ -53,14 +53,6 @@ Route::prefix('Admin')->group(function () {
 
 Route::prefix('Pages')->group(function () {
     Route::view('/', 'pages/index');
-
-    // Route::prefix('Authentication')->group(function () {
-    //     Route::view('/', 'pages/authentication/index');
-    //     Route::view('Login', 'pages/authentication/login');
-    //     Route::view('Register', 'pages/authentication/register');
-    //     Route::view('ForgotPassword', 'pages/authentication/forgot_password');
-    //     Route::view('ResetPassword', 'pages/authentication/reset_password');
-    // });
 
 
 });
