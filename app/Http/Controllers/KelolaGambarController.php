@@ -18,12 +18,19 @@ class KelolaGambarController extends Controller
      */
     public function index ()
     {
-        $data = Transaksi::where('idUserPeminta', Auth::id())->get();
+        // Mengambil data didatabase
+        $data = Transaksi::with('kegunaan','user')
+        ->where('idUserPeminta', Auth::id())->get();
+
+        // Membuat Json hasil query
         $json = json_encode(array(
             "data" =>$data));
         if (file_put_contents(public_path()."/json/kelolagambar.json", $json))
+
+        //Populate Option kegunaan untuk form permintaan
         $Kegunaan = Kegunaan::all();
-        return view('kelolagambar.index', compact('Kegunaan'));
+
+        return view('kelolagambar.index', compact('Kegunaan','data'));
     }
 
     /**

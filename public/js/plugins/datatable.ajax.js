@@ -51,8 +51,12 @@
         order: [], // Clearing default order
         sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
         pageLength: 10,
-        columns: [{data: 'id'}, {data: 'linkPermintaan'}, {data: 'idKegunaan'}, {data: 'created_at'}, {data: 'idStatus'}],
-        // {data: 'Check'}
+        columns: [{data: function ( row, type, val, meta ) {
+            val = '#'+row.user.kodesatker + row.id ;
+            return val;
+            }
+          }, {data: 'kegunaan.kegunaan'}, {data: 'linkPermintaan'}, {data: 'created_at'}, {data: 'idStatus'}
+        ],
         language: {
           paginate: {
             previous: '<i class="cs-chevron-left"></i>',
@@ -70,13 +74,12 @@
           {
             targets: 0,
             render: function (data, type, row, meta) {
-              
-              return '<a class= data-bs-toggle="modal" href="#previewModal"> ' + data + '</a>';
+              return '<a class= data-bs-toggle="modal" href="#previewModal" data-bs-toggle="modal" data-bs-target="#previewModal"> ' + data + '</a>';
             },
           },
           // Memotong Tetx agar tidak terlalu panjang
           {
-            targets: 1,
+            targets: 2,
             render: function (data) {
               if (data.length > 5) {
                 return '<a class="" href="'+ data +' " target="_blank" rel="noopener noreferrer">' + data.substring(0, 30) + '...'+ '</a>';
@@ -85,6 +88,40 @@
              }
               
             }
+
+          },
+          {
+            targets: 3,
+            render: function (data) {
+
+              function dateFormat(inputDate, format) {
+                //parse the input date
+                const date = new Date(inputDate);
+            
+                //extract the parts of the date
+                const day = date.getDate();
+                const month = date.getMonth() + 1;
+                const year = date.getFullYear();    
+            
+                //replace the month
+                
+                format = format.replace("MM",date.toLocaleString('default', { month: 'long' }));        
+            
+                //replace the year
+                if (format.indexOf("yyyy") > -1) {
+                    format = format.replace("yyyy", year.toString());
+                } else if (format.indexOf("yy") > -1) {
+                    format = format.replace("yy", year.toString().substr(2,2));
+                }
+            
+                //replace the day
+                format = format.replace("dd", day.toString().padStart(2,"0"));
+            
+                return format;
+              }
+              
+              return dateFormat(data, 'dd MM yyyy');
+              }
 
           },
 

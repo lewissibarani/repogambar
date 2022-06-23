@@ -21,8 +21,17 @@ class Transaksi extends Model
         'idUserPetugas'
     ];
 
-    public function kegunaan (){
-        return $this->belongsTo('App\Models\Kegunaan');
+    protected $dateFormat = 'U';
+
+    public function kegunaan ()
+    {
+        return $this->hasOne('App\Models\Kegunaan','id','idKegunaan');
+    }
+
+    public function user()
+    {
+        
+        return $this->belongsTo('App\Models\User','idUserPeminta','id');
     }
 
 }

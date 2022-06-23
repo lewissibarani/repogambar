@@ -39,16 +39,16 @@ Route::middleware('auth')->group(function () {
 // Route::view('/Vertical', 'vertical');
 
 Route::prefix('KelolaGambar')->group(function () {
-    Route::get('/', [KelolaGambarController::class, 'index']);
+    Route::get('/', [KelolaGambarController::class, 'index'])->name('kelolagambar.index');
     Route::get('Index',[KelolaGambarController::class, 'index'])->name('kelolagambar.index');
     Route::post('Store', [KelolaGambarController::class, 'store'])->name('kelolagambar.store');
-    Route::view('Update', 'kelolagambar/update');
+    // Route::view('Update', 'kelolagambar/update');
 });
 
 Route::prefix('Admin')->group(function () {
-    Route::view('/', 'admin/index');
-    Route::view('Index', 'admin/index');
-    Route::view('View', 'admin/view');
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('Index',[AdminController::class, 'index'])->name('admin.index');
+    Route::post('Store', [AdminController::class, 'store'])->name('admin.store');
 });
 
 Route::prefix('Pages')->group(function () {
