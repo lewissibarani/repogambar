@@ -18,10 +18,7 @@ class Transaksi extends Model
         'alasanDitolak',
         'linkPermintaan',
         'idUserPeminta',
-        'idUserPetugas'
     ];
-
-    protected $dateFormat = 'U';
 
     public function kegunaan ()
     {
@@ -32,6 +29,11 @@ class Transaksi extends Model
     {
         
         return $this->belongsTo('App\Models\User','idUserPeminta','id');
+    }
+    public function pembagiantugas()
+    {
+        
+        return $this->belongsTo('App\Models\PembagianTugas');
     }
 
 }

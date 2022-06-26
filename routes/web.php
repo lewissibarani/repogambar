@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardsController;
 use App\Http\Controllers\KelolaGambarController;
+use App\Http\Controllers\BagiTugasController;
+use App\Http\Controllers\PetugasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,10 +47,16 @@ Route::prefix('KelolaGambar')->group(function () {
     // Route::view('Update', 'kelolagambar/update');
 });
 
-Route::prefix('Admin')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('Index',[AdminController::class, 'index'])->name('admin.index');
-    Route::post('Store', [AdminController::class, 'store'])->name('admin.store');
+Route::prefix('PembagianTugas')->group(function () {
+    Route::get('/', [BagiTugasController::class, 'index'])->name('bagipetugas.index');
+    Route::get('Index',[BagiTugasController::class, 'index'])->name('bagipetugas.index');
+    Route::post('Store', [BagiTugasController::class, 'store'])->name('bagipetugas.store');
+});
+
+Route::prefix('Petugas')->group(function () {
+    Route::get('/', [PetugasController::class, 'index'])->name('petugas.index');
+    Route::get('Index',[PetugasController::class, 'index'])->name('petugas.index');
+    Route::post('Store', [PetugasController::class, 'store'])->name('petugas.store');
 });
 
 Route::prefix('Pages')->group(function () {

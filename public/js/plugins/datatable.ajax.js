@@ -74,7 +74,7 @@
           {
             targets: 0,
             render: function (data, type, row, meta) {
-              return '<a class= data-bs-toggle="modal" href="#previewModal" data-bs-toggle="modal" data-bs-target="#previewModal"> ' + data + '</a>';
+              return '<a data-bs-toggle="modal" href="#previewModal" data-bs-toggle="modal" data-bs-target="#previewModal"> ' + data + '</a>';
             },
           },
           // Memotong Tetx agar tidak terlalu panjang
@@ -287,21 +287,47 @@
     // Filling the modal form data
     _setPreviewForm() {
       const data = this._rowToEdit.data();
-      document.querySelector('.previewLink').innerHTML = data.link;
-      document.querySelector('.previewJudul').innerHTML = data.judul;
-      document.querySelector('.previewLink').innerHTML = data.link;
-      document.querySelector('.previewKegunaan').innerHTML = data.kegunaan;
-      document.querySelector('.previewWaktu').innerHTML = data.waktu;
+
+      function dateFormat(inputDate, format) {
+        //parse the input date
+        const date = new Date(inputDate);
+    
+        //extract the parts of the date
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();    
+    
+        //replace the month
+        
+        format = format.replace("MM",date.toLocaleString('default', { month: 'long' }));        
+    
+        //replace the year
+        if (format.indexOf("yyyy") > -1) {
+            format = format.replace("yyyy", year.toString());
+        } else if (format.indexOf("yy") > -1) {
+            format = format.replace("yy", year.toString().substr(2,2));
+        }
+    
+        //replace the day
+        format = format.replace("dd", day.toString().padStart(2,"0"));
+    
+        return format;
+      }
+
+      document.querySelector('.previewLink').innerHTML = data.linkPermintaan;
+      document.querySelector('.previewJudul').innerHTML = data.judulPermintaan;
+      document.querySelector('.previewKegunaan').innerHTML = data.kegunaan.kegunaan;
+      document.querySelector('.previewWaktu').innerHTML = dateFormat(data.created_at,'dd MM yyyy');
       //---Status Badge Start
       let status;
-              switch (data.status) {
-                case 0:
+              switch (data.idStatus) {
+                case 1:
                   status = "<span class='badge bg-outline-primary'>Diproses</span>";
                   break;
-                case 1:
+                case 2:
                   status = "<span class='badge rounded-pill bg-danger'>Ditolak</span>";
                   break;
-                case 2:
+                case 3:
                   status = "<span class='badge rounded-pill bg-primary'>Selesai</span>";
                   break;
                 default:
@@ -315,17 +341,14 @@
       let alasanTolak;
         switch (data.status) {
           case 1:
-            alasanTolak = "<span class='font-weight-bold'>Alasan Ditolak: </span>" + data.alasanTolak;
+            alasanTolak = "<span class='font-weight-bold'>Alasan Ditolak: </span>" + data.alasanDitolak;
             break;
           default:
             alasanTolak = "";
             break;
         }
       document.querySelector('.previewAlasanTolak').innerHTML = alasanTolak;
-      //--Alasan Ditolak end
-      document.querySelector('.previewLink').innerHTML = data.link;
 
-      //--Alasan Ditolak Start
       let downloadButton;
         switch (data.status) {
           case 2:
@@ -341,9 +364,6 @@
             break;
         }
       document.querySelector('.tombolDownload').innerHTML = downloadButton;
-      //--Alasan Ditolak end
-
-      document.querySelector('.previewCatatan').innerHTML = "<span class='font-weight-bold'>Catatan: </span>"+ data.catatan;
     }
   
     // Getting form values from the fields to pass to datatable

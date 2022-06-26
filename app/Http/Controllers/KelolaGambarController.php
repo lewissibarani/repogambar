@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Kegunaan;
 use App\Models\Transaksi;
+use App\Models\PembagianTugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use DB;
 
 
 class KelolaGambarController extends Controller
@@ -57,15 +57,17 @@ class KelolaGambarController extends Controller
             'linkPermintaan' => ['required'],
             'idkegunaan' => ['required'],
         ]);
-        DB::table('permintaan')->insert([
+        $create_transaksi=Transaksi::create([
             'judulPermintaan' => $request->judulPermintaan,
             'linkPermintaan' => $request->linkPermintaan,
-            'idkegunaan' => $request->idkegunaan,
+            'idKegunaan' => $request->idkegunaan,
             'idUserPeminta' => $idpeminta,
-            'idStatus' => 1,
-            'created_at' => date('d-m-y h:i:s')
+            'idStatus' => 1
         ]);
-
+        PembagianTugas::create([
+            'permintaan_id' => $create_transaksi->id,
+            'seenboolean' => '0'
+        ]);
         return redirect()->route('kelolagambar.index')->withStatus(__('Permintaan Berhasil Dibuat.'));
     }
 

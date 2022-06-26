@@ -210,10 +210,22 @@
                 </a>
             </li>
             <li>
-                <a href="/Admin/Index">
+                <a href="/Petugas/Index">
                     <i data-acorn-icon="screen" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Halaman Admin</span>
+                    <span class="label">Halaman Petugas</span>
                 </a>
+                <ul id="interfaceComponents">
+                            <li>
+                                <a href="/PembagianTugas/Index">
+                                    <span class="label">Pembagian Tugas</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Pembagian/Index">
+                                    <span class="label">Daftar Tugas</span>
+                                </a>
+                            </li>
+                </ul>
             </li>
             <li>
                 <a href="/Kontribusi">

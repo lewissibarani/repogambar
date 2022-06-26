@@ -46,11 +46,15 @@
         scrollX: true,
         buttons: ['copy', 'excel', 'csv', 'print'],
         info: false,
-        ajax: '/json/transaksi_admin.json',
+        ajax: '/json/PembagianTugas.json',
         order: [], // Clearing default order
         sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
         pageLength: 10,
-        columns: [{data: 'idPermintaan'}, {data: 'author'}, { data: 'satker'},{data: 'noHp'}, {data: 'eMail'}, {data: 'status'}],
+        columns: [{data: function ( row, type, val, meta ) {
+          val = '#'+row.user.kodesatker + row.id ;
+          return val;
+          }
+        }, {data: 'user.name'}, { data: 'user.satker'},{data: 'Petugas'}],
         // {data: 'Check'}
         language: {
           paginate: {
@@ -66,47 +70,33 @@
         },
         columnDefs: [
           // Adding Name content as an anchor with a target #
-          {
+          { width: "10%",
             targets: 0,
             render: function (data, type, row, meta) {
               
-              return '<a class="list-item-heading body" target="_blank" rel="noopener noreferrer" href="/Admin/Index">' + data + '</a>';
+              return '<a target="#" rel="noopener noreferrer" href="#">' + data + '</a>';
             },
           },
-
+          // Adding checkbox for Check column
           {
-            targets: 1,
-            render: function (data) {
-            return  '<div class="row g-0">'+
-                      '<div class="col-auto">'+
-                          '<div class="sw-5 me-3">'+
-                              '<img src="/img/profile/profile-1.webp" class="img-fluid rounded-xl" alt="thumb" />'+
-                          '</div>'+
-                      '</div>'+
-                      '<div class="col d-flex align-items-center">'+
-                          '<a href="#"> '+ data +'</a>'+
-                      '</div>'+
-                    '</div>';          
-            }
-
+            targets: 3,
+            render: function (data, type, row, meta) {
+              return '<a class="btn btn-outline-primary w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#bagiTugasModal">'+
+              '<i data-acorn-icon="plus"></i>'+
+              '<span>Alokasikan Tugas</span>'+
+              '</a>';
+            },
           },
-          // // Adding checkbox for Check column
-          // {
-          //   targets: 5,
-          //   render: function (data, type, row, meta) {
-          //     return '<div class="form-check float-end mt-1"><input type="checkbox" class="form-check-input"></div>';
-          //   },
-          // },
         ],
       });
     }
   
     _addListeners() {
       // Listener for confirm button on the edit/add modal
-      document.getElementById('addEditConfirmButton').addEventListener('click', this._addEditFromModalClick.bind(this));
+      // document.getElementById('addEditConfirmButton').addEventListener('click', this._addEditFromModalClick.bind(this));
   
       // Listener for add buttons
-      document.querySelectorAll('.add-datatable').forEach((el) => el.addEventListener('click', this._onAddRowClick.bind(this)));
+      // document.querySelectorAll('.add-datatable').forEach((el) => el.addEventListener('click', this._onAddRowClick.bind(this)));
   
       // Listener for delete buttons
       document.querySelectorAll('.delete-datatable').forEach((el) => el.addEventListener('click', this._onDeleteClick.bind(this)));
@@ -150,14 +140,14 @@
     }
   
     // Add or edit button inside the modal click
-    _addEditFromModalClick(event) {
-      if (this._currentState === 'add') {
-        this._addNewRowFromModal();
-      } else {
-        this._editRowFromModal();
-      }
-      this._addEditModal.hide();
-    }
+    // _addEditFromModalClick(event) {
+    //   if (this._currentState === 'add') {
+    //     this._addNewRowFromModal();
+    //   } else {
+    //     this._editRowFromModal();
+    //   }
+    //   this._addEditModal.hide();
+    // }
   
     // Top side edit icon click
     _onEditButtonClick(event) {
@@ -167,13 +157,6 @@
       const selected = this._datatableExtend.getSelectedRows();
       this._onEditRowClick(this._datatable.row(selected[0][0]));
     }
-  
-    // // Direct click from row title
-    // _onEditRowClick(rowToEdit) {
-    //   this._rowToEdit = rowToEdit; // Passed from DatatableExtend via callback from settings
-    //   this._showModal('edit', 'Edit', 'Done');
-    //   this._setForm();
-    // }
 
     // Direct click from row title
     _onEditRowClick(rowToEdit) {
@@ -213,45 +196,71 @@
     }
   
     // Showing modal for an objective, add or edit
-    _showModal(objective, title, button) {
-      this._addEditModal.show();
-      this._currentState = objective;
-      document.getElementById('modalTitle').innerHTML = title;
-      document.getElementById('addEditConfirmButton').innerHTML = button;
-    }
+    // _showModal(objective, title, button) {
+    //   this._addEditModal.show();
+    //   this._currentState = objective;
+    //   document.getElementById('modalTitle').innerHTML = title;
+    //   document.getElementById('addEditConfirmButton').innerHTML = button;
+    // }
   
     // Filling the modal form data
-    _setForm() {
-      const data = this._rowToEdit.data();
-      document.querySelector('#addEditModal input[name=Name]').value = data.Name;
-      document.querySelector('#addEditModal input[name=Sales]').value = data.Sales;
-      document.querySelector('#addEditModal input[name=Stock]').value = data.Stock;
-      if (document.querySelector('#addEditModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
-        document.querySelector('#addEditModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
-      }
-      if (document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
-        document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
-      }
-    }
+    // _setForm() {
+    //   const data = this._rowToEdit.data();
+    //   document.querySelector('#addEditModal input[name=Name]').value = data.Name;
+    //   document.querySelector('#addEditModal input[name=Sales]').value = data.Sales;
+    //   document.querySelector('#addEditModal input[name=Stock]').value = data.Stock;
+    //   if (document.querySelector('#addEditModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
+    //     document.querySelector('#addEditModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
+    //   }
+    //   if (document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
+    //     document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
+    //   }
+    // }
 
     // Filling the modal form data
     _setPreviewForm() {
       const data = this._rowToEdit.data();
-      document.querySelector('.previewLink').innerHTML = data.link;
-      document.querySelector('.previewJudul').innerHTML = data.judul;
-      document.querySelector('.previewLink').innerHTML = data.link;
-      document.querySelector('.previewKegunaan').innerHTML = data.kegunaan;
-      document.querySelector('.previewWaktu').innerHTML = data.waktu;
+
+      function dateFormat(inputDate, format) {
+        //parse the input date
+        const date = new Date(inputDate);
+    
+        //extract the parts of the date
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();    
+    
+        //replace the month
+        
+        format = format.replace("MM",date.toLocaleString('default', { month: 'long' }));        
+    
+        //replace the year
+        if (format.indexOf("yyyy") > -1) {
+            format = format.replace("yyyy", year.toString());
+        } else if (format.indexOf("yy") > -1) {
+            format = format.replace("yy", year.toString().substr(2,2));
+        }
+    
+        //replace the day
+        format = format.replace("dd", day.toString().padStart(2,"0"));
+    
+        return format;
+      }
+
+      document.querySelector('.previewJudul').innerHTML = data.judulPermintaan;
+      document.querySelector('.previewLink').innerHTML = data.linkPermintaan;
+      document.querySelector('.previewKegunaan').innerHTML = data.idKegunaan;
+      document.querySelector('.previewWaktu').innerHTML = dateFormat(data.created_at,'dd MM yyyy');
       //---Status Badge Start
       let status;
               switch (data.status) {
-                case 0:
+                case 1:
                   status = "<span class='badge bg-outline-primary'>Diproses</span>";
                   break;
-                case 1:
+                case 2:
                   status = "<span class='badge rounded-pill bg-danger'>Ditolak</span>";
                   break;
-                case 2:
+                case 3:
                   status = "<span class='badge rounded-pill bg-primary'>Selesai</span>";
                   break;
                 default:
@@ -265,7 +274,7 @@
       let alasanTolak;
         switch (data.status) {
           case 1:
-            alasanTolak = "<span class='font-weight-bold'>Alasan Ditolak: </span>" + data.alasanTolak;
+            alasanTolak = "<span class='font-weight-bold'>Alasan Ditolak: </span>" + data.alasanDitolak;
             break;
           default:
             alasanTolak = "";
@@ -274,24 +283,23 @@
       document.querySelector('.previewAlasanTolak').innerHTML = alasanTolak;
       //--Alasan Ditolak end
       
-      document.querySelector('.previewCatatan').innerHTML = "<span class='font-weight-bold'>Catatan: </span>"+ data.catatan;
     }
   
     // Getting form values from the fields to pass to datatable
-    _getFormData() {
-      const data = {};
-      data.Name = document.querySelector('#addEditModal input[name=Name]').value;
-      data.Sales = document.querySelector('#addEditModal input[name=Sales]').value;
-      data.Stock = document.querySelector('#addEditModal input[name=Stock]').value;
-      data.Category = document.querySelector('#addEditModal input[name=Category]:checked')
-        ? document.querySelector('#addEditModal input[name=Category]:checked').value || ''
-        : '';
-      data.Tag = document.querySelector('#addEditModal input[name=Tag]:checked')
-        ? document.querySelector('#addEditModal input[name=Tag]:checked').value || ''
-        : '';
-      data.Check = '';
-      return data;
-    }
+    // _getFormData() {
+    //   const data = {};
+    //   data.Name = document.querySelector('#addEditModal input[name=Name]').value;
+    //   data.Sales = document.querySelector('#addEditModal input[name=Sales]').value;
+    //   data.Stock = document.querySelector('#addEditModal input[name=Stock]').value;
+    //   data.Category = document.querySelector('#addEditModal input[name=Category]:checked')
+    //     ? document.querySelector('#addEditModal input[name=Category]:checked').value || ''
+    //     : '';
+    //   data.Tag = document.querySelector('#addEditModal input[name=Tag]:checked')
+    //     ? document.querySelector('#addEditModal input[name=Tag]:checked').value || ''
+    //     : '';
+    //   data.Check = '';
+    //   return data;
+    // }
   
     // Clearing modal form
     _clearModalForm() {
