@@ -50,27 +50,7 @@
                                 </span>
                             -->
                         </div>
-                                <!-- <button
-                                        type="button"
-                                        class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
-                                        data-bs-offset="0,3"
-                                        data-bs-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        data-submenu
-                                ></button>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <div class="dropdown dropstart dropdown-submenu">
-                                        <button class="dropdown-item dropdown-toggle tag-datatable caret-absolute disabled" type="button">Tag</button>
-                                        <div class="dropdown-menu">
-                                            <button class="dropdown-item tag-done" type="button">Done</button>
-                                            <button class="dropdown-item tag-new" type="button">New</button>
-                                            <button class="dropdown-item tag-sale" type="button">Sale</button>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item disabled delete-datatable" type="button">Delete</button>
-                                </div> -->
+
                             </div>
                             <!-- Check Button End -->
                         </div>
@@ -198,19 +178,22 @@
                                         </div>
                                         <div class="border-bottom border-separator-light mb-2 pb-2">
                                             <div class="row g-0 sh-6">
+                                                @foreach ($Users as $user)
                                                 <div class="col-auto">
-                                                    <img src="/img/profile/profile-6.webp" class="card-img rounded-xl sh-6 sw-6" alt="thumb" />
+                                                    <!-- /img/profile/profile-6.webp -->
+                                                    <img src="{{ $user->profilepicture }}" class="card-img rounded-xl sh-6 sw-6" alt="thumb" />
                                                 </div>
                                                 <div class="col">
                                                     <div class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
                                                         <div class="d-flex flex-column">
-                                                            <div><a href="#">James Kindangen</a></div>
+                                                            <div><a href="#">{{ $user->name }}</a></div>
                                                         </div>
                                                         <div class="d-flex">
                                                             1.244
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -224,9 +207,25 @@
                 <div class="modal fade" id="bagiTugasModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                     <div class="modal-dialog modal-lg rounded">
                         <div class="modal-content">
-                            <div class="">
+                            <div class="modal-header">
+                                <h5 class="modal-title font-weight-bold" id="modalTitle">ID Permintaan: <span class="previewId"></span></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form id="bagiTugasForm" action="{{route('bagipetugas.store')}}" method="POST" novalidate>
+                                @csrf
+                                @error('user_id')
+                                <div class="mb-3 text-danger">
+                                    {{$message}}
+                                </div>
+                                @enderror
                                 @include('BagiPetugas.alokasitugas')
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary" >Kirim</button>
+                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

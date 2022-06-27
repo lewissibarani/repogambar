@@ -339,23 +339,31 @@
 
       //--Alasan Ditolak Start
       let alasanTolak;
-        switch (data.status) {
-          case 1:
-            alasanTolak = "<span class='font-weight-bold'>Alasan Ditolak: </span>" + data.alasanDitolak;
+        switch (data.idStatus) {
+          case 2:
+          alasanTolak =   
+            '<div class="row mb-3">'+
+                '<label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Alasan Ditolak</label>'+
+                '<div class="col-sm-10">'+
+                    '<label class=" col-sm-12 col-form-label">'+
+                      data.alasanDitolak +
+                    '</label>  '+            
+                '</div>'+
+            '</div>'
             break;
           default:
             alasanTolak = "";
             break;
         }
-      document.querySelector('.previewAlasanTolak').innerHTML = alasanTolak;
+      
 
       let downloadButton;
-        switch (data.status) {
-          case 2:
+        switch (data.idStatus) {
+          case 3:
             downloadButton =  '<a class="btn btn-sm btn-icon btn-primary"'+
                                       'data-bs-toggle="tooltip"'+
                                       'title="Download Gambar"'+
-                                      'href="'+ data.path +'">'+
+                                      'href="'+ data.gambar.path +'">'+
                                   '<i data-acorn-icon="download"></i> Download'+
                               '</a>';
             break;

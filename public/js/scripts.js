@@ -29,6 +29,7 @@
       this._initPages();
       this._initForms();
       this._initPlugins();
+      this._initBagitugas();
     }, 100);
   }
 
@@ -245,6 +246,13 @@
     // datatable.serverside.js initialization
     if (typeof BoxedVariations !== 'undefined') {
       const boxedVariations = new BoxedVariations();
+    }
+  }
+
+  // Bagi Tugas initialization
+  _initBagitugas() {
+    if (typeof BagiTugas !== 'undefined') {
+      const bagiTugas = new BagiTugas();
     }
   }
 

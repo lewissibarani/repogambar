@@ -18,6 +18,7 @@ class Transaksi extends Model
         'alasanDitolak',
         'linkPermintaan',
         'idUserPeminta',
+        'gambar_id'
     ];
 
     public function kegunaan ()
@@ -30,10 +31,11 @@ class Transaksi extends Model
         
         return $this->belongsTo('App\Models\User','idUserPeminta','id');
     }
+
     public function pembagiantugas()
     {
         
-        return $this->belongsTo('App\Models\PembagianTugas');
+        return $this->belongsTo('App\Models\PembagianTugas' ,'id','permintaan_id');
     }
 
 }

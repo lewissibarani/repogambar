@@ -7,7 +7,7 @@
  *
  */
 
- class RowsAjax {
+ class BagiTugas {
     constructor() {
       if (!jQuery().DataTable) {
         console.log('DataTable is null!');
@@ -27,7 +27,8 @@
       this._datatableExtend;
   
       // Add or edit modal
-      this._addEditModal;
+      this._bagiTugasModal;
+      
       
   
       // Datatable single item height
@@ -74,17 +75,21 @@
             targets: 0,
             render: function (data, type, row, meta) {
               
-              return '<a target="#" rel="noopener noreferrer" href="#">' + data + '</a>';
+              return  data ;
             },
           },
-          // Adding checkbox for Check column
+
           {
             targets: 3,
             render: function (data, type, row, meta) {
-              return '<a class="btn btn-outline-primary w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#bagiTugasModal">'+
-              '<i data-acorn-icon="plus"></i>'+
-              '<span>Alokasikan Tugas</span>'+
-              '</a>';
+              if(row.pembagiantugas==null){
+                return '<a class="btn btn-outline-primary w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#bagiTugasModal">'+
+                '<i data-acorn-icon="plus"></i>'+
+                'Alokasi Petugas'+
+                '</a>';
+              }else{
+                return row.pembagiantugas.user.name;
+              }
             },
           },
         ],
@@ -110,7 +115,7 @@
       document.querySelectorAll('.tag-sale').forEach((el) => el.addEventListener('click', () => this._updateTag('Sale')));
   
       // Calling clear form when modal is closed
-      document.getElementById('addEditModal').addEventListener('hidden.bs.modal', this._clearModalForm);
+      document.getElementById('bagiTugasModal').addEventListener('hidden.bs.modal', this._clearModalForm);
     }
   
     // Extending with DatatableExtend to get search, select and export working
@@ -127,7 +132,7 @@
   
     // Keeping a reference to add/edit modal
     _initBootstrapModal() {
-      this._addEditModal = new bootstrap.Modal(document.getElementById('addEditModal'));
+      this._bagiTugasModal = new bootstrap.Modal(document.getElementById('bagiTugasModal'));
     }
   
     // Setting static height to datatable to prevent pagination movement when list is not full
@@ -146,7 +151,7 @@
     //   } else {
     //     this._editRowFromModal();
     //   }
-    //   this._addEditModal.hide();
+    //   this._bagiTugasModal.hide();
     // }
   
     // Top side edit icon click
@@ -197,7 +202,7 @@
   
     // Showing modal for an objective, add or edit
     // _showModal(objective, title, button) {
-    //   this._addEditModal.show();
+    //   this._bagiTugasModal.show();
     //   this._currentState = objective;
     //   document.getElementById('modalTitle').innerHTML = title;
     //   document.getElementById('addEditConfirmButton').innerHTML = button;
@@ -206,14 +211,14 @@
     // Filling the modal form data
     // _setForm() {
     //   const data = this._rowToEdit.data();
-    //   document.querySelector('#addEditModal input[name=Name]').value = data.Name;
-    //   document.querySelector('#addEditModal input[name=Sales]').value = data.Sales;
-    //   document.querySelector('#addEditModal input[name=Stock]').value = data.Stock;
-    //   if (document.querySelector('#addEditModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
-    //     document.querySelector('#addEditModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
+    //   document.querySelector('#bagiTugasModal input[name=Name]').value = data.Name;
+    //   document.querySelector('#bagiTugasModal input[name=Sales]').value = data.Sales;
+    //   document.querySelector('#bagiTugasModal input[name=Stock]').value = data.Stock;
+    //   if (document.querySelector('#bagiTugasModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
+    //     document.querySelector('#bagiTugasModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
     //   }
-    //   if (document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
-    //     document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
+    //   if (document.querySelector('#bagiTugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
+    //     document.querySelector('#bagiTugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
     //   }
     // }
 
@@ -247,13 +252,21 @@
         return format;
       }
 
+      //Merubah Format Id
+      function Id(data) {
+        data = '#'+data.user.kodesatker + data.id ;
+        return data;
+        }
+      //--end of Merubah Format Id
+      document.querySelector('.idalokasipetugas').value = data.id;
+      document.querySelector('.previewId').innerHTML = Id(data);
       document.querySelector('.previewJudul').innerHTML = data.judulPermintaan;
       document.querySelector('.previewLink').innerHTML = data.linkPermintaan;
-      document.querySelector('.previewKegunaan').innerHTML = data.idKegunaan;
+      document.querySelector('.previewKegunaan').innerHTML = data.kegunaan.kegunaan;
       document.querySelector('.previewWaktu').innerHTML = dateFormat(data.created_at,'dd MM yyyy');
       //---Status Badge Start
       let status;
-              switch (data.status) {
+              switch (data.idStatus) {
                 case 1:
                   status = "<span class='badge bg-outline-primary'>Diproses</span>";
                   break;
@@ -272,8 +285,8 @@
 
       //--Alasan Ditolak Start
       let alasanTolak;
-        switch (data.status) {
-          case 1:
+        switch (data.idStatus) {
+          case 2:
             alasanTolak = "<span class='font-weight-bold'>Alasan Ditolak: </span>" + data.alasanDitolak;
             break;
           default:
@@ -288,23 +301,23 @@
     // Getting form values from the fields to pass to datatable
     // _getFormData() {
     //   const data = {};
-    //   data.Name = document.querySelector('#addEditModal input[name=Name]').value;
-    //   data.Sales = document.querySelector('#addEditModal input[name=Sales]').value;
-    //   data.Stock = document.querySelector('#addEditModal input[name=Stock]').value;
-    //   data.Category = document.querySelector('#addEditModal input[name=Category]:checked')
-    //     ? document.querySelector('#addEditModal input[name=Category]:checked').value || ''
+    //   data.Name = document.querySelector('#bagiTugasModal input[name=Name]').value;
+    //   data.Sales = document.querySelector('#bagiTugasModal input[name=Sales]').value;
+    //   data.Stock = document.querySelector('#bagiTugasModal input[name=Stock]').value;
+    //   data.Category = document.querySelector('#bagiTugasModal input[name=Category]:checked')
+    //     ? document.querySelector('#bagiTugasModal input[name=Category]:checked').value || ''
     //     : '';
-    //   data.Tag = document.querySelector('#addEditModal input[name=Tag]:checked')
-    //     ? document.querySelector('#addEditModal input[name=Tag]:checked').value || ''
+    //   data.Tag = document.querySelector('#bagiTugasModal input[name=Tag]:checked')
+    //     ? document.querySelector('#bagiTugasModal input[name=Tag]:checked').value || ''
     //     : '';
     //   data.Check = '';
     //   return data;
     // }
   
     // Clearing modal form
-    _clearModalForm() {
-      document.querySelector('#addEditModal form').reset();
-    }
+    // _clearModalForm() {
+    //   document.querySelector('#bagiTugasModal form').reset();
+    // }
   
     // Update tag from top side dropdown
     _updateTag(tag) {

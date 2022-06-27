@@ -9,4 +9,20 @@ class Gambar extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
+    protected $table = 'gambar';
+    protected $fillable = [
+        'judul',
+        'link',
+        'path',
+        'idKegunaan',
+        'idUser',
+        'metadata',
+        'catatan',
+    ];
+
+    public function transaksi()
+    {
+        
+        return $this->belongsTo('App\Models\Transaksi', 'id','gambar_id');
+    }
 }
