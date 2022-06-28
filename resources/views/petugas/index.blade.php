@@ -1,8 +1,8 @@
 @php
     $html_tag_data = [];
-    $title = 'Daftar Permintaan Gambar';
+    $title = 'Halaman Petugas';
     $description= 'A table enhancing plug-in for the jQuery Javascript library, adding sorting, paging and filtering abilities to plain HTML tables with minimal effort.';
-    $breadcrumbs = ["/"=>"Home","/KelolaGambar/Index"=>"Daftar Permintaan Gambar"]
+    $breadcrumbs = ["/"=>"Home","/Petugas/Index"=>"Halaman Petugas"]
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
@@ -18,7 +18,7 @@
 
 @section('js_page')
     <script src="/js/cs/datatable.extend.js"></script>
-    <script src="/js/admin/datatable.admin.js"></script>
+    <script src="/js/petugas/datatable.petugas.js"></script>
 @endsection
 
 @section('content')
@@ -225,7 +225,7 @@
                             </div>
                             <div class="modal-body">
                                 <form>
-                                    @include('KelolaGambar.form')
+                                    @include('Petugas.form_petugas')
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -242,7 +242,7 @@
                     <div class="modal-dialog modal-lg rounded">
                         <div class="modal-content">
                             <div class="">
-                                @include('KelolaGambar.preview')
+                                @include('Petugas.preview_petugas')
                             </div>
                         </div>
                     </div>

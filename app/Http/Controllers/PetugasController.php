@@ -6,18 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\Kegunaan;
 use App\Models\Transaksi;
 
-class AdminController extends Controller
+class PetugasController extends Controller
 {
     public function index ()
     {
         // Mengambil data didatabase
-        $data = Transaksi::with('kegunaan','user')->get();
+        $data = Transaksi::with('kegunaan','user')
+        ->where('idUserPeminta', Auth::id())->get();
 
         // Membuat Json hasil query
         $json = json_encode(array(
             "data" =>$data));
-        if (file_put_contents(public_path()."/json/Permintaan.json", $json))
+        if (file_put_contents(public_path()."/json/Tugas.json", $json))
         
-        return view('admin.index', compact('Kegunaan'));
+        return view('petugas.index', 
+        // compact('Kegunaan')
+    );
     }
 }

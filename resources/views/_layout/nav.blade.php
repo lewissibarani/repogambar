@@ -221,7 +221,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/Pembagian/Index">
+                                <a href="/Petugas/Index">
                                     <span class="label">Daftar Tugas</span>
                                 </a>
                             </li>

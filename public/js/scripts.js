@@ -30,6 +30,7 @@
       this._initForms();
       this._initPlugins();
       this._initBagitugas();
+      this._initPetugas();
     }, 100);
   }
 
@@ -253,6 +254,12 @@
   _initBagitugas() {
     if (typeof BagiTugas !== 'undefined') {
       const bagiTugas = new BagiTugas();
+    }
+  }
+
+  _initPetugas() {
+    if (typeof Petugas !== 'undefined') {
+      const petugas = new Petugas();
     }
   }
 
