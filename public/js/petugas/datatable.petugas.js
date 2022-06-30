@@ -27,7 +27,7 @@
       this._datatableExtend;
   
       // Add or edit modal
-      this._bagiTugasModal;
+      this._petugasModal;
       
       
   
@@ -52,10 +52,10 @@
         sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
         pageLength: 10,
         columns: [{data: function ( row, type, val, meta ) {
-          val = '#'+row.user.kodesatker + row.id ;
+          val = '#'+row.permintaan.user.kodesatker + row.permintaan.id ;
           return val;
           }
-        }, {data: 'user.name'}, { data: 'user.satker'},{data: 'Petugas'}],
+        }, {data: 'permintaan.user.name'}, { data: 'permintaan.user.satker'},{ data: 'permintaan.linkPermintaan'},{data: 'Aksi'}],
         // {data: 'Check'}
         language: {
           paginate: {
@@ -74,22 +74,32 @@
           { width: "10%",
             targets: 0,
             render: function (data, type, row, meta) {
-              
-              return  data ;
+              return '<a data-bs-toggle="modal" href="#previewModal" data-bs-toggle="modal" data-bs-target="#previewModal"> ' + data + '</a>';
             },
           },
 
           {
             targets: 3,
             render: function (data, type, row, meta) {
-              if(row.pembagiantugas==null){
-                return '<a class="btn btn-outline-primary w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#bagiTugasModal">'+
-                '<i data-acorn-icon="plus"></i>'+
-                'Alokasi Petugas'+
+              if (data.length > 5) {
+                return '<a class="" href="'+ data +' " target="_blank" rel="noopener noreferrer">' + data.substring(0, 30) + '...'+ '</a>';
+             } else {
+                return '<a class="" href="'+ data +' " target="_blank" rel="noopener noreferrer">' + data + '</a>';
+             }
+            },
+          },
+
+          {
+            targets: 4,
+            render: function (data, type, row, meta) {
+              if(row.permintaan.idStatus==1){
+                return '<a class="btn btn-outline-primary w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#petugasModal">'+
+                'Layani Permintaan'+
                 '</a>';
               }else{
-                return row.pembagiantugas.user.name;
+                return row.permintaan.status.status;
               }
+            
             },
           },
         ],
@@ -115,7 +125,7 @@
       document.querySelectorAll('.tag-sale').forEach((el) => el.addEventListener('click', () => this._updateTag('Sale')));
   
       // Calling clear form when modal is closed
-      document.getElementById('bagiTugasModal').addEventListener('hidden.bs.modal', this._clearModalForm);
+      document.getElementById('petugasModal').addEventListener('hidden.bs.modal', this._clearModalForm);
     }
   
     // Extending with DatatableExtend to get search, select and export working
@@ -132,7 +142,7 @@
   
     // Keeping a reference to add/edit modal
     _initBootstrapModal() {
-      this._bagiTugasModal = new bootstrap.Modal(document.getElementById('bagiTugasModal'));
+      this._petugasModal = new bootstrap.Modal(document.getElementById('petugasModal'));
     }
   
     // Setting static height to datatable to prevent pagination movement when list is not full
@@ -151,7 +161,7 @@
     //   } else {
     //     this._editRowFromModal();
     //   }
-    //   this._bagiTugasModal.hide();
+    //   this._petugasModal.hide();
     // }
   
     // Top side edit icon click
@@ -202,7 +212,7 @@
   
     // Showing modal for an objective, add or edit
     // _showModal(objective, title, button) {
-    //   this._bagiTugasModal.show();
+    //   this._petugasModal.show();
     //   this._currentState = objective;
     //   document.getElementById('modalTitle').innerHTML = title;
     //   document.getElementById('addEditConfirmButton').innerHTML = button;
@@ -211,14 +221,14 @@
     // Filling the modal form data
     // _setForm() {
     //   const data = this._rowToEdit.data();
-    //   document.querySelector('#bagiTugasModal input[name=Name]').value = data.Name;
-    //   document.querySelector('#bagiTugasModal input[name=Sales]').value = data.Sales;
-    //   document.querySelector('#bagiTugasModal input[name=Stock]').value = data.Stock;
-    //   if (document.querySelector('#bagiTugasModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
-    //     document.querySelector('#bagiTugasModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
+    //   document.querySelector('#petugasModal input[name=Name]').value = data.Name;
+    //   document.querySelector('#petugasModal input[name=Sales]').value = data.Sales;
+    //   document.querySelector('#petugasModal input[name=Stock]').value = data.Stock;
+    //   if (document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
+    //     document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
     //   }
-    //   if (document.querySelector('#bagiTugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
-    //     document.querySelector('#bagiTugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
+    //   if (document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
+    //     document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
     //   }
     // }
 
@@ -254,40 +264,23 @@
 
       //Merubah Format Id
       function Id(data) {
-        data = '#'+data.user.kodesatker + data.id ;
+        data = '#'+data.permintaan.user.kodesatker + data.permintaan.id ;
         return data;
         }
       //--end of Merubah Format Id
-      document.querySelector('.idalokasipetugas').value = data.id;
       document.querySelector('.previewId').innerHTML = Id(data);
-      document.querySelector('.previewJudul').innerHTML = data.judulPermintaan;
-      document.querySelector('.previewLink').innerHTML = data.linkPermintaan;
-      document.querySelector('.previewKegunaan').innerHTML = data.kegunaan.kegunaan;
+      document.querySelector('.previewJudul').innerHTML = data.permintaan.judulPermintaan;
+      document.querySelector('.previewLink').innerHTML = '<a href="'+ data.permintaan.linkPermintaan +' " target="_blank" rel="noopener noreferrer">' + data.permintaan.linkPermintaan + '</a>';
+      document.querySelector('.previewKegunaan').innerHTML = data.permintaan.kegunaan.kegunaan;
       document.querySelector('.previewWaktu').innerHTML = dateFormat(data.created_at,'dd MM yyyy');
-      //---Status Badge Start
-      let status;
-              switch (data.idStatus) {
-                case 1:
-                  status = "<span class='badge bg-outline-primary'>Diproses</span>";
-                  break;
-                case 2:
-                  status = "<span class='badge rounded-pill bg-danger'>Ditolak</span>";
-                  break;
-                case 3:
-                  status = "<span class='badge rounded-pill bg-primary'>Selesai</span>";
-                  break;
-                default:
-                  status = "<span class='badge rounded-pill bg-warning'>Duplikasi</span>";
-                  break;
-              }
-      document.querySelector('.previewStatus').innerHTML = status;
+      document.querySelector('.previewStatus').innerHTML = data.permintaan.status.status;
       //---Status Badge end
 
       //--Alasan Ditolak Start
       let alasanTolak;
-        switch (data.idStatus) {
+        switch (data.permintaan.idStatus) {
           case 2:
-            alasanTolak = "<span class='font-weight-bold'>Alasan Ditolak: </span>" + data.alasanDitolak;
+            alasanTolak = "<span class='font-weight-bold'>Alasan Ditolak: </span>" + data.permintaan.alasanDitolak;
             break;
           default:
             alasanTolak = "";
@@ -301,14 +294,14 @@
     // Getting form values from the fields to pass to datatable
     // _getFormData() {
     //   const data = {};
-    //   data.Name = document.querySelector('#bagiTugasModal input[name=Name]').value;
-    //   data.Sales = document.querySelector('#bagiTugasModal input[name=Sales]').value;
-    //   data.Stock = document.querySelector('#bagiTugasModal input[name=Stock]').value;
-    //   data.Category = document.querySelector('#bagiTugasModal input[name=Category]:checked')
-    //     ? document.querySelector('#bagiTugasModal input[name=Category]:checked').value || ''
+    //   data.Name = document.querySelector('#petugasModal input[name=Name]').value;
+    //   data.Sales = document.querySelector('#petugasModal input[name=Sales]').value;
+    //   data.Stock = document.querySelector('#petugasModal input[name=Stock]').value;
+    //   data.Category = document.querySelector('#petugasModal input[name=Category]:checked')
+    //     ? document.querySelector('#petugasModal input[name=Category]:checked').value || ''
     //     : '';
-    //   data.Tag = document.querySelector('#bagiTugasModal input[name=Tag]:checked')
-    //     ? document.querySelector('#bagiTugasModal input[name=Tag]:checked').value || ''
+    //   data.Tag = document.querySelector('#petugasModal input[name=Tag]:checked')
+    //     ? document.querySelector('#petugasModal input[name=Tag]:checked').value || ''
     //     : '';
     //   data.Check = '';
     //   return data;
@@ -316,7 +309,7 @@
   
     // Clearing modal form
     // _clearModalForm() {
-    //   document.querySelector('#bagiTugasModal form').reset();
+    //   document.querySelector('#petugasModal form').reset();
     // }
   
     // Update tag from top side dropdown

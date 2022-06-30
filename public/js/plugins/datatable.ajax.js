@@ -55,7 +55,7 @@
             val = '#'+row.user.kodesatker + row.id ;
             return val;
             }
-          }, {data: 'kegunaan.kegunaan'}, {data: 'linkPermintaan'}, {data: 'created_at'}, {data: 'idStatus'}
+          }, {data: 'kegunaan.kegunaan'}, {data: 'linkPermintaan'}, {data: 'created_at'}, {data: 'status.status'}
         ],
         language: {
           paginate: {
@@ -129,22 +129,7 @@
           {
             targets: 4,
             render: function (data, type, row, meta) {
-              let status;
-              switch (data) {
-                case 1:
-                  status = "<span class='badge bg-outline-primary'>Diproses</span>";
-                  break;
-                case 2:
-                  status = "<span class='badge rounded-pill bg-danger'>Ditolak</span>";
-                  break;
-                case 3:
-                  status = "<span class='badge rounded-pill bg-primary'>Selesai</span>";
-                  break;
-                default:
-                  status = "<span class='badge rounded-pill bg-warning'>Duplikasi</span>";
-                  break;
-              }
-              return status;
+              return data;
             },
           },
         ],

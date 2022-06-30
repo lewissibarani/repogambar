@@ -38,4 +38,9 @@ class Transaksi extends Model
         return $this->belongsTo('App\Models\PembagianTugas' ,'id','permintaan_id');
     }
 
+    public function status ()
+    {
+        return $this->hasOne('App\Models\Status','id','idStatus');
+    }
+
 }

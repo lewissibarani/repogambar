@@ -19,7 +19,7 @@ class KelolaGambarController extends Controller
     public function index ()
     {
         // Mengambil data didatabase
-        $data = Transaksi::with('kegunaan','user')
+        $data = Transaksi::with('kegunaan','user','status')
         ->where('idUserPeminta', Auth::id())->get();
 
         // Membuat Json hasil query

@@ -8,17 +8,25 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/vendor/datatables.min.css"/>
+    <link rel="stylesheet" href="/css/vendor/dropzone.min.css"/>
+    <link rel="stylesheet" href="/css/main.css"/>
 @endsection
 
 @section('js_vendor')
     <script src="/js/vendor/bootstrap-submenu.js"></script>
     <script src="/js/vendor/datatables.min.js"></script>
     <script src="/js/vendor/mousetrap.min.js"></script>
+    <script src="/js/cs/scrollspy.js"></script>
+    <script src="/js/vendor/dropzone.min.js"></script>
+    <script src="/js/vendor/singleimageupload.js"></script>
 @endsection
 
 @section('js_page')
     <script src="/js/cs/datatable.extend.js"></script>
     <script src="/js/petugas/datatable.petugas.js"></script>
+    <script src="/js/cs/dropzone.templates.js"></script>
+    <script src="/js/forms/controls.dropzone.js"></script>
+    <script src="/js/tags.js"></script>
 @endsection
 
 @section('content')
@@ -40,12 +48,12 @@
                             <!-- Default Start -->
                             <section class="scroll-section" id="default">
                                 <!-- Button Trigger -->
-                                <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" 
+                                <!-- <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" 
                                 data-bs-toggle="modal"        
                                 data-bs-target="#addEditModal">
                                     <i data-acorn-icon="plus"></i>
                                     <span>Tambah Baru</span>
-                                </button>
+                                </button> -->
                             </section>
                             <!-- Default End -->
 
@@ -203,8 +211,7 @@
                                 <th class="text-muted text-small text-uppercase">ID Permintaan</th>
                                 <th class="text-muted text-small text-uppercase">Pembuat Order</th>
                                 <th class="text-muted text-small text-uppercase">Satuan Kerja</th>
-                                <th class="text-muted text-small text-uppercase">No Handphone</th>
-                                <th class="text-muted text-small text-uppercase">e-mail</th>
+                                <th class="text-muted text-small text-uppercase">Link</th>
                                 <th class="text-muted text-small text-uppercase">Aksi</th>
                                 <!-- <th class="empty">&nbsp;</th> -->
                             </tr>
@@ -216,21 +223,27 @@
                 <!-- Content End -->
 
                 <!-- Add Edit Modal Start -->
-                <div class="modal modal-right large fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
+                <div class="modal large fade" id="petugasModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content ">
                             <div class="modal-header">
-                                <h5 class="modal-title font-weight-bold" id="modalTitle">Form Permintaan Gambar</h5>
+                                <h5 class="modal-title font-weight-bold" id="modalTitle">ID Permintaan: <span class="previewId"></span></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form id="bagiTugasForm" action="{{route('petugas.store')}}" method="POST" novalidate>
+                                    @csrf
+                                    @error('user_id')
+                                    <div class="mb-3 text-danger">
+                                        {{$message}}
+                                    </div>
+                                    @enderror
                                     @include('Petugas.form_petugas')
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
-                                <button type="button" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
+                                <button type="submit" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
                             </div>
                         </div>
                     </div>
@@ -238,7 +251,7 @@
                 <!-- Add Edit Modal End -->
 
                 <!-- Add Edit Modal Start -->
-                <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                <div class="modal fade" id="previewPetugasModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                     <div class="modal-dialog modal-lg rounded">
                         <div class="modal-content">
                             <div class="">

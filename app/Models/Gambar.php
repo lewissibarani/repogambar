@@ -25,4 +25,10 @@ class Gambar extends Model
         
         return $this->belongsTo('App\Models\Transaksi', 'id','gambar_id');
     }
+
+    public function source()
+    {
+        
+        return $this->belongsTo('App\Models\Source', 'id','source_id');
+    }
 }

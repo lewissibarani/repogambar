@@ -19,7 +19,7 @@ class PembagianTugas extends Model
 
     public function permintaan ()
     {
-        return $this->hasOne('App\Models\Transaksi');
+        return $this->hasOne('App\Models\Transaksi','id','permintaan_id');
     }
 
     public function user()
