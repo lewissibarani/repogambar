@@ -10,12 +10,15 @@
     <link rel="stylesheet" href="/css/vendor/datatables.min.css"/>
     <link rel="stylesheet" href="/css/vendor/dropzone.min.css"/>
     <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/vendor/select2.min.css"/>
+    <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css"/>
 @endsection
 
 @section('js_vendor')
     <script src="/js/vendor/bootstrap-submenu.js"></script>
     <script src="/js/vendor/datatables.min.js"></script>
     <script src="/js/vendor/mousetrap.min.js"></script>
+    <script src="/js/vendor/select2.full.min.js"></script>
     <script src="/js/cs/scrollspy.js"></script>
     <script src="/js/vendor/dropzone.min.js"></script>
     <script src="/js/vendor/singleimageupload.js"></script>
@@ -27,6 +30,7 @@
     <script src="/js/cs/dropzone.templates.js"></script>
     <script src="/js/forms/controls.dropzone.js"></script>
     <script src="/js/tags.js"></script>
+    <script src="/js/forms/controls.select2.js"></script>
 @endsection
 
 @section('content')
@@ -231,7 +235,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="bagiTugasForm" action="{{route('petugas.store')}}" method="POST" novalidate>
+                                <form id="bagiTugasForm" action="{{route('petugas.store')}}" method="POST" novalidate enctype="multipart/form-data">
                                     @csrf
                                     @error('user_id')
                                     <div class="mb-3 text-danger">
@@ -266,3 +270,4 @@
         </div>
     </div>
 @endsection
+

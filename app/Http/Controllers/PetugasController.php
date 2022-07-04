@@ -27,19 +27,15 @@ class PetugasController extends Controller
     );
     }
 
-    public function store ()
+    public function store (Request $request)
     {
-        // Mengambil data didatabase
-        $data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
-        ->where('user_id',Auth::id())->get();
-
-        // Membuat Json hasil query
-        $json = json_encode(array(
-            "data" =>$data));
-        if (file_put_contents(public_path()."/json/Tugas.json", $json))
+        $image = $request->file('file');
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('img/uploadedGambar'),$imageName);
         
-        return view('petugas.index', 
-        // compact('Kegunaan')
-    );
+        $imageUpload = new ImageUpload();
+        $imageUpload->filename = $imageName;
+        $imageUpload->save();
+        return response()->json(['success'=>$imageName]);
     }
 }

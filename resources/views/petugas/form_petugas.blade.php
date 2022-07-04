@@ -46,7 +46,7 @@
             <div class="row mb-3">
                 <label class="font-weight-bold col-sm-2 col-form-label">Source</label>
                 <div class="col-sm-10">
-                    <select class="form-select" name="source_id">
+                    <select class="form-select" name="source_id" id="select2Basic">
                         <option selected>Pilih...</option>
                         @foreach ($Source as $source)
                             <option value="{{ $source->id }}">{{ $source->sumber_gambar }}</option> 
@@ -57,9 +57,9 @@
             <div class="row mb-3">
                 <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload Gambar</label>
                 <div class="col-sm-10">
-                        <div class="col-sm-12 col-form-label card mb-5">
-                            <div class="dropzone" id="dropzoneImage"></div>
-                        </div>   
+                    <div class="col-sm-12 col-form-label card no-shadow mb-5">
+                        <input type="file" class="form-control" id="inputGroupFile01" name="gambar" />
+                    </div>   
                 </div>
             </div>
             <div class="row mb-3">

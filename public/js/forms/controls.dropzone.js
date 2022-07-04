@@ -6,7 +6,6 @@
  *
  *
  */
-
 class DropzoneControls {
   constructor() {
     // Initialization of the page plugins
@@ -29,7 +28,7 @@ class DropzoneControls {
   _initImage() {
     if (document.querySelector('#dropzoneImage')) {
       new Dropzone('#dropzoneImage', {
-        url: 'https://httpbin.org/pos',
+        url: '{{route("petugas.store")}}',
         maxFilesize: 10,
         init: function () {
           this.on('success', function (file, responseText) {
@@ -64,7 +63,7 @@ class DropzoneControls {
   _initColumns() {
     if (document.querySelector('#dropzoneColumns')) {
       new Dropzone('#dropzoneColumns', {
-        url: 'https://httpbin.org/pos',
+        url: '{{route("petugas.store")}}',
         init: function () {
           this.on('success', function (file, responseText) {
             console.log(responseText);
