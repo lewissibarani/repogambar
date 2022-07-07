@@ -7,7 +7,7 @@
  *
  */
 
- class Petugas {
+ class PermintaanGambar {
     constructor() {
       if (!jQuery().DataTable) {
         console.log('DataTable is null!');
@@ -27,8 +27,7 @@
       this._datatableExtend;
   
       // Add or edit modal
-      this._petugasModal;
-      
+      this._addEditModal;
       
   
       // Datatable single item height
@@ -38,6 +37,7 @@
       this._addListeners();
       this._extend();
       this._initBootstrapModal();
+      this._initForm();
     }
   
     // Creating datatable instance. Table data is provided by json/products.json file and loaded via ajax
@@ -47,16 +47,16 @@
         scrollX: true,
         buttons: ['copy', 'excel', 'csv', 'print'],
         info: false,
-        ajax: '/json/Tugas.json',
+        ajax: '/json/kelolagambar.json',
         order: [], // Clearing default order
         sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
         pageLength: 10,
         columns: [{data: function ( row, type, val, meta ) {
-          val = '#'+row.permintaan.user.kodesatker + row.permintaan.id ;
-          return val;
-          }
-        }, {data: 'permintaan.user.name'}, { data: 'permintaan.user.satker'},{ data: 'permintaan.linkPermintaan'},{data: 'Aksi'}],
-        // {data: 'Check'}
+            val = '#'+row.user.kodesatker + row.id ;
+            return val;
+            }
+          }, {data: 'kegunaan.kegunaan'}, {data: 'linkPermintaan'}, {data: 'created_at'}, {data: 'status.status'}
+        ],
         language: {
           paginate: {
             previous: '<i class="cs-chevron-left"></i>',
@@ -71,36 +71,65 @@
         },
         columnDefs: [
           // Adding Name content as an anchor with a target #
-          { width: "10%",
+          {
             targets: 0,
             render: function (data, type, row, meta) {
               return '<a data-bs-toggle="modal" href="#previewModal" data-bs-toggle="modal" data-bs-target="#previewModal"> ' + data + '</a>';
             },
           },
-
+          // Memotong Tetx agar tidak terlalu panjang
           {
-            targets: 3,
-            render: function (data, type, row, meta) {
+            targets: 2,
+            render: function (data) {
               if (data.length > 5) {
                 return '<a class="" href="'+ data +' " target="_blank" rel="noopener noreferrer">' + data.substring(0, 30) + '...'+ '</a>';
              } else {
                 return '<a class="" href="'+ data +' " target="_blank" rel="noopener noreferrer">' + data + '</a>';
              }
-            },
+              
+            }
+
+          },
+          {
+            targets: 3,
+            render: function (data) {
+
+              function dateFormat(inputDate, format) {
+                //parse the input date
+                const date = new Date(inputDate);
+            
+                //extract the parts of the date
+                const day = date.getDate();
+                const month = date.getMonth() + 1;
+                const year = date.getFullYear();    
+            
+                //replace the month
+                
+                format = format.replace("MM",date.toLocaleString('default', { month: 'long' }));        
+            
+                //replace the year
+                if (format.indexOf("yyyy") > -1) {
+                    format = format.replace("yyyy", year.toString());
+                } else if (format.indexOf("yy") > -1) {
+                    format = format.replace("yy", year.toString().substr(2,2));
+                }
+            
+                //replace the day
+                format = format.replace("dd", day.toString().padStart(2,"0"));
+            
+                return format;
+              }
+              
+              return dateFormat(data, 'dd MM yyyy');
+              }
+
           },
 
+          // Adding Tag content as a span with a badge class
           {
             targets: 4,
             render: function (data, type, row, meta) {
-              if(row.permintaan.idStatus==1){
-                return '<div class="btn-group">'+
-                '<a class="btn btn-outline-primary w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#petugasModal">Layani</a>'+
-                '<a class="btn btn-outline-primary w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#petugasModal">Tolak</a>'+
-                '</div>';
-              }else{
-                return row.permintaan.status.status;
-              }
-            
+              return data;
             },
           },
         ],
@@ -126,7 +155,7 @@
       document.querySelectorAll('.tag-sale').forEach((el) => el.addEventListener('click', () => this._updateTag('Sale')));
   
       // Calling clear form when modal is closed
-      document.getElementById('petugasForm').addEventListener('hidden.bs.modal', this._clearModalForm);
+      document.getElementById('addEditModal').addEventListener('hidden.bs.modal', this._clearModalForm);
     }
   
     // Extending with DatatableExtend to get search, select and export working
@@ -143,7 +172,7 @@
   
     // Keeping a reference to add/edit modal
     _initBootstrapModal() {
-      this._petugasModal = new bootstrap.Modal(document.getElementById('petugasModal'));
+      this._addEditModal = new bootstrap.Modal(document.getElementById('addEditModal'));
     }
   
     // Setting static height to datatable to prevent pagination movement when list is not full
@@ -155,14 +184,14 @@
       document.querySelector('.dataTables_scrollBody').style.height = this._staticHeight * pageLength + 'px';
     }
   
-    // Add or edit button inside the modal click
+    // // Add or edit button inside the modal click
     // _addEditFromModalClick(event) {
     //   if (this._currentState === 'add') {
     //     this._addNewRowFromModal();
     //   } else {
     //     this._editRowFromModal();
     //   }
-    //   this._petugasModal.hide();
+    //   this._addEditModal.hide();
     // }
   
     // Top side edit icon click
@@ -173,6 +202,13 @@
       const selected = this._datatableExtend.getSelectedRows();
       this._onEditRowClick(this._datatable.row(selected[0][0]));
     }
+  
+    // // Direct click from row title
+    // _onEditRowClick(rowToEdit) {
+    //   this._rowToEdit = rowToEdit; // Passed from DatatableExtend via callback from settings
+    //   this._showModal('edit', 'Edit', 'Done');
+    //   this._setForm();
+    // }
 
     // Direct click from row title
     _onEditRowClick(rowToEdit) {
@@ -183,21 +219,21 @@
     }
 
     // Edit button inside th modal click
-    _editRowFromModal() {
-      const data = this._rowToEdit.data();
-      const formData = Object.assign(data, this._getFormData());
-      this._datatable.row(this._rowToEdit).data(formData).draw();
-      this._datatableExtend.unCheckAllRows();
-      this._datatableExtend.controlCheckAll();
-    }
+    // _editRowFromModal() {
+    //   const data = this._rowToEdit.data();
+    //   const formData = Object.assign(data, this._getFormData());
+    //   this._datatable.row(this._rowToEdit).data(formData).draw();
+    //   this._datatableExtend.unCheckAllRows();
+    //   this._datatableExtend.controlCheckAll();
+    // }
   
     // Add button inside th modal click
-    _addNewRowFromModal() {
-      const data = this._getFormData();
-      this._datatable.row.add(data).draw();
-      this._datatableExtend.unCheckAllRows();
-      this._datatableExtend.controlCheckAll();
-    }
+    // _addNewRowFromModal() {
+    //   const data = this._getFormData();
+    //   this._datatable.row.add(data).draw();
+    //   this._datatableExtend.unCheckAllRows();
+    //   this._datatableExtend.controlCheckAll();
+    // }
   
     // Delete icon click
     _onDeleteClick() {
@@ -206,32 +242,32 @@
       this._datatableExtend.controlCheckAll();
     }
   
-    // + Add New or just + button from top side click
-    _onAddRowClick() {
-      this._showModal('add', 'Formulir Permintaan Gambar', 'Kirim');
-    }
+    // // + Add New or just + button from top side click
+    // _onAddRowClick() {
+    //   this._showModal('add', 'Formulir Permintaan Gambar', 'Kirim');
+    // }
   
     // Showing modal for an objective, add or edit
     // _showModal(objective, title, button) {
-    //   this._petugasModal.show();
+    //   this._addEditModal.show();
     //   this._currentState = objective;
     //   document.getElementById('modalTitle').innerHTML = title;
     //   document.getElementById('addEditConfirmButton').innerHTML = button;
     // }
   
     // Filling the modal form data
-    // _setForm() {
-    //   const data = this._rowToEdit.data();
-    //   document.querySelector('#petugasModal input[name=Name]').value = data.Name;
-    //   document.querySelector('#petugasModal input[name=Sales]').value = data.Sales;
-    //   document.querySelector('#petugasModal input[name=Stock]').value = data.Stock;
-    //   if (document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
-    //     document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
-    //   }
-    //   if (document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
-    //     document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
-    //   }
-    // }
+    _setForm() {
+      const data = this._rowToEdit.data();
+      document.querySelector('#addEditModal input[name=Name]').value = data.Name;
+      document.querySelector('#addEditModal input[name=Sales]').value = data.Sales;
+      document.querySelector('#addEditModal input[name=Stock]').value = data.Stock;
+      if (document.querySelector('#addEditModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
+        document.querySelector('#addEditModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
+      }
+      if (document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
+        document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
+      }
+    }
 
     // Filling the modal form data
     _setPreviewForm() {
@@ -263,54 +299,77 @@
         return format;
       }
 
-      //Merubah Format Id
-      function Id(data) {
-        data = '#'+data.permintaan.user.kodesatker + data.permintaan.id ;
-        return data;
-        }
-      //--end of Merubah Format Id
-      document.querySelector('.previewId').innerHTML = Id(data);
-
-      
-      document.querySelector('#petugasModal input[name=judul]').value=data.permintaan.judulPermintaan;
-      document.querySelector('#petugasModal input[name=bagitugas_id]').value=data.id;
-
-      document.querySelector('.previewLink').innerHTML = '<a href="'+ data.permintaan.linkPermintaan +' " target="_blank" rel="noopener noreferrer">' + data.permintaan.linkPermintaan + '</a>';
-      document.querySelector('#petugasModal input[name=link]').value=data.data.permintaan.linkPermintaan;
-
-      document.querySelector('.previewKegunaan').innerHTML = data.permintaan.kegunaan.kegunaan;
-      document.querySelector('#petugasModal input[name=idKegunaan]').value=data.permintaan.kegunaan.id;
-
+      document.querySelector('.previewLink').innerHTML = data.linkPermintaan;
+      document.querySelector('.previewJudul').innerHTML = data.judulPermintaan;
+      document.querySelector('.previewKegunaan').innerHTML = data.kegunaan.kegunaan;
       document.querySelector('.previewWaktu').innerHTML = dateFormat(data.created_at,'dd MM yyyy');
-      document.querySelector('.previewStatus').innerHTML = data.permintaan.status.status;
+      //---Status Badge Start
+      let status;
+              switch (data.idStatus) {
+                case 1:
+                  status = "<span class='badge bg-outline-primary'>Diproses</span>";
+                  break;
+                case 2:
+                  status = "<span class='badge rounded-pill bg-danger'>Ditolak</span>";
+                  break;
+                case 3:
+                  status = "<span class='badge rounded-pill bg-primary'>Selesai</span>";
+                  break;
+                default:
+                  status = "<span class='badge rounded-pill bg-warning'>Duplikasi</span>";
+                  break;
+              }
+      document.querySelector('.previewStatus').innerHTML = status;
       //---Status Badge end
 
       //--Alasan Ditolak Start
       let alasanTolak;
-        switch (data.permintaan.idStatus) {
+        switch (data.idStatus) {
           case 2:
-            alasanTolak = "<span class='font-weight-bold'>Alasan Ditolak: </span>" + data.permintaan.alasanDitolak;
+          alasanTolak =   
+            '<div class="row mb-3">'+
+                '<label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Alasan Ditolak</label>'+
+                '<div class="col-sm-10">'+
+                    '<label class=" col-sm-12 col-form-label">'+
+                      data.alasanDitolak +
+                    '</label>  '+            
+                '</div>'+
+            '</div>'
             break;
           default:
             alasanTolak = "";
             break;
         }
-      document.querySelector('.previewAlasanTolak').innerHTML = alasanTolak;
-      //--Alasan Ditolak end
       
+
+      let downloadButton;
+        switch (data.idStatus) {
+          case 3:
+            downloadButton =  '<a class="btn btn-sm btn-icon btn-primary"'+
+                                      'data-bs-toggle="tooltip"'+
+                                      'title="Download Gambar"'+
+                                      'href="'+ data.gambar.path +'">'+
+                                  '<i data-acorn-icon="download"></i> Download'+
+                              '</a>';
+            break;
+          default:
+            downloadButton = "";
+            break;
+        }
+      document.querySelector('.tombolDownload').innerHTML = downloadButton;
     }
   
     // Getting form values from the fields to pass to datatable
     // _getFormData() {
     //   const data = {};
-    //   data.Name = document.querySelector('#petugasModal input[name=Name]').value;
-    //   data.Sales = document.querySelector('#petugasModal input[name=Sales]').value;
-    //   data.Stock = document.querySelector('#petugasModal input[name=Stock]').value;
-    //   data.Category = document.querySelector('#petugasModal input[name=Category]:checked')
-    //     ? document.querySelector('#petugasModal input[name=Category]:checked').value || ''
+    //   data.Name = document.querySelector('#addEditModal input[name=Name]').value;
+    //   data.Sales = document.querySelector('#addEditModal input[name=Sales]').value;
+    //   data.Stock = document.querySelector('#addEditModal input[name=Stock]').value;
+    //   data.Category = document.querySelector('#addEditModal input[name=Category]:checked')
+    //     ? document.querySelector('#addEditModal input[name=Category]:checked').value || ''
     //     : '';
-    //   data.Tag = document.querySelector('#petugasModal input[name=Tag]:checked')
-    //     ? document.querySelector('#petugasModal input[name=Tag]:checked').value || ''
+    //   data.Tag = document.querySelector('#addEditModal input[name=Tag]:checked')
+    //     ? document.querySelector('#addEditModal input[name=Tag]:checked').value || ''
     //     : '';
     //   data.Check = '';
     //   return data;
@@ -318,7 +377,7 @@
   
     // Clearing modal form
     _clearModalForm() {
-      document.querySelector('#petugasForm form').reset();
+      document.querySelector('#addEditModal form').reset();
     }
   
     // Update tag from top side dropdown
@@ -354,6 +413,52 @@
     _onNoneSelect() {
       document.querySelectorAll('.delete-datatable').forEach((el) => el.classList.add('disabled'));
       document.querySelectorAll('.tag-datatable').forEach((el) => el.classList.add('disabled'));
+    }
+
+    _initForm() {
+      const form = document.getElementById('createGambarForm');
+      if (!form) {
+        return;
+      }
+      const validateOptions = {
+        rules: {
+          judul: {
+            required: true,
+          },
+          link: {
+            required: true,
+          },
+          kegunaan: {
+            required: true,
+          },
+        },
+        messages: {
+          judul: {
+            required: 'Judul harus diisi',
+          },
+          link: {
+            required: 'Link harus diisi',
+          },
+          kegunaan: {
+            required: 'Harap pilih penggunaan',
+          },
+        },
+      };
+      jQuery(form).validate(validateOptions);
+  
+      // form.addEventListener('submit', (event) => {
+      //   event.preventDefault();
+      //   event.stopPropagation();
+      //   if (jQuery(form).valid()) {
+      //     const formValues = {
+      //       email: form.querySelector('[name="registerEmail"]').value,
+      //       password: form.querySelector('[name="registerPassword"]').value,
+      //       name: form.querySelector('[name="registerName"]').value,
+      //     };
+      //     console.log(formValues);
+      //     return;
+      //   }
+      // });
     }
   }
   

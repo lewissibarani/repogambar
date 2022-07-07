@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gambar extends Model
 {
+    use \Conner\Tagging\Taggable;
     use HasFactory;
     protected $primaryKey = 'id';
     protected $table = 'gambar';

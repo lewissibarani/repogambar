@@ -21,7 +21,7 @@
 
 @section('js_page')
     <script src="/js/cs/datatable.extend.js"></script>
-    <script src="/js/plugins/datatable.ajax.js"></script>
+    <script src="/js/permintaan/datatable.permintaangambar.js"></script>
 @endsection
 
 @section('content')

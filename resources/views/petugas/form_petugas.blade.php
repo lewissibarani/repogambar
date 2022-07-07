@@ -4,9 +4,8 @@
             <div class="row mb-3">
                 <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>
                 <div class="col-sm-10">
-                <label class=" col-sm-12 col-form-label">
-                    <span class="previewJudul"></span>
-                </label>                  
+                    <input type="text" class="form-control" id="" name="judul" /> 
+                    <input type="hidden" class="form-control" id="" name="bagitugas_id"/>             
                 </div>
             </div>
             <div class="row mb-3">
@@ -14,6 +13,7 @@
                 <div class="col-sm-10">
                 <label class=" col-sm-12 col-form-label">
                     <span class="previewLink"></span>
+                    <input type="hidden" class="form-control" name="link" />   
                 </label>                  
                 </div>
             </div>
@@ -30,6 +30,7 @@
                 <div class="col-sm-10">
                     <label class=" col-sm-12 col-form-label">
                         <span class="previewKegunaan"></span>
+                        <input type="hidden" class="form-control" name="idKegunaan" />  
                     </label>               
                 </div>
             </div>
@@ -65,8 +66,10 @@
             <div class="row mb-3">
                 <label class="font-weight-bold col-sm-2 col-form-label">Tags</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="hashtags" onkeypress="return event.keyCode != 13;" autocomplete="off" >
-                    <div class="tag-container"></div>                 
+                    <input class="form-control" type="text" data-role="tagsinput" name="tags">
+                    <!-- <input class="form-control" type="text" data-role="tagsinput" name="tags"> -->
+                    <!-- <input type="text" class="form-control" id="hashtags" onkeypress="return event.keyCode != 13;" autocomplete="off" >
+                    <div class="tag-container"></div>                  -->
                 </div>
             </div>
         </div>

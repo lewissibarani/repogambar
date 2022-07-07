@@ -31,6 +31,7 @@
       this._initPlugins();
       this._initBagitugas();
       this._initPetugas();
+      this._initPermintaan();
     }, 100);
   }
 
@@ -257,9 +258,20 @@
     }
   }
 
+   // Bagi Tugas initialization
+   _initPermintaan() {
+    if (typeof PermintaanGambar !== 'undefined') {
+      const permintaanGambar = new PermintaanGambar();
+    }
+  }
+
   _initPetugas() {
     if (typeof Petugas !== 'undefined') {
       const petugas = new Petugas();
+    }
+
+    if (typeof AuthPetugas !== 'undefined') {
+      const authPetugas = new AuthPetugas();
     }
   }
 

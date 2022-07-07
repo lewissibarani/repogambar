@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kegunaan;
 use App\Models\Transaksi;
+use App\Models\Gambar;
 use App\Models\PembagianTugas;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Source;
@@ -29,13 +30,42 @@ class PetugasController extends Controller
 
     public function store (Request $request)
     {
-        $image = $request->file('file');
-        $imageName = $image->getClientOriginalName();
-        $image->move(public_path('img/uploadedGambar'),$imageName);
+
+        $this->validate($request, [
+            'source_id' => 'required',
+            'gambar' => 'required',
+            'tags' => 'required',
+        ]);
+  
+        $filename='';
+        if($request->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('img/uploadedGambar/'), $filename);
+        }
+
+    	$tags = explode(",", $request->tags);
+        $gambars=Gambar::create([
+            'judul' => $request->judul,
+            'link' => $request->link,
+            'idKegunaan' => $request->idkegunaan,
+            'path' => $idpeminta,
+            'idUser' => Auth::id(),
+            'path' =>'img/uploadedGambar/'.$filename,
+            'metadata' =>'',
+            'catatan' =>'',
+            'source_id' => $request->source_id
+        ]);
+        $gambars->tag($tags);
         
-        $imageUpload = new ImageUpload();
-        $imageUpload->filename = $imageName;
-        $imageUpload->save();
-        return response()->json(['success'=>$imageName]);
+        $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
+        $permintaan = Transaksi::where('id', $id_permintaan)
+        ->update(['gambar_id' => $request->id,
+                  'idStatus' => 3]);
+
+        return redirect()->route('petugas.view');
+        
     }
+
+    
 }
