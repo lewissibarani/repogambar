@@ -44,6 +44,7 @@
             </div>
 
             <span class="previewAlasanTolak"></span>
+            
             <div class="row mb-3">
                 <label class="font-weight-bold col-sm-2 col-form-label">Source</label>
                 <div class="col-sm-10">
@@ -59,7 +60,7 @@
                 <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload Gambar</label>
                 <div class="col-sm-10">
                     <div class="col-sm-12 col-form-label card no-shadow mb-5">
-                        <input type="file" class="form-control" id="inputGroupFile01" name="gambar" />
+                        <input type="file" class="form-control" name="image" />
                     </div>   
                 </div>
             </div>

@@ -1,34 +1,25 @@
 @php
     $html_tag_data = [];
-    $title = 'Halaman Petugas';
+    $title = 'Halaman Pembagian Tugas';
     $description= 'A table enhancing plug-in for the jQuery Javascript library, adding sorting, paging and filtering abilities to plain HTML tables with minimal effort.';
-    $breadcrumbs = ["/"=>"Home","/Petugas/Index"=>"Halaman Petugas"]
+    $breadcrumbs = ["/"=>"Home","/PembagianTugas/Index"=>"Halaman Pembagian Tugas"]
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
 @section('css')
     <link rel="stylesheet" href="/css/vendor/datatables.min.css"/>
-    <link rel="stylesheet" href="/css/main.css"/>
-    <link rel="stylesheet" href="/css/tag.css"/>
-    <link rel="stylesheet" href="/css/vendor/select2.min.css"/>
-    <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css"/>
 @endsection
 
 @section('js_vendor')
     <script src="/js/vendor/bootstrap-submenu.js"></script>
     <script src="/js/vendor/datatables.min.js"></script>
     <script src="/js/vendor/mousetrap.min.js"></script>
-    <script src="/js/vendor/select2.full.min.js"></script>
-    <script src="/js/cs/scrollspy.js"></script>
-    <script src="/js/vendor/singleimageupload.js"></script>
 @endsection
 
 @section('js_page')
     <script src="/js/cs/datatable.extend.js"></script>
-    <script src="/js/petugas/datatable.petugas.js"></script>
-    <script src="/js//tags/tags.js"></script>
-    <script src="/js/forms/controls.select2.js"></script>
-    <script src="/js/petugas/auth.petugas.js"></script>
+    <script src="/js/bagitugas/datatable.bagitugas.js"></script>
+    
 @endsection
 
 @section('content')
@@ -48,15 +39,6 @@
                         <!-- Top Buttons Start -->
                         <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
                             <!-- Default Start -->
-                            <section class="scroll-section" id="default">
-                                <!-- Button Trigger -->
-                                <!-- <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" 
-                                data-bs-toggle="modal"        
-                                data-bs-target="#addEditModal">
-                                    <i data-acorn-icon="plus"></i>
-                                    <span>Tambah Baru</span>
-                                </button> -->
-                            </section>
                             <!-- Default End -->
 
                             <!-- Check Button Start -->
@@ -68,27 +50,7 @@
                                 </span>
                             -->
                         </div>
-                                <!-- <button
-                                        type="button"
-                                        class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
-                                        data-bs-offset="0,3"
-                                        data-bs-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        data-submenu
-                                ></button>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <div class="dropdown dropstart dropdown-submenu">
-                                        <button class="dropdown-item dropdown-toggle tag-datatable caret-absolute disabled" type="button">Tag</button>
-                                        <div class="dropdown-menu">
-                                            <button class="dropdown-item tag-done" type="button">Done</button>
-                                            <button class="dropdown-item tag-new" type="button">New</button>
-                                            <button class="dropdown-item tag-sale" type="button">Sale</button>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item disabled delete-datatable" type="button">Delete</button>
-                                </div> -->
+
                             </div>
                             <!-- Check Button End -->
                         </div>
@@ -104,7 +66,7 @@
                         <!-- Search Start -->
                         <div class="col-sm-12 col-md-5 col-lg-3 col-xxl-2 mb-1">
                             <div class="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
-                                <input class="form-control datatable-search" placeholder="Search" data-datatable="#datatablePetugas" />
+                                <input class="form-control datatable-search" placeholder="Search" data-datatable="#datatableRowsAjax" />
                                 <span class="search-magnifier-icon">
                 <i data-acorn-icon="search"></i>
               </span>
@@ -117,32 +79,6 @@
 
                         <div class="col-sm-12 col-md-7 col-lg-9 col-xxl-10 text-end mb-1">
                             <div class="d-inline-block me-0 me-sm-3 float-start float-md-none">
-
-                                <!-- Edit Button Start -->
-                                <!-- <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow edit-datatable disabled"
-                                        data-bs-delay="0"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Edit"
-                                        type="button"
-                                >
-                                    <i data-acorn-icon="edit"></i>
-                                </button> -->
-                                <!-- Edit Button End -->
-
-                                <!-- Delete Button Start -->
-                                <!-- <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow disabled delete-datatable"
-                                        data-bs-delay="0"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Delete"
-                                        type="button"
-                                >
-                                    <i data-acorn-icon="bin"></i>
-                                </button> -->
-                                <!-- Delete Button End -->
                             </div>
                             <div class="d-inline-block">
                                 <!-- Print Button Start -->
@@ -160,7 +96,7 @@
                                 <!-- Print Button End -->
 
                                 <!-- Export Dropdown Start -->
-                                <div class="d-inline-block datatable-export" data-datatable="#datatablePetugas">
+                                <div class="d-inline-block datatable-export" data-datatable="#datatableRowsAjax">
                                     <button class="btn p-0" data-bs-toggle="dropdown" type="button" data-bs-offset="0,3">
                                         <span
                                                 class="btn btn-icon btn-icon-only btn-foreground-alternate shadow dropdown"
@@ -181,7 +117,7 @@
                                 <!-- Export Dropdown End -->
 
                                 <!-- Length Start -->
-                                <div class="dropdown-as-select d-inline-block datatable-length" data-datatable="#datatablePetugas" data-childSelector="span">
+                                <div class="dropdown-as-select d-inline-block datatable-length" data-datatable="#datatableRowsAjax" data-childSelector="span">
                                     <button class="btn p-0 shadow" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="0,3">
                   <span
                           class="btn btn-foreground-alternate dropdown-toggle"
@@ -204,61 +140,74 @@
                         </div>
                     </div>
                     <!-- Controls End -->
-
-                    <!-- Table Start -->
-                    <div class="data-table-responsive-wrapper">
-                        <table id="datatablePetugas" class="data-table nowrap w-100">
-                            <thead>
-                            <tr>
-                                <th class="text-muted text-small text-uppercase">ID Permintaan</th>
-                                <th class="text-muted text-small text-uppercase">Pembuat Order</th>
-                                <th class="text-muted text-small text-uppercase">Satuan Kerja</th>
-                                <th class="text-muted text-small text-uppercase">Link</th>
-                                <th class="text-muted text-small text-uppercase">Aksi</th>
-                                <!-- <th class="empty">&nbsp;</th> -->
-                            </tr>
-                            </thead>
-                        </table>
+                    <div class="row">
+                        <div class="col-12 col-xl-9 col-xxl-9 mb-5">
+                            <!-- Table Start -->
+                            <div class="data-table-responsive-wrapper">
+                                <table id="datatableRowsAjax" class="data-table nowrap w-100">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-muted text-small text-uppercase">ID Permintaan</th>
+                                        <th class="text-muted text-small text-uppercase">Pembuat Permintaan</th>
+                                        <th class="text-muted text-small text-uppercase">Satuan Kerja</th>
+                                        <th class="text-muted text-small text-uppercase">Petugas</th>
+                                        <!-- <th class="empty">&nbsp;</th> -->
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <!-- Table End -->
+                        </div>
+                        <div class="col-12 col-xl-3 col-xxl-3">
+                            <div class="col-12">
+                                <h2 class="small-title">Daftar Beban Petugas</h2>
+                                <div class="card mb-5">
+                                    <div class="card-body mb-n2 border-last-none h-100">
+                                        <div class="mb-2 pb-2">
+                                                <div class="col">
+                                                    <div class="d-flex flex-row pt-0 pb-0 ps-3 pe-0 align-items-center justify-content-between">
+                                                        <div class="d-flex flex-column">
+                                                            <div></div>
+                                                            <div class="text-small text-muted"></div>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            Jumlah
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="border-bottom border-separator-light mb-2 pb-2">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Table End -->
                 </div>
                 <!-- Content End -->
-
                 <!-- Add Edit Modal Start -->
-                <div class="modal large fade" id="petugasModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content ">
+                <div class="modal fade" id="bagiTugasModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg rounded">
+                        <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title font-weight-bold" id="modalTitle">ID Permintaan: <span class="previewId"></span></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="{{route('petugas.store')}}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @error('image')
-                                    <div class="mb-3 text-danger">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
-                                    @include('Petugas.form_petugas')
+                            <form id="bagiTugasForm" action="{{route('bagipetugas.store')}}" method="POST" novalidate>
+                                @csrf
+                                @error('user_id')
+                                <div class="mb-3 text-danger">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
+                                <button type="button" class="btn btn-primary" >Kirim</button>
                             </div>
-                                </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add Edit Modal End -->
-
-                <!-- Add Edit Modal Start -->
-                <div class="modal fade" id="previewPetugasModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-lg rounded">
-                        <div class="modal-content">
-                            <div class="">
-                                @include('Petugas.preview_petugas')
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -268,4 +217,3 @@
         </div>
     </div>
 @endsection
-

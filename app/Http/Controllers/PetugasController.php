@@ -33,37 +33,60 @@ class PetugasController extends Controller
 
         $this->validate($request, [
             'source_id' => 'required',
-            'gambar' => 'required',
+            'image' => 'required',
             'tags' => 'required',
         ]);
-  
-        $filename='';
+        
+        $filename="";
+
         if($request->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
             $file-> move(public_path('img/uploadedGambar/'), $filename);
+           
         }
-
     	$tags = explode(",", $request->tags);
         $gambars=Gambar::create([
             'judul' => $request->judul,
             'link' => $request->link,
             'idKegunaan' => $request->idkegunaan,
-            'path' => $idpeminta,
             'idUser' => Auth::id(),
             'path' =>'img/uploadedGambar/'.$filename,
             'metadata' =>'',
-            'catatan' =>'',
+            'nama_gambar' =>$filename,
             'source_id' => $request->source_id
         ]);
+        
         $gambars->tag($tags);
         
+        //mencari id transaksi permitaan gambar di tabel pembagian tugas
         $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
+
+        //merubah status permintaan gambar menjadi selesai
         $permintaan = Transaksi::where('id', $id_permintaan)
         ->update(['gambar_id' => $request->id,
                   'idStatus' => 3]);
 
-        return redirect()->route('petugas.view');
+        return redirect()->route('petugas.index');
+        
+    }
+
+    public function tolak (Request $request)
+    {
+
+        $this->validate($request, [
+            'alasan_tolak' => 'required',
+        ]);
+        
+        //mencari id transaksi permitaan gambar di tabel pembagian tugas
+        $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
+
+        //merubah status permintaan gambar menjadi selesai
+        $permintaan = Transaksi::where('id', $id_permintaan)
+        ->update(['gambar_id' => $request->id,
+                  'idStatus' => 2]);
+
+        return redirect()->route('petugas.index');
         
     }
 

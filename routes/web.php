@@ -58,6 +58,7 @@ Route::prefix('Petugas')->group(function () {
     Route::get('/', [PetugasController::class, 'index'])->name('petugas.index');
     Route::get('Index',[PetugasController::class, 'index'])->name('petugas.index');
     Route::post('Store', [PetugasController::class, 'store'])->name('petugas.store');
+    Route::view('Contoh','petugas/contoh');
 });
 
 Route::prefix('Pages')->group(function () {

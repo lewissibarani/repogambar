@@ -43,7 +43,7 @@
     // Creating datatable instance. Table data is provided by json/products.json file and loaded via ajax
     _createInstance() {
       const _this = this;
-      this._datatable = jQuery('#datatableRowsAjax').DataTable({
+      this._datatable = jQuery('#datatablePetugas').DataTable({
         scrollX: true,
         buttons: ['copy', 'excel', 'csv', 'print'],
         info: false,
@@ -95,7 +95,7 @@
               if(row.permintaan.idStatus==1){
                 return '<div class="btn-group">'+
                 '<a class="btn btn-outline-primary w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#petugasModal">Layani</a>'+
-                '<a class="btn btn-outline-primary w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#petugasModal">Tolak</a>'+
+                '<a class="btn btn-outline-danger w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#petugasModal">Tolak</a>'+
                 '</div>';
               }else{
                 return row.permintaan.status.status;
@@ -108,25 +108,26 @@
     }
   
     _addListeners() {
-      // Listener for confirm button on the edit/add modal
-      // document.getElementById('addEditConfirmButton').addEventListener('click', this._addEditFromModalClick.bind(this));
-  
-      // Listener for add buttons
-      // document.querySelectorAll('.add-datatable').forEach((el) => el.addEventListener('click', this._onAddRowClick.bind(this)));
-  
-      // Listener for delete buttons
-      document.querySelectorAll('.delete-datatable').forEach((el) => el.addEventListener('click', this._onDeleteClick.bind(this)));
-  
-      // Listener for edit button
-      document.querySelectorAll('.edit-datatable').forEach((el) => el.addEventListener('click', this._onEditButtonClick.bind(this)));
-  
-      // Calling a function to update tags on click
-      document.querySelectorAll('.tag-done').forEach((el) => el.addEventListener('click', () => this._updateTag('Done')));
-      document.querySelectorAll('.tag-new').forEach((el) => el.addEventListener('click', () => this._updateTag('New')));
-      document.querySelectorAll('.tag-sale').forEach((el) => el.addEventListener('click', () => this._updateTag('Sale')));
-  
-      // Calling clear form when modal is closed
-      document.getElementById('petugasForm').addEventListener('hidden.bs.modal', this._clearModalForm);
+
+    // Listener for confirm button on the edit/add modal
+    document.getElementById('addEditConfirmButton').addEventListener('click', this._addEditFromModalClick.bind(this));
+
+    // // Listener for add buttons
+    // document.querySelectorAll('.add-datatable').forEach((el) => el.addEventListener('click', this._onAddRowClick.bind(this)));
+
+    // // Listener for delete buttons
+    // document.querySelectorAll('.delete-datatable').forEach((el) => el.addEventListener('click', this._onDeleteClick.bind(this)));
+
+    // // Listener for edit button
+    // document.querySelectorAll('.edit-datatable').forEach((el) => el.addEventListener('click', this._onEditButtonClick.bind(this)));
+
+    // Calling a function to update tags on click
+    document.querySelectorAll('.tag-done').forEach((el) => el.addEventListener('click', () => this._updateTag('Done')));
+    document.querySelectorAll('.tag-new').forEach((el) => el.addEventListener('click', () => this._updateTag('New')));
+    document.querySelectorAll('.tag-sale').forEach((el) => el.addEventListener('click', () => this._updateTag('Sale')));
+
+    // Calling clear form when modal is closed
+    document.getElementById('petugasModal').addEventListener('hidden.bs.modal', this._clearModalForm);
     }
   
     // Extending with DatatableExtend to get search, select and export working
@@ -155,15 +156,15 @@
       document.querySelector('.dataTables_scrollBody').style.height = this._staticHeight * pageLength + 'px';
     }
   
-    // Add or edit button inside the modal click
-    // _addEditFromModalClick(event) {
-    //   if (this._currentState === 'add') {
-    //     this._addNewRowFromModal();
-    //   } else {
-    //     this._editRowFromModal();
-    //   }
-    //   this._petugasModal.hide();
-    // }
+    //Add or edit button inside the modal click
+    _addEditFromModalClick(event) {
+      if (this._currentState === 'add') {
+        this._addNewRowFromModal();
+      } else {
+        this._editRowFromModal();
+      }
+      this._petugasModal.hide();
+    }
   
     // Top side edit icon click
     _onEditButtonClick(event) {
@@ -212,26 +213,26 @@
     }
   
     // Showing modal for an objective, add or edit
-    // _showModal(objective, title, button) {
-    //   this._petugasModal.show();
-    //   this._currentState = objective;
-    //   document.getElementById('modalTitle').innerHTML = title;
-    //   document.getElementById('addEditConfirmButton').innerHTML = button;
-    // }
+    _showModal(objective, title, button) {
+      this._petugasModal.show();
+      this._currentState = objective;
+      document.getElementById('modalTitle').innerHTML = title;
+      document.getElementById('addEditConfirmButton').innerHTML = button;
+    }
   
     // Filling the modal form data
-    // _setForm() {
-    //   const data = this._rowToEdit.data();
-    //   document.querySelector('#petugasModal input[name=Name]').value = data.Name;
-    //   document.querySelector('#petugasModal input[name=Sales]').value = data.Sales;
-    //   document.querySelector('#petugasModal input[name=Stock]').value = data.Stock;
-    //   if (document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
-    //     document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
-    //   }
-    //   if (document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
-    //     document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
-    //   }
-    // }
+    _setForm() {
+      const data = this._rowToEdit.data();
+      document.querySelector('#petugasModal input[name=Name]').value = data.Name;
+      document.querySelector('#petugasModal input[name=Sales]').value = data.Sales;
+      document.querySelector('#petugasModal input[name=Stock]').value = data.Stock;
+      if (document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
+        document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
+      }
+      if (document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
+        document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
+      }
+    }
 
     // Filling the modal form data
     _setPreviewForm() {
@@ -276,7 +277,7 @@
       document.querySelector('#petugasModal input[name=bagitugas_id]').value=data.id;
 
       document.querySelector('.previewLink').innerHTML = '<a href="'+ data.permintaan.linkPermintaan +' " target="_blank" rel="noopener noreferrer">' + data.permintaan.linkPermintaan + '</a>';
-      document.querySelector('#petugasModal input[name=link]').value=data.data.permintaan.linkPermintaan;
+      document.querySelector('#petugasModal input[name=link]').value=data.permintaan.linkPermintaan;
 
       document.querySelector('.previewKegunaan').innerHTML = data.permintaan.kegunaan.kegunaan;
       document.querySelector('#petugasModal input[name=idKegunaan]').value=data.permintaan.kegunaan.id;
@@ -301,24 +302,24 @@
     }
   
     // Getting form values from the fields to pass to datatable
-    // _getFormData() {
-    //   const data = {};
-    //   data.Name = document.querySelector('#petugasModal input[name=Name]').value;
-    //   data.Sales = document.querySelector('#petugasModal input[name=Sales]').value;
-    //   data.Stock = document.querySelector('#petugasModal input[name=Stock]').value;
-    //   data.Category = document.querySelector('#petugasModal input[name=Category]:checked')
-    //     ? document.querySelector('#petugasModal input[name=Category]:checked').value || ''
-    //     : '';
-    //   data.Tag = document.querySelector('#petugasModal input[name=Tag]:checked')
-    //     ? document.querySelector('#petugasModal input[name=Tag]:checked').value || ''
-    //     : '';
-    //   data.Check = '';
-    //   return data;
-    // }
+    _getFormData() {
+      const data = {};
+      data.Name = document.querySelector('#petugasModal input[name=Name]').value;
+      data.Sales = document.querySelector('#petugasModal input[name=Sales]').value;
+      data.Stock = document.querySelector('#petugasModal input[name=Stock]').value;
+      data.Category = document.querySelector('#petugasModal input[name=Category]:checked')
+        ? document.querySelector('#petugasModal input[name=Category]:checked').value || ''
+        : '';
+      data.Tag = document.querySelector('#petugasModal input[name=Tag]:checked')
+        ? document.querySelector('#petugasModal input[name=Tag]:checked').value || ''
+        : '';
+      data.Check = '';
+      return data;
+    }
   
     // Clearing modal form
     _clearModalForm() {
-      document.querySelector('#petugasForm form').reset();
+      document.querySelector('#petugasModal form').reset();
     }
   
     // Update tag from top side dropdown
