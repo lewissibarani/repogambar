@@ -15,7 +15,7 @@
   
     // Form validation
     _initForm() {
-      const form = document.getElementById('registerForm');
+      const form = document.getElementById('petugasModalForm');
       if (!form) {
         return;
       }

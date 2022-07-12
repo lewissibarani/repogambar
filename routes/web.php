@@ -57,7 +57,11 @@ Route::prefix('PembagianTugas')->group(function () {
 Route::prefix('Petugas')->group(function () {
     Route::get('/', [PetugasController::class, 'index'])->name('petugas.index');
     Route::get('Index',[PetugasController::class, 'index'])->name('petugas.index');
+    Route::get('/transaksi/{transaksi_id}', [PetugasController::class, 'layani']);
+
     Route::post('Store', [PetugasController::class, 'store'])->name('petugas.store');
+    Route::post('Tolak', [PetugasController::class, 'store'])->name('petugas.tolak');
+    
     Route::view('Contoh','petugas/contoh');
 });
 

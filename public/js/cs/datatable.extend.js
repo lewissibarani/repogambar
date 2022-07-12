@@ -124,10 +124,10 @@
       this.settings.editRowCallback(this.datatable.row(currentTarget));
       return true;
     }
-    currentTarget.classList.toggle('selected');
-    const checkbox = currentTarget.querySelector('.form-check input');
-    checkbox.checked = !checkbox.checked;
-    checkbox.dispatchEvent(new Event('change'));
+    // currentTarget.classList.toggle('selected');
+    // const checkbox = currentTarget.querySelector('.form-check input');
+    // checkbox.checked = !checkbox.checked;
+    // checkbox.dispatchEvent(new Event('change'));
     this.controlCheckAll();
   }
 

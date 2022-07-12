@@ -1,3 +1,7 @@
+<div class="alert alert-info" role="alert">
+    Hanya isikan kolom penolakan apabila ingin menolak permintaan ini.
+</div>
+
 <div class="row">
     <div class="col-12">
         <div class="card-body">
@@ -43,8 +47,6 @@
                 </div>
             </div>
 
-            <span class="previewAlasanTolak"></span>
-            
             <div class="row mb-3">
                 <label class="font-weight-bold col-sm-2 col-form-label">Source</label>
                 <div class="col-sm-10">

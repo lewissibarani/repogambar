@@ -75,20 +75,43 @@ class PetugasController extends Controller
     {
 
         $this->validate($request, [
-            'alasan_tolak' => 'required',
+            'alasanDitolak' => 'required',
         ]);
         
+
         //mencari id transaksi permitaan gambar di tabel pembagian tugas
         $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
 
         //merubah status permintaan gambar menjadi selesai
         $permintaan = Transaksi::where('id', $id_permintaan)
-        ->update(['gambar_id' => $request->id,
-                  'idStatus' => 2]);
+        ->update([  'gambar_id' => $request->id,
+                    'idStatus' => 2,
+                    'alasanDitolak' => $request->alasanDitolak]);
 
         return redirect()->route('petugas.index');
         
     }
+
+    //     public function tolak (Request $request)
+    // {
+
+    //     $this->validate($request, [
+    //         'alasanDitolak' => 'required',
+    //     ]);
+        
+
+    //     //mencari id transaksi permitaan gambar di tabel pembagian tugas
+    //     $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
+
+    //     //merubah status permintaan gambar menjadi selesai
+    //     $permintaan = Transaksi::where('id', $id_permintaan)
+    //     ->update([  'gambar_id' => $request->id,
+    //                 'idStatus' => 2,
+    //                 'alasanDitolak' => $request->alasanDitolak]);
+
+    //     return redirect()->route('petugas.index');
+        
+    // }
 
     
 }

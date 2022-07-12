@@ -93,14 +93,15 @@
             targets: 4,
             render: function (data, type, row, meta) {
               if(row.permintaan.idStatus==1){
-                return '<div class="btn-group">'+
-                '<a class="btn btn-outline-primary w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#petugasModal">Layani</a>'+
-                '<a class="btn btn-outline-danger w-100 w-md-auto add-datatable" href="#" data-bs-toggle="modal" data-bs-target="#petugasModal">Tolak</a>'+
+                return '<div class="col-12 col-md-5 d-flex align-items-center justify-content-md-center">'+
+                '<a class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" href="#" data-bs-toggle="modal" data-bs-target="#petugasModal"><i data-acorn-icon="support" class="icon" data-acorn-size="15"></i><span class="d-none d-xxl-inline-block">Layani</span></a>'+
                 '</div>';
               }else{
-                return row.permintaan.status.status;
+                return '<div class="col-12 col-md-5 d-flex align-items-center justify-content-md-center">'+
+                row.permintaan.status.status+
+                '</div>';
               }
-            
+              
             },
           },
         ],
@@ -179,7 +180,7 @@
     _onEditRowClick(rowToEdit) {
       this._rowToEdit = rowToEdit; // Passed from DatatableExtend via callback from settings
 
-      // this._showPreviewModal('edit', 'Edit', 'Done');
+      // this._showModal('edit', 'Edit', 'Done');
       this._setPreviewForm();
     }
 
@@ -216,23 +217,23 @@
     _showModal(objective, title, button) {
       this._petugasModal.show();
       this._currentState = objective;
-      document.getElementById('modalTitle').innerHTML = title;
-      document.getElementById('addEditConfirmButton').innerHTML = button;
+      // document.getElementById('modalTitle').innerHTML = title;
+      // document.getElementById('addEditConfirmButton').innerHTML = button;
     }
   
     // Filling the modal form data
-    _setForm() {
-      const data = this._rowToEdit.data();
-      document.querySelector('#petugasModal input[name=Name]').value = data.Name;
-      document.querySelector('#petugasModal input[name=Sales]').value = data.Sales;
-      document.querySelector('#petugasModal input[name=Stock]').value = data.Stock;
-      if (document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
-        document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
-      }
-      if (document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
-        document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
-      }
-    }
+    // _setForm() {
+    //   const data = this._rowToEdit.data();
+    //   document.querySelector('#petugasModal input[name=Name]').value = data.Name;
+    //   document.querySelector('#petugasModal input[name=Sales]').value = data.Sales;
+    //   document.querySelector('#petugasModal input[name=Stock]').value = data.Stock;
+    //   if (document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
+    //     document.querySelector('#petugasModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
+    //   }
+    //   if (document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
+    //     document.querySelector('#petugasModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
+    //   }
+    // }
 
     // Filling the modal form data
     _setPreviewForm() {
@@ -270,6 +271,7 @@
         return data;
         }
       //--end of Merubah Format Id
+      
       document.querySelector('.previewId').innerHTML = Id(data);
 
       
@@ -302,24 +304,24 @@
     }
   
     // Getting form values from the fields to pass to datatable
-    _getFormData() {
-      const data = {};
-      data.Name = document.querySelector('#petugasModal input[name=Name]').value;
-      data.Sales = document.querySelector('#petugasModal input[name=Sales]').value;
-      data.Stock = document.querySelector('#petugasModal input[name=Stock]').value;
-      data.Category = document.querySelector('#petugasModal input[name=Category]:checked')
-        ? document.querySelector('#petugasModal input[name=Category]:checked').value || ''
-        : '';
-      data.Tag = document.querySelector('#petugasModal input[name=Tag]:checked')
-        ? document.querySelector('#petugasModal input[name=Tag]:checked').value || ''
-        : '';
-      data.Check = '';
-      return data;
-    }
+    // _getFormData() {
+    //   const data = {};
+    //   data.Name = document.querySelector('#petugasModal input[name=Name]').value;
+    //   data.Sales = document.querySelector('#petugasModal input[name=Sales]').value;
+    //   data.Stock = document.querySelector('#petugasModal input[name=Stock]').value;
+    //   data.Category = document.querySelector('#petugasModal input[name=Category]:checked')
+    //     ? document.querySelector('#petugasModal input[name=Category]:checked').value || ''
+    //     : '';
+    //   data.Tag = document.querySelector('#petugasModal input[name=Tag]:checked')
+    //     ? document.querySelector('#petugasModal input[name=Tag]:checked').value || ''
+    //     : '';
+    //   data.Check = '';
+    //   return data;
+    // }
   
     // Clearing modal form
     _clearModalForm() {
-      document.querySelector('#petugasModal form').reset();
+      // document.querySelector('#petugasModal form').reset();
     }
   
     // Update tag from top side dropdown
