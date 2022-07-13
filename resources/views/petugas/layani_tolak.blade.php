@@ -1,8 +1,8 @@
 @php
     $html_tag_data = [];
-    $title = 'Permintaan # '.$permintaan_id;
+    $title = 'Permintaan # '.$permintaan_id.' Ditolak';
     $description = 'Empty Page';
-    $breadcrumbs = ["/"=>"Home", "Petugas/Index"=>"Daftar Tugas", "Petugas/transaksi/$transaksi_id/permintaan/$permintaan_id"=>"Permintaan Gambar # $permintaan_id"]
+    $breadcrumbs = ["/"=>"Home", "Petugas/Index"=>"Daftar Tugas", "Petugas/transaksi/$transaksi_id/permintaan/$permintaan_id"=>"Permintaan Gambar # $permintaan_id","Petugas/Transaksi_tolak/$transaksi_id/Permintaan_tolak/$permintaan_id"=>"Permintaan Gambar # $permintaan_id Ditolak"]
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
@@ -44,30 +44,20 @@
         <!-- Title and Top Buttons End -->
 
         <!-- Content Start -->
-        <h2 class="small-title">Form Pelayanan Permintaan Gambar</h2>
+        <h2 class="small-title">Form Penolakan Permintaan Gambar</h2>
         <div class="card mb-5">
             <div class="card-body h-100">
 
-            <div class="alert alert-danger" role="alert">
-                Tolak permintaan gambar ini ? klik <a class="alert-link" href ="{{route('petugas.layani_tolak', ['transaksi_id' => $transaksi_id,'permintaan_id' => $permintaan_id])}}" > disini</a>
+            <div class="alert alert-info" role="alert">
+                Tuliskan alasan penolakan permintaan gambar dengan jelas.
             </div>
 
 <div class="row">
     <div class="col-12">
         <div class="card-body">
-            <form id="petugasModalForm" action="{{route('petugas.store')}}" method="POST" enctype="multipart/form-data">
+            <form id="petugasModalForm" action="{{route('petugas.tolak')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @error('image')
-                <div class="alert alert-danger" role="alert">
-                    {{$message}}
-                </div>
-                @enderror
-                @error('source_id')
-                <div class="alert alert-danger" role="alert">
-                    {{$message}}
-                </div>
-                @enderror
-                @error('tags')
+                @error('alasanDitolak')
                 <div class="alert alert-danger" role="alert">
                     {{$message}}
                 </div>
@@ -76,8 +66,9 @@
                 <div class="row mb-3">
                     <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>
                     <div class="col-sm-10">
-                        <input type="text" value="{{$Data->permintaan->judulPermintaan}}" class="form-control" id="" name="judul" /> 
-                        <input type="hidden" value="{{$Data->id}}" class="form-control" id="" name="bagitugas_id"/>             
+                        <label class=" col-sm-12 col-form-label">
+                            {{$Data->permintaan->judulPermintaan}}
+                        </label>      
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -114,37 +105,13 @@
                         </label>              
                     </div>
                 </div>
-
                 <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Source</label>
+                    <label class="font-weight-bold col-sm-2 col-form-label">Alasan Ditolak</label>
                     <div class="col-sm-10">
-                        <select class="form-select" name="source_id" id="select2Basic">
-                            <option selected>Pilih...</option>
-                            @foreach ($Source as $source)
-                                <option value="{{ $source->id }}">{{ $source->sumber_gambar }}</option> 
-                            @endforeach
-                        </select>            
+                        <textarea rows="4" class="form-control" id="" name="alasanDitolak"> </textarea>          
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload Gambar</label>
-                    <div class="col-sm-10">
-                        <div class="col-sm-12 col-form-label card no-shadow">
-                            <input type="file" class="form-control" name="image" />
-                        </div>   
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Tags</label>
-                    <div class="col-sm-10">
-                        <input 
-                                id="tagsBasic"
-                                name="tags"
-                        />
-                        <small class="form-text text-muted">Tuliskan minimal 3 tags. Setiap tag dipisahkan dengan tanda koma</small>
-                        <!-- <input class="form-control" type="text" data-role="tagsinput" name="tags"> -->
-                    </div>
-                </div>
+                
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>

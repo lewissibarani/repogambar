@@ -28,7 +28,6 @@
     <script src="/js/petugas/datatable.petugas.js"></script>
     <script src="/js//tags/tags.js"></script>
     <script src="/js/forms/controls.select2.js"></script>
-    <script src="/js/petugas/auth.petugas.js"></script>
 @endsection
 @section('content')
     <div class="container">
@@ -222,69 +221,6 @@
                     <!-- Table End -->
                 </div>
                 <!-- Content End -->
-
-                <!-- Add Edit Modal Start -->
-                <div class="modal large fade" id="petugasModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content ">
-                            <div class="modal-header">
-                                <h5 class="modal-title font-weight-bold" id="modalTitle">ID Permintaan: <span class="previewId"></span></h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="petugasModalForm" action="{{route('petugas.store')}}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @error('image')
-                                    <div class="mb-3 text-danger">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
-                                    @include('Petugas.form_petugas')
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
-                            </div>
-                                </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add Edit Modal End -->
-
-                <!-- Add Edit Modal Start -->
-                <div class="modal fade modal-close-out"
-                                        id="petugasModaltolak"
-                                        tabindex="-1"
-                                        role="dialog"
-                                        aria-labelledby="verticallyCenteredLabel"
-                                        aria-hidden="true">
-
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content ">
-                            <div class="modal-header">
-                                <h5 class="modal-title font-weight-bold" id="modalTitle">ID Permintaan: <span class="previewId"></span></h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{route('petugas.store')}}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @error('alasanDitolak')
-                                    <div class="mb-3 text-danger">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
-                                    @include('Petugas.form_petugas_tolak')
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
-                            </div>
-                                </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add Edit Modal End -->
-
             </div>
         </div>
     </div>

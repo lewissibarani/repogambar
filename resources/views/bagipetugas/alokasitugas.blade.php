@@ -50,7 +50,7 @@
             <div class="row mb-3">
                 <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Alokasi</label>
                 <div class="col-sm-10">
-                    <select id="inputState" class="form-select" name="user_id">
+                    <select  id="select2Basic" class="form-select" name="user_id">
                         <option selected>Pilih...</option>
                         @foreach ($Users as $user)
                             <option value="{{ $user->id }}">{{ $user->name}}</option> 

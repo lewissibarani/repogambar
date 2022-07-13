@@ -35,8 +35,8 @@
       this._staticHeight = 62;
   
       this._createInstance();
-      this._addListeners();
-      this._extend();
+      // this._addListeners();
+      // this._extend();
       this._initBootstrapModal();
     }
   
@@ -94,7 +94,7 @@
             render: function (data, type, row, meta) {
               if(row.permintaan.idStatus==1){
                 return '<div class="col-12 col-md-5 d-flex align-items-center justify-content-md-center">'+
-                '<a class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" href="#" data-bs-toggle="modal" data-bs-target="#petugasModal"><i data-acorn-icon="support" class="icon" data-acorn-size="15"></i><span class="d-none d-xxl-inline-block">Layani</span></a>'+
+                '<a class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" target="_blank" rel="noopener noreferrer" href="transaksi/'+ row.permintaan.id +'/permintaan/'+ row.permintaan.user.kodesatker + row.permintaan.id +'"><i data-acorn-icon="support" class="icon" data-acorn-size="15"></i><span class="d-none d-xxl-inline-block">Layani</span></a>'+
                 '</div>';
               }else{
                 return '<div class="col-12 col-md-5 d-flex align-items-center justify-content-md-center">'+
@@ -123,9 +123,9 @@
     // document.querySelectorAll('.edit-datatable').forEach((el) => el.addEventListener('click', this._onEditButtonClick.bind(this)));
 
     // Calling a function to update tags on click
-    document.querySelectorAll('.tag-done').forEach((el) => el.addEventListener('click', () => this._updateTag('Done')));
-    document.querySelectorAll('.tag-new').forEach((el) => el.addEventListener('click', () => this._updateTag('New')));
-    document.querySelectorAll('.tag-sale').forEach((el) => el.addEventListener('click', () => this._updateTag('Sale')));
+    // document.querySelectorAll('.tag-done').forEach((el) => el.addEventListener('click', () => this._updateTag('Done')));
+    // document.querySelectorAll('.tag-new').forEach((el) => el.addEventListener('click', () => this._updateTag('New')));
+    // document.querySelectorAll('.tag-sale').forEach((el) => el.addEventListener('click', () => this._updateTag('Sale')));
 
     // Calling clear form when modal is closed
     document.getElementById('petugasModal').addEventListener('hidden.bs.modal', this._clearModalForm);
@@ -135,7 +135,7 @@
     _extend() {
       this._datatableExtend = new DatatableExtend({
         datatable: this._datatable,
-        editRowCallback: this._onEditRowClick.bind(this),
+        // editRowCallback: this._onEditRowClick.bind(this),
         singleSelectCallback: this._onSingleSelect.bind(this),
         multipleSelectCallback: this._onMultipleSelect.bind(this),
         anySelectCallback: this._onAnySelect.bind(this),
@@ -145,7 +145,7 @@
   
     // Keeping a reference to add/edit modal
     _initBootstrapModal() {
-      this._petugasModal = new bootstrap.Modal(document.getElementById('petugasModal'));
+      // this._petugasModal = new bootstrap.Modal(document.getElementById('petugasModal'));
     }
   
     // Setting static height to datatable to prevent pagination movement when list is not full
@@ -181,7 +181,7 @@
       this._rowToEdit = rowToEdit; // Passed from DatatableExtend via callback from settings
 
       // this._showModal('edit', 'Edit', 'Done');
-      this._setPreviewForm();
+      // this._setPreviewForm();
     }
 
     // Edit button inside th modal click

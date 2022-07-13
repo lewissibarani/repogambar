@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use SebastianBergmann\Environment\Console;
+use App\Models\Transaksi;
+use App\Models\Gambar;
+use App\Models\PembagianTugas;
 
 class DashboardsController extends Controller
 {
@@ -21,6 +24,13 @@ class DashboardsController extends Controller
      */
     public function dashboard()
     {
+        $Data = Gambar::with('user','transaksi','permintaan.user','permintaan.status','permintaan.kegunaan')
+        ->get();
+
+        return view('petugas.layani', 
+        compact(['Data'
+            ]));
+
         return view('dashboard.dashboard');
     }
 

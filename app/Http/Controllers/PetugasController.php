@@ -12,6 +12,17 @@ use App\Models\Source;
 
 class PetugasController extends Controller
 {
+
+    private function convertArray($array)
+    {
+        $converted_array=array();
+        foreach(json_decode($array, true) as $key=> $data )
+        {
+            array_push($converted_array,$data['value']);
+        }
+        return $converted_array;
+    }
+
     public function index ()
     {
         // Mengambil data didatabase
@@ -24,8 +35,7 @@ class PetugasController extends Controller
         if (file_put_contents(public_path()."/json/Tugas.json", $json))
         
         $Source = Source::all();
-        return view('petugas.index', compact('Source')
-    );
+        return view('petugas.index');
     }
 
     public function store (Request $request)
@@ -45,7 +55,7 @@ class PetugasController extends Controller
             $file-> move(public_path('img/uploadedGambar/'), $filename);
            
         }
-    	$tags = explode(",", $request->tags);
+        
         $gambars=Gambar::create([
             'judul' => $request->judul,
             'link' => $request->link,
@@ -57,7 +67,8 @@ class PetugasController extends Controller
             'source_id' => $request->source_id
         ]);
         
-        $gambars->tag($tags);
+        //Menyimpan Tags
+        $gambars->tag($this->convertArray($request->tags));
         
         //mencari id transaksi permitaan gambar di tabel pembagian tugas
         $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
@@ -92,26 +103,38 @@ class PetugasController extends Controller
         
     }
 
-    //     public function tolak (Request $request)
-    // {
+    public function layani_tolak ($transaksi_id, $permintaan_id)
+    {
 
-    //     $this->validate($request, [
-    //         'alasanDitolak' => 'required',
-    //     ]);
+        $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
+        ->where('user_id',Auth::id())
+        ->where('permintaan_id', $transaksi_id)
+        ->first();
+
+        return view('petugas.layani_tolak', 
+        compact(['transaksi_id',
+                'permintaan_id',
+                'Data'
+            ]));
         
+    }
 
-    //     //mencari id transaksi permitaan gambar di tabel pembagian tugas
-    //     $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
+    public function layani ($transaksi_id, $permintaan_id)
+    {
+        $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
+        ->where('user_id',Auth::id())
+        ->where('permintaan_id', $transaksi_id)
+        ->first();
 
-    //     //merubah status permintaan gambar menjadi selesai
-    //     $permintaan = Transaksi::where('id', $id_permintaan)
-    //     ->update([  'gambar_id' => $request->id,
-    //                 'idStatus' => 2,
-    //                 'alasanDitolak' => $request->alasanDitolak]);
-
-    //     return redirect()->route('petugas.index');
+        $Source = Source::all();
+        return view('petugas.layani', 
+        compact(['transaksi_id',
+                'permintaan_id',
+                'Source',
+                'Data'
+            ]));
         
-    // }
+    }
 
     
 }

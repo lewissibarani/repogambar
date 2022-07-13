@@ -18,7 +18,8 @@ class Gambar extends Model
         'idKegunaan',
         'idUser',
         'metadata',
-        'catatan',
+        'nama_gambar',
+        'source_id',
     ];
 
     public function transaksi()

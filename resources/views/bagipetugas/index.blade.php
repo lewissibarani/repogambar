@@ -8,10 +8,13 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/vendor/datatables.min.css"/>
+    <link rel="stylesheet" href="/css/vendor/select2.min.css"/>
+    <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css"/>
 @endsection
 
 @section('js_vendor')
     <script src="/js/vendor/bootstrap-submenu.js"></script>
+    <script src="/js/vendor/select2.full.min.js"></script>
     <script src="/js/vendor/datatables.min.js"></script>
     <script src="/js/vendor/mousetrap.min.js"></script>
 @endsection
@@ -19,6 +22,7 @@
 @section('js_page')
     <script src="/js/cs/datatable.extend.js"></script>
     <script src="/js/bagitugas/datatable.bagitugas.js"></script>
+    <script src="/js/forms/controls.select2.js"></script>
     
 @endsection
 
@@ -223,7 +227,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
-                                <button type="button" class="btn btn-primary" >Kirim</button>
+                                <button type="submit" class="btn btn-primary" >Kirim</button>
                             </div>
                             </form>
                         </div>
