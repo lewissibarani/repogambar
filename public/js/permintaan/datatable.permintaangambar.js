@@ -34,8 +34,8 @@
       this._staticHeight = 62;
   
       this._createInstance();
-      // this._addListeners();
-      // this._extend();
+      this._addListeners();
+      this._extend();
       this._initBootstrapModal();
       this._initForm();
     }
@@ -134,7 +134,7 @@
               switch (row.idStatus) {
                 case 3:
                   downloadButton =  '<div class="col-12 col-md-5 d-flex align-items-center justify-content-md-center">'+
-                                        '<a download="'+ row.gambar.nama_gambar +'" class="btn btn-sm btn-icon btn-info"'+
+                                        '<a download="'+ row.gambar.nama_gambar +'" class="btn btn-sm btn-icon btn-primary"'+
                                             'href="/'+ row.gambar.path +'">'+
                                           'Download'+
                                         '</a>'+
@@ -143,7 +143,9 @@
                   return downloadButton;
                   break;
                 default:
-                  return row.status.status;
+                  return '<div class="col-12 col-md-5 d-flex align-items-center justify-content-md-center">'+ 
+                  row.status.status +
+                  '</div>';
                   break;
               }
               

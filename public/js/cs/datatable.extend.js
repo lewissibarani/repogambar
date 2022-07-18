@@ -59,9 +59,9 @@
     }
 
     // Click listeners for rows to make them selected or show the edit modal
-    if (this.element) {
-      this.element.querySelectorAll('tbody').forEach((el) => el.addEventListener('click', this._onRowClick.bind(this)));
-    }
+    // if (this.element) {
+    //   this.element.querySelectorAll('tbody').forEach((el) => el.addEventListener('click', this._onRowClick.bind(this)));
+    // }
 
     // Search listeners
     document.querySelectorAll('.datatable-search').forEach((el) => {
