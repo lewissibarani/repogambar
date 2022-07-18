@@ -59,7 +59,7 @@ class PetugasController extends Controller
         $gambars=Gambar::create([
             'judul' => $request->judul,
             'link' => $request->link,
-            'idKegunaan' => $request->idkegunaan,
+            'idKegunaan' => $request->idKegunaan,
             'idUser' => Auth::id(),
             'path' =>'img/uploadedGambar/'.$filename,
             'metadata' =>'',

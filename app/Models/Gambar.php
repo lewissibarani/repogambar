@@ -31,6 +31,16 @@ class Gambar extends Model
     public function source()
     {
         
-        return $this->belongsTo('App\Models\Source', 'id','source_id');
+        return $this->hasOne('App\Models\Source', 'id','source_id');
+    }
+    public function kegunaan()
+    {
+        
+        return $this->hasOne('App\Models\Kegunaan', 'id','idKegunaan');
+    }
+
+    public function user ()
+    {
+        return $this->hasOne('App\Models\User','id','idUser');
     }
 }

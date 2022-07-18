@@ -62,14 +62,14 @@
                 <!-- Grid Start -->
                 <h2 class="small-title">Karya Favorit</h2>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-2 mb-5">
-                    @foreach ($Source as $source)
+                    @foreach ($Data as $datas)
                         <div class="col">
                             <div class="card h-100">
-                                <img src="/img/product/small/product-6.webp" class="card-img-top sh-19" alt="card image" />
+                                <img src="{{$datas->path}}" class="card-img-top sh-19" alt="card image" />
                                 <div class="card-body">
                                     <h5 class="heading mb-3">
                                         <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">Basic Introduction to Bread Making</span>
+                                            <span class="clamp-line sh-5" data-line="2">{{$datas->judul}}</span>
                                         </a>
                                     </h5>
                                     <div>
@@ -80,7 +80,7 @@
                                             </div>
                                             <div class="col">
                                                 <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
-                                                <span class="align-middle">15 Min</span>
+                                                <span class="align-middle">{{$datas->source->sumber_gambar}}</span>
                                             </div>
                                         </div>
                                     </div>

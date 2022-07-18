@@ -9,7 +9,6 @@
     <div class="col-6">
         <div class="card-body">
             <h1 class="card-title font-weight-bold"><span class="previewJudul"></span></h1>
-            <p class="card-text "><span class="font-weight-bold">Author: </span><span class="previewAuthor"></span></p>
             <p class="card-text"><span class="font-weight-bold">Link: </span><span class="previewLink"></span></p>    
             <p class="card-text"><span class="font-weight-bold">Tanggal Permintaan: </span><span class="previewWaktu"></span></p>
             <p class="card-text"><span class="font-weight-bold">Penggunaan: </span><span class="previewKegunaan"></span></p>

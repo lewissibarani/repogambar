@@ -24,14 +24,12 @@ class DashboardsController extends Controller
      */
     public function dashboard()
     {
-        $Data = Gambar::with('user','transaksi','permintaan.user','permintaan.status','permintaan.kegunaan')
+        $Data = Gambar::with('user','transaksi','kegunaan','source')
         ->get();
 
-        return view('petugas.layani', 
+        return view('dashboard.dashboard',
         compact(['Data'
-            ]));
-
-        return view('dashboard.dashboard');
+        ]));
     }
 
     /**

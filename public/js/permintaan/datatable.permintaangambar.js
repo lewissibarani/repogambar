@@ -34,8 +34,8 @@
       this._staticHeight = 62;
   
       this._createInstance();
-      this._addListeners();
-      this._extend();
+      // this._addListeners();
+      // this._extend();
       this._initBootstrapModal();
       this._initForm();
     }
@@ -55,7 +55,7 @@
             val = '#'+row.user.kodesatker + row.id ;
             return val;
             }
-          }, {data: 'kegunaan.kegunaan'}, {data: 'linkPermintaan'}, {data: 'created_at'}, {data: 'status.status'}
+          }, {data: 'kegunaan.kegunaan'}, {data: 'linkPermintaan'}, {data: 'created_at'}, {data: 'Status'}
         ],
         language: {
           paginate: {
@@ -121,7 +121,7 @@
               }
               
               return dateFormat(data, 'dd MM yyyy');
-              }
+            }
 
           },
 
@@ -129,7 +129,24 @@
           {
             targets: 4,
             render: function (data, type, row, meta) {
-              return data;
+              
+              let downloadButton;
+              switch (row.idStatus) {
+                case 3:
+                  downloadButton =  '<div class="col-12 col-md-5 d-flex align-items-center justify-content-md-center">'+
+                                        '<a download="'+ row.gambar.nama_gambar +'" class="btn btn-sm btn-icon btn-info"'+
+                                            'href="/'+ row.gambar.path +'">'+
+                                          'Download'+
+                                        '</a>'+
+                                    '</div>';
+
+                  return downloadButton;
+                  break;
+                default:
+                  return row.status.status;
+                  break;
+              }
+              
             },
           },
         ],
@@ -303,24 +320,8 @@
       document.querySelector('.previewJudul').innerHTML = data.judulPermintaan;
       document.querySelector('.previewKegunaan').innerHTML = data.kegunaan.kegunaan;
       document.querySelector('.previewWaktu').innerHTML = dateFormat(data.created_at,'dd MM yyyy');
-      //---Status Badge Start
-      let status;
-              switch (data.idStatus) {
-                case 1:
-                  status = "<span class='badge bg-outline-primary'>Diproses</span>";
-                  break;
-                case 2:
-                  status = "<span class='badge rounded-pill bg-danger'>Ditolak</span>";
-                  break;
-                case 3:
-                  status = "<span class='badge rounded-pill bg-primary'>Selesai</span>";
-                  break;
-                default:
-                  status = "<span class='badge rounded-pill bg-warning'>Duplikasi</span>";
-                  break;
-              }
-      document.querySelector('.previewStatus').innerHTML = status;
-      //---Status Badge end
+      document.querySelector('.previewStatus').innerHTML = data.status.status;
+ 
 
       //--Alasan Ditolak Start
       let alasanTolak;

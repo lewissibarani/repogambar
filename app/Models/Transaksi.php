@@ -43,4 +43,9 @@ class Transaksi extends Model
         return $this->hasOne('App\Models\Status','id','idStatus');
     }
 
+    public function gambar ()
+    {
+        return $this->hasOne('App\Models\Gambar','id','gambar_id');
+    }
+
 }

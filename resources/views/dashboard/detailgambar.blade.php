@@ -143,12 +143,12 @@
                                     </a>
                                 </div>                            
                             </div>
-                            <div>
+                            <!-- <div>
                                 <h4 class="mb-3 font-weight-bold">Deskripsi Gambar </h4>
                                 <div class="mb-4">
                                     {{$deskripsiGambar}}
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col 6">
                                     <h4 class="mb-3 font-weight-bold">Penyumbang Gambar </h4>

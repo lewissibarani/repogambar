@@ -94,7 +94,7 @@
             render: function (data, type, row, meta) {
               if(row.permintaan.idStatus==1){
                 return '<div class="col-12 col-md-5 d-flex align-items-center justify-content-md-center">'+
-                '<a class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" target="_blank" rel="noopener noreferrer" href="transaksi/'+ row.permintaan.id +'/permintaan/'+ row.permintaan.user.kodesatker + row.permintaan.id +'"><i data-acorn-icon="support" class="icon" data-acorn-size="15"></i><span class="d-none d-xxl-inline-block">Layani</span></a>'+
+                '<a class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" target="_blank" rel="noopener noreferrer" href="transaksi/'+ row.permintaan.id +'/permintaan/'+ row.permintaan.user.kodesatker + row.permintaan.id +'">Layani</a>'+
                 '</div>';
               }else{
                 return '<div class="col-12 col-md-5 d-flex align-items-center justify-content-md-center">'+
