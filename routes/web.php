@@ -47,11 +47,9 @@ Route::prefix('KelolaGambar')->group(function () {
     // Route::view('Update', 'kelolagambar/update');
 });
 
-Route::prefix('PembagianTugas')->group(function () {
+Route::prefix('Statistik')->group(function () {
     Route::get('/', [BagiTugasController::class, 'index'])->name('bagipetugas.index');
     Route::get('Index',[BagiTugasController::class, 'index'])->name('bagipetugas.index');
-    Route::post('Store', [BagiTugasController::class, 'store'])->name('bagipetugas.store');
-    Route::get('DaftarTugas',[BagiTugasController::class, 'getdaftarpembagiantugas'])->name('bagipetugas.daftar_tugas');
 });
 
 Route::prefix('Petugas')->group(function () {

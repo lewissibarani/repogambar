@@ -216,8 +216,8 @@
                 </a>
                 <ul id="interfaceComponents">
                             <li>
-                                <a href="/PembagianTugas/Index">
-                                    <span class="label">Pembagian Tugas</span>
+                                <a href="/Statistik/Index">
+                                    <span class="label">Statistik Aplikasi</span>
                                 </a>
                             </li>
                             <li>
