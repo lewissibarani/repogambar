@@ -37,9 +37,6 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-// Route::view('/Horizontal', 'horizontal');
-// Route::view('/Vertical', 'vertical');
-
 Route::prefix('KelolaGambar')->group(function () {
     Route::get('/', [KelolaGambarController::class, 'index'])->name('kelolagambar.index');
     Route::get('Index',[KelolaGambarController::class, 'index'])->name('kelolagambar.index');
