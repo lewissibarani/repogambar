@@ -220,9 +220,16 @@
                                     <span class="label">Statistik Aplikasi</span>
                                 </a>
                             </li>
+
                             <li>
                                 <a href="/Petugas/Index">
                                     <span class="label">Daftar Tugas</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/Petugas/Pengaturan">
+                                    <span class="label">Pengaturan Petugas</span>
                                 </a>
                             </li>
                 </ul>

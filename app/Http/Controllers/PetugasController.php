@@ -9,6 +9,8 @@ use App\Models\Gambar;
 use App\Models\PembagianTugas;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Source;
+use App\Models\User;
+use App\Models\User_Petugas;
 
 class PetugasController extends Controller
 {
@@ -164,5 +166,12 @@ class PetugasController extends Controller
         
     }
 
-    
+    public function pengaturan ()
+    {
+        $User = User::all();
+        $User_Petugas = User_Petugas::with('user')->get();
+        return view('petugas.pengaturan', 
+        compact(['User','User_Petugas'
+            ]));
+    }
 }

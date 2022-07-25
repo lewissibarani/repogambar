@@ -18,7 +18,8 @@ class Transaksi extends Model
         'alasanDitolak',
         'linkPermintaan',
         'idUserPeminta',
-        'gambar_id'
+        'gambar_id',
+        'id_permintaan'
     ];
 
     public function kegunaan ()

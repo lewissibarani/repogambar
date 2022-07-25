@@ -71,6 +71,11 @@ class KelolaGambarController extends Controller
         return redirect()->route('kelolagambar.index')->withStatus(__('Permintaan Berhasil Dibuat.'));
     }
 
+    private function distribusiTugas($permintaan_baru)
+    {
+        // $permintaan_baru = 
+    }
+
     /**
      * Display the specified resource.
      *
