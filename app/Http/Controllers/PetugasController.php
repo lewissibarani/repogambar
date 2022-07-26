@@ -169,9 +169,23 @@ class PetugasController extends Controller
     public function pengaturan ()
     {
         $User = User::all();
-        $User_Petugas = User_Petugas::with('user')->get();
+        $User_Petugas = User_Petugas::with('users')->get();
         return view('petugas.pengaturan', 
         compact(['User','User_Petugas'
             ]));
+    }
+
+    public function tambah (Request $request)
+    {
+        $this->validate($request, [
+            'users_id' => 'required|unique:users_petugas,users_id',
+        ]);
+
+        $gambars=User_Petugas::create([
+            'users_id' =>$request->users_id,
+            'aktif' => 1
+        ]);
+
+        return redirect()->route('petugas.pengaturan');
     }
 }

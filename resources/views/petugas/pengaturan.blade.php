@@ -46,20 +46,26 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-10">
-                                        <select class="form-control" id="select2Basic">
+                                    <form id="" action="{{route('petugas.tambah')}}" method="POST">
+                                        @csrf
+                                        @error('users_id')
+                                        <div class="alert alert-danger" role="alert">
+                                            {{$message}}
+                                        </div>
+                                        @enderror
+                                        <select class="form-control" id="select2Basic" name="users_id">
                                         <option label="Cari nama petugas..."></option>
                                         @foreach ($User as $users)
                                             <option value="{{$users->id}}">{{$users->name}}</option>
                                         @endforeach
                                         </select>
-                                        <small class="text-muted"> Pilih nama petugas baru yang akan ditambahkan.</small>
+                                        <small class="text-muted"> Pilih nama petugas yang akan ditambahkan.</small>
                             </div>
-                            <div class="col-2">
-                                    <a href="/Dashboard/HasilPencarian" class="btn btn-icon btn-primary">
-                                        <i data-acorn-icon="plus"></i>
-                                        <span>Tambah Petugas</span>
-                                    </a>
-                            </div>
+                                <div class="col-2">
+                                    <button type="submit" class="btn btn-icon btn-primary" id=""><i data-acorn-icon="plus"></i>
+                                        <span>Tambah Petugas</span></button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

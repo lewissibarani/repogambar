@@ -52,23 +52,56 @@ class KelolaGambarController extends Controller
     public function store(Request $request)
     {
         $idpeminta= Auth::id();
+
         $request->validate([
             'judulPermintaan' => ['required'],
-            'linkPermintaan' => ['required'],
+            'linkPermintaan' => ['required|unique:permintaan,linkPermintaan'],
             'idkegunaan' => ['required'],
         ]);
+
         $create_transaksi=Transaksi::create([
             'judulPermintaan' => $request->judulPermintaan,
             'linkPermintaan' => $request->linkPermintaan,
             'idKegunaan' => $request->idkegunaan,
             'idUserPeminta' => $idpeminta,
-            'idStatus' => 1
+            'idStatus' => 1,
+            'kegunaan_lainnya' => $request->kegunaan_lainnya
         ]);
+
         PembagianTugas::create([
             'permintaan_id' => $create_transaksi->id,
             'seenboolean' => '0'
         ]);
+        
         return redirect()->route('kelolagambar.index')->withStatus(__('Permintaan Berhasil Dibuat.'));
+    }
+
+    private function cek_link($link)
+    {   
+        $result=3;
+        $parse = parse_url($link);
+        if (str_contains($parse['host'], 'shutterstock')) { 
+            $result=2;
+        }
+
+        if (str_contains($parse['host'], 'freepik')) { 
+            $result=1;
+        }
+
+        return $result;
+    }
+
+    private function pemberian_id_gambar($kodesatker)
+    {   
+        $lastnumber=0;
+        $permintaan = Transaksi::where(DB::raw('substr(code, 1, 4)'), '=' , $kodesatker)->latest("id")->first();;
+        if($permintaan!=null)
+        {
+            $lastnumber_1 = $permintaan->id_permintaan;
+            $lastnumber_2 = $permintaan->id_permintaan;
+        }
+
+        return $lastnumber;
     }
 
     private function distribusiTugas($permintaan_baru)
