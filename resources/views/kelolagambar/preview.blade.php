@@ -2,61 +2,58 @@
     <div class="col-12">
         <div class="card-body">
             
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>
-                    <div class="col-sm-10">
-                        <span class="previewJudul"></span>             
-                    </div>
+            <div class="row mb-3">
+                <div class="font-weight-bold col-sm-3 col-form-label">
+                    <div class="d-flex flex-row-reverse text-info">Judul :</div>
                 </div>
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Link</label>
-                    <div class="col-sm-10">
-                        <label class=" col-sm-12 col-form-label">
-                            <span class="previewLink"></span>
-                        </label>                  
-                    </div>
+                <div class="col-sm-9">
+                    <label class="col-sm-12 col-form-label">
+                        <span class="previewJudul"></span>
+                    </label>             
                 </div>
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Tanggal Permintaan</label>
-                    <div class="col-sm-10">
-                        <label class=" col-sm-12 col-form-label">
-                            <span class="previewWaktu"></span>
-                        </label>                  
-                    </div>
+            </div>
+            <div class="row mb-3">
+                <div class="font-weight-bold col-sm-3 col-form-label">
+                    <div class="d-flex flex-row-reverse text-info">Link :</div>
                 </div>
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Penggunaan</label>
-                    <div class="col-sm-10">
-                        <label class=" col-sm-12 col-form-label">
-                            <span class="previewKegunaan"></span>  
-                        </label>               
-                    </div>
+                <div class="col-sm-9">
+                    <label class=" col-sm-12 col-form-label">
+                        <span class="previewLink"></span>
+                    </label>                  
                 </div>
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Status</label>
-                    <div class="col-sm-10">
-                        <label class=" col-sm-2 col-form-label">
-                            <span class="previewStatus"></span>
-                        </label>              
-                    </div>
+            </div>
+            <div class="row mb-3">
+                <div class="font-weight-bold col-sm-3 col-form-label">
+                    <div class="d-flex flex-row-reverse text-info">Tanggal Permintaan :</div>
                 </div>
-
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Sumber</label>
-                    <div class="col-sm-10">
-                        <span class="previewSource"></span>            
-                    </div>
+                <div class="col-sm-9">
+                    <label class=" col-sm-12 col-form-label">
+                        <span class="previewWaktu"></span>
+                    </label>                  
                 </div>
-                
-                <div class="row mb-3">
-                    <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Alasan Ditolak</label>
-                    <div class="col-sm-10">
-                        <div class="col-sm-12 col-form-label card no-shadow">
-                            <span class="previewAlasanTolak">
-                        </div>   
-                    </div>
+            </div>
+            <div class="row mb-3">
+                <div class="font-weight-bold col-sm-3 col-form-label">
+                    <div class="d-flex flex-row-reverse text-info">Kegunaan :</div>
                 </div>
+                <div class="col-sm-9">
+                    <label class=" col-sm-12 col-form-label">
+                        <span class="previewKegunaan"></span>  
+                    </label>               
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="font-weight-bold col-sm-3 col-form-label">
+                    <div class="d-flex flex-row-reverse text-info">Status :</div>
+                </div>
+                <div class="col-sm-9">
+                    <label class=" col-sm-2 col-form-label">
+                        <span class="previewStatus"></span>
+                    </label>              
+                </div>
+            </div>
+                            
+            <span class="previewAlasanTolak"></span>
         </div>
-        <!-- Content End -->
     </div>  
 </div> 

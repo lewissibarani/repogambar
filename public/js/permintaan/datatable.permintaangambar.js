@@ -156,13 +156,7 @@
   }
 
   _addListeners() {
-    // Listener for confirm button on the edit/add modal
-    // document.getElementById('addEditConfirmButton').addEventListener('click', this._addEditFromModalClick.bind(this));
-
-    // Listener for add buttons
-    // document.querySelectorAll('.add-datatable').forEach((el) => el.addEventListener('click', this._onAddRowClick.bind(this)));
-
-    // Listener for delete buttons
+    
     document.querySelectorAll('.delete-datatable').forEach((el) => el.addEventListener('click', this._onDeleteClick.bind(this)));
 
     // Listener for edit button
@@ -202,17 +196,7 @@
     const pageLength = this._datatable.page.len();
     document.querySelector('.dataTables_scrollBody').style.height = this._staticHeight * pageLength + 'px';
   }
-
-  // // Add or edit button inside the modal click
-  // _addEditFromModalClick(event) {
-  //   if (this._currentState === 'add') {
-  //     this._addNewRowFromModal();
-  //   } else {
-  //     this._editRowFromModal();
-  //   }
-  //   this._addEditModal.hide();
-  // }
-
+  
   // Top side edit icon click
   _onEditButtonClick(event) {
     if (event.currentTarget.classList.contains('disabled')) {
@@ -228,57 +212,12 @@
     this._setForm();
   }
 
-  // Edit button inside th modal click
-  // _editRowFromModal() {
-  //   const data = this._rowToEdit.data();
-  //   const formData = Object.assign(data, this._getFormData());
-  //   this._datatable.row(this._rowToEdit).data(formData).draw();
-  //   this._datatableExtend.unCheckAllRows();
-  //   this._datatableExtend.controlCheckAll();
-  // }
-
-  // Add button inside th modal click
-  // _addNewRowFromModal() {
-  //   const data = this._getFormData();
-  //   this._datatable.row.add(data).draw();
-  //   this._datatableExtend.unCheckAllRows();
-  //   this._datatableExtend.controlCheckAll();
-  // }
-
   // Delete icon click
   _onDeleteClick() {
     const selected = this._datatableExtend.getSelectedRows();
     selected.remove().draw();
     this._datatableExtend.controlCheckAll();
   }
-
-  // // + Add New or just + button from top side click
-  // _onAddRowClick() {
-  //   this._showModal('add', 'Formulir Permintaan Gambar', 'Kirim');
-  // }
-
-  // Showing modal for an objective, add or edit
-  // _showModal(objective, title, button) {
-  //   this._addEditModal.show();
-  //   this._currentState = objective;
-  //   document.getElementById('modalTitle').innerHTML = title;
-  //   document.getElementById('addEditConfirmButton').innerHTML = button;
-  // }
-
-  // Filling the modal form data
-
-  // _setForm() {
-  //   const data = this._rowToEdit.data();
-  //   document.querySelector('#addEditModal input[name=Name]').value = data.Name;
-  //   document.querySelector('#addEditModal input[name=Sales]').value = data.Sales;
-  //   document.querySelector('#addEditModal input[name=Stock]').value = data.Stock;
-  //   if (document.querySelector('#addEditModal ' + 'input[name=Category][value="' + data.Category + '"]')) {
-  //     document.querySelector('#addEditModal ' + 'input[name=Category][value="' + data.Category + '"]').checked = true;
-  //   }
-  //   if (document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]')) {
-  //     document.querySelector('#addEditModal ' + 'input[name=Tag][value="' + data.Tag + '"]').checked = true;
-  //   }
-  // }
 
   // Filling the modal form data
   _setForm() {
@@ -309,66 +248,63 @@
   
       return format;
     }
-
+    
+    document.querySelector('.idPermintaan').innerHTML = data.id_permintaan;
     document.querySelector('.previewLink').innerHTML = data.linkPermintaan;
     document.querySelector('.previewJudul').innerHTML = data.judulPermintaan;
-    document.querySelector('.previewKegunaan').innerHTML = data.kegunaan.kegunaan;
+
+    if (data.idKegunaan == 4) {
+      document.querySelector('.previewKegunaan').innerHTML = data.kegunaan_lainnya;
+    } else {
+      document.querySelector('.previewKegunaan').innerHTML = data.kegunaan.kegunaan;
+    }
+
     document.querySelector('.previewWaktu').innerHTML = dateFormat(data.created_at,'dd MM yyyy');
     document.querySelector('.previewStatus').innerHTML = data.status.status;
-
 
     //--Alasan Ditolak Start
     let alasanTolak;
       switch (data.idStatus) {
         case 2:
-        alasanTolak =   
+        alasanTolak =  
           '<div class="row mb-3">'+
-              '<label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Alasan Ditolak</label>'+
-              '<div class="col-sm-10">'+
-                  '<label class=" col-sm-12 col-form-label">'+
-                    data.alasanDitolak +
-                  '</label>  '+            
+              '<div class="font-weight-bold col-sm-3 col-form-label">'+
+                  '<div class="d-flex flex-row-reverse text-info">Alasan Ditolak :</div>'+
               '</div>'+
-          '</div>'
+              '<div class="col-sm-9">'+
+                  '<div class="col-sm-12 col-form-label card no-shadow">'+
+                    data.alasanDitolak +
+                  '</div>'+
+              '</div>'+
+          '</div> '
+          document.querySelector('.previewAlasanTolak').innerHTML = alasanTolak;
+
           break;
         default:
           alasanTolak = "";
           break;
       }
-    
 
+      
     let downloadButton;
       switch (data.idStatus) {
         case 3:
-          downloadButton =  '<a class="btn btn-sm btn-icon btn-primary"'+
-                                    'data-bs-toggle="tooltip"'+
-                                    'title="Download Gambar"'+
-                                    'href="'+ data.gambar.path +'">'+
-                                '<i data-acorn-icon="download"></i> Download'+
-                            '</a>';
+          downloadButton = 
+          '<div class="row mb-3">'+
+                    '<div class="font-weight-bold col-sm-3 col-form-label">'+
+                        '<div class="d-flex flex-row-reverse text-info"> Link Gambar : </div>'+
+                    '</div>'+
+                    '<div class="col-sm-9">'+
+                        '<a class="btn btn-outline-primary" href="/'+data.gambar.path +'" download="'+data.gambar.nama_gambar+'"><i data-acorn-icon="download" data-acorn-size="16"></i> Download Gambar</a>'+
+                    '</div>'+
+          '</div>'
+          document.querySelector('.tombolDownload').innerHTML = downloadButton;
           break;
         default:
           downloadButton = "";
           break;
       }
-    document.querySelector('.tombolDownload').innerHTML = downloadButton;
   }
-
-  // Getting form values from the fields to pass to datatable
-  // _getFormData() {
-  //   const data = {};
-  //   data.Name = document.querySelector('#addEditModal input[name=Name]').value;
-  //   data.Sales = document.querySelector('#addEditModal input[name=Sales]').value;
-  //   data.Stock = document.querySelector('#addEditModal input[name=Stock]').value;
-  //   data.Category = document.querySelector('#addEditModal input[name=Category]:checked')
-  //     ? document.querySelector('#addEditModal input[name=Category]:checked').value || ''
-  //     : '';
-  //   data.Tag = document.querySelector('#addEditModal input[name=Tag]:checked')
-  //     ? document.querySelector('#addEditModal input[name=Tag]:checked').value || ''
-  //     : '';
-  //   data.Check = '';
-  //   return data;
-  // }
 
   // Clearing modal form
   _clearModalForm() {
@@ -440,19 +376,6 @@
       },
     };
     jQuery(form).validate(validateOptions);
-
-    // form.addEventListener('submit', (event) => {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    //   if (jQuery(form).valid()) {
-    //     const formValues = {
-    //       email: form.querySelector('[name="registerEmail"]').value,
-    //       password: form.querySelector('[name="registerPassword"]').value,
-    //       name: form.querySelector('[name="registerName"]').value,
-    //     };
-    //     console.log(formValues);
-    //     return;
-    //   }
-    // });
+    
   }
 }

@@ -21,7 +21,7 @@
 
 
 @section('js_page')
-    <script src="/js/cs/datatable.extend.js"></script>
+    <script src="/js/cs/datatable_permintaan.extend.js"></script>
     <script src="/js/permintaan/datatable.permintaangambar.js"></script>
 @endsection
 
@@ -45,10 +45,10 @@
                             <section class="scroll-section" id="default">
                                 <!-- Button Trigger -->
                                 <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" 
-                                data-bs-toggle="modal"        
-                                data-bs-target="#addEditModal">
-                                    <i data-acorn-icon="plus"></i>
-                                    <span>Tambah Baru</span>
+                                    data-bs-toggle="modal"        
+                                    data-bs-target="#addEditModal">
+                                        <i data-acorn-icon="plus"></i>
+                                        <span>Tambah Baru</span>
                                 </button>
                             </section>
                             <!-- Default End -->
@@ -111,32 +111,6 @@
 
                         <div class="col-sm-12 col-md-7 col-lg-9 col-xxl-10 text-end mb-1">
                             <div class="d-inline-block me-0 me-sm-3 float-start float-md-none">
-
-                                <!-- Edit Button Start -->
-                                <!-- <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow edit-datatable disabled"
-                                        data-bs-delay="0"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Edit"
-                                        type="button"
-                                >
-                                    <i data-acorn-icon="edit"></i>
-                                </button> -->
-                                <!-- Edit Button End -->
-
-                                <!-- Delete Button Start -->
-                                <!-- <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow disabled delete-datatable"
-                                        data-bs-delay="0"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Delete"
-                                        type="button"
-                                >
-                                    <i data-acorn-icon="bin"></i>
-                                </button> -->
-                                <!-- Delete Button End -->
                             </div>
                             <div class="d-inline-block">
                                 <!-- Print Button Start -->
@@ -156,15 +130,15 @@
                                 <!-- Export Dropdown Start -->
                                 <div class="d-inline-block datatable-export" data-datatable="#datatablePermintaanGambar">
                                     <button class="btn p-0" data-bs-toggle="dropdown" type="button" data-bs-offset="0,3">
-                  <span
-                          class="btn btn-icon btn-icon-only btn-foreground-alternate shadow dropdown"
-                          data-bs-delay="0"
-                          data-bs-placement="top"
-                          data-bs-toggle="tooltip"
-                          title="Export"
-                  >
-                    <i data-acorn-icon="download"></i>
-                  </span>
+                                    <span
+                                            class="btn btn-icon btn-icon-only btn-foreground-alternate shadow dropdown"
+                                            data-bs-delay="0"
+                                            data-bs-placement="top"
+                                            data-bs-toggle="tooltip"
+                                            title="Export"
+                                    >
+                                        <i data-acorn-icon="download"></i>
+                                    </span>
                                     </button>
                                     <div class="dropdown-menu shadow dropdown-menu-end">
                                         <button class="dropdown-item export-copy" type="button">Copy</button>
@@ -262,7 +236,7 @@
                     <div class="modal-dialog modal-lg rounded">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title font-weight-bold" id="modalTitle">ID Permintaan Gambar: </h5>
+                                <h5 class="modal-title font-weight-bold" id="modalTitle">ID Permintaan Gambar: #<span class="idPermintaan"></span></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">

@@ -188,4 +188,19 @@ class PetugasController extends Controller
 
         return redirect()->route('petugas.pengaturan');
     }
+
+    private function cek_link($link)
+    {   
+        $result=3;
+        $parse = parse_url($link);
+        if (str_contains($parse['host'], 'shutterstock')) { 
+            $result=2;
+        }
+
+        if (str_contains($parse['host'], 'freepik')) { 
+            $result=1;
+        }
+
+        return $result;
+    }
 }
