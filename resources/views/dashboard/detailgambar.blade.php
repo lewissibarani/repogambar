@@ -1,7 +1,7 @@
 @php
     $html_tag_data = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
     $title = 'Detail Gambar';
-    $heading = 'Fresh fruit and veg stall';
+    $heading = $Data->judul;
     $description = 'Blog Detail';
     $user='Ayu Kartika';
     $userSatker='BPS Provinsi Sulawesi Utara';

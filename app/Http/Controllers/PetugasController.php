@@ -14,31 +14,123 @@ use App\Models\User_Petugas;
 
 class PetugasController extends Controller
 {
-    private function image_resize($file_name, $width, $height, $crop=FALSE) {
-        list($wid, $ht) = getimagesize($file_name);
-        $r = $wid / $ht;
-        if ($crop) {
-           if ($wid > $ht) {
-              $wid = ceil($wid-($width*abs($r-$width/$height)));
-           } else {
-              $ht = ceil($ht-($ht*abs($r-$w/$h)));
-           }
-           $new_width = $width;
-           $new_height = $height;
-        } else {
-           if ($width/$height > $r) {
-              $new_width = $height*$r;
-              $new_height = $height;
-           } else {
-              $new_height = $width/$r;
-              $new_width = $width;
-           }
+        // Link image type to correct image loader and saver
+    // - makes it easier to add additional types later on
+    // - makes the function easier to read
+    const IMAGE_HANDLERS = [
+        IMAGETYPE_JPEG => [
+            'load' => 'imagecreatefromjpeg',
+            'save' => 'imagejpeg',
+            'quality' => 100
+        ],
+        IMAGETYPE_PNG => [
+            'load' => 'imagecreatefrompng',
+            'save' => 'imagepng',
+            'quality' => 0
+        ],
+        IMAGETYPE_GIF => [
+            'load' => 'imagecreatefromgif',
+            'save' => 'imagegif',
+            'quality' => 0 
+        ]
+    ];
+
+    public function createThumbnail($src, $dest, $targetWidth, $targetHeight = null) {
+
+        // 1. Load the image from the given $src
+        // - see if the file actually exists
+        // - check if it's of a valid image type
+        // - load the image resource
+    
+        // get the type of the image
+        // we need the type to determine the correct loader
+        $type = exif_imagetype($src);
+    
+        // if no valid type or no handler found -> exit
+        if (!$type || !self::IMAGE_HANDLERS[$type]) {
+            return null;
         }
-        $source = imagecreatefromjpeg($file_name);
-        $dst = imagecreatetruecolor($new_width, $new_height);
-        image_copy_resampled($dst, $source, 0, 0, 0, 0, $new_width, $new_height, $wid, $ht);
-        return $dst;
-     }
+    
+        // load the image with the correct loader
+        $image = call_user_func(self::IMAGE_HANDLERS[$type]['load'], $src);
+    
+        // no image found at supplied location -> exit
+        if (!$image) {
+            return null;
+        }
+    
+    
+        // 2. Create a thumbnail and resize the loaded $image
+        // - get the image dimensions
+        // - define the output size appropriately
+        // - create a thumbnail based on that size
+        // - set alpha transparency for GIFs and PNGs
+        // - draw the final thumbnail
+    
+        // get original image width and height
+        $width = imagesx($image);
+        $height = imagesy($image);
+    
+        // maintain aspect ratio when no height set
+        if ($targetHeight == null) {
+    
+            // get width to height ratio
+            $ratio = $width / $height;
+    
+            // if is portrait
+            // use ratio to scale height to fit in square
+            if ($width > $height) {
+                $targetHeight = floor($targetWidth / $ratio);
+            }
+            // if is landscape
+            // use ratio to scale width to fit in square
+            else {
+                $targetHeight = $targetWidth;
+                $targetWidth = floor($targetWidth * $ratio);
+            }
+        }
+    
+        // create duplicate image based on calculated target size
+        $thumbnail = imagecreatetruecolor($targetWidth, $targetHeight);
+    
+        // set transparency options for GIFs and PNGs
+        if ($type == IMAGETYPE_GIF || $type == IMAGETYPE_PNG) {
+    
+            // make image transparent
+            imagecolortransparent(
+                $thumbnail,
+                imagecolorallocate($thumbnail, 0, 0, 0)
+            );
+    
+            // additional settings for PNGs
+            if ($type == self::IMAGETYPE_PNG) {
+                imagealphablending($thumbnail, false);
+                imagesavealpha($thumbnail, true);
+            }
+        }
+    
+        // copy entire source image to duplicate image and resize
+        imagecopyresampled(
+            $thumbnail,
+            $image,
+            0, 0, 0, 0,
+            $targetWidth, $targetHeight,
+            $width, $height
+        );
+    
+    
+        // 3. Save the $thumbnail to disk
+        // - call the correct save method
+        // - set the correct quality level
+    
+        // save the duplicate version of the image to disk
+        return call_user_func(
+            self::IMAGE_HANDLERS[$type]['save'],
+            $thumbnail,
+            $dest,
+            self::IMAGE_HANDLERS[$type]['quality']
+        );
+    }
 
     private function convertArray($array)
     {
@@ -82,8 +174,7 @@ class PetugasController extends Controller
             $file-> move(public_path('img/uploadedGambar/'), $filename);
 
             //Membuat thumbnail
-            $img_to_resize = image_resize(public_path('img/uploadedGambar/'.$filename), 250, 250);
-            $img_to_resize-> move(public_path('img/thumbnail/'), $filename);
+            $this->createThumbnail(public_path('img/uploadedGambar/').$filename, public_path('img/thumbnail/').$filename, 300);
         }
         
         $gambars=Gambar::create([
@@ -92,6 +183,7 @@ class PetugasController extends Controller
             'idKegunaan' => $request->idKegunaan,
             'idUser' => Auth::id(),
             'path' =>'img/uploadedGambar/'.$filename,
+            'thumbnail_path' =>'img/thumbnail/'.$filename,
             'metadata' =>'',
             'nama_gambar' =>$filename,
             'source_id' => $request->source_id
@@ -105,7 +197,7 @@ class PetugasController extends Controller
 
         //merubah status permintaan gambar menjadi selesai
         $permintaan = Transaksi::where('id', $id_permintaan)
-        ->update(['gambar_id' => $request->id,
+        ->update(['gambar_id' => $gambars->id,
                   'idStatus' => 3]);
 
         return redirect()->route('petugas.index');

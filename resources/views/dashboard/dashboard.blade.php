@@ -1,18 +1,24 @@
 @php
     $html_tag_data = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
     $title = 'Beranda';
+    $path = public_path();
     $description = 'Beranda';
     $breadcrumbs = ["/"=>"Home","/Dashboard"=>"Beranda"]
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
 @section('css')
+<link rel="stylesheet" href="/css/vendor/glide.core.min.css"/>
+<link rel="stylesheet" href="/css/vendor/baguetteBox.min.css"/>
 @endsection
 
 @section('js_vendor')
+<script src="/js/cs/scrollspy.js"></script>
+<script src="/js/vendor/baguetteBox.min.js"></script>
 @endsection
 
 @section('js_page')
+<script src="/js/pages/blocks.gallery.js"></script>
 @endsection
 
 @section('content')
@@ -61,32 +67,14 @@
             <div class="col-12 col-xl-8 col-xxl-9 mb-5">
                 <!-- Grid Start -->
                 <h2 class="small-title">Karya Favorit</h2>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-2 mb-5">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 gallery g-2 mb-5">
                     @foreach ($Data as $datas)
                         <div class="col">
-                            <div class="card h-100">
-                                <img src="{{$datas->path}}" class="card-img-top sh-19" alt="card image" />
-                                <div class="card-body">
-                                    <h5 class="heading mb-3">
-                                        <a href="/Dashboard/DetailGambar" class="body-link stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">{{$datas->judul}}</span>
-                                        </a>
-                                    </h5>
-                                    <div>
-                                        <div class="row g-0">
-                                            <div class="col-auto pe-3">
-                                                <i data-acorn-icon="heart" class="text-primary me-1" data-acorn-size="15"></i>
-                                                <span class="align-middle">34</span>
-                                            </div>
-                                            <div class="col">
-                                                <i data-acorn-icon="user" class="text-primary me-1" data-acorn-size="15"></i>
-                                                <span class="align-middle">{{$datas->source->sumber_gambar}}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <a href="/DetailGambar/{{$datas->id}}" class="card hover-img-scale-up">
+                                <img class="card-img sh-25 scale" src="{{$datas->thumbnail_path}}" alt="card image" />
+                            </a>
                         </div>
+
                     @endforeach
                 </div>
                 <!-- Grid End -->

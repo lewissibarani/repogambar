@@ -45,8 +45,13 @@ class DashboardsController extends Controller
         return view('dashboard.hasilpencarian');
     }
 
-    public function viewGambar(Request $request)
+    public function viewGambar ($gambar_id)
     {
-        return view('dashboard.detailgambar');
+
+        $Data = Gambar::with('user','source','kegunaan')->where('id',$gambar_id)->first();
+        return view('dashboard.detailgambar', 
+        compact(['Data'
+            ]));
+        
     }
 }

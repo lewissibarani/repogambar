@@ -1,0 +1,1 @@
+12 Aug 2022 menambahkan = extension=php_gd.dll di Xampp php.ini

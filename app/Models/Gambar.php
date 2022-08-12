@@ -15,6 +15,7 @@ class Gambar extends Model
         'judul',
         'link',
         'path',
+        'thumbnail_path',
         'idKegunaan',
         'idUser',
         'metadata',
