@@ -37,9 +37,6 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-// Route::view('/Horizontal', 'horizontal');
-// Route::view('/Vertical', 'vertical');
-
 Route::prefix('KelolaGambar')->group(function () {
     Route::get('/', [KelolaGambarController::class, 'index'])->name('kelolagambar.index');
     Route::get('Index',[KelolaGambarController::class, 'index'])->name('kelolagambar.index');
@@ -47,11 +44,9 @@ Route::prefix('KelolaGambar')->group(function () {
     // Route::view('Update', 'kelolagambar/update');
 });
 
-Route::prefix('PembagianTugas')->group(function () {
+Route::prefix('Statistik')->group(function () {
     Route::get('/', [BagiTugasController::class, 'index'])->name('bagipetugas.index');
     Route::get('Index',[BagiTugasController::class, 'index'])->name('bagipetugas.index');
-    Route::post('Store', [BagiTugasController::class, 'store'])->name('bagipetugas.store');
-    Route::get('DaftarTugas',[BagiTugasController::class, 'getdaftarpembagiantugas'])->name('bagipetugas.daftar_tugas');
 });
 
 Route::prefix('Petugas')->group(function () {
@@ -59,10 +54,13 @@ Route::prefix('Petugas')->group(function () {
     Route::get('Index',[PetugasController::class, 'index'])->name('petugas.index');
     Route::get('/transaksi/{transaksi_id}/permintaan/{permintaan_id}', [PetugasController::class, 'layani'])->name('petugas.layani');
     Route::get('/Transaksi_tolak/{transaksi_id}/Permintaan_tolak/{permintaan_id}', [PetugasController::class, 'layani_tolak'])->name('petugas.layani_tolak');
+    Route::get('Pengaturan',[PetugasController::class, 'pengaturan'])->name('petugas.pengaturan');
+
 
     Route::post('Store', [PetugasController::class, 'store'])->name('petugas.store');
     Route::post('Tolak', [PetugasController::class, 'store'])->name('petugas.tolak');
-    
+    Route::post('Tambah', [PetugasController::class, 'tambah'])->name('petugas.tambah');
+
     Route::view('Contoh','petugas/contoh');
 });
 

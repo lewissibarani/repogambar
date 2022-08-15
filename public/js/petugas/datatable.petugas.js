@@ -52,7 +52,7 @@
         sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
         pageLength: 10,
         columns: [{data: function ( row, type, val, meta ) {
-          val = '#'+row.permintaan.user.kodesatker + row.permintaan.id ;
+          val = '#'+row.permintaan.id_permintaan ;
           return val;
           }
         }, {data: 'permintaan.user.name'}, { data: 'permintaan.user.satker'},{ data: 'permintaan.linkPermintaan'},{data: 'Aksi'}],

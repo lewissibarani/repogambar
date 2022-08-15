@@ -9,9 +9,36 @@ use App\Models\Gambar;
 use App\Models\PembagianTugas;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Source;
+use App\Models\User;
+use App\Models\User_Petugas;
 
 class PetugasController extends Controller
 {
+    private function image_resize($file_name, $width, $height, $crop=FALSE) {
+        list($wid, $ht) = getimagesize($file_name);
+        $r = $wid / $ht;
+        if ($crop) {
+           if ($wid > $ht) {
+              $wid = ceil($wid-($width*abs($r-$width/$height)));
+           } else {
+              $ht = ceil($ht-($ht*abs($r-$w/$h)));
+           }
+           $new_width = $width;
+           $new_height = $height;
+        } else {
+           if ($width/$height > $r) {
+              $new_width = $height*$r;
+              $new_height = $height;
+           } else {
+              $new_height = $width/$r;
+              $new_width = $width;
+           }
+        }
+        $source = imagecreatefromjpeg($file_name);
+        $dst = imagecreatetruecolor($new_width, $new_height);
+        image_copy_resampled($dst, $source, 0, 0, 0, 0, $new_width, $new_height, $wid, $ht);
+        return $dst;
+     }
 
     private function convertArray($array)
     {
@@ -53,7 +80,10 @@ class PetugasController extends Controller
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
             $file-> move(public_path('img/uploadedGambar/'), $filename);
-           
+
+            //Membuat thumbnail
+            $img_to_resize = image_resize(public_path('img/uploadedGambar/'.$filename), 250, 250);
+            $img_to_resize-> move(public_path('img/thumbnail/'), $filename);
         }
         
         $gambars=Gambar::create([
@@ -136,5 +166,41 @@ class PetugasController extends Controller
         
     }
 
-    
+    public function pengaturan ()
+    {
+        $User = User::all();
+        $User_Petugas = User_Petugas::with('users')->get();
+        return view('petugas.pengaturan', 
+        compact(['User','User_Petugas'
+            ]));
+    }
+
+    public function tambah (Request $request)
+    {
+        $this->validate($request, [
+            'users_id' => 'required|unique:users_petugas,users_id',
+        ]);
+
+        $gambars=User_Petugas::create([
+            'users_id' =>$request->users_id,
+            'aktif' => 1
+        ]);
+
+        return redirect()->route('petugas.pengaturan');
+    }
+
+    private function cek_link($link)
+    {   
+        $result=3;
+        $parse = parse_url($link);
+        if (str_contains($parse['host'], 'shutterstock')) { 
+            $result=2;
+        }
+
+        if (str_contains($parse['host'], 'freepik')) { 
+            $result=1;
+        }
+
+        return $result;
+    }
 }

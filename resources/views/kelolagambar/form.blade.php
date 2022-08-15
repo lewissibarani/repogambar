@@ -20,7 +20,7 @@
     <div class="row mb-3">
         <label for="inputState" class="col-sm-3 col-form-label">Jenis Penggunaan</label>
         <div class="col-sm-9">
-            <select id="inputState" class="form-select" name="idkegunaan">
+            <select id="inputState" class="form-select" name="idkegunaan" onchange="showDiv('hidden_div', this)">
                 <option selected>Pilih...</option>
                 @foreach ($Kegunaan as $kegunaan)
                     <option value="{{ $kegunaan->id }}">{{ $kegunaan->kegunaan }}</option> 
@@ -28,10 +28,12 @@
             </select>
         </div>
     </div>
-    <div class="row mb-3">
-        <label for="colFormLabel" class="col-sm-3 col-form-label">Lainnya</label>
-        <div class="col-sm-9">
-            <textarea class="form-control" id="colFormLabel"></textarea>
+    <div id="hidden_div" style="display:none;">
+        <div class="row mb-3">
+            <label for="colFormLabel" class="col-sm-3 col-form-label">Lainnya</label>
+            <div class="col-sm-9">
+                <textarea class="form-control" rows="4" id="colFormLabel" name="kegunaan_lainnya"></textarea>
+            </div>
         </div>
     </div>
 </section>

@@ -52,75 +52,77 @@
                 Tuliskan alasan penolakan permintaan gambar dengan jelas.
             </div>
 
-<div class="row">
-    <div class="col-12">
-        <div class="card-body">
-            <form id="petugasModalForm" action="{{route('petugas.tolak')}}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @error('alasanDitolak')
-                <div class="alert alert-danger" role="alert">
-                    {{$message}}
-                </div>
-                @enderror
+        <div class="row">
+            <div class="col-12">
+                <div class="card-body">
+                    <form id="petugasModalForm" action="{{route('petugas.tolak')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @error('alasanDitolak')
+                        <div class="alert alert-danger" role="alert">
+                            {{$message}}
+                        </div>
+                        @enderror
 
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>
-                    <div class="col-sm-10">
-                        <label class=" col-sm-12 col-form-label">
-                            {{$Data->permintaan->judulPermintaan}}
-                        </label>      
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Link</label>
-                    <div class="col-sm-10">
-                    <label class=" col-sm-12 col-form-label">
-                        <a href ="{{$Data->permintaan->linkPermintaan}}" target="_blank" rel="noopener noreferrer" > {{$Data->permintaan->linkPermintaan}}</a>
-                        <input type="hidden" value="{{$Data->permintaan->linkPermintaan}}" class="form-control" name="link" />   
-                    </label>                  
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Tanggal Permintaan</label>
-                    <div class="col-sm-10">
-                        <label class=" col-sm-12 col-form-label">
-                        {{date_format($Data->permintaan->created_at,"d M Y")}}
-                        </label>                  
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Penggunaan</label>
-                    <div class="col-sm-10">
-                        <label class=" col-sm-12 col-form-label">
-                        {{ $Data->permintaan->kegunaan->kegunaan }}
-                            <input type="hidden" value="{{ $Data->permintaan->kegunaan->kegunaan }}" class="form-control" name="idKegunaan" />  
-                        </label>               
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Status</label>
-                    <div class="col-sm-10">
-                        <label class=" col-sm-2 col-form-label">
-                            <?php echo $Data->permintaan->status->status ?>
-                        </label>              
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="font-weight-bold col-sm-2 col-form-label">Alasan Ditolak</label>
-                    <div class="col-sm-10">
-                        <textarea rows="4" class="form-control" id="" name="alasanDitolak"> </textarea>          
-                    </div>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
-                </div>
+                        <div class="row mb-3">
+                            <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>
+                            <div class="col-sm-10">
+                                <label class=" col-sm-12 col-form-label">
+                                    {{$Data->permintaan->judulPermintaan}}
+                                </label>      
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="font-weight-bold col-sm-2 col-form-label">Link</label>
+                            <div class="col-sm-10">
+                            <label class=" col-sm-12 col-form-label">
+                                <a href ="{{$Data->permintaan->linkPermintaan}}" target="_blank" rel="noopener noreferrer" > {{$Data->permintaan->linkPermintaan}}</a>
+                                <input type="hidden" value="{{$Data->permintaan->linkPermintaan}}" class="form-control" name="link" />   
+                            </label>                  
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="font-weight-bold col-sm-2 col-form-label">Tanggal Permintaan</label>
+                            <div class="col-sm-10">
+                                <label class=" col-sm-12 col-form-label">
+                                {{date_format($Data->permintaan->created_at,"d M Y")}}
+                                </label>                  
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="font-weight-bold col-sm-2 col-form-label">Penggunaan</label>
+                            <div class="col-sm-10">
+                                <label class=" col-sm-12 col-form-label">
+                                {{ $Data->permintaan->kegunaan->kegunaan }}
+                                    <input type="hidden" value="{{ $Data->permintaan->kegunaan->kegunaan }}" class="form-control" name="idKegunaan" />  
+                                </label>               
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="font-weight-bold col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-10">
+                                <label class=" col-sm-2 col-form-label">
+                                    <?php echo $Data->permintaan->status->status ?>
+                                </label>              
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="font-weight-bold col-sm-2 col-form-label">Alasan Ditolak</label>
+                            <div class="col-sm-10">
+                                <textarea rows="4" class="form-control" id="" name="alasanDitolak"> </textarea>          
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
+                        </div>
 
-             </form>
-            
+                    </form>
+                    
+                </div>
             </div>
         </div>
         <!-- Content End -->
     </div>
-@endsection
+
+    @endsection

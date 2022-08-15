@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Kegunaan;
 use App\Models\Transaksi;
 use App\Models\PembagianTugas;
+use App\Models\User_Petugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class KelolaGambarController extends Controller
@@ -52,23 +54,62 @@ class KelolaGambarController extends Controller
     public function store(Request $request)
     {
         $idpeminta= Auth::id();
+
+        //---start proses pemberian id permintaan
+        $kodesatker = Auth::user()->kodesatker;
+        $digiterakhir_idpermintaan= $this->pemberian_id_permintaan($kodesatker);
+        $id_permintaan = $kodesatker.$digiterakhir_idpermintaan;
+        //---end proses pemberian id permintaan
+
         $request->validate([
             'judulPermintaan' => ['required'],
             'linkPermintaan' => ['required'],
             'idkegunaan' => ['required'],
         ]);
+
         $create_transaksi=Transaksi::create([
             'judulPermintaan' => $request->judulPermintaan,
             'linkPermintaan' => $request->linkPermintaan,
             'idKegunaan' => $request->idkegunaan,
             'idUserPeminta' => $idpeminta,
-            'idStatus' => 1
+            'idStatus' => 1,
+            'kegunaan_lainnya' => $request->kegunaan_lainnya,
+            'id_permintaan' => $id_permintaan
         ]);
+        
+        //start of distribusi petugas
+        $petugas = User_Petugas::where('aktif',1)->orderBy('updated_at', 'asc')->first();
+        $count_task = $petugas->count_task +1;
+        $petugas->update(['count_task' => $count_task]);
+        $petugas_id=$petugas->users_id;
+
         PembagianTugas::create([
             'permintaan_id' => $create_transaksi->id,
-            'seenboolean' => '0'
+            'seenboolean' => '0',
+            'user_id' =>$petugas_id,
         ]);
+        //end of distribusi tugas
+        
         return redirect()->route('kelolagambar.index')->withStatus(__('Permintaan Berhasil Dibuat.'));
+    }
+
+    private function pemberian_id_permintaan($kodesatker)
+    {   
+        $lastnumber=0;
+        $permintaan = Transaksi::where(DB::raw('substr(id_permintaan, 1, 4)'), '=' , $kodesatker)->latest("id")->first();
+        if($permintaan!=null)
+        {
+            $lastnumber_2 = $permintaan->id_permintaan;
+            $sisa_digit_terakhir = substr($lastnumber_2, 4);
+            $lastnumber = $sisa_digit_terakhir +1;
+        }
+
+        return $lastnumber;
+    }
+
+    private function distribusiTugas($permintaan_baru)
+    {
+        // $permintaan_baru = 
     }
 
     /**

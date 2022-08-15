@@ -50,7 +50,7 @@ class RegisteredUserController extends Controller
             'nohp' => $request->nohp,
             'kodesatker' => $request->kodesatker,
             'satker' => $request->satker,
-            'level' => '0',
+            'level' => '4',
         ]);
         event(new Registered($user));
 

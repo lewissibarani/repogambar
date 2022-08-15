@@ -24,7 +24,7 @@ class DashboardsController extends Controller
      */
     public function dashboard()
     {
-        $Data = Gambar::with('user','transaksi','kegunaan','source')
+        $Data = Gambar::with('user','kegunaan','source')
         ->get();
 
         return view('dashboard.dashboard',

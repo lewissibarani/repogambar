@@ -8,6 +8,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/vendor/datatables.min.css"/>
+    <link rel="stylesheet" href="/css/main.css"/>
 @endsection
 
 @section('js_vendor')
@@ -20,7 +21,7 @@
 
 
 @section('js_page')
-    <script src="/js/cs/datatable.extend.js"></script>
+    <script src="/js/cs/datatable_permintaan.extend.js"></script>
     <script src="/js/permintaan/datatable.permintaangambar.js"></script>
 @endsection
 
@@ -44,10 +45,10 @@
                             <section class="scroll-section" id="default">
                                 <!-- Button Trigger -->
                                 <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" 
-                                data-bs-toggle="modal"        
-                                data-bs-target="#addEditModal">
-                                    <i data-acorn-icon="plus"></i>
-                                    <span>Tambah Baru</span>
+                                    data-bs-toggle="modal"        
+                                    data-bs-target="#addEditModal">
+                                        <i data-acorn-icon="plus"></i>
+                                        <span>Tambah Baru</span>
                                 </button>
                             </section>
                             <!-- Default End -->
@@ -97,7 +98,7 @@
                         <!-- Search Start -->
                         <div class="col-sm-12 col-md-5 col-lg-3 col-xxl-2 mb-1">
                             <div class="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
-                                <input class="form-control datatable-search" placeholder="Search" data-datatable="#datatableRowsAjax" />
+                                <input class="form-control datatable-search" placeholder="Search" data-datatable="#datatablePermintaanGambar" />
                                 <span class="search-magnifier-icon">
                 <i data-acorn-icon="search"></i>
               </span>
@@ -110,39 +111,13 @@
 
                         <div class="col-sm-12 col-md-7 col-lg-9 col-xxl-10 text-end mb-1">
                             <div class="d-inline-block me-0 me-sm-3 float-start float-md-none">
-
-                                <!-- Edit Button Start -->
-                                <!-- <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow edit-datatable disabled"
-                                        data-bs-delay="0"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Edit"
-                                        type="button"
-                                >
-                                    <i data-acorn-icon="edit"></i>
-                                </button> -->
-                                <!-- Edit Button End -->
-
-                                <!-- Delete Button Start -->
-                                <!-- <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow disabled delete-datatable"
-                                        data-bs-delay="0"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Delete"
-                                        type="button"
-                                >
-                                    <i data-acorn-icon="bin"></i>
-                                </button> -->
-                                <!-- Delete Button End -->
                             </div>
                             <div class="d-inline-block">
                                 <!-- Print Button Start -->
                                 <!-- <button
                                         class="btn btn-icon btn-icon-only btn-foreground-alternate shadow datatable-print"
                                         data-bs-delay="0"
-                                        data-datatable="#datatableRowsAjax"
+                                        data-datatable="#datatablePermintaanGambar"
                                         data-bs-toggle="tooltip"
                                         data-bs-placement="top"
                                         title="Print"
@@ -153,17 +128,17 @@
                                 <!-- Print Button End -->
 
                                 <!-- Export Dropdown Start -->
-                                <div class="d-inline-block datatable-export" data-datatable="#datatableRowsAjax">
+                                <div class="d-inline-block datatable-export" data-datatable="#datatablePermintaanGambar">
                                     <button class="btn p-0" data-bs-toggle="dropdown" type="button" data-bs-offset="0,3">
-                  <span
-                          class="btn btn-icon btn-icon-only btn-foreground-alternate shadow dropdown"
-                          data-bs-delay="0"
-                          data-bs-placement="top"
-                          data-bs-toggle="tooltip"
-                          title="Export"
-                  >
-                    <i data-acorn-icon="download"></i>
-                  </span>
+                                    <span
+                                            class="btn btn-icon btn-icon-only btn-foreground-alternate shadow dropdown"
+                                            data-bs-delay="0"
+                                            data-bs-placement="top"
+                                            data-bs-toggle="tooltip"
+                                            title="Export"
+                                    >
+                                        <i data-acorn-icon="download"></i>
+                                    </span>
                                     </button>
                                     <div class="dropdown-menu shadow dropdown-menu-end">
                                         <button class="dropdown-item export-copy" type="button">Copy</button>
@@ -174,7 +149,7 @@
                                 <!-- Export Dropdown End -->
 
                                 <!-- Length Start -->
-                                <div class="dropdown-as-select d-inline-block datatable-length" data-datatable="#datatableRowsAjax" data-childSelector="span">
+                                <div class="dropdown-as-select d-inline-block datatable-length" data-datatable="#datatablePermintaanGambar" data-childSelector="span">
                                     <button class="btn p-0 shadow" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="0,3">
                   <span
                           class="btn btn-foreground-alternate dropdown-toggle"
@@ -200,7 +175,7 @@
 
                     <!-- Table Start -->
                     <div class="data-table-responsive-wrapper">
-                        <table id="datatableRowsAjax" class="data-table nowrap w-100">
+                        <table id="datatablePermintaanGambar" class="data-table nowrap w-100">
                             <thead>
                             <tr>
                                 <th class="text-muted text-small text-uppercase">ID Permintaan</th>
@@ -260,8 +235,14 @@
                 <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                     <div class="modal-dialog modal-lg rounded">
                         <div class="modal-content">
-                            <div class="">
-                                @include('KelolaGambar.preview')
+                            <div class="modal-header">
+                                <h5 class="modal-title font-weight-bold" id="modalTitle">ID Permintaan Gambar: #<span class="idPermintaan"></span></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="">
+                                    @include('KelolaGambar.preview')
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -272,3 +253,9 @@
         </div>
     </div>
 @endsection
+<script>
+function showDiv(divId, element)
+{
+    document.getElementById(divId).style.display = element.value == 4 ? 'block' : 'none';
+}
+</script>
