@@ -47,11 +47,16 @@ class DashboardsController extends Controller
 
     public function viewGambar ($gambar_id)
     {
-
+        
         $Data = Gambar::with('user','source','kegunaan')->where('id',$gambar_id)->first();
+
+        // Mencari item dengan tag yang sama untuk dijadikan rekomendasi
+        $Rekomendasi= Gambar::withAnyTag($Data->tagNames())->paginate(3);
+
         return view('dashboard.detailgambar', 
-        compact(['Data'
-            ]));
+        compact(['Data',
+                'Rekomendasi'
+                ]));
         
     }
 }

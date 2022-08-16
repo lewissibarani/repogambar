@@ -103,7 +103,7 @@ class PetugasController extends Controller
             );
     
             // additional settings for PNGs
-            if ($type == self::IMAGETYPE_PNG) {
+            if ($type == IMAGETYPE_PNG) {
                 imagealphablending($thumbnail, false);
                 imagesavealpha($thumbnail, true);
             }
@@ -174,7 +174,7 @@ class PetugasController extends Controller
             $file-> move(public_path('img/uploadedGambar/'), $filename);
 
             //Membuat thumbnail
-            $this->createThumbnail(public_path('img/uploadedGambar/').$filename, public_path('img/thumbnail/').$filename, 300);
+            $this->createThumbnail(public_path('img/uploadedGambar/').$filename, public_path('img/thumbnail/').$filename, 400);
         }
         
         $gambars=Gambar::create([

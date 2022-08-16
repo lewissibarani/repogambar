@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard']);
         Route::get('Beranda', [DashboardsController::class, 'dashboard']);
         Route::get('HasilPencarian', [DashboardsController::class, 'hasilPencarian']);
-        Route::get('DetailGambar/{transaksi_id}', [DashboardsController::class, 'viewGambar']);
+        Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar']);
     });
 });
 

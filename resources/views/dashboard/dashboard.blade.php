@@ -67,21 +67,23 @@
             <div class="col-12 col-xl-8 col-xxl-9 mb-5">
                 <!-- Grid Start -->
                 <h2 class="small-title">Karya Favorit</h2>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 gallery g-2 mb-5">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 gallery g-2 mb-5">
                     @foreach ($Data as $datas)
                         <div class="col">
-                            <a href="/DetailGambar/{{$datas->id}}" class="card hover-img-scale-up">
-                                <img class="card-img sh-25 scale" src="{{$datas->thumbnail_path}}" alt="card image" />
+                            <a href="Dashboard/DetailGambar/{{$datas->id}}" class="card hover-img-scale-up">
+                                <img class="card-img sh-25 scale" 
+                                data-original="{{$datas->thumbnail_path}}"
+                                alt="card image" />
                             </a>
                         </div>
-
+                        <!-- src="{{$datas->thumbnail_path}}"  -->
                     @endforeach
                 </div>
                 <!-- Grid End -->
 
                 <div class="row">
                     <div class="col-12 text-center">
-                        <button class="btn btn-xl btn-outline-primary sw-30">Load More</button>
+                        
                     </div>
                 </div>
             </div>
