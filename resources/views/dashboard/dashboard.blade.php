@@ -191,43 +191,13 @@
                     <div class="col-12 col-sm-6 col-xl-12">
                         <h2 class="small-title">Tags</h2>
                         <div class="card mb-5">
+                            
                             <div class="card-body">
+                            @foreach($Tags as $tag)
                                 <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Food (12)</span>
+                                    <span>{{$tag->name}} ({{$tag->count}})</span>
                                 </a>
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Baking (3)</span>
-                                </a>
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Sweet (1)</span>
-                                </a>
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Molding (3)</span>
-                                </a>
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Pastry (5)</span>
-                                </a>
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Healthy (7)</span>
-                                </a>
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Rye (3)</span>
-                                </a>
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Simple (3)</span>
-                                </a>
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Cake (2)</span>
-                                </a>
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Recipe (6)</span>
-                                </a>
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Bread (8)</span>
-                                </a>
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
-                                    <span>Wheat (2)</span>
-                                </a>
+                            @endforeach
                             </div>
                         </div>
                     </div>

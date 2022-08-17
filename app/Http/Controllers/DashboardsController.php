@@ -14,9 +14,11 @@ use SebastianBergmann\Environment\Console;
 use App\Models\Transaksi;
 use App\Models\Gambar;
 use App\Models\PembagianTugas;
+use Conner\Tagging\Model\Tag;
 
 class DashboardsController extends Controller
 {
+   
     /**
      * Display the registration view.
      *
@@ -24,11 +26,15 @@ class DashboardsController extends Controller
      */
     public function dashboard()
     {
+
+        //Menampilkan Tags
+        $Tags= Tag::where('count', '>', 0)->paginate(12);
         $Data = Gambar::with('user','kegunaan','source')
         ->get();
 
         return view('dashboard.dashboard',
-        compact(['Data'
+        compact(['Data',
+                 'Tags'
         ]));
     }
 
