@@ -35,7 +35,7 @@
 
     this._createInstance();
     this._addListeners();
-    this._extend();
+    // this._extend();
     this._initBootstrapModal();
     this._initForm();
   }
