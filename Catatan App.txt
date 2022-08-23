@@ -1,2 +1,9 @@
 12 Aug 2022 menambahkan = extension=php_gd.dll di Xampp php.ini
 Tags System Menggunakan: https://github.com/rtconner/laravel-tagging
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=repogambar
+DB_USERNAME=root
+DB_PASSWORD=
