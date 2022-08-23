@@ -218,7 +218,47 @@
                                     {{$message}}
                                 </div>
                                 @enderror
-                                    @include('KelolaGambar.form')
+
+                                <section class="scroll-section" id="labelSize">
+                                    <div class="row mb-3">
+                                        <label for="colFormLabel" class="col-sm-3 col-form-label">Judul</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="colFormLabel" name="judulPermintaan" />
+                                            <div id="passwordHelpBlock" class="form-text">
+                                                Tuliskan judul gambar yang seuai dengan gambar yang diminta.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="colFormLabel" class="col-sm-3 col-form-label">Link</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Link Shuttertock atau Freepik..." name="linkPermintaan"/>
+                                            <div id="passwordHelpBlock" class="form-text">
+                                                Hanya bisa satu link gambar untuk satu permintaan.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="inputState" class="col-sm-3 col-form-label">Jenis Penggunaan</label>
+                                        <div class="col-sm-9">
+                                            <select id="inputState" class="form-select" name="idkegunaan" onchange="showDiv('hidden_div', this)">
+                                                <option selected>Pilih...</option>
+                                                @foreach ($Kegunaan as $kegunaan)
+                                                    <option value="{{ $kegunaan->id }}">{{ $kegunaan->kegunaan }}</option> 
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div id="hidden_div" style="display:none;">
+                                        <div class="row mb-3">
+                                            <label for="colFormLabel" class="col-sm-3 col-form-label">Lainnya</label>
+                                            <div class="col-sm-9">
+                                                <textarea class="form-control" rows="4" id="colFormLabel" name="kegunaan_lainnya"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
                                 
                             </div>
                             <div class="modal-footer">
@@ -241,7 +281,68 @@
                             </div>
                             <div class="modal-body">
                                 <div class="">
-                                    @include('KelolaGambar.preview')
+                                    
+<div class="row">
+    <div class="col-12">
+        <div class="card-body">
+            
+            <div class="row mb-3">
+                <div class="font-weight-bold col-sm-3 col-form-label">
+                    <div class="d-flex flex-row-reverse text-info">Judul :</div>
+                </div>
+                <div class="col-sm-9">
+                    <label class="col-sm-12 col-form-label">
+                        <span class="previewJudul"></span>
+                    </label>             
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="font-weight-bold col-sm-3 col-form-label">
+                    <div class="d-flex flex-row-reverse text-info">Link :</div>
+                </div>
+                <div class="col-sm-9">
+                    <label class=" col-sm-12 col-form-label">
+                        <span class="previewLink"></span>
+                    </label>                  
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="font-weight-bold col-sm-3 col-form-label">
+                    <div class="d-flex flex-row-reverse text-info">Tanggal Permintaan :</div>
+                </div>
+                <div class="col-sm-9">
+                    <label class=" col-sm-12 col-form-label">
+                        <span class="previewWaktu"></span>
+                    </label>                  
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="font-weight-bold col-sm-3 col-form-label">
+                    <div class="d-flex flex-row-reverse text-info">Kegunaan :</div>
+                </div>
+                <div class="col-sm-9">
+                    <label class=" col-sm-12 col-form-label">
+                        <span class="previewKegunaan"></span>  
+                    </label>               
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="font-weight-bold col-sm-3 col-form-label">
+                    <div class="d-flex flex-row-reverse text-info">Status :</div>
+                </div>
+                <div class="col-sm-9">
+                    <label class=" col-sm-2 col-form-label">
+                        <span class="previewStatus"></span>
+                    </label>              
+                </div>
+            </div>
+                            
+            <span class="previewAlasanTolak"></span>
+        </div>
+    </div>  
+</div> 
+
+
                                 </div>
                             </div>
                         </div>

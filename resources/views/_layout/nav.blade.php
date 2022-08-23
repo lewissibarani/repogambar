@@ -215,11 +215,11 @@
                     <span class="label">Halaman Petugas</span>
                 </a>
                 <ul id="interfaceComponents">
-                            <li>
+                            <!-- <li>
                                 <a href="/Statistik/Index">
                                     <span class="label">Statistik Aplikasi</span>
                                 </a>
-                            </li>
+                            </li> -->
 
                             <li>
                                 <a href="/Petugas/Index">
@@ -235,10 +235,10 @@
                 </ul>
             </li>
             <li>
-                <a href="/Kontribusi">
+                <!-- <a href="/Kontribusi">
                     <i data-acorn-icon="camera" class="icon" data-acorn-size="18"></i>
                     <span class="label">Halaman Kontributor</span>
-                </a>
+                </a> -->
             </li>
         </ul>
     </div>
