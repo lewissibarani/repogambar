@@ -47,7 +47,7 @@
       scrollX: true,
       buttons: ['copy', 'excel', 'csv', 'print'],
       info: false,
-      ajax: '/json/kelolagambar.json',
+      ajax: '/KelolaGambar/DaftarPermintaan',
       order: [], // Clearing default order
       sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
       pageLength: 10,
@@ -55,7 +55,7 @@
           val = '#'+ row.id_permintaan ;
           return val;
           }
-        }, {data: 'kegunaan.kegunaan'}, {data: 'linkPermintaan'}, {data: 'created_at'}, {data: 'Status'}
+        }, {data: 'judulPermintaan'},{data: 'kegunaan.kegunaan'}, {data: 'linkPermintaan'}, {data: 'created_at'}, {data: 'Status'}
       ],
       language: {
         paginate: {
@@ -77,11 +77,24 @@
             return '<a data-bs-toggle="modal" href="#previewModal" data-bs-toggle="modal" data-bs-target="#previewModal"> ' + data + '</a>';
           },
         },
-        // Memotong Tetx agar tidak terlalu panjang
+
         {
-          targets: 2,
+          targets: 1,
           render: function (data) {
-            if (data.length > 5) {
+            if (data.length > 30) {
+              return data.substring(0, 30) + '...';
+           } else {
+              return data;
+           }
+            
+          }
+
+        },
+        // Memotong Text agar tidak terlalu panjang
+        {
+          targets: 3,
+          render: function (data) {
+            if (data.length > 30) {
               return '<a class="" href="'+ data +' " target="_blank" rel="noopener noreferrer">' + data.substring(0, 30) + '...'+ '</a>';
            } else {
               return '<a class="" href="'+ data +' " target="_blank" rel="noopener noreferrer">' + data + '</a>';
@@ -91,7 +104,7 @@
 
         },
         {
-          targets: 3,
+          targets: 4,
           render: function (data) {
 
             function dateFormat(inputDate, format) {
@@ -127,7 +140,7 @@
 
         // Adding Tag content as a span with a badge class
         {
-          targets: 4,
+          targets: 5,
           render: function (data, type, row, meta) {
             
             let downloadButton;

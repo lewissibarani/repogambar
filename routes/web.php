@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('KelolaGambar')->group(function () {
     Route::get('/', [KelolaGambarController::class, 'index'])->name('kelolagambar.index');
     Route::get('Index',[KelolaGambarController::class, 'index'])->name('kelolagambar.index');
+    Route::get('DaftarPermintaan',[KelolaGambarController::class, 'daftar_permintaan']);
     Route::post('Store', [KelolaGambarController::class, 'store'])->name('kelolagambar.store');
     // Route::view('Update', 'kelolagambar/update');
 });
@@ -52,6 +53,8 @@ Route::prefix('Statistik')->group(function () {
 Route::prefix('Petugas')->group(function () {
     Route::get('/', [PetugasController::class, 'index'])->name('petugas.index');
     Route::get('Index',[PetugasController::class, 'index'])->name('petugas.index');
+    Route::get('DaftarTugas',[PetugasController::class, 'daftar_tugas']);
+
     Route::get('/transaksi/{transaksi_id}/permintaan/{permintaan_id}', [PetugasController::class, 'layani'])->name('petugas.layani');
     Route::get('/Transaksi_tolak/{transaksi_id}/Permintaan_tolak/{permintaan_id}', [PetugasController::class, 'layani_tolak'])->name('petugas.layani_tolak');
     Route::get('Pengaturan',[PetugasController::class, 'pengaturan'])->name('petugas.pengaturan');

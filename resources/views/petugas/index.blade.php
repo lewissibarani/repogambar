@@ -91,6 +91,12 @@
                             <!-- Check Button End -->
                         </div>
                         <!-- Top Buttons End -->
+
+                        @if(session()->has('message'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('message') }}
+                                </div>
+                        @endif
                     </div>
                 </div>
                 <!-- Title and Top Buttons End -->

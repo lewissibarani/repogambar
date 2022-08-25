@@ -18,9 +18,10 @@ class Gambar extends Model
         'thumbnail_path',
         'idKegunaan',
         'idUser',
-        'metadata',
+        'ukuran',
         'nama_gambar',
         'source_id',
+        'file_id',
     ];
 
     public function source()
@@ -37,5 +38,10 @@ class Gambar extends Model
     public function user ()
     {
         return $this->hasOne('App\Models\User','id','idUser');
+    }
+
+    public function file ()
+    {
+        return $this->hasOne('App\Models\File');
     }
 }

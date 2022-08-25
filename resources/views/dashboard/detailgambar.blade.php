@@ -1,6 +1,4 @@
 @php
-    $imageext="";
-    $source = "Badan Pusat Statistik";
     $html_tag_data = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
     $title = 'Detail Gambar';
     $heading = $Data->judul;
@@ -8,6 +6,11 @@
     $user=$Data->user->name;
     $userProfilPicture =  $Data->user->profilepicture;
     $userSatker=$Data->user->satker;
+    $imageext="";
+    
+    $image_size_MB=$Data->ukuran/1000000;
+    $image_size=number_format((float)$image_size_MB, 2, '.', '');
+    $source = "Badan Pusat Statistik";
     $deskripsiGambar='Toffee croissant icing toffee. Sweet roll 
         chupa chups marshmallow muffin liquorice chupa chups soufflé bonbon. 
         Liquorice gummi bears cake donut chocolate lollipop gummi bears. 
@@ -133,7 +136,7 @@ $imageinfo = getimagesize($Data->path);
                                             Raster
                                         </p>
                                         <p>
-                                            {{$imageinfo[0]}} x {{$imageinfo[1]}} pixels | {{$imageinfo['mime']}}
+                                            {{$imageinfo[0]}} x {{$imageinfo[1]}} pixels | {{$imageinfo['mime']}} | {{$image_size}} MB
                                         </p>
                                     </div>
                                 </div>
@@ -157,8 +160,10 @@ $imageinfo = getimagesize($Data->path);
                                     <div class="row g-0 h-100">
                                     
                                          <!-- Download Button Start -->
+
+                                    <div class=" btn-group" role="group" aria-label="Button group with nested dropdown">
                                     <a
-                                            class="btn btn-success btn-lg btn-block"
+                                            class="btn btn-quaternary"
                                             data-bs-delay="0"
                                             data-bs-toggle="tooltip"
                                             data-bs-placement="top"
@@ -168,6 +173,35 @@ $imageinfo = getimagesize($Data->path);
                                     >
                                     <h3 class="text-white"><i data-acorn-icon="download"></i> Download</h3>
                                     </a>
+
+                                    <div class="btn-group" role="group">
+                                        <button
+                                                id="btnGroupDrop1"
+                                                type="button"
+                                                class="btn btn-quaternary dropdown-toggle active"
+                                                data-bs-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                        >
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-end mw-100"  aria-labelledby="btnGroupDrop1">
+                                            <div class="row" style="width: 500px;">
+                                                <h5 class="font-weight-bold dropdown-item disabled">TIPE FILE</h5>
+                                                <a class="dropdown-item"  href="#">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            JPG
+                                                        </div>
+                                                        <div class="col-10">
+                                                            {{$image_size}}
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a class="dropdown-item" href="#">Dropdown link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                     
                                     <!-- Downloaf Button End -->
                                    

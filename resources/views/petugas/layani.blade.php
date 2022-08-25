@@ -46,33 +46,37 @@
         <!-- Content Start -->
         <h2 class="small-title">Form Pelayanan Permintaan Gambar</h2>
         <div class="card mb-5">
-            <div class="card-body h-100">
-
-                <div class="alert alert-danger" role="alert">
-                    Tolak permintaan gambar ini ? klik <a class="alert-link" href ="{{route('petugas.layani_tolak', ['transaksi_id' => $transaksi_id,'permintaan_id' => $permintaan_id])}}" > disini</a>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-12">
                     <div class="card-body">
                         <form id="petugasModalForm" action="{{route('petugas.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            @error('image')
-                            <div class="alert alert-danger" role="alert">
-                                {{$message}}
+                                <div class="alert alert-primary" role="alert">
+                                    Tolak permintaan gambar ini ? klik <a class="alert-link" href ="{{route('petugas.layani_tolak', ['transaksi_id' => $transaksi_id,'permintaan_id' => $permintaan_id])}}" > disini</a>
+                                </div>
+                            @if(session()->has('message'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('message') }}
+                                </div>
+                            @endif
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            <div class="row mb-3">
+                                <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>
+                                <div class="col-sm-10">
+                                    <input type="hidden" value="{{$transaksi_id}}" class="form-control" id="" name="transaksi_id"/>             
+                                </div>
                             </div>
-                            @enderror
-                            @error('source_id')
-                            <div class="alert alert-danger" role="alert">
-                                {{$message}}
-                            </div>
-                            @enderror
-                            @error('tags')
-                            <div class="alert alert-danger" role="alert">
-                                {{$message}}
-                            </div>
-                            @enderror
 
                             <div class="row mb-3">
                                 <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>
@@ -116,7 +120,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            <!-- <div class="row mb-3">
                                 <label class="font-weight-bold col-sm-2 col-form-label">Source</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="source_id" id="select2Basic">
@@ -126,7 +130,8 @@
                                         @endforeach
                                     </select>            
                                 </div>
-                            </div>
+                            </div> -->
+
                             <div class="row mb-3">
                                 <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload Gambar</label>
                                 <div class="col-sm-10">
@@ -135,6 +140,16 @@
                                     </div>   
                                 </div>
                             </div>
+
+                            <div class="row mb-3">
+                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload File</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-12 col-form-label card no-shadow">
+                                        <input type="file" class="form-control" name="file" />
+                                    </div>   
+                                </div>
+                            </div>
+
                             <div class="row mb-3">
                                 <label class="font-weight-bold col-sm-2 col-form-label">Tags</label>
                                 <div class="col-sm-10">

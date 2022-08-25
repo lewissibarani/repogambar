@@ -18,21 +18,23 @@ class KelolaGambarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index ()
+
+    public function daftar_permintaan()
     {
-        // Mengambil data didatabase
         $data = Transaksi::with('kegunaan','user','status','gambar')
         ->where('idUserPeminta', Auth::id())->get();
 
         // Membuat Json hasil query
         $json = json_encode(array(
             "data" =>$data));
-        if (file_put_contents(public_path()."/json/kelolagambar.json", $json))
+            return $json;
+    }
 
+    public function index ()
+    {
         //Populate Option kegunaan untuk form permintaan
         $Kegunaan = Kegunaan::all();
-
-        return view('kelolagambar.index', compact('Kegunaan','data'));
+        return view('kelolagambar.index', compact('Kegunaan'));
     }
 
     /**
@@ -51,6 +53,7 @@ class KelolaGambarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $idpeminta= Auth::id();
@@ -61,10 +64,10 @@ class KelolaGambarController extends Controller
         $id_permintaan = $kodesatker.$digiterakhir_idpermintaan;
         //---end proses pemberian id permintaan
 
-        $request->validate([
-            'judulPermintaan' => ['required'],
-            'linkPermintaan' => ['required'],
-            'idkegunaan' => ['required'],
+        $this->validate($request, [
+            'judulPermintaan' => 'required',
+            'linkPermintaan' => 'required|max:255',
+            'idkegunaan' => 'required',
         ]);
 
         $create_transaksi=Transaksi::create([
@@ -90,7 +93,7 @@ class KelolaGambarController extends Controller
         ]);
         //end of distribusi tugas
         
-        return redirect()->route('kelolagambar.index')->withStatus(__('Permintaan Berhasil Dibuat.'));
+        return redirect()->route('kelolagambar.index')->with('message','Permintaan Berhasil Dibuat.');
     }
 
     private function pemberian_id_permintaan($kodesatker)
