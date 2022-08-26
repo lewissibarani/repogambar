@@ -1,4 +1,10 @@
 @php
+    $target_download=$Data->path;
+    if($Data->file_id!==null)
+    {
+        $target_download=$Data->file->path;
+    }
+
     $html_tag_data = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
     $title = 'Detail Gambar';
     $heading = $Data->judul;
@@ -9,7 +15,11 @@
     $imageext="";
     
     $image_size_MB=$Data->ukuran/1000000;
+    $file_size_MB=$Data->file->size/1000000;
+
     $image_size=number_format((float)$image_size_MB, 2, '.', '');
+    $file_size=number_format((float)$file_size_MB, 2, '.', '');
+
     $source = "Badan Pusat Statistik";
     $deskripsiGambar='Toffee croissant icing toffee. Sweet roll 
         chupa chups marshmallow muffin liquorice chupa chups soufflé bonbon. 
@@ -169,7 +179,7 @@ $imageinfo = getimagesize($Data->path);
                                             data-bs-placement="top"
                                             title="Download Gambar"
                                             download="{{$Data->nama_gambar}}"
-                                            href="/{{$Data->path}}"
+                                            href="/{{$target_download}}"
                                     >
                                     <h3 class="text-white"><i data-acorn-icon="download"></i> Download</h3>
                                     </a>
@@ -187,17 +197,27 @@ $imageinfo = getimagesize($Data->path);
                                         <div class="dropdown-menu dropdown-menu-lg-end mw-100"  aria-labelledby="btnGroupDrop1">
                                             <div class="row" style="width: 500px;">
                                                 <h5 class="font-weight-bold dropdown-item disabled">TIPE FILE</h5>
-                                                <a class="dropdown-item"  href="#">
+                                                <a class="dropdown-item"  download="{{$Data->nama_gambar}}" href="/{{$Data->path}}">
                                                     <div class="row">
                                                         <div class="col-2">
-                                                            JPG
+                                                            Gambar
                                                         </div>
                                                         <div class="col-10">
-                                                            {{$image_size}}
+                                                            <p class="font-weight-bold">{{$image_size}} MB </p>
                                                         </div>
                                                     </div>
                                                 </a>
-                                                <a class="dropdown-item" href="#">Dropdown link</a>
+                                                <a class="dropdown-item" href="/{{$target_download}}">
+
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            File
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <p class="font-weight-bold">{{$file_size}} MB </p>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

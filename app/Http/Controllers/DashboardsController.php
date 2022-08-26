@@ -48,13 +48,26 @@ class DashboardsController extends Controller
      */
     public function hasilPencarian(Request $request)
     {
-        return view('dashboard.hasilpencarian');
+        $this->validate($request, [
+            'katakunci' => 'required'
+        ]);
+        //mencari berdasarkan judul
+        $ResultbyJudul=Gambar::where('judul','like',"%".$request->katakunci."%");
+
+        //mencari berdasarkan Tag kemudian di gabung dengan Result berdasarkan Judul
+        $Result=Gambar::withAnyTag([$request->katakunci])
+        ->union($ResultbyJudul)
+        ->get();
+
+        return view('dashboard.hasilpencarian',
+        compact(['Result'
+        ]));
     }
 
     public function viewGambar ($gambar_id)
     {
         
-        $Data = Gambar::with('user','source','kegunaan')->where('id',$gambar_id)->first();
+        $Data = Gambar::with('user','source','kegunaan','file')->where('id',$gambar_id)->first();
 
         // Mencari item dengan tag yang sama untuk dijadikan rekomendasi
         $Rekomendasi= Gambar::withAnyTag($Data->tagNames())->paginate(3);

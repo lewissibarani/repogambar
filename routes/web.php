@@ -27,12 +27,12 @@ Route::redirect('/', '/Dashboard/Beranda');
 |
 */
 Route::middleware('auth')->group(function () {
-    Route::redirect('/', '/Dashboard/Beranda');
+    Route::redirect('/', '/Dashboard');
 
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard']);
         Route::get('Beranda', [DashboardsController::class, 'dashboard']);
-        Route::get('HasilPencarian', [DashboardsController::class, 'hasilPencarian']);
+        Route::post('HasilPencarian', [DashboardsController::class, 'hasilPencarian'])->name('dashboard.hasilpencarian');
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar']);
     });
 });

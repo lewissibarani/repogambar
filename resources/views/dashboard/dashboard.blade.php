@@ -15,10 +15,13 @@
 @section('js_vendor')
 <script src="/js/cs/scrollspy.js"></script>
 <script src="/js/vendor/baguetteBox.min.js"></script>
+<script src="/js/vendor/jquery.validate/jquery.validate.min.js"></script>
+<script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
 @endsection
 
 @section('js_page')
 <script src="/js/pages/blocks.gallery.js"></script>
+<script src="/js/pages/auth.search.js"></script>
 @endsection
 
 @section('content')
@@ -47,22 +50,44 @@
             </div>
         </div>
         <!-- Title End -->
+        <form id="searchGambarForm" action="{{route('dashboard.hasilpencarian')}}" method="POST">
+            @csrf
+            @if(session()->has('message'))
+                <div class="alert alert-danger">
+                    {{ session()->get('message') }}
+                </div>
+            @endif
 
-        <div class="row">
-            <div class="col-12 col-xl-12 col-xxl-12 mb-12">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">
-                    <i data-acorn-icon="search" class="text-primary me-1"></i>    
-                    </span>
-                    <input type="text" placeholder="Kata kunci pencarian..." class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-                        <a href="/Dashboard/HasilPencarian" class="btn btn-icon btn-icon-start btn-primary stretched-link">
-                                <i data-acorn-icon="chevron-right"></i>
-                                <span>Cari Gambar</span>
-                        </a>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <div class="row">
+                <div class="col-12 col-xl-12 col-xxl-12 mb-12">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">
+                        <i data-acorn-icon="search" class="text-primary me-1"></i>    
+                        </span>
+                        <input type="text" placeholder="Kata kunci pencarian..." class="form-control" 
+                        aria-label="Sizing example input" 
+                        aria-describedby="inputGroup-sizing-default"
+                        name="katakunci"/>
+                        
+                        <button type="submit" class="btn btn-icon btn-icon-start btn-primary stretched-link" >
+                            <i data-acorn-icon="chevron-right"></i>
+                            <span>Cari Gambar</span>
+                        </button> 
+                        
+                    </div>
                 </div>
             </div>
-        </div>
-
+        </form>
         <div class="row">
             <div class="col-12 col-xl-8 col-xxl-9 mb-5">
                 <!-- Grid Start -->

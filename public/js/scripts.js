@@ -32,6 +32,7 @@
       this._initBagitugas();
       this._initPetugas();
       this._initPermintaan();
+      this._initSearchdashboard
     }, 100);
   }
 
@@ -258,7 +259,7 @@
     }
   }
 
-   // Bagi Tugas initialization
+   // Permintaan initialization
    _initPermintaan() {
     if (typeof PermintaanGambar !== 'undefined') {
       const permintaanGambar = new PermintaanGambar();
@@ -277,6 +278,14 @@
 
   // Pages initialization
   _initPages() {
+
+    if (typeof SearchDashboard !== 'undefined') {
+      const searchDashboard = new SearchDashboard();
+    }
+
+    if (typeof AuthPetugas !== 'undefined') {
+      const authPetugas = new AuthPetugas();
+    }
     // dashboard.default.js initialization
     if (typeof DashboardDefault !== 'undefined') {
       let dashboardDefault = new DashboardDefault();

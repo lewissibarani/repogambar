@@ -103,8 +103,10 @@ class PetugasController extends Controller
                 $file-> move(public_path('filezip/'), $file_name);
 
                 $filezip =File::create([
-                    'path' => 'img/uploadedGambar/'.$file_name,
-                    'nama_file' => $file_name
+                    'path' => 'filezip/'.$file_name,
+                    'nama_file' => $file_name,
+                    'size' => filesize(public_path('filezip'.$file_name)),
+                    'type' => \File::extension('filezip/'.$file_name),
                     ]);
                 
             }

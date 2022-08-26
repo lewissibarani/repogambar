@@ -42,6 +42,6 @@ class Gambar extends Model
 
     public function file ()
     {
-        return $this->hasOne('App\Models\File');
+        return $this->hasOne('App\Models\File','id','file_id');
     }
 }
