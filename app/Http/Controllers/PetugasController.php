@@ -84,15 +84,17 @@ class PetugasController extends Controller
             //Given Constants
             $gambar_name="";
             $filezip=null;
+            $fileid=null;
             $source_id=3;
             $gambar_size=null;
+            $tipe_gambar=null;
 
             if($request->file('image')){
                 $gambar= $request->file('image');
                 $gambar_name= date('YmdHi').$gambar->getClientOriginalName();
                 $gambar-> move(public_path('img/uploadedGambar/'), $gambar_name);
                 $gambar_size=filesize(public_path('img/uploadedGambar/'.$gambar_name));
-
+                $tipe_gambar=\File::extension('img/uploadedGambar/'.$gambar_name);
                 //Membuat thumbnail
                 $this->createThumbnail(public_path('img/uploadedGambar/').$gambar_name, public_path('img/thumbnail/').$gambar_name, 400);
             }
@@ -100,14 +102,20 @@ class PetugasController extends Controller
             if($request->file('file')){
                 $file= $request->file('file');
                 $file_name= date('YmdHi').$file->getClientOriginalName();
+
+                //Memghilangkan spesial character di path
+                $file_name = str_replace(Array("\n", "\r", "\n\r"), '', $file_name);
+
                 $file-> move(public_path('filezip/'), $file_name);
 
                 $filezip =File::create([
                     'path' => 'filezip/'.$file_name,
                     'nama_file' => $file_name,
-                    'size' => filesize(public_path('filezip'.$file_name)),
+                    'size' => filesize(public_path('filezip/'.$file_name)),
                     'type' => \File::extension('filezip/'.$file_name),
                     ]);
+
+                $fileid=$filezip->id;
                 
             }
             
@@ -132,7 +140,8 @@ class PetugasController extends Controller
                 'ukuran' =>$gambar_size,
                 'nama_gambar' =>$gambar_name,
                 'source_id' => $source_id,
-                'file_id' => $filezip->id,
+                'file_id' => $fileid,
+                'tipe_gambar' => $tipe_gambar,
             ]);
             
             //Menyimpan Tags
@@ -155,7 +164,7 @@ class PetugasController extends Controller
 
     public function tolak (Request $request)
     {
-
+        if($this->cek_sudah_di_layani_apa_belum($request->transaksi_id)){
         $this->validate($request, [
             'alasanDitolak' => 'required',
         ]);
@@ -171,12 +180,14 @@ class PetugasController extends Controller
                     'alasanDitolak' => $request->alasanDitolak]);
 
         return redirect()->route('petugas.index');
+    }
+    return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
         
     }
 
     public function layani_tolak ($transaksi_id, $permintaan_id)
     {
-
+        if($this->cek_sudah_di_layani_apa_belum($transaksi_id)){
         $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
         ->where('user_id',Auth::id())
         ->where('permintaan_id', $transaksi_id)
@@ -187,6 +198,9 @@ class PetugasController extends Controller
                 'permintaan_id',
                 'Data'
             ]));
+        }
+        return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
+
         
     }
 

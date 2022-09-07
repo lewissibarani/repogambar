@@ -61,7 +61,7 @@ Route::prefix('Petugas')->group(function () {
 
 
     Route::post('Store', [PetugasController::class, 'store'])->name('petugas.store');
-    Route::post('Tolak', [PetugasController::class, 'store'])->name('petugas.tolak');
+    Route::post('Tolak', [PetugasController::class, 'tolak'])->name('petugas.tolak');
     Route::post('Tambah', [PetugasController::class, 'tambah'])->name('petugas.tambah');
 
     Route::view('Contoh','petugas/contoh');

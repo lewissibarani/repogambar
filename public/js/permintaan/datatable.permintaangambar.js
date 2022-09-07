@@ -157,7 +157,7 @@
                 break;
               default:
                 return '<div class="col-12 col-md-5 d-flex align-items-center justify-content-md-center">'+ 
-                row.status.status +
+                // row.status.status +
                 '</div>';
                 break;
             }

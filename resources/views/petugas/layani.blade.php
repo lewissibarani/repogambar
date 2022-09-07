@@ -72,7 +72,7 @@
                             @endif
 
                             <div class="row mb-3">
-                                <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>
+                                
                                 <div class="col-sm-10">
                                     <input type="hidden" value="{{$transaksi_id}}" class="form-control" id="" name="transaksi_id"/>             
                                 </div>

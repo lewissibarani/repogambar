@@ -23,10 +23,12 @@
 @section('js_page')
     <script src="/js/cs/datatable_permintaan.extend.js"></script>
     <script src="/js/permintaan/datatable.permintaangambar.js"></script>
+    <script src="/js/cs/scrollspy.js"></script>
 @endsection
 
 @section('content')
     <div class="container">
+        
         <div class="row">
             <div class="col">
                 <!-- Title and Top Buttons Start -->

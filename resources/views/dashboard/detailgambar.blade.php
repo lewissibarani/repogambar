@@ -1,8 +1,20 @@
 @php
+
+    $image_info_file=null;
+    $file_size_MB=null;
+    $file_size="-";
     $target_download=$Data->path;
+    $target_download_nama=$Data->nama_gambar;
+    $tipe_file_raster_atau_vector="Raster";
+
     if($Data->file_id!==null)
     {
         $target_download=$Data->file->path;
+        $target_download_nama=$Data->file->nama_file;
+        $image_info_file= "dan Vector";
+        $file_size_MB=$Data->file->size/1000000;
+        $file_size=number_format((float)$file_size_MB, 2, '.', '')." MB";
+        $tipe_file_raster_atau_vector="Raster dan Vector";
     }
 
     $html_tag_data = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
@@ -15,10 +27,8 @@
     $imageext="";
     
     $image_size_MB=$Data->ukuran/1000000;
-    $file_size_MB=$Data->file->size/1000000;
-
+   
     $image_size=number_format((float)$image_size_MB, 2, '.', '');
-    $file_size=number_format((float)$file_size_MB, 2, '.', '');
 
     $source = "Badan Pusat Statistik";
     $deskripsiGambar='Toffee croissant icing toffee. Sweet roll 
@@ -44,6 +54,7 @@
  
 // Calling getimagesize() function
 $imageinfo = getimagesize($Data->path);
+$imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
 
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
@@ -143,10 +154,10 @@ $imageinfo = getimagesize($Data->path);
                                     <h4 class="mb-3 font-weight-bold">Format Gambar </h4>
                                     <div>
                                         <p>
-                                            Raster
+                                            {{$tipe_file_raster_atau_vector}}
                                         </p>
                                         <p>
-                                            {{$imageinfo[0]}} x {{$imageinfo[1]}} pixels | {{$imageinfo['mime']}} | {{$image_size}} MB
+                                            {{$imageinfo[0]}} x {{$imageinfo[1]}} pixels | {{$imageinfo_tipe_file}} {{$image_info_file}}| {{$image_size}} MB
                                         </p>
                                     </div>
                                 </div>
@@ -178,7 +189,7 @@ $imageinfo = getimagesize($Data->path);
                                             data-bs-toggle="tooltip"
                                             data-bs-placement="top"
                                             title="Download Gambar"
-                                            download="{{$Data->nama_gambar}}"
+                                            download="{{$target_download_nama}}"
                                             href="/{{$target_download}}"
                                     >
                                     <h3 class="text-white"><i data-acorn-icon="download"></i> Download</h3>
@@ -214,7 +225,7 @@ $imageinfo = getimagesize($Data->path);
                                                             File
                                                         </div>
                                                         <div class="col-10">
-                                                            <p class="font-weight-bold">{{$file_size}} MB </p>
+                                                            <p class="font-weight-bold">{{$file_size}}</p>
                                                         </div>
                                                     </div>
                                                 </a>

@@ -48,7 +48,7 @@
         <div class="card mb-5">
             <div class="card-body h-100">
 
-            <div class="alert alert-info" role="alert">
+            <div class="alert alert-primary" role="alert">
                 Tuliskan alasan penolakan permintaan gambar dengan jelas.
             </div>
 
@@ -57,11 +57,29 @@
                 <div class="card-body">
                     <form id="petugasModalForm" action="{{route('petugas.tolak')}}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @error('alasanDitolak')
-                        <div class="alert alert-danger" role="alert">
-                            {{$message}}
-                        </div>
-                        @enderror
+                        @if(session()->has('message'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('message') }}
+                                </div>
+                            @endif
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <div class="row mb-3">
+                                
+                                <div class="col-sm-10">
+                                    <input type="hidden" value="{{$transaksi_id}}" class="form-control" id="" name="transaksi_id"/>    
+                                    <input type="hidden" value="{{$Data->id}}" class="form-control" id="" name="bagitugas_id"/>          
+                                </div>
+                            </div>
 
                         <div class="row mb-3">
                             <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>

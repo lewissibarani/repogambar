@@ -22,6 +22,7 @@ class Gambar extends Model
         'nama_gambar',
         'source_id',
         'file_id',
+        'tipe_gambar',
     ];
 
     public function source()

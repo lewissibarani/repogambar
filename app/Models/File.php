@@ -12,6 +12,8 @@ class File extends Model
     protected $fillable = [
         'path',
         'nama_file',
+        'size',
+        'type',
     ];
 
     public function gambar ()
