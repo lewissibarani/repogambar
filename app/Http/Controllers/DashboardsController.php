@@ -52,17 +52,19 @@ class DashboardsController extends Controller
             'katakunci' => 'required'
         ]);
         //mencari berdasarkan judul
-        $ResultbyJudul=Gambar::where('judul','like',"%".$request->katakunci."%");
+        $ResultbyJudul=Gambar::with('file','source')->where('judul','like',"%".$request->katakunci."%");
 
         //mencari berdasarkan Tag kemudian di gabung dengan Result berdasarkan Judul
-        $Result=Gambar::withAnyTag([$request->katakunci])
+        $Data=Gambar::withAnyTag([$request->katakunci])
         ->union($ResultbyJudul)
         ->get();
-
+        $Katakunci=$request->katakunci;
         return view('dashboard.hasilpencarian',
-        compact(['Result'
+        compact(['Data',
+                 'Katakunci'
         ]));
     }
+    
 
     public function viewGambar ($gambar_id)
     {

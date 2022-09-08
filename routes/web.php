@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('KelolaGambar')->group(function () {
-    Route::get('/', [KelolaGambarController::class, 'index'])->name('kelolagambar.index');
+    Route::get('/', [KelolaGambarController::class, 'index']);
     Route::get('Index',[KelolaGambarController::class, 'index'])->name('kelolagambar.index');
     Route::get('DaftarPermintaan',[KelolaGambarController::class, 'daftar_permintaan']);
     Route::post('Store', [KelolaGambarController::class, 'store'])->name('kelolagambar.store');
@@ -46,12 +46,12 @@ Route::prefix('KelolaGambar')->group(function () {
 });
 
 Route::prefix('Statistik')->group(function () {
-    Route::get('/', [BagiTugasController::class, 'index'])->name('bagipetugas.index');
+    Route::get('/', [BagiTugasController::class, 'index']);
     Route::get('Index',[BagiTugasController::class, 'index'])->name('bagipetugas.index');
 });
 
 Route::prefix('Petugas')->group(function () {
-    Route::get('/', [PetugasController::class, 'index'])->name('petugas.index');
+    Route::get('/', [PetugasController::class, 'index']);
     Route::get('Index',[PetugasController::class, 'index'])->name('petugas.index');
     Route::get('DaftarTugas',[PetugasController::class, 'daftar_tugas']);
 

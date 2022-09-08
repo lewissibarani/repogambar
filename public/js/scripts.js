@@ -32,7 +32,6 @@
       this._initBagitugas();
       this._initPetugas();
       this._initPermintaan();
-      this._initSearchdashboard
     }, 100);
   }
 
@@ -281,6 +280,9 @@
 
     if (typeof SearchDashboard !== 'undefined') {
       const searchDashboard = new SearchDashboard();
+    }
+    if (typeof SearchDashboard_ !== 'undefined') {
+      const searchDashboard_ = new SearchDashboard_();
     }
 
     if (typeof AuthPetugas !== 'undefined') {

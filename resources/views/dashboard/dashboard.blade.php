@@ -3,7 +3,9 @@
     $title = 'Beranda';
     $path = public_path();
     $description = 'Beranda';
-    $breadcrumbs = ["/"=>"Home","/Dashboard"=>"Beranda"]
+    $breadcrumbs = ["/"=>"Home","/Dashboard"=>"Beranda"];
+    $file = "";
+
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
@@ -52,22 +54,6 @@
         <!-- Title End -->
         <form id="searchGambarForm" action="{{route('dashboard.hasilpencarian')}}" method="POST">
             @csrf
-            @if(session()->has('message'))
-                <div class="alert alert-danger">
-                    {{ session()->get('message') }}
-                </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <div class="row">
                 <div class="col-12 col-xl-12 col-xxl-12 mb-12">
                     <div class="input-group mb-3">
@@ -92,14 +78,55 @@
             <div class="col-12 col-xl-8 col-xxl-9 mb-5">
                 <!-- Grid Start -->
                 <h2 class="small-title">Karya Favorit</h2>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 gallery g-2 mb-5">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 gallery g-2 mb-5">
                     @foreach ($Data as $datas)
                         <div class="col">
-                            <a href="Dashboard/DetailGambar/{{$datas->id}}" class="card hover-img-scale-up">
-                                <img class="card-img sh-25 scale" 
-                                data-original="{{$datas->thumbnail_path}}"
-                                alt="card image" />
-                            </a>
+                            <div class="card hover-img-scale-up hover-reveal">
+                                    <img class="card-img sh-50 scale" 
+                                    data-original="{{$datas->thumbnail_path}}"
+                                    alt="card image" />
+                                    <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
+                                            <div class="row g-0">
+                                                <!-- <div class="col-auto pe-3">
+                                                    <i data-acorn-icon="eye" class="text-white me-1" data-acorn-size="15"></i>
+                                                    <span class="align-middle text-white">153</span>
+                                                </div>
+                                                <div class="col-auto pe-3">
+                                                    <i data-acorn-icon="message" class="text-white me-1" data-acorn-size="15"></i>
+                                                    <span class="align-middle text-white">5</span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i data-acorn-icon="like" class="text-white me-1" data-acorn-size="15"></i>
+                                                    <span class="align-middle text-white">29</span>
+                                                </div> -->
+                                            </div>
+                                            <div class="row g-0">
+                                                <div class="col pe-2">
+                                                    <a href="Dashboard/DetailGambar/{{$datas->id}}" class="stretched-link">
+                                                        <h5 class="heading text-white mb-1">{{$datas->judul}}</h5>
+                                                    </a>
+                                                    <div class="d-inline-block">
+                                                        <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->tipe_gambar}}</span></div>
+                                                    </div>
+                                                    @php
+                                                    if($datas->file_id!==null)
+                                                        {
+                                                        @endphp
+                                                        <div class="d-inline-block">
+                                                            <div class="text-uppercase"><span class='badge rounded-pill bg-light'>ZIP</span></div>
+                                                        </div>
+                                                        @php
+                                                            $file = "zip";
+                                                        }
+                                                    @endphp
+                                                    <div class="d-inline-block">
+                                                        <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->source->sumber_gambar}}</span></div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                            </div>
                         </div>
                         <!-- src="{{$datas->thumbnail_path}}"  -->
                     @endforeach
@@ -216,10 +243,9 @@
                     <div class="col-12 col-sm-6 col-xl-12">
                         <h2 class="small-title">Tags</h2>
                         <div class="card mb-5">
-                            
                             <div class="card-body">
                             @foreach($Tags as $tag)
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
+                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="{{route('dashboard.hasilpencarian')}}">
                                     <span>{{$tag->name}} ({{$tag->count}})</span>
                                 </a>
                             @endforeach
