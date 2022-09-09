@@ -119,7 +119,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                 <h4 class="mb-3 font-weight-bold">Tags </h4>
                                 <div class="mb-2">
                                     @foreach($Data->tags as $tag)
-                                        <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/Pages/Blog/List">
+                                        <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/hasilpencarian/katakunci/{{$tag->name}}">
                                             <span>{{ $tag->name }}({{ $tag->count }})</span>
                                         </a>
                                     @endforeach

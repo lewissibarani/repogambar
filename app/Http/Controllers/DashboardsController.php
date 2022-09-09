@@ -38,6 +38,22 @@ class DashboardsController extends Controller
         ]));
     }
 
+    public function result_pencarian($katakunci)
+    {
+        //mencari berdasarkan judul
+        $ResultbyJudul=Gambar::with('file','source')->where('judul','like',"%".$katakunci."%");
+
+        //mencari berdasarkan Tag kemudian di gabung dengan Result berdasarkan Judul
+        $Data=Gambar::withAnyTag([$katakunci])
+        ->union($ResultbyJudul)
+        ->get();
+        $Katakunci=$katakunci;
+        return view('dashboard.hasilpencarian',
+        compact(['Data',
+                 'Katakunci'
+        ]));
+    }
+
     /**
      * Handle an incoming registration request.
      *
@@ -51,20 +67,23 @@ class DashboardsController extends Controller
         $this->validate($request, [
             'katakunci' => 'required'
         ]);
-        //mencari berdasarkan judul
-        $ResultbyJudul=Gambar::with('file','source')->where('judul','like',"%".$request->katakunci."%");
-
-        //mencari berdasarkan Tag kemudian di gabung dengan Result berdasarkan Judul
-        $Data=Gambar::withAnyTag([$request->katakunci])
-        ->union($ResultbyJudul)
-        ->get();
+        
         $Katakunci=$request->katakunci;
-        return view('dashboard.hasilpencarian',
-        compact(['Data',
-                 'Katakunci'
-        ]));
+        return redirect()->route('result_pencarian',['katakunci'=> $Katakunci]);
+        
     }
-    
+
+    public function hasilPencarian_(Request $request)
+    {
+        $this->validate($request, [
+            'katakunci_' => 'required'
+        ]);
+        
+        $Katakunci=$request->katakunci_;
+        return redirect()->route('result_pencarian',['katakunci'=> $Katakunci]);
+        
+    }
+
 
     public function viewGambar ($gambar_id)
     {

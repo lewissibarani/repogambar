@@ -10,10 +10,12 @@
 @endsection
 
 @section('js_vendor')
+<script src="/js/vendor/jquery.validate/jquery.validate.min.js"></script>
+<script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
 @endsection
 
 @section('js_page')
-<script src="/js/pages/auth.search.js"></script>
+<script src="/js/pages/auth.search_.js"></script>
 @endsection
 
 @section('content')
@@ -29,40 +31,36 @@
                             <div class="col-12 text-center">
                                 <div class="cta-3 text-primary">Ingin mencari gambar?</div>
                                 <div class="cta-3 text-black mb-3">Ketik kata kuncinya di bawah ini!</div>
-                                <div class="row g-2 justify-content-center">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="d-flex flex-column justify-content-start">
-                                        <form id="searchGambarForm" action="{{route('dashboard.hasilpencarian')}}" method="POST">
-                                         @csrf
-                                         @if(session()->has('message'))
-                                            <div class="alert alert-danger">
-                                                {{ session()->get('message') }}
+                                <form id="searchGambarForm_" action="{{route('dashboard.hasilpencarian_')}}" method="POST">                                
+                                    <div class="row g-2 justify-content-center">
+                                        <div class="col-12 col-sm-6">
+                                            <div class="d-flex flex-column justify-content-start">
+                                            @csrf
+                                            @if ($errors->any())
+                                                <div class="alert alert-danger">
+                                                    <ul>
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                                    <div class="text-muted mb-3 mb-sm-0">
+                                                        <input type="text" class="form-control" value="{{$Katakunci}}" placeholder="kata kunci pencarian..." name="katakunci_" />
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="col-12 col-sm-auto">
+                                                    <button type="submit" class="btn btn-icon btn-icon-start btn-primary" >
+                                                        <i data-acorn-icon="search"></i>
+                                                        <span>Cari Gambar</span>
+                                                    </button> 
+                                                </div>
                                             </div>
-                                        @endif
-
-                                        @if ($errors->any())
-                                            <div class="alert alert-danger">
-                                                <ul>
-                                                    @foreach ($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        @endif
-                                            <div class="text-muted mb-3 mb-sm-0">
-                                                <input type="text" class="form-control" value="{{$Katakunci}}" placeholder="kata kunci pencarian..." name="katakunci" />
-                                            </div>
-                                            </div>
-                                            </div>
-                                            <div class="col-12 col-sm-auto">
-                                            <button type="submit" class="btn btn-icon btn-icon-start btn-primary" >
-                                                <i data-acorn-icon="search"></i>
-                                                <span>Cari Gambar</span>
-                                            </button> 
-
-                                            </div>
-                                        </form>
-                                </div>
+                                        </div>
+                                        
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

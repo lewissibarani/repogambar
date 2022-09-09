@@ -24,12 +24,12 @@
           $error.appendTo($element.closest("form"));
         },
         rules: {
-            katakunci: {
+            katakunci_: {
                 required: true,
           },
         },
         messages: {
-            katakunci: {
+            katakunci_: {
                 required: 'Field ini harus diisi',
           },
         },

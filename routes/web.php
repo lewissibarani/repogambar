@@ -32,9 +32,15 @@ Route::middleware('auth')->group(function () {
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard']);
         Route::get('Beranda', [DashboardsController::class, 'dashboard']);
-        Route::post('HasilPencarian', [DashboardsController::class, 'hasilPencarian'])->name('dashboard.hasilpencarian');
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar']);
     });
+
+    Route::prefix('hasilpencarian')->group(function () {
+        Route::post('caridashboard', [DashboardsController::class, 'hasilPencarian'])->name('dashboard.hasilpencarian');
+        Route::post('cari', [DashboardsController::class, 'hasilPencarian_'])->name('dashboard.hasilpencarian_');
+        Route::get('/katakunci/{katakunci}', [DashboardsController::class, 'result_pencarian'])->name('result_pencarian');
+    });
+
 });
 
 Route::prefix('KelolaGambar')->group(function () {
@@ -43,11 +49,6 @@ Route::prefix('KelolaGambar')->group(function () {
     Route::get('DaftarPermintaan',[KelolaGambarController::class, 'daftar_permintaan']);
     Route::post('Store', [KelolaGambarController::class, 'store'])->name('kelolagambar.store');
     // Route::view('Update', 'kelolagambar/update');
-});
-
-Route::prefix('Statistik')->group(function () {
-    Route::get('/', [BagiTugasController::class, 'index']);
-    Route::get('Index',[BagiTugasController::class, 'index'])->name('bagipetugas.index');
 });
 
 Route::prefix('Petugas')->group(function () {

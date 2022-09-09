@@ -8,195 +8,178 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/vendor/datatables.min.css"/>
-    <link rel="stylesheet" href="/css/main.css"/>
 @endsection
 
 @section('js_vendor')
-    <script src="/js/vendor/bootstrap-submenu.js"></script>
+    <script src="/js/cs/scrollspy.js"></script>
     <script src="/js/vendor/datatables.min.js"></script>
-    <script src="/js/vendor/mousetrap.min.js"></script>
-    <script src="/js/vendor/jquery.validate/jquery.validate.min.js"></script>
-    <script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
 @endsection
 
-
 @section('js_page')
-    <script src="/js/cs/datatable_permintaan.extend.js"></script>
-    <script src="/js/permintaan/datatable.permintaangambar.js"></script>
-    <script src="/js/cs/scrollspy.js"></script>
+    <script src="/js/cs/datatable.extend.js"></script>
+    <script src="/js/plugins/datatable.boxedvariations.js"></script>
 @endsection
 
 @section('content')
     <div class="container">
-        
         <div class="row">
             <div class="col">
-                <!-- Title and Top Buttons Start -->
-                <div class="page-title-container">
-                    <div class="row">
-                        <!-- Title Start -->
-                        <div class="col-12 col-md-7">
-                            <h1 class="mb-0 pb-0 display-4" id="title">{{ $title }}</h1>
-                            @include('_layout.breadcrumb',['breadcrumbs'=>$breadcrumbs])
-                        </div>
-                        <!-- Title End -->
+                <!-- Title Start -->
+                <section class="scroll-section" id="title">
+                    <div class="page-title-container">
+                        <h1 class="mb-0 pb-0 display-4">{{ $title }}</h1>
+                        @include('_layout.breadcrumb',['breadcrumbs'=>$breadcrumbs])
+                    </div>
+                </section>
+                <!-- Title End -->
 
-                        <!-- Top Buttons Start -->
-                        <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
-                            <!-- Default Start -->
-                            <section class="scroll-section" id="default">
-                                <!-- Button Trigger -->
-                                <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" 
-                                    data-bs-toggle="modal"        
-                                    data-bs-target="#addEditModal">
-                                        <i data-acorn-icon="plus"></i>
-                                        <span>Tambah Baru</span>
-                                </button>
-                            </section>
-                            <!-- Default End -->
+                    <!-- Hover Start -->
+                    <section class="scroll-section" id="hover">
+                        <div class="card mb-5">
+                            <div class="card-body">
+                                <!-- Hover Controls Start -->
+                                <div class="row">
+                                    <div class="col-12 d-flex align-items-start justify-content-left">
+                                                        <section class="scroll-section" id="default">
+                                                            <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
+                                                                data-bs-toggle="modal"        
+                                                                data-bs-target="#addEditModal">
+                                                                    <i data-acorn-icon="plus"></i>
+                                                                    <span>Tambah Baru</span>
+                                                            </button>
+                                                        </section>
+                                    </div>
 
-                            <!-- Check Button Start -->
-                            <!-- <div class="btn-group ms-1 check-all-container">
-                                <div class="btn btn-outline-primary btn-custom-control p-0 ps-3 pe-2" id="datatableCheckAllButton">
-                             
-                                <span class="form-check float-end">
-                                <input type="checkbox" class="form-check-input" id="datatableCheckAll" />
-                                </span>
-                            -->
-                        </div>
-                                <!-- <button
-                                        type="button"
-                                        class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
-                                        data-bs-offset="0,3"
-                                        data-bs-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        data-submenu
-                                ></button>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <div class="dropdown dropstart dropdown-submenu">
-                                        <button class="dropdown-item dropdown-toggle tag-datatable caret-absolute disabled" type="button">Tag</button>
-                                        <div class="dropdown-menu">
-                                            <button class="dropdown-item tag-done" type="button">Done</button>
-                                            <button class="dropdown-item tag-new" type="button">New</button>
-                                            <button class="dropdown-item tag-sale" type="button">Sale</button>
+                                    <div class="col-12 col-sm-7 col-lg-9 col-xxl-10 text-end mb-1">
+                                        <div class="d-inline-block">
+                                            <button class="btn btn-icon btn-icon-only btn-outline-muted btn-sm datatable-print" type="button" data-datatable="#datatableHover">
+                                                <i data-acorn-icon="print"></i>
+                                            </button>
+
+                                            <div class="d-inline-block datatable-export" data-datatable="#datatableHover">
+                                                <button
+                                                        class="btn btn-icon btn-icon-only btn-outline-muted btn-sm dropdown"
+                                                        data-bs-toggle="dropdown"
+                                                        type="button"
+                                                        data-bs-offset="0,3"
+                                                >
+                                                    <i data-acorn-icon="download"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end">
+                                                    <button class="dropdown-item export-copy" type="button">Copy</button>
+                                                    <button class="dropdown-item export-excel" type="button">Excel</button>
+                                                    <button class="dropdown-item export-cvs" type="button">Cvs</button>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-as-select d-inline-block datatable-length" data-datatable="#datatableHover">
+                                                <button
+                                                        class="btn btn-outline-muted btn-sm dropdown-toggle"
+                                                        type="button"
+                                                        data-bs-toggle="dropdown"
+                                                        aria-haspopup="true"
+                                                        aria-expanded="false"
+                                                        data-bs-offset="0,3"
+                                                >
+                                                    10 Items
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#">5 Items</a>
+                                                    <a class="dropdown-item active" href="#">10 Items</a>
+                                                    <a class="dropdown-item" href="#">20 Items</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item disabled delete-datatable" type="button">Delete</button>
-                                </div> -->
-                            </div>
-                            <!-- Check Button End -->
-                        </div>
-                        <!-- Top Buttons End -->
-                    </div>
-                </div>
-                <!-- Title and Top Buttons End -->
+                                    <div class="col-12 col-sm-5 col-lg-3 col-xxl-2 mb-1">
+                                        <div class="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 border border-separator bg-foreground search-sm">
+                                            
+                                            <input class="form-control form-control-sm datatable-search" placeholder="Search" data-datatable="#datatableHover" />
+                                            <span class="search-magnifier-icon">
+                                            <i data-acorn-icon="search"></i>
+                                            </span>
+                                            <span class="search-delete-icon d-none">
+                                            <i data-acorn-icon="close"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Hover Controls End -->
 
-                <!-- Content Start -->
-                <div class="data-table-rows slim">
-                    <!-- Controls Start -->
-                    <div class="row">
-                        <!-- Search Start -->
-                        <div class="col-sm-12 col-md-5 col-lg-3 col-xxl-2 mb-1">
-                            <div class="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
-                                <input class="form-control datatable-search" placeholder="Search" data-datatable="#datatablePermintaanGambar" />
-                                <span class="search-magnifier-icon">
-                <i data-acorn-icon="search"></i>
-              </span>
-                                <span class="search-delete-icon d-none">
-                <i data-acorn-icon="close"></i>
-              </span>
-                            </div>
-                        </div>
-                        <!-- Search End -->
-
-                        <div class="col-sm-12 col-md-7 col-lg-9 col-xxl-10 text-end mb-1">
-                            <div class="d-inline-block me-0 me-sm-3 float-start float-md-none">
-                            </div>
-                            <div class="d-inline-block">
-                                <!-- Print Button Start -->
-                                <!-- <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow datatable-print"
-                                        data-bs-delay="0"
-                                        data-datatable="#datatablePermintaanGambar"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Print"
-                                        type="button"
+                                <!-- Hover Table Start -->
+                                <table
+                                        class="data-table data-table-pagination data-table-standard responsive nowrap hover"
+                                        id="datatableHover"
+                                        data-order='[[ 0, "desc" ]]'
                                 >
-                                    <i data-acorn-icon="print"></i>
-                                </button> -->
-                                <!-- Print Button End -->
+                                    <thead>
+                                    <tr>
+                                        <th class="text-muted text-small text-uppercase">ID</th>
+                                        <th class="text-muted text-small text-uppercase">Judul Permintaan</th>
+                                        <th class="text-muted text-small text-uppercase">Kegunaan</th>
+                                        <th class="text-muted text-small text-uppercase">Link</th>
+                                        <th class="text-muted text-small text-uppercase">Diupdate Terakhir</th>
+                                        <th class="text-muted text-small text-uppercase">Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($Data as $datas)
+                                        @php 
+                                        $link=$datas->linkPermintaan;
+                                        $link_trimmed=null;
+                                        if(strlen($link)>30){
+                                            $link_trimmed=substr($link,0,30);
+                                        }
 
-                                <!-- Export Dropdown Start -->
-                                <div class="d-inline-block datatable-export" data-datatable="#datatablePermintaanGambar">
-                                    <button class="btn p-0" data-bs-toggle="dropdown" type="button" data-bs-offset="0,3">
-                                    <span
-                                            class="btn btn-icon btn-icon-only btn-foreground-alternate shadow dropdown"
-                                            data-bs-delay="0"
-                                            data-bs-placement="top"
-                                            data-bs-toggle="tooltip"
-                                            title="Export"
-                                    >
-                                        <i data-acorn-icon="download"></i>
-                                    </span>
-                                    </button>
-                                    <div class="dropdown-menu shadow dropdown-menu-end">
-                                        <button class="dropdown-item export-copy" type="button">Copy</button>
-                                        <button class="dropdown-item export-excel" type="button">Excel</button>
-                                        <button class="dropdown-item export-cvs" type="button">Cvs</button>
-                                    </div>
-                                </div>
-                                <!-- Export Dropdown End -->
+                                        $update_terakhir=date_format($datas->updated_at,"Y/m/d");
+                                        
+                                        @endphp
+                                        <tr>
+                                            <td>#{{$datas->id_permintaan}}</td>
+                                            <td class="text-alternate">{{$datas->judulPermintaan}}</td>
+                                            <td class="text-alternate">{{$datas->kegunaan->kegunaan}}</td>
+                                            <td class="text-alternate"><a href="{{$link}}" target="_blank" rel="noopener noreferrer">{{$link_trimmed}}...</a></td>
+                                            <td class="text-alternate">{{$update_terakhir}}</td>
+                                            <td class="text-alternate">
+                                            @php echo $datas->status->status;
 
-                                <!-- Length Start -->
-                                <div class="dropdown-as-select d-inline-block datatable-length" data-datatable="#datatablePermintaanGambar" data-childSelector="span">
-                                    <button class="btn p-0 shadow" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="0,3">
-                  <span
-                          class="btn btn-foreground-alternate dropdown-toggle"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          data-bs-delay="0"
-                          title="Item Count"
-                  >
-                    10 Items
-                  </span>
-                                    </button>
-                                    <div class="dropdown-menu shadow dropdown-menu-end">
-                                        <a class="dropdown-item" href="#">5 Items</a>
-                                        <a class="dropdown-item active" href="#">10 Items</a>
-                                        <a class="dropdown-item" href="#">20 Items</a>
-                                    </div>
-                                </div>
-                                <!-- Length End -->
+                                            if($datas->idStatus==2)
+                                            {
+                                            @endphp
+                                            <button
+                                                                        class="btn btn-sm btn-outline-danger align-top float-end dropdown-toggle"
+                                                                        type="button"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                        aria-haspopup="true"
+                                                                > 
+                                                                    Alasan Ditolak
+                                                                </button>
+                                                                </button>
+                                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end ">
+                                                                    <div class="p-3">
+                                                                        {{$datas->alasanDitolak}}
+                                                                    </div>
+                                                                </div>
+                                            @php
+                                            }
+                                            @endphp
+                                            
+                                                                
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                <!-- Hover Table End -->
                             </div>
                         </div>
+                    </section>
+                    <!-- Hover End -->
                     </div>
-                    <!-- Controls End -->
 
-                    <!-- Table Start -->
-                    <div class="data-table-responsive-wrapper">
-                        <table id="datatablePermintaanGambar" class="data-table nowrap w-100">
-                            <thead>
-                            <tr>
-                                <th class="text-muted text-small text-uppercase">ID Permintaan</th>
-                                <th class="text-muted text-small text-uppercase">Judul Permintaan</th>
-                                <th class="text-muted text-small text-uppercase">Kegunaan</th>
-                                <th class="text-muted text-small text-uppercase">Link</th>
-                                <th class="text-muted text-small text-uppercase">Waktu</th>
-                                <th class="text-muted text-small text-uppercase">Status</th>
-                                <!-- <th class="empty">&nbsp;</th> -->
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <!-- Table End -->
-                </div>
-                <!-- Content End -->
-
-                <!-- Add Edit Modal Start -->
-                <div class="modal modal-right large fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                     <!-- Add Edit Modal Start -->
+                <div class="modal modal-left large fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -274,92 +257,12 @@
                 </div>
                 <!-- Add Edit Modal End -->
 
-                <!-- Add Edit Modal Start -->
-                <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-lg rounded">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title font-weight-bold" id="modalTitle">ID Permintaan Gambar: #<span class="idPermintaan"></span></h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="">
-                                    
-<div class="row">
-    <div class="col-12">
-        <div class="card-body">
-            
-            <div class="row mb-3">
-                <div class="font-weight-bold col-sm-3 col-form-label">
-                    <div class="d-flex flex-row-reverse text-info">Judul :</div>
-                </div>
-                <div class="col-sm-9">
-                    <label class="col-sm-12 col-form-label">
-                        <span class="previewJudul"></span>
-                    </label>             
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="font-weight-bold col-sm-3 col-form-label">
-                    <div class="d-flex flex-row-reverse text-info">Link :</div>
-                </div>
-                <div class="col-sm-9">
-                    <label class=" col-sm-12 col-form-label">
-                        <span class="previewLink"></span>
-                    </label>                  
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="font-weight-bold col-sm-3 col-form-label">
-                    <div class="d-flex flex-row-reverse text-info">Tanggal Permintaan :</div>
-                </div>
-                <div class="col-sm-9">
-                    <label class=" col-sm-12 col-form-label">
-                        <span class="previewWaktu"></span>
-                    </label>                  
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="font-weight-bold col-sm-3 col-form-label">
-                    <div class="d-flex flex-row-reverse text-info">Kegunaan :</div>
-                </div>
-                <div class="col-sm-9">
-                    <label class=" col-sm-12 col-form-label">
-                        <span class="previewKegunaan"></span>  
-                    </label>               
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="font-weight-bold col-sm-3 col-form-label">
-                    <div class="d-flex flex-row-reverse text-info">Status :</div>
-                </div>
-                <div class="col-sm-9">
-                    <label class=" col-sm-2 col-form-label">
-                        <span class="previewStatus"></span>
-                    </label>              
-                </div>
-            </div>
-                            
-            <span class="previewAlasanTolak"></span>
-        </div>
-    </div>  
-</div> 
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add Edit Modal End -->
-
-            </div>
         </div>
     </div>
-@endsection
 <script>
 function showDiv(divId, element)
 {
     document.getElementById(divId).style.display = element.value == 4 ? 'block' : 'none';
 }
 </script>
+@endsection

@@ -245,7 +245,7 @@
                         <div class="card mb-5">
                             <div class="card-body">
                             @foreach($Tags as $tag)
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="{{route('dashboard.hasilpencarian')}}">
+                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="hasilpencarian/katakunci/{{$tag->name}}">
                                     <span>{{$tag->name}} ({{$tag->count}})</span>
                                 </a>
                             @endforeach
