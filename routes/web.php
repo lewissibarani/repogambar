@@ -41,37 +41,32 @@ Route::middleware('auth')->group(function () {
         Route::get('/katakunci/{katakunci}', [DashboardsController::class, 'result_pencarian'])->name('result_pencarian');
     });
 
-});
-
-Route::prefix('KelolaGambar')->group(function () {
-    Route::get('/', [KelolaGambarController::class, 'index']);
-    Route::get('Index',[KelolaGambarController::class, 'index'])->name('kelolagambar.index');
-    Route::get('DaftarPermintaan',[KelolaGambarController::class, 'daftar_permintaan']);
-    Route::post('Store', [KelolaGambarController::class, 'store'])->name('kelolagambar.store');
-    // Route::view('Update', 'kelolagambar/update');
-});
-
-Route::prefix('Petugas')->group(function () {
-    Route::get('/', [PetugasController::class, 'index']);
-    Route::get('Index',[PetugasController::class, 'index'])->name('petugas.index');
-    Route::get('DaftarTugas',[PetugasController::class, 'daftar_tugas']);
-
-    Route::get('/transaksi/{transaksi_id}/permintaan/{permintaan_id}', [PetugasController::class, 'layani'])->name('petugas.layani');
-    Route::get('/Transaksi_tolak/{transaksi_id}/Permintaan_tolak/{permintaan_id}', [PetugasController::class, 'layani_tolak'])->name('petugas.layani_tolak');
-    Route::get('Pengaturan',[PetugasController::class, 'pengaturan'])->name('petugas.pengaturan');
-
-
-    Route::post('Store', [PetugasController::class, 'store'])->name('petugas.store');
-    Route::post('Tolak', [PetugasController::class, 'tolak'])->name('petugas.tolak');
-    Route::post('Tambah', [PetugasController::class, 'tambah'])->name('petugas.tambah');
-
-    Route::view('Contoh','petugas/contoh');
-});
-
-Route::prefix('Pages')->group(function () {
-    Route::view('/', 'pages/index');
-
+    Route::prefix('KelolaGambar')->group(function () {
+        Route::get('/', [KelolaGambarController::class, 'index']);
+        Route::get('Index',[KelolaGambarController::class, 'index'])->name('kelolagambar.index');
+        Route::get('DaftarPermintaan',[KelolaGambarController::class, 'daftar_permintaan']);
+        Route::post('Store', [KelolaGambarController::class, 'store'])->name('kelolagambar.store');
+        // Route::view('Update', 'kelolagambar/update');
+    });
+    
+    Route::prefix('Petugas')->group(function () {
+        Route::get('/', [PetugasController::class, 'index']);
+        Route::get('Index',[PetugasController::class, 'index'])->name('petugas.index');
+        Route::get('DaftarTugas',[PetugasController::class, 'daftar_tugas']);
+    
+        Route::get('/transaksi/{transaksi_id}/permintaan/{permintaan_id}', [PetugasController::class, 'layani'])->name('petugas.layani');
+        Route::get('/Transaksi_tolak/{transaksi_id}/Permintaan_tolak/{permintaan_id}', [PetugasController::class, 'layani_tolak'])->name('petugas.layani_tolak');
+        Route::get('Pengaturan',[PetugasController::class, 'pengaturan'])->name('petugas.pengaturan');
+    
+    
+        Route::post('Store', [PetugasController::class, 'store'])->name('petugas.store');
+        Route::post('Tolak', [PetugasController::class, 'tolak'])->name('petugas.tolak');
+        Route::post('Tambah', [PetugasController::class, 'tambah'])->name('petugas.tambah');
+    
+        Route::view('Contoh','petugas/contoh');
+    });
 
 });
+
 
 require __DIR__.'/auth.php';

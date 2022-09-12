@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\User_Petugas;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -27,6 +28,9 @@ class DashboardsController extends Controller
     public function dashboard()
     {
 
+        //menampilkan penyumbang gambar
+        $Users = User_Petugas::with('users')->paginate(4);
+
         //Menampilkan Tags
         $Tags= Tag::where('count', '>', 0)->paginate(12);
         $Data = Gambar::with('user','kegunaan','source')
@@ -34,7 +38,8 @@ class DashboardsController extends Controller
 
         return view('dashboard.dashboard',
         compact(['Data',
-                 'Tags'
+                 'Tags',
+                 'Users'
         ]));
     }
 

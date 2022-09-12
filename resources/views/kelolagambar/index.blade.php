@@ -119,6 +119,7 @@
                                         <th class="text-muted text-small text-uppercase">Link</th>
                                         <th class="text-muted text-small text-uppercase">Diupdate Terakhir</th>
                                         <th class="text-muted text-small text-uppercase">Status</th>
+                                        <th class="text-muted text-small text-uppercase">Aksi</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -133,7 +134,7 @@
                                         $update_terakhir=date_format($datas->updated_at,"Y/m/d");
                                         
                                         @endphp
-                                        <tr>
+                                        <tr style="height:50px;">
                                             <td>#{{$datas->id_permintaan}}</td>
                                             <td class="text-alternate">{{$datas->judulPermintaan}}</td>
                                             <td class="text-alternate">{{$datas->kegunaan->kegunaan}}</td>
@@ -141,31 +142,67 @@
                                             <td class="text-alternate">{{$update_terakhir}}</td>
                                             <td class="text-alternate">
                                             @php echo $datas->status->status;
-
+                                            @endphp
+                                            </td>
+                                            <td class="text-alternate">
+                                            @php
                                             if($datas->idStatus==2)
                                             {
                                             @endphp
-                                            <button
-                                                                        class="btn btn-sm btn-outline-danger align-top float-end dropdown-toggle"
-                                                                        type="button"
-                                                                        data-bs-toggle="dropdown"
-                                                                        aria-expanded="false"
-                                                                        aria-haspopup="true"
-                                                                > 
-                                                                    Alasan Ditolak
-                                                                </button>
-                                                                </button>
-                                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end ">
-                                                                    <div class="p-3">
-                                                                        {{$datas->alasanDitolak}}
+                                                <button
+                                                                            class="btn btn-sm btn-outline-danger align-top dropdown-toggle"
+                                                                            type="button"
+                                                                            data-bs-toggle="dropdown"
+                                                                            aria-expanded="false"
+                                                                            aria-haspopup="true"
+                                                                    > 
+                                                                        Alasan Ditolak
+                                                                    </button>
+                                                                    </button>
+                                                                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end ">
+                                                                        <div class="p-3">
+                                                                            {{$datas->alasanDitolak}}
+                                                                        </div>
                                                                     </div>
-                                                                </div>
                                             @php
-                                            }
-                                            @endphp
-                                            
-                                                                
+                                            };
+                                            if($datas->idStatus==3)
+                                            { 
 
+                                            @endphp
+                                            <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-left">
+                                                @php
+
+                                                    if($datas->gambar->file_id !==null){
+                                                @endphp
+                                                        <button type="button" class="btn btn-sm btn-icon btn-outline-primary ">      
+                                                                <a download="{{$datas->gambar->file->nama_file}}" 
+                                                                data-bs-delay="0"
+                                                                data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                title="Download File"
+                                                                href="/{{$datas->gambar->file->path}}">
+                                                                <i data-acorn-icon="attachment"></i>
+                                                                </a>
+                                                        </button>
+                                                        &nbsp; 
+                                                    @php
+                                                    };
+                                                    @endphp
+                                                        <button type="button" class="btn btn-sm btn-icon btn-outline-primary"> 
+                                                                <a download="{{$datas->gambar->nama_gambar}}"
+                                                                data-bs-delay="0"
+                                                                data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                title="Download Gambar"
+                                                                href="/{{$datas->gambar->path}}">
+                                                                <i data-acorn-icon="file-image"></i>
+                                                                </a>
+                                                        </button>    
+                                                @php
+                                                };
+                                                @endphp
+                                            </div>
                                             </td>
                                         </tr>
                                     @endforeach

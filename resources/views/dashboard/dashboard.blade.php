@@ -157,83 +157,31 @@
                                                         <div class="text-small text-muted"></div>
                                                     </div>
                                                     <div class="d-flex">
-                                                        Jumlah Karya
+                                                        Jumlah Upload
                                                     </div>
                                                 </div>
                                             </div>
                                     </div>
+                                    @foreach($Users as $users)
                                     <div class="border-bottom border-separator-light mb-2 pb-2">
                                         <div class="row g-0 sh-6">
                                             <div class="col-auto">
-                                                <img src="/img/profile/profile-6.webp" class="card-img rounded-xl sh-6 sw-6" alt="thumb" />
+                                                <img src="{{$users->users->profilepicture}}" class="card-img rounded-xl sh-6 sw-6" alt="thumb" />
                                             </div>
                                             <div class="col">
                                                 <div class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
                                                     <div class="d-flex flex-column">
-                                                        <div><a href="#">James Kindangen</a></div>
-                                                        <div class="text-small text-muted">BPS Provinsi Sulawesi Utara</div>
+                                                        <div><a href="#">{{$users->users->name}}</a></div>
+                                                        <div class="text-small text-muted">{{$users->users->satker}}</div>
                                                     </div>
                                                     <div class="d-flex">
-                                                        1.244
+                                                    {{$users->count_task}}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="border-bottom border-separator-light mb-2 pb-2">
-                                        <div class="row g-0 sh-6">
-                                            <div class="col-auto">
-                                                <img src="/img/profile/profile-7.webp" class="card-img rounded-xl sh-6 sw-6" alt="thumb" />
-                                            </div>
-                                            <div class="col">
-                                                <div class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                    <div class="d-flex flex-column">
-                                                        <div><a href="#">Ayu Kartika</a></div>
-                                                        <div class="text-small text-muted">Direktorat Diseminasi Statistik</div>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        1.123
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="border-bottom border-separator-light mb-2 pb-2">
-                                        <div class="row g-0 sh-6">
-                                            <div class="col-auto">
-                                                <img src="/img/profile/profile-8.webp" class="card-img rounded-xl sh-6 sw-6" alt="thumb" />
-                                            </div>
-                                            <div class="col">
-                                                <div class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                    <div class="d-flex flex-column">
-                                                        <div><a href="#">Nashir</a></div>
-                                                        <div class="text-small text-muted">BPS Provinsi Sumatera Utara</div>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        1.120
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-2 pb-2 border-bottom border-separator-light">
-                                        <div class="row g-0 sh-6">
-                                            <div class="col-auto">
-                                                <img src="/img/profile/profile-2.webp" class="card-img rounded-xl sh-6 sw-6" alt="thumb" />
-                                            </div>
-                                            <div class="col">
-                                                <div class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                    <div class="d-flex flex-column">
-                                                        <div><a href="#">Allen Iverson</a></div>
-                                                        <div class="text-small text-muted">BPS Provinsi Maluku</div>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        1.099
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                     </div>
