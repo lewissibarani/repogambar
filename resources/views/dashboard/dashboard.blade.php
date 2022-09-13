@@ -87,18 +87,6 @@
                                     alt="card image" />
                                     <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
                                             <div class="row g-0">
-                                                <!-- <div class="col-auto pe-3">
-                                                    <i data-acorn-icon="eye" class="text-white me-1" data-acorn-size="15"></i>
-                                                    <span class="align-middle text-white">153</span>
-                                                </div>
-                                                <div class="col-auto pe-3">
-                                                    <i data-acorn-icon="message" class="text-white me-1" data-acorn-size="15"></i>
-                                                    <span class="align-middle text-white">5</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <i data-acorn-icon="like" class="text-white me-1" data-acorn-size="15"></i>
-                                                    <span class="align-middle text-white">29</span>
-                                                </div> -->
                                             </div>
                                             <div class="row g-0">
                                                 <div class="col pe-2">
