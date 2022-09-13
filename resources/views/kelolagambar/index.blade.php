@@ -32,6 +32,12 @@
                     </div>
                 </section>
                 <!-- Title End -->
+                
+                            @if(session()->has('message'))
+                                <div class="alert alert-info">
+                                {!! session()->get('message') !!}
+                                </div>
+                            @endif
 
                     <!-- Hover Start -->
                     <section class="scroll-section" id="hover">
@@ -128,7 +134,7 @@
                                         $link=$datas->linkPermintaan;
                                         $link_trimmed=null;
                                         if(strlen($link)>30){
-                                            $link_trimmed=substr($link,0,30);
+                                            $link=substr($link,0,30).'...';
                                         }
 
                                         $update_terakhir=date_format($datas->updated_at,"Y/m/d");
@@ -138,7 +144,7 @@
                                             <td>#{{$datas->id_permintaan}}</td>
                                             <td class="text-alternate">{{$datas->judulPermintaan}}</td>
                                             <td class="text-alternate">{{$datas->kegunaan->kegunaan}}</td>
-                                            <td class="text-alternate"><a href="{{$link}}" target="_blank" rel="noopener noreferrer">{{$link_trimmed}}...</a></td>
+                                            <td class="text-alternate"><a href="{{$datas->linkPermintaan}}" target="_blank" rel="noopener noreferrer">{{$link}}</a></td>
                                             <td class="text-alternate">{{$update_terakhir}}</td>
                                             <td class="text-alternate">
                                             @php echo $datas->status->status;

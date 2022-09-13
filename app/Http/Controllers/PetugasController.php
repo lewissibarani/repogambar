@@ -46,27 +46,16 @@ class PetugasController extends Controller
         return $converted_array;
     }
 
-    public function daftar_tugas(){
-        $data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
-        ->where('user_id',Auth::id())->get();
-        $json = json_encode(array(
-            "data" =>$data));
-        return $json;
-    }
-
     public function index ()
     {
         // Mengambil data didatabase
-        $data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
+        $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
         ->where('user_id',Auth::id())->get();
-
-        // Membuat Json hasil query
-        // $json = json_encode(array(
-        //     "data" =>$data));
-        // if (file_put_contents(public_path()."/json/Tugas.json", $json))
         
         $Source = Source::all();
-        return view('petugas.index');
+        return view('petugas.index', compact(['Data',
+        'Source',
+        ]));
     }
 
     public function store (Request $request)

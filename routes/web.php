@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard']);
         Route::get('Beranda', [DashboardsController::class, 'dashboard']);
-        Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar']);
+        Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar');
     });
 
     Route::prefix('hasilpencarian')->group(function () {
