@@ -76,7 +76,7 @@
                         <div class="col">
                             <div class="card hover-img-scale-up hover-reveal">
                                     <img class="card-img sh-50 scale" 
-                                    data-original="https://webapps.bps.go.id/simrad/{{$datas->thumbnail_path}}"
+                                    data-original="/{{$datas->path}}"
                                     alt="card image" />
                                     <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
                                             <div class="row g-0">
