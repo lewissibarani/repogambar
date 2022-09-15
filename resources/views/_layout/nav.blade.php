@@ -27,6 +27,7 @@
 
         @auth
         <a href="#" class="d-flex user position-relative" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{$File}}
             <img class="profile" alt="profile" src="/img/profile/profile-9.webp" />
             <div class="name">{{ Auth::user()->name }}</div>
         </a>
@@ -153,7 +154,7 @@
                 <i data-acorn-icon="light-off" class="dark" data-acorn-size="18"></i>
             </a>
         </li>
-        <!-- <li class="list-inline-item">
+        <li class="list-inline-item">
             <a href="#" data-bs-toggle="dropdown" data-bs-target="#notifications" aria-haspopup="true" aria-expanded="false" class="notification-button">
                 <div class="position-relative d-inline-flex">
                     <i data-acorn-icon="bell" data-acorn-size="18"></i>
@@ -190,7 +191,7 @@
                     </ul>
                 </div>
             </div>
-        </li> -->
+        </li>
     </ul>
     <!-- Icons Menu End -->
 

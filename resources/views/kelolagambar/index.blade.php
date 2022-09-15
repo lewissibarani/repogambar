@@ -115,7 +115,7 @@
                                 <table
                                         class="data-table data-table-pagination data-table-standard responsive nowrap hover"
                                         id="datatableHover"
-                                        data-order='[[ 0, "desc" ]]'
+                                        data-order='[[ 4, "desc" ]]'
                                 >
                                     <thead>
                                     <tr>
@@ -137,7 +137,7 @@
                                             $link=substr($link,0,30).'...';
                                         }
 
-                                        $update_terakhir=date_format($datas->updated_at,"Y/m/d");
+                                        $update_terakhir=date_format($datas->updated_at,"Y/m/d_H:i:s");
                                         
                                         @endphp
                                         <tr style="height:50px;">

@@ -9,6 +9,7 @@ use App\Models\User_Petugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Providers\NewPermintaan;
 
 
 class KelolaGambarController extends Controller
@@ -53,9 +54,12 @@ class KelolaGambarController extends Controller
      */
     private function cek_duplikasi_link($link)
     {
-        $cek=Transaksi::with('user','status','gambar')->where('linkPermintaan',$link)->first();
-        return $cek;
         
+        $cek=Transaksi::with('user','status','gambar')->where('linkPermintaan',$link)->first();
+        if($cek!==null){
+            return $cek;
+        }
+        return ;
     }
 
     /**
@@ -69,60 +73,66 @@ class KelolaGambarController extends Controller
     {
         $cek_duplikasi=$this->cek_duplikasi_link($request->linkPermintaan);
         $msg="";
-
-        if($cek_duplikasi->idStatus!==3){
-            $msg='Link gambar sudah pernah diminta '.
-            ' dengan status '.$cek_duplikasi->status->status;
-            
-        }else{
-            $msg='Permintaan sudah pernah diminta oleh satuan Kerja '.$cek_duplikasi->user->satker.
-            ' dengan status '.$cek_duplikasi->status->status.
-            '. Berikut adalah link gambar tersebut: <a href="'.route('dashboard.detailgambar', ['gambar_id'=>$cek_duplikasi->gambar->id]) . '"> link gambar  </a>';
+        $bolean_cek_duplikasi=true;
+        if($cek_duplikasi!==null){
+            $bolean_cek_duplikasi=false;
         }
         
 
-        if( $cek_duplikasi==null)
+        if($bolean_cek_duplikasi)
         {
-            $idpeminta= Auth::id();
+            $cek=Transaksi::with('user','status','gambar')->where('id',1)->first();
+            event(new NewPermintaan($cek));
+            // $idpeminta= Auth::id();
 
-            //---start proses pemberian id permintaan
-            $kodesatker = Auth::user()->kodesatker;
-            $digiterakhir_idpermintaan= $this->pemberian_id_permintaan($kodesatker);
-            $id_permintaan = $kodesatker.$digiterakhir_idpermintaan;
-            //---end proses pemberian id permintaan
+            // //---start proses pemberian id permintaan
+            // $kodesatker = Auth::user()->kodesatker;
+            // $digiterakhir_idpermintaan= $this->pemberian_id_permintaan($kodesatker);
+            // $id_permintaan = $kodesatker.$digiterakhir_idpermintaan;
+            // //---end proses pemberian id permintaan
 
-            $this->validate($request, [
-                'judulPermintaan' => 'required',
-                'linkPermintaan' => 'required|max:255',
-                'idkegunaan' => 'required',
-            ]);
+            // $this->validate($request, [
+            //     'judulPermintaan' => 'required',
+            //     'linkPermintaan' => 'required|max:255',
+            //     'idkegunaan' => 'required',
+            // ]);
 
-            $create_transaksi=Transaksi::create([
-                'judulPermintaan' => $request->judulPermintaan,
-                'linkPermintaan' => $request->linkPermintaan,
-                'idKegunaan' => $request->idkegunaan,
-                'idUserPeminta' => $idpeminta,
-                'idStatus' => 1,
-                'kegunaan_lainnya' => $request->kegunaan_lainnya,
-                'id_permintaan' => $id_permintaan
-            ]);
+            // $create_transaksi=Transaksi::create([
+            //     'judulPermintaan' => $request->judulPermintaan,
+            //     'linkPermintaan' => $request->linkPermintaan,
+            //     'idKegunaan' => $request->idkegunaan,
+            //     'idUserPeminta' => $idpeminta,
+            //     'idStatus' => 1,
+            //     'kegunaan_lainnya' => $request->kegunaan_lainnya,
+            //     'id_permintaan' => $id_permintaan
+            // ]);
             
-            //start of distribusi petugas
-            $petugas = User_Petugas::where('aktif',1)->orderBy('updated_at', 'asc')->first();
-            $count_task = $petugas->count_task +1;
-            $petugas->update(['count_task' => $count_task]);
-            $petugas_id=$petugas->users_id;
+            // //start of distribusi petugas
+            // $petugas = User_Petugas::where('aktif',1)->orderBy('updated_at', 'asc')->first();
+            // $count_task = $petugas->count_task +1;
+            // $petugas->update(['count_task' => $count_task]);
+            // $petugas_id=$petugas->users_id;
 
-            PembagianTugas::create([
-                'permintaan_id' => $create_transaksi->id,
-                'seenboolean' => '0',
-                'user_id' =>$petugas_id,
-            ]);
-            //end of distribusi tugas
-            dd('Tidak Duplikat');
+            // PembagianTugas::create([
+            //     'permintaan_id' => $create_transaksi->id,
+            //     'seenboolean' => '0',
+            //     'user_id' =>$petugas_id,
+            // ]);
+            // //end of distribusi tugas
+
             return redirect()->route('kelolagambar.index')->with('message','Permintaan Berhasil Dibuat.');
         } 
         else {
+
+            if($cek_duplikasi->idStatus!==3){
+                $msg='Link gambar sudah pernah diminta '.
+                ' dengan status '.$cek_duplikasi->status->status;
+                
+            }else{
+                $msg='Permintaan sudah pernah diminta oleh satuan Kerja '.$cek_duplikasi->user->satker.
+                ' dengan status '.$cek_duplikasi->status->status.
+                '. Berikut adalah link gambar tersebut: <a href="'.route('dashboard.detailgambar', ['gambar_id'=>$cek_duplikasi->gambar->id]) . '"> link gambar  </a>';
+            }
            
             return redirect()->route('kelolagambar.index')->with('message',
             $msg
