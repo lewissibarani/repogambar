@@ -27,8 +27,7 @@
 
         @auth
         <a href="#" class="d-flex user position-relative" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{$File}}
-            <img class="profile" alt="profile" src="/img/profile/profile-9.webp" />
+            <img class="profile" alt="profile" src="{{ Auth::user()->profilepicture}}" />
             <div class="name">{{ Auth::user()->name }}</div>
         </a>
         <div class="dropdown-menu dropdown-menu-end user-menu wide">
@@ -158,36 +157,64 @@
             <a href="#" data-bs-toggle="dropdown" data-bs-target="#notifications" aria-haspopup="true" aria-expanded="false" class="notification-button">
                 <div class="position-relative d-inline-flex">
                     <i data-acorn-icon="bell" data-acorn-size="18"></i>
-                    <span class="position-absolute notification-dot rounded-xl"></span>
+                        <span class="badge bg-danger ">{{auth()->user()->unreadNotifications->count()}}</span>
                 </div>
             </a>
-            <div class="dropdown-menu dropdown-menu-end wide notification-dropdown scroll-out" id="notifications">
+            <div class="dropdown-menu dropdown-menu wide notification-dropdown scroll-out" id="notifications">
                 <div class="scroll">
                     <ul class="list-unstyled border-last-none">
-                        <li class="mb-3 pb-3 border-bottom border-separator-light d-flex">
-                            <img src="/img/profile/profile-1.webp" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
-                            <div class="align-self-center">
-                                <a href="#">Joisse Kaycee just sent a new comment!</a>
+                    @foreach(auth()->user()->unreadNotifications as $notification)
+                    @php
+                    if(auth()->user()->level==3){
+                    @endphp 
+                        <li class="mb-3 pb-3 border-bottom border-separator-light ">
+                            <div class="row align-items-start ">
+                                <div class="col-auto">
+                                    <div class="sw-1 me-3">
+                                        <img src="{{$notification->data['peminta_pp']}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
+                                    </div>
+                                </div>
+                                <div class=" col">
+                                    <a href="{{route('petugas.layani',['transaksi_id'=>$notification->data['permintaan_id'], 'permintaan_id'=>$notification->data['kode_permintaan_id']])}}">
+                                        Saya membuat permintaan: {{$notification->data['kode_permintaan_id']}}.</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class=" d-flex flex-row-reverse bd-highlight">
+                                    <div class="p-2 bd-highlight ">
+                                        <span class="text-muted text-small"> {{$notification->updated_at}}</span>
+                                    </div>
+                                </div>
                             </div>
                         </li>
-                        <li class="mb-3 pb-3 border-bottom border-separator-light d-flex">
-                            <img src="/img/profile/profile-2.webp" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
-                            <div class="align-self-center">
-                                <a href="#">New order received! It is total $147,20.</a>
+                    @php
+                    }else{
+                    @endphp
+                        <li class="mb-3 pb-3 border-bottom border-separator-light ">
+                            <div class="row align-items-start ">
+                                <div class="col-auto">
+                                    <div class="sw-1 me-3">
+                                        <img src="{{$notification->data['petugas_pp']}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
+                                    </div>
+                                </div>
+                                <div class=" col">
+                                    <a href="{{route('dashboard.detailgambar',['gambar_id'=>$notification->data['gambar_id']])}}">
+                                        Hai, permintaan <strong class="text-primary">{{$notification->data['kode_permintaan_id']}}</strong> sudah kami proses. Klik disini.</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class=" d-flex flex-row-reverse bd-highlight">
+                                    <div class="p-2 bd-highlight ">
+                                        <span class="text-muted text-small"> {{$notification->updated_at}}</span>
+                                    </div>
+                                </div>
                             </div>
                         </li>
-                        <li class="mb-3 pb-3 border-bottom border-separator-light d-flex">
-                            <img src="/img/profile/profile-3.webp" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
-                            <div class="align-self-center">
-                                <a href="#">3 items just added to wish list by a user!</a>
-                            </div>
-                        </li>
-                        <li class="pb-3 pb-3 border-bottom border-separator-light d-flex">
-                            <img src="/img/profile/profile-6.webp" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
-                            <div class="align-self-center">
-                                <a href="#">Kirby Peters just sent a new message!</a>
-                            </div>
-                        </li>
+                    @php
+                    }
+                    @endphp
+                        
+                    @endforeach
                     </ul>
                 </div>
             </div>

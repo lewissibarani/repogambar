@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Source;
 use App\Models\User;
 use App\Models\User_Petugas;
+use App\Providers\PetugasPermintaan;
 
 class PetugasController extends Controller
 {
@@ -143,7 +144,9 @@ class PetugasController extends Controller
             $permintaan = Transaksi::where('id', $id_permintaan)
             ->update(['gambar_id' => $gambars->id,
                     'idStatus' => 3]);
-
+            
+            
+            event(new PetugasPermintaan($permintaan));
             return redirect()->route('petugas.index');
         }
 

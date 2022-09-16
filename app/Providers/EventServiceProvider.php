@@ -6,6 +6,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use App\Notifications\PermintaanNotification;
 use App\Listeners\SendNewPermintaanNotification;
+use App\Notifications\PetugasNotification;
+use App\Listeners\SendNewPetugasNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewPermintaan::class => [
             SendNewPermintaanNotification::class,
+        ],
+        PetugasPermintaan::class => [
+            SendNewPetugasNotification::class,
         ],
     ];
 

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PermintaanNotification extends Notification
+class PetugasNotification extends Notification
 {
     use Queueable;
 
@@ -57,8 +57,9 @@ class PermintaanNotification extends Notification
         return [
             'permintaan_id' => $this->permintaan->permintaan->id,
             'kode_permintaan_id' => $this->permintaan->permintaan->id_permintaan,
-            'peminta_id' => $this->permintaan->permintaan->idUserPeminta,
-            'peminta_pp' => $this->permintaan->permintaan->user->profilepicture
+            'gambar_id' => $this->permintaan->permintaan->gambar_id,
+            'petugas_id' => $this->permintaan->permintaan->pembagiantugas->user_id,
+            'petugas_pp' => $this->permintaan->permintaan->user->profilepicture
         ];
     }
 }

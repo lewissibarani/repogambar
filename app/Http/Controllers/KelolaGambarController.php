@@ -81,45 +81,44 @@ class KelolaGambarController extends Controller
 
         if($bolean_cek_duplikasi)
         {
-            $cek=Transaksi::with('user','status','gambar')->where('id',1)->first();
-            event(new NewPermintaan($cek));
-            // $idpeminta= Auth::id();
+            $idpeminta= Auth::id();
 
-            // //---start proses pemberian id permintaan
-            // $kodesatker = Auth::user()->kodesatker;
-            // $digiterakhir_idpermintaan= $this->pemberian_id_permintaan($kodesatker);
-            // $id_permintaan = $kodesatker.$digiterakhir_idpermintaan;
-            // //---end proses pemberian id permintaan
+            //---start proses pemberian id permintaan
+            $kodesatker = Auth::user()->kodesatker;
+            $digiterakhir_idpermintaan= $this->pemberian_id_permintaan($kodesatker);
+            $id_permintaan = $kodesatker.$digiterakhir_idpermintaan;
+            //---end proses pemberian id permintaan
 
-            // $this->validate($request, [
-            //     'judulPermintaan' => 'required',
-            //     'linkPermintaan' => 'required|max:255',
-            //     'idkegunaan' => 'required',
-            // ]);
+            $this->validate($request, [
+                'judulPermintaan' => 'required',
+                'linkPermintaan' => 'required|max:255',
+                'idkegunaan' => 'required',
+            ]);
 
-            // $create_transaksi=Transaksi::create([
-            //     'judulPermintaan' => $request->judulPermintaan,
-            //     'linkPermintaan' => $request->linkPermintaan,
-            //     'idKegunaan' => $request->idkegunaan,
-            //     'idUserPeminta' => $idpeminta,
-            //     'idStatus' => 1,
-            //     'kegunaan_lainnya' => $request->kegunaan_lainnya,
-            //     'id_permintaan' => $id_permintaan
-            // ]);
+            $create_transaksi=Transaksi::create([
+                'judulPermintaan' => $request->judulPermintaan,
+                'linkPermintaan' => $request->linkPermintaan,
+                'idKegunaan' => $request->idkegunaan,
+                'idUserPeminta' => $idpeminta,
+                'idStatus' => 1,
+                'kegunaan_lainnya' => $request->kegunaan_lainnya,
+                'id_permintaan' => $id_permintaan
+            ]);
             
-            // //start of distribusi petugas
-            // $petugas = User_Petugas::where('aktif',1)->orderBy('updated_at', 'asc')->first();
-            // $count_task = $petugas->count_task +1;
-            // $petugas->update(['count_task' => $count_task]);
-            // $petugas_id=$petugas->users_id;
+            //start of distribusi petugas
+            $petugas = User_Petugas::where('aktif',1)->orderBy('updated_at', 'asc')->first();
+            $count_task = $petugas->count_task +1;
+            $petugas->update(['count_task' => $count_task]);
+            $petugas_id=$petugas->users_id;
 
-            // PembagianTugas::create([
-            //     'permintaan_id' => $create_transaksi->id,
-            //     'seenboolean' => '0',
-            //     'user_id' =>$petugas_id,
-            // ]);
-            // //end of distribusi tugas
-
+            PembagianTugas::create([
+                'permintaan_id' => $create_transaksi->id,
+                'seenboolean' => '0',
+                'user_id' =>$petugas_id,
+            ]);
+            //end of distribusi tugas
+            
+            event(new NewPermintaan($create_transaksi));
             return redirect()->route('kelolagambar.index')->with('message','Permintaan Berhasil Dibuat.');
         } 
         else {
