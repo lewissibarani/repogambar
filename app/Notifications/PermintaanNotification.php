@@ -58,6 +58,7 @@ class PermintaanNotification extends Notification
             'permintaan_id' => $this->permintaan->permintaan->id,
             'kode_permintaan_id' => $this->permintaan->permintaan->id_permintaan,
             'peminta_id' => $this->permintaan->permintaan->idUserPeminta,
+            'namapeminta'=>$this->permintaan->permintaan->user->name,
             'peminta_pp' => $this->permintaan->permintaan->user->profilepicture
         ];
     }

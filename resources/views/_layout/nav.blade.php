@@ -156,11 +156,15 @@
         <li class="list-inline-item">
             <a href="#" data-bs-toggle="dropdown" data-bs-target="#notifications" aria-haspopup="true" aria-expanded="false" class="notification-button">
                 <div class="position-relative d-inline-flex">
+                    <span class="badge rounded-pill bg-danger me-2 position-absolute s-3 t-n2 z-index-">
+                    <small> {{auth()->user()->unreadNotifications->count()}}</small>
+                    </span>
                     <i data-acorn-icon="bell" data-acorn-size="18"></i>
-                        <span class="badge bg-danger ">{{auth()->user()->unreadNotifications->count()}}</span>
+                    
+                        
                 </div>
             </a>
-            <div class="dropdown-menu dropdown-menu wide notification-dropdown scroll-out" id="notifications">
+            <div class="dropdown-menu dropdown-menu wide notification-dropdown scroll-out" id="notifications" style="width:400px;">
                 <div class="scroll">
                     <ul class="list-unstyled border-last-none">
                     @foreach(auth()->user()->unreadNotifications as $notification)
@@ -176,13 +180,13 @@
                                 </div>
                                 <div class=" col">
                                     <a href="{{route('petugas.layani',['transaksi_id'=>$notification->data['permintaan_id'], 'permintaan_id'=>$notification->data['kode_permintaan_id']])}}">
-                                        Saya membuat permintaan: {{$notification->data['kode_permintaan_id']}}.</a>
+                                    <b>{{$notification->data['namapeminta']}}</b>, membuat permintaan: {{$notification->data['kode_permintaan_id']}}.</a>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class=" d-flex flex-row-reverse bd-highlight">
                                     <div class="p-2 bd-highlight ">
-                                        <span class="text-muted text-small"> {{$notification->updated_at}}</span>
+                                        <span class="text-muted text-small"><b> {{$notification->updated_at}}</b></span>
                                     </div>
                                 </div>
                             </div>

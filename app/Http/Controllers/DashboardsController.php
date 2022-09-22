@@ -25,6 +25,19 @@ class DashboardsController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function markNotification(Request $request)
+    {
+        auth()->user()
+            ->unreadNotifications
+            ->when($request->input('id'), function ($query) use ($request) {
+                return $query->where('id', $request->input('id'));
+            })
+            ->markAsRead();
+
+        return response()->noContent();
+    }
+
     public function dashboard()
     {
 
