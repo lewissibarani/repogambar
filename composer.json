@@ -5,13 +5,14 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "ext-gd": "*",
-        "ext-exif":"*",
         "php": "^7.3|^8.0",
+        "ext-exif": "*",
+        "ext-gd": "*",
         "doctrine/dbal": "^3.3",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "irsadarief/jkd-sso": "^1.6",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "rtconner/laravel-tagging": "^4.1"
