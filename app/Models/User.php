@@ -27,6 +27,13 @@ class User extends Authenticatable
         'level',
         'profilepicture',
         'aboutme',
+        'nip',
+        'nipbaru',
+        'alamatkantor',
+        'golongan',
+        'jabatan',
+
+
     ];
 
     /**
