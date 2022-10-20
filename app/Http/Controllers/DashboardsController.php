@@ -47,6 +47,7 @@ class DashboardsController extends Controller
         //Menampilkan Tags
         $Tags= Tag::where('count', '>', 0)->paginate(12);
         $Data = Gambar::with('user','kegunaan','source')
+        ->orderBy('created_at', 'desc')
         ->get();
 
         return view('dashboard.dashboard',
@@ -64,6 +65,7 @@ class DashboardsController extends Controller
         //mencari berdasarkan Tag kemudian di gabung dengan Result berdasarkan Judul
         $Data=Gambar::withAnyTag([$katakunci])
         ->union($ResultbyJudul)
+        ->orderBy('created_at', 'asc')
         ->get();
         $Katakunci=$katakunci;
         return view('dashboard.hasilpencarian',

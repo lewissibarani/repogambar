@@ -1,3 +1,18 @@
+<script>
+    function getMessage() {
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        type:'POST',
+        url:'/Notifikasi/Dibaca',
+        data:'_token = {{csrf_token()}}',
+        success:function(data) {
+            // $("#msg").html(data.msg);
+            alert("Hello! I am an alert box!!");
+        }
+    });
+    }
+</script>
+
 <div class="nav-content d-flex">
     <!-- Logo Start -->
     <div class="logo position-relative">
@@ -154,18 +169,17 @@
             </a>
         </li>
         <li class="list-inline-item">
-            <a href="#" data-bs-toggle="dropdown" data-bs-target="#notifications" aria-haspopup="true" aria-expanded="false" class="notification-button">
+            <a href="#" data-bs-toggle="dropdown" data-bs-target="#notifications" 
+            aria-haspopup="true" aria-expanded="false" class="notification-button">
                 <div class="position-relative d-inline-flex">
                     <span class="badge rounded-pill bg-danger me-2 position-absolute s-3 t-n2 z-index-">
                     <small> {{auth()->user()->unreadNotifications->count()}}</small>
                     </span>
-                    <i data-acorn-icon="bell" data-acorn-size="18"></i>
-                    
-                        
+                    <i data-acorn-icon="bell" data-acorn-size="18"></i>                        
                 </div>
             </a>
-            <div class="dropdown-menu dropdown-menu wide notification-dropdown scroll-out" id="notifications" style="width:400px;">
-                <div class="scroll">
+            <div class="dropdown-menu dropdown-menu wide scroll-out" id="notifications" style="">
+                <div class="scroll ">
                     <ul class="list-unstyled border-last-none">
                     @foreach(auth()->user()->unreadNotifications as $notification)
                     @php
@@ -179,7 +193,9 @@
                                     </div>
                                 </div>
                                 <div class=" col">
-                                    <a href="{{route('petugas.layani',['transaksi_id'=>$notification->data['permintaan_id'], 'permintaan_id'=>$notification->data['kode_permintaan_id']])}}">
+                                    <a href="{{route('petugas.layani',['transaksi_id'=>$notification->data['permintaan_id'], 'permintaan_id'=>$notification->data['kode_permintaan_id']])}}"
+                                    data-id="{{ $notification->id }}"
+                                    >
                                     <b>{{$notification->data['namapeminta']}}</b>, membuat permintaan: {{$notification->data['kode_permintaan_id']}}.</a>
                                 </div>
                             </div>

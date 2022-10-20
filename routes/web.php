@@ -26,13 +26,21 @@ Route::redirect('/', '/Dashboard/Beranda');
 |--------------------------------------------------------------------------
 |
 */
+
+
 Route::middleware('auth')->group(function () {
     Route::redirect('/', '/Dashboard');
+
+    Route::prefix('/Notifikasi')->group(function () {
+        Route::post('Dibaca', [AjaxController::class, 'notifikasidibaca']);
+        
+    });
 
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard']);
         Route::get('Beranda', [DashboardsController::class, 'dashboard']);
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar');
+        
     });
 
     Route::prefix('hasilpencarian')->group(function () {

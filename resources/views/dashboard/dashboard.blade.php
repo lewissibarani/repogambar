@@ -146,7 +146,6 @@
                                                     </div>
                                                     <div class="d-flex">
                                                         Jumlah Upload
-                                                    </div>
                                                 </div>
                                             </div>
                                     </div>
