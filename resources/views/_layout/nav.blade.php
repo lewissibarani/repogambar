@@ -1,18 +1,3 @@
-<script>
-    function getMessage() {
-    $.ajax({
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        type:'POST',
-        url:'/Notifikasi/Dibaca',
-        data:'_token = {{csrf_token()}}',
-        success:function(data) {
-            // $("#msg").html(data.msg);
-            alert("Hello! I am an alert box!!");
-        }
-    });
-    }
-</script>
-
 <div class="nav-content d-flex">
     <!-- Logo Start -->
     <div class="logo position-relative">
@@ -178,63 +163,94 @@
                     <i data-acorn-icon="bell" data-acorn-size="18"></i>                        
                 </div>
             </a>
-            <div class="dropdown-menu dropdown-menu wide scroll-out" id="notifications" style="">
+            <div class="dropdown-menu wide scroll-out" id="notifications" style="width:350px;">
                 <div class="scroll ">
-                    <ul class="list-unstyled border-last-none">
-                    @foreach(auth()->user()->unreadNotifications as $notification)
-                    @php
-                    if(auth()->user()->level==3){
-                    @endphp 
-                        <li class="mb-3 pb-3 border-bottom border-separator-light ">
-                            <div class="row align-items-start ">
-                                <div class="col-auto">
-                                    <div class="sw-1 me-3">
-                                        <img src="{{$notification->data['peminta_pp']}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
+                    <ul class="border-last-none">
+                    @if(auth()->user()->level==3)
+                        @forelse(auth()->user()->unreadNotifications as $notification)
+                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
+                                <div class="row align-items-start ">
+                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
+                                        <div class="sw-1 mb-4">
+                                            <img src="{{$notification->data['peminta_pp']}}" class="sw-6 sh-6 rounded-xl" alt="..." />
+                                        </div>
+                                    </div>
+                                    <div class=" col align-self-center">
+                                        <div class="p-3">
+                                            <a href="
+                                            {{route('petugas.layani',['transaksi_id'=>$notification->data['permintaan_id'], 'permintaan_id'=>$notification->data['kode_permintaan_id']])}}
+                                            "
+                                            data-id="{{ $notification->id }}" class="mark-as-read"
+                                            >
+                                            <b>{{$notification->data['namapeminta']}}</b>, membuat permintaan: {{$notification->data['kode_permintaan_id']}}.</a>
+                                            <div class="d-flex flex-row">
+                                                <div class="mark-as-read">
+                                                    <span id="tanggal-mark-as-read" class="text-primary text-small"><b> {{$notification->updated_at}}</b></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="icon-mark-as-read" class="col col-lg-1 align-self-center">
+                                        <div class="sw-1 me-3">
+                                        <i class="text-primary" data-acorn-icon="circle" data-acorn-size="18"></i> 
+                                        </div>
                                     </div>
                                 </div>
-                                <div class=" col">
-                                    <a href="{{route('petugas.layani',['transaksi_id'=>$notification->data['permintaan_id'], 'permintaan_id'=>$notification->data['kode_permintaan_id']])}}"
-                                    data-id="{{ $notification->id }}"
-                                    >
-                                    <b>{{$notification->data['namapeminta']}}</b>, membuat permintaan: {{$notification->data['kode_permintaan_id']}}.</a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class=" d-flex flex-row-reverse bd-highlight">
-                                    <div class="p-2 bd-highlight ">
-                                        <span class="text-muted text-small"><b> {{$notification->updated_at}}</b></span>
+                            </li>
+                            @empty
+                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
+                                <div class="row align-items-start ">
+                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
+                                        <div class="sw-1 mb-4">
+                                        There are no new notifications
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    @php
-                    }else{
-                    @endphp
-                        <li class="mb-3 pb-3 border-bottom border-separator-light ">
-                            <div class="row align-items-start ">
-                                <div class="col-auto">
-                                    <div class="sw-1 me-3">
-                                        <img src="{{$notification->data['petugas_pp']}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
+                            </li>
+                        @endforelse
+                    @endif
+
+                    @if(!auth()->user()->level==3)
+                        @forelse(auth()->user()->unreadNotifications as $notification)
+                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
+                                <div class="row align-items-start ">
+                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
+                                            <div class="sw-1 mb-4">
+                                                <img src="{{$notification->data['petugas_pp']}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
+                                            </div>
+                                    </div>
+                                    <div class=" col align-self-center">
+                                        <div class="p-3">
+                                            <a href="{{route('dashboard.detailgambar',['gambar_id'=>$notification->data['gambar_id']])}}"
+                                            data-id="{{ $notification->id }}"
+                                            >
+                                                Hai, permintaan <strong class="text-primary">{{$notification->data['kode_permintaan_id']}}</strong> sudah kami proses. Klik disini.</a>
+                                            <div class=" d-flex flex-row-reverse bd-highlight">
+                                                <div class="p-2 bd-highlight ">
+                                                    <span class="text-primary text-small"><b> {{$notification->updated_at}}</b></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-lg-1 align-self-center">
+                                        <div class="sw-1 me-3">
+                                            <i class="text-primary" data-acorn-icon="circle" data-acorn-size="18"></i> 
+                                        </div>
                                     </div>
                                 </div>
-                                <div class=" col">
-                                    <a href="{{route('dashboard.detailgambar',['gambar_id'=>$notification->data['gambar_id']])}}">
-                                        Hai, permintaan <strong class="text-primary">{{$notification->data['kode_permintaan_id']}}</strong> sudah kami proses. Klik disini.</a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class=" d-flex flex-row-reverse bd-highlight">
-                                    <div class="p-2 bd-highlight ">
-                                        <span class="text-muted text-small"> {{$notification->updated_at}}</span>
+                            </li>
+                            @empty
+                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
+                                <div class="row align-items-start ">
+                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
+                                        <div class="sw-1 mb-4">
+                                        There are no new notifications
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    @php
-                    }
-                    @endphp
-                        
-                    @endforeach
+                            </li>
+                            @endforelse
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -321,3 +337,29 @@
     <!-- Mobile Buttons End -->
 </div>
 <div class="nav-shadow"></div>
+@section('scripts')
+<script>
+    function sendMarkRequest(id = null) {
+        return $.ajax("{{ route('markNotification') }}", {
+            method: 'POST',
+            data: {
+                _token,
+                id
+            }
+        });
+    }
+
+    $(function() {
+        $('.mark-as-read').click(function() {
+            let request = sendMarkRequest($(this).data('id'));
+
+            request.done(() => {
+                $(this).addClass("text muted");
+                $('#icon-mark-as-read').remove();
+                $('#tanggal-mark-as-read').addClass("text muted");
+                
+            });
+        });
+    });
+</script>
+@endsection

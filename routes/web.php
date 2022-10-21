@@ -31,8 +31,8 @@ Route::redirect('/', '/Dashboard/Beranda');
 Route::middleware('auth')->group(function () {
     Route::redirect('/', '/Dashboard');
 
-    Route::prefix('/Notifikasi')->group(function () {
-        Route::post('Dibaca', [AjaxController::class, 'notifikasidibaca']);
+    Route::prefix('Notifikasi')->group(function () {
+        Route::post('Dibaca', [DashboardsController::class, 'markNotification'])->name('markNotification');
         
     });
 

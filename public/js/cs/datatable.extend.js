@@ -20,7 +20,7 @@
  *
  */
 
- class DatatableExtend {
+class DatatableExtend {
   get options() {
     return {
       datatable: null,
@@ -59,9 +59,9 @@
     }
 
     // Click listeners for rows to make them selected or show the edit modal
-    // if (this.element) {
-    //   this.element.querySelectorAll('tbody').forEach((el) => el.addEventListener('click', this._onRowClick.bind(this)));
-    // }
+    if (this.element) {
+      this.element.querySelectorAll('tbody').forEach((el) => el.addEventListener('click', this._onRowClick.bind(this)));
+    }
 
     // Search listeners
     document.querySelectorAll('.datatable-search').forEach((el) => {
@@ -124,10 +124,10 @@
       this.settings.editRowCallback(this.datatable.row(currentTarget));
       return true;
     }
-    // currentTarget.classList.toggle('selected');
-    // const checkbox = currentTarget.querySelector('.form-check input');
-    // checkbox.checked = !checkbox.checked;
-    // checkbox.dispatchEvent(new Event('change'));
+    currentTarget.classList.toggle('selected');
+    const checkbox = currentTarget.querySelector('.form-check input');
+    checkbox.checked = !checkbox.checked;
+    checkbox.dispatchEvent(new Event('change'));
     this.controlCheckAll();
   }
 
