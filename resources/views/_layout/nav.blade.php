@@ -337,29 +337,3 @@
     <!-- Mobile Buttons End -->
 </div>
 <div class="nav-shadow"></div>
-@section('scripts')
-<script>
-    function sendMarkRequest(id = null) {
-        return $.ajax("{{ route('markNotification') }}", {
-            method: 'POST',
-            data: {
-                _token,
-                id
-            }
-        });
-    }
-
-    $(function() {
-        $('.mark-as-read').click(function() {
-            let request = sendMarkRequest($(this).data('id'));
-
-            request.done(() => {
-                $(this).addClass("text muted");
-                $('#icon-mark-as-read').remove();
-                $('#tanggal-mark-as-read').addClass("text muted");
-                
-            });
-        });
-    });
-</script>
-@endsection
