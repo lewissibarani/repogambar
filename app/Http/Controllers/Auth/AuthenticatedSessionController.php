@@ -95,7 +95,6 @@ class AuthenticatedSessionController extends Controller
                 
                 $user = $provider->getResourceOwner($token);
 
-
                 $email = $user->getEmail();
                 $id = User::where('email', $email)->first();
 
@@ -112,7 +111,8 @@ class AuthenticatedSessionController extends Controller
                         'golongan' => $user->getGolongan(),
                         'jabatan' => $user->getJabatan(),
                         'profilepicture' => $user->getUrlFoto(),
-                        'satker' => $user->satker(),
+                        'kodesatker' =>$user->getKodeOrganisasi(),
+                        'satker' =>$user->getEselon(),
                         'password' =>Hash::make('pks2022'),
                     ]);
                     $id = $newUser->id;

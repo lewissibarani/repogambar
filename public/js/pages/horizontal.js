@@ -11,5 +11,4 @@ class VerticalPage {
   constructor() {
     // Page js
   }
-
 }
