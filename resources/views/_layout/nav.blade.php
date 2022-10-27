@@ -154,103 +154,71 @@
             </a>
         </li>
         <li class="list-inline-item">
-            <a href="#" data-bs-toggle="dropdown" data-bs-target="#notifications" 
-            aria-haspopup="true" aria-expanded="false" class="notification-button">
+            <a href="#" data-bs-toggle="dropdown" data-bs-target="#notifications" aria-haspopup="true" aria-expanded="false" class="notification-button">
                 <div class="position-relative d-inline-flex">
                     <span class="badge rounded-pill bg-danger me-2 position-absolute s-3 t-n2 z-index-">
                     <small> {{auth()->user()->unreadNotifications->count()}}</small>
                     </span>
-                    <i data-acorn-icon="bell" data-acorn-size="18"></i>                        
+                    <i data-acorn-icon="bell" data-acorn-size="18"></i>
+                    
+                        
                 </div>
             </a>
-            <div class="dropdown-menu wide scroll-out" id="notifications" style="width:350px;">
-                <div class="scroll ">
-                    <ul class="border-last-none">
-                    @if(auth()->user()->level==3)
-                        @forelse(auth()->user()->unreadNotifications as $notification)
-                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
-                                <div class="row align-items-start ">
-                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
-                                        <div class="sw-1 mb-4">
-                                            <img src="{{$notification->data['peminta_pp']}}" class="sw-6 sh-6 rounded-xl" alt="..." />
-                                        </div>
-                                    </div>
-                                    <div class=" col align-self-center">
-                                        <div class="p-3">
-                                            <a href="
-                                            {{route('petugas.layani',['transaksi_id'=>$notification->data['permintaan_id'], 'permintaan_id'=>$notification->data['kode_permintaan_id']])}}
-                                            "
-                                            data-id="{{ $notification->id }}" class="mark-as-read"
-                                            >
-                                            <b>{{$notification->data['namapeminta']}}</b>, membuat permintaan: {{$notification->data['kode_permintaan_id']}}.</a>
-                                            <div class="d-flex flex-row">
-                                                <div class="mark-as-read">
-                                                    <span id="tanggal-mark-as-read" class="text-primary text-small"><b> {{$notification->updated_at}}</b></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="icon-mark-as-read" class="col col-lg-1 align-self-center">
-                                        <div class="sw-1 me-3">
-                                        <i class="text-primary" data-acorn-icon="circle" data-acorn-size="18"></i> 
-                                        </div>
+            <div class="dropdown-menu dropdown-menu wide notification-dropdown scroll-out" id="notifications" style="width:400px;">
+                <div class="scroll">
+                    <ul class="list-unstyled border-last-none">
+                    @foreach(auth()->user()->unreadNotifications as $notification)
+                    @php
+                    if(auth()->user()->level==3){
+                    @endphp 
+                        <li class="mb-3 pb-3 border-bottom border-separator-light ">
+                            <div class="row align-items-start ">
+                                <div class="col-auto">
+                                    <div class="sw-1 me-3">
+                                        <img src="{{$notification->data['peminta_pp']}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
                                     </div>
                                 </div>
-                            </li>
-                            @empty
-                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
-                                <div class="row align-items-start ">
-                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
-                                        <div class="sw-1 mb-4">
-                                        There are no new notifications
-                                        </div>
+                                <div class=" col">
+                                    <a href="{{route('petugas.layani',['transaksi_id'=>$notification->data['permintaan_id'], 'permintaan_id'=>$notification->data['kode_permintaan_id']])}}">
+                                    <b>{{$notification->data['namapeminta']}}</b>, membuat permintaan: {{$notification->data['kode_permintaan_id']}}.</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class=" d-flex flex-row-reverse bd-highlight">
+                                    <div class="p-2 bd-highlight ">
+                                        <span class="text-muted text-small"><b> {{$notification->updated_at}}</b></span>
                                     </div>
                                 </div>
-                            </li>
-                        @endforelse
-                    @endif
-
-                    @if(!auth()->user()->level==3)
-                        @forelse(auth()->user()->unreadNotifications as $notification)
-                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
-                                <div class="row align-items-start ">
-                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
-                                            <div class="sw-1 mb-4">
-                                                <img src="{{$notification->data['petugas_pp']}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
-                                            </div>
-                                    </div>
-                                    <div class=" col align-self-center">
-                                        <div class="p-3">
-                                            <a href="{{route('dashboard.detailgambar',['gambar_id'=>$notification->data['gambar_id']])}}"
-                                            data-id="{{ $notification->id }}"
-                                            >
-                                                Hai, permintaan <strong class="text-primary">{{$notification->data['kode_permintaan_id']}}</strong> sudah kami proses. Klik disini.</a>
-                                            <div class=" d-flex flex-row-reverse bd-highlight">
-                                                <div class="p-2 bd-highlight ">
-                                                    <span class="text-primary text-small"><b> {{$notification->updated_at}}</b></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col col-lg-1 align-self-center">
-                                        <div class="sw-1 me-3">
-                                            <i class="text-primary" data-acorn-icon="circle" data-acorn-size="18"></i> 
-                                        </div>
+                            </div>
+                        </li>
+                    @php
+                    }else{
+                    @endphp
+                        <li class="mb-3 pb-3 border-bottom border-separator-light ">
+                            <div class="row align-items-start ">
+                                <div class="col-auto">
+                                    <div class="sw-1 me-3">
+                                        <img src="{{$notification->data['petugas_pp']}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
                                     </div>
                                 </div>
-                            </li>
-                            @empty
-                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
-                                <div class="row align-items-start ">
-                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
-                                        <div class="sw-1 mb-4">
-                                        There are no new notifications
-                                        </div>
+                                <div class=" col">
+                                    <a href="{{route('dashboard.detailgambar',['gambar_id'=>$notification->data['gambar_id']])}}">
+                                        Hai, permintaan <strong class="text-primary">{{$notification->data['kode_permintaan_id']}}</strong> sudah kami proses. Klik disini.</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class=" d-flex flex-row-reverse bd-highlight">
+                                    <div class="p-2 bd-highlight ">
+                                        <span class="text-muted text-small"> {{$notification->updated_at}}</span>
                                     </div>
                                 </div>
-                            </li>
-                            @endforelse
-                        @endif
+                            </div>
+                        </li>
+                    @php
+                    }
+                    @endphp
+                        
+                    @endforeach
                     </ul>
                 </div>
             </div>
