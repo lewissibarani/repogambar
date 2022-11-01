@@ -62,10 +62,9 @@ class AuthenticatedSessionController extends Controller
         $provider = new Keycloak([
             'authServerUrl'         => 'https://sso.bps.go.id',
             'realm'                 => 'pegawai-bps',
-            'clientId'              => '03200-simrad-97h',
-            'clientSecret'          => 'bed2e9b7-896e-489d-b3ab-0fed95d673b4',
-            'redirectUri'           => 'http://localhost:8000/login',
-            //'redirectUri'           => 'http://localhost/site/sso'
+            'clientId'              => env('KEYCLOAK_CLIENT_ID'),
+            'clientSecret'          => env('KEYCLOAK_CLIENT_SECRET'),
+            'redirectUri'           => env('KEYCLOAK_REDIRECT_URI'),
         ]);
         
         if (!isset($_GET['code'])) {
