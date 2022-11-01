@@ -164,8 +164,8 @@
                         
                 </div>
             </a>
-            <div class="dropdown-menu wide scroll-out" id="notifications" style="width:350px;">
-                <div class="scroll ">
+            <div class="dropdown-menu dropdown-menu wide notification-dropdown scroll-out" id="notifications" style="width:390px; ">
+                <div class="scroll " style="width:350px; height: 300px;">
                     <ul class="border-last-none">
                     @if(auth()->user()->level==3)
                         @forelse(auth()->user()->unreadNotifications as $notification)
