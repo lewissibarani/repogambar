@@ -172,8 +172,8 @@
                             <li class="mb-3 pb-3 border-bottom border-separator-light ">
                                 <div class="row align-items-start ">
                                     <div class="col-2 align-self-center "style="margin-b:350px;" >
-                                        <div class="sw-1 mb-4">
-                                            <img src="{{$notification->data['peminta_pp']}}" class="sw-6 sh-6 rounded-xl" alt="..." />
+                                        <div class="">
+                                            <img src="{{$notification->data['peminta_pp']}}" class="sw-5 sh-5 rounded-xl" alt="..." />
                                         </div>
                                     </div>
                                     <div class=" col align-self-center">
