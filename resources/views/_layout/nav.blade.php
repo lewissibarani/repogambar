@@ -165,11 +165,11 @@
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu wide notification-dropdown scroll-out" id="notifications" style="width:390px; ">
-                <div class="scroll " style="width:350px; height: 300px;">
+                <div class="scroll " style="width:350px;">
                     <ul class="border-last-none">
                     @if(auth()->user()->level==3)
                         @forelse(auth()->user()->unreadNotifications as $notification)
-                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
+                            <li class="pb-1 border-bottom border-separator-light ">
                                 <div class="row align-items-start ">
                                     <div class="col-2 align-self-center "style="margin-b:350px;" >
                                         <div class="">
@@ -212,7 +212,7 @@
                             <li class="mb-3 pb-3 border-bottom border-separator-light ">
                                 <div class="row align-items-start ">
                                     <div class="col-2 align-self-center "style="margin-b:350px;" >
-                                        <div class="sw-1 mb-4">
+                                        <div class="">
                                         There are no new notifications
                                         </div>
                                     </div>
