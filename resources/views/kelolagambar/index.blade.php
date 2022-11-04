@@ -113,7 +113,7 @@
 
                                 <!-- Hover Table Start -->
                                 <table
-                                        class="data-table data-table-pagination data-table-standard responsive nowrap hover"
+                                        class="table"
                                         id="datatableHover"
                                         data-order='[[ 4, "desc" ]]'
                                 >
