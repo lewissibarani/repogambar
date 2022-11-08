@@ -10,5 +10,12 @@
     "/icon/acorn-icons-medical.js": "/icon/acorn-icons-medical.js",
     "/icon/acorn-icons.js": "/icon/acorn-icons.js",
     "/icon/index.html": "/icon/index.html",
-    "/json/search.json": "/json/search.json"
+    "/json/chat.json": "/json/chat.json",
+    "/json/contacts.json": "/json/contacts.json",
+    "/json/events.json": "/json/events.json",
+    "/json/icons.json": "/json/icons.json",
+    "/json/mailbox.json": "/json/mailbox.json",
+    "/json/products.json": "/json/products.json",
+    "/json/search.json": "/json/search.json",
+    "/json/tasks.json": "/json/tasks.json"
 }
