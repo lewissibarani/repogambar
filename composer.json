@@ -15,6 +15,7 @@
         "irsadarief/jkd-sso": "^1.6",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
+        "pusher/pusher-php-server": "^7.2",
         "rtconner/laravel-tagging": "^4.1"
     },
     "require-dev": {
