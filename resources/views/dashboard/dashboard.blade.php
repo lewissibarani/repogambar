@@ -51,6 +51,7 @@
                 </div>
             </div>
         </div>
+       
         <!-- Title End -->
         <form id="searchGambarForm" action="{{route('dashboard.hasilpencarian')}}" method="POST">
             @csrf

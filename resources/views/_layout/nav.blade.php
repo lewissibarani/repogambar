@@ -17,11 +17,11 @@
     <!-- Logo Start -->
     <div class="logo position-relative">
         <a href="/">
-            <!-- Logo can be added directly -->
-            <!-- <img src="/img/logo/logo-white.svg" alt="logo" /> -->
+            <!-- Logo can be added directly --> 
+            <img src="/img/logo/logo-light.svg" alt="logo" />
 
             <!-- Or added via css to provide different ones for different color themes -->
-            <div class="img"></div>
+            <!-- <div class="img"></div> -->
         </a>
     </div>
     <!-- Logo End -->
@@ -244,7 +244,7 @@
 
     <!-- Menu Start -->
     <div class="menu-container flex-grow-1">
-        <ul id="menu" class="menu">
+        <ul id="menu" class="menu" style="margin-left :3em;">
             <li>
                 <a href="/Dashboard">
                     <i data-acorn-icon="home" class="icon" data-acorn-size="18"></i>
