@@ -13,6 +13,7 @@ use App\Models\Source;
 use App\Models\User;
 use App\Models\User_Petugas;
 use App\Providers\PetugasPermintaan;
+use Illuminate\Support\Facades\DB;
 
 class PetugasController extends Controller
 {
@@ -202,9 +203,18 @@ class PetugasController extends Controller
         
     }
 
-    public function layani ($transaksi_id, $permintaan_id)
+    public function layani ($transaksi_id, $permintaan_id, $notifikasi_id)
     {
         if($this->cek_sudah_di_layani_apa_belum($transaksi_id)){
+            //Start Read The Notification 
+            DB::table('notifications')->where(
+                    [
+                        ['type', '=', 'App\Notifications\PermintaanNotification'],
+                        ['id', '=', $notifikasi_id], 
+                    ]
+                )->update([ 'read_at' => date("Y-m-d H:i:s")]);
+            //End Read The Notification
+
             $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
             ->where('user_id',Auth::id())
             ->where('permintaan_id', $transaksi_id)
