@@ -148,11 +148,11 @@ class KelolaGambarController extends Controller
     private function pemberian_id_permintaan($kodesatker)
     {   
         $lastnumber=0;
-        $permintaan = Transaksi::where(DB::raw('substr(id_permintaan, 1, 4)'), '=' , $kodesatker)->latest("id")->first();
+        $permintaan = Transaksi::where(DB::raw('substr(id_permintaan, 1, 12)'), '=' , $kodesatker)->latest("id")->first();
         if($permintaan!=null)
         {
             $lastnumber_2 = $permintaan->id_permintaan;
-            $sisa_digit_terakhir = substr($lastnumber_2, 4);
+            $sisa_digit_terakhir = substr($lastnumber_2, 12);
             $lastnumber = $sisa_digit_terakhir +1;
         }
 
