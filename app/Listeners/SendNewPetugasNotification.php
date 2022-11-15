@@ -30,7 +30,7 @@ class SendNewPetugasNotification
      */
     public function handle($event)
     {
-        $peminta = $event->permintaan->permintaan->user;
+        $peminta = $event->permintaan->user;
         Notification::send($peminta, new PetugasNotification($event));
     }
 }

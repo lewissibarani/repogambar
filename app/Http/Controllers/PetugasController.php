@@ -60,8 +60,7 @@ class PetugasController extends Controller
     }
 
     public function store (Request $request)
-    {
-
+    { 
         if($this->cek_sudah_di_layani_apa_belum($request->transaksi_id)){
 
             
@@ -86,7 +85,7 @@ class PetugasController extends Controller
                 $gambar_size=filesize(public_path('img/uploadedGambar/'.$gambar_name));
                 $tipe_gambar=\File::extension('img/uploadedGambar/'.$gambar_name);
                 //Membuat thumbnail
-                $this->createThumbnail(public_path('img/uploadedGambar/').$gambar_name, public_path('img/thumbnail/').$gambar_name, 400);
+                $this->createThumbnail(public_path('img/uploadedGambar/').$gambar_name, public_path('img/thumbnail/').$gambar_name, 500);
             }
 
             if($request->file('file')){
@@ -144,6 +143,8 @@ class PetugasController extends Controller
             $permintaan = Transaksi::where('id', $id_permintaan)
             ->update(['gambar_id' => $gambars->id,
                     'idStatus' => 3]);
+
+            $permintaan = Transaksi::where('id', $id_permintaan)->first();
             
             try {
                 event(new PetugasPermintaan($permintaan));
@@ -152,7 +153,7 @@ class PetugasController extends Controller
                 return false;
             }
             
-            return redirect()->route('petugas.index');
+            return redirect()->route('petugas.index')->with('message', 'Permintaan berhasil dilayani');;
         }
 
         return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');

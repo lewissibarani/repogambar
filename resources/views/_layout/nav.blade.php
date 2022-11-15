@@ -182,8 +182,8 @@
             <div class="dropdown-menu dropdown-menu wide notification-dropdown scroll-out" id="notifications" style="width:390px; ">
                 <div class="scroll " style="height:300px; width:350px;">
                     <ul class="border-last-none">
-                    @if(auth()->user()->level==3)
                         @forelse(auth()->user()->unreadNotifications as $notification)
+                            @if( $notification->type=='App\Notifications\PermintaanNotification')
                             <li class="pb-1 border-bottom border-separator-light ">
                                 <div class="row align-items-start ">
                                     <div class="col-2 align-self-center "style="margin-b:350px;" >
@@ -209,20 +209,50 @@
                                     @if ( $notification->read_at==null)
                                     <div id="icon-mark-as-read" class="col col-lg-1 align-self-center">
                                         <div class="sw-1 me-3">
-                                        <div class="bg-gradient-light sw-1 sh-1 rounded-xl d-flex justify-content-center align-items-center">
-                                        </div> 
+                                            <div class="bg-gradient-light sw-1 sh-1 rounded-xl d-flex justify-content-center align-items-center">
+                                            </div> 
                                         </div>
                                     </div>
                                     @else
                                     <div id="icon-mark-as-read" class="col col-lg-1 align-self-center">
                                         <div class="sw-1 me-3">
-                                        <div class="sw-1 sh-1 rounded-xl d-flex justify-content-center align-items-center border border-primary">
-                                        </div> 
+                                            <div class="sw-1 sh-1 rounded-xl d-flex justify-content-center align-items-center border border-primary">
+                                            </div> 
                                         </div>
                                     </div>
                                     @endif
                                 </div>
                             </li>
+                            @else
+                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
+                                <div class="row align-items-start ">
+                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
+                                            <div class="sw-1 mb-4">
+                                                <img src="{{$notification->data['petugas_pp']}}" class="sw-5 sh-5 rounded-xl" alt="..." /> 
+                                            </div>
+                                    </div>
+                                    <div class=" col align-self-center">
+                                        <div class="p-3">
+                                            <a href="{{route('dashboard.detailgambar',['gambar_id'=>$notification->data['gambar_id']])}}"
+                                            data-id="{{ $notification->id }}"
+                                            >
+                                                Hai, permintaan <strong class="text-primary">{{$notification->data['kode_permintaan_id']}}</strong> sudah kami proses. Klik disini.</a>
+                                            <div class="d-flex flex-row">
+                                                <div class="mark-as-read">
+                                                    <span id="tanggal-mark-as-read" class="text-primary text-small"><b> {{$notification->updated_at}}</b></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="icon-mark-as-read" class="col col-lg-1 align-self-center">
+                                        <div class="sw-1 me-3">
+                                            <div class="bg-gradient-light sw-1 sh-1 rounded-xl d-flex justify-content-center align-items-center">
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            @endif
                             @empty
                             <li class="mb-3 pb-3 border-bottom border-separator-light ">
                                 <div class="row align-items-start ">
@@ -233,50 +263,7 @@
                                     </div>
                                 </div>
                             </li>
-                        @endforelse
-                    @endif
-
-                    @if(!auth()->user()->level==3)
-                        @forelse(auth()->user()->unreadNotifications as $notification)
-                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
-                                <div class="row align-items-start ">
-                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
-                                            <div class="sw-1 mb-4">
-                                                <img src="{{$notification->data['petugas_pp']}}" class="me-3 sw-4 sh-4 rounded-xl align-self-center" alt="..." />
-                                            </div>
-                                    </div>
-                                    <div class=" col align-self-center">
-                                        <div class="p-3">
-                                            <a href="{{route('dashboard.detailgambar',['gambar_id'=>$notification->data['gambar_id']])}}"
-                                            data-id="{{ $notification->id }}"
-                                            >
-                                                Hai, permintaan <strong class="text-primary">{{$notification->data['kode_permintaan_id']}}</strong> sudah kami proses. Klik disini.</a>
-                                            <div class=" d-flex flex-row-reverse bd-highlight">
-                                                <div class="p-2 bd-highlight ">
-                                                    <span class="text-primary text-small"><b> {{$notification->updated_at}}</b></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col col-lg-1 align-self-center">
-                                        <div class="sw-1 me-3">
-                                            <i class="text-primary" data-acorn-icon="circle" data-acorn-size="18"></i> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            @empty
-                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
-                                <div class="row align-items-start ">
-                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
-                                        <div class="sw-1 mb-4">
-                                        There are no new notifications
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            @endforelse
-                        @endif
+                        @endforelse 
                     </ul>
                 </div>
             </div>
