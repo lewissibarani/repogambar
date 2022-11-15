@@ -145,8 +145,13 @@ class PetugasController extends Controller
             ->update(['gambar_id' => $gambars->id,
                     'idStatus' => 3]);
             
+            try {
+                event(new PetugasPermintaan($permintaan));
+            } catch (Throwable $e) {
+                report($e);
+                return false;
+            }
             
-            event(new PetugasPermintaan($permintaan));
             return redirect()->route('petugas.index');
         }
 

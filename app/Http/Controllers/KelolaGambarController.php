@@ -117,8 +117,14 @@ class KelolaGambarController extends Controller
                 'user_id' =>$petugas_id,
             ]);
             //end of distribusi tugas
-            
-            event(new NewPermintaan($create_transaksi));
+
+            try {
+                event(new NewPermintaan($create_transaksi));
+            } catch (Throwable $e) {
+                report($e);
+                return false;
+            }
+
             return redirect()->route('kelolagambar.index')->with('message','Permintaan Berhasil Dibuat.');
         } 
         else {
