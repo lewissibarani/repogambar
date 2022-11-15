@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard']);
         Route::get('Beranda', [DashboardsController::class, 'dashboard']);
-        Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar');
+        Route::get('DetailGambar/{gambar_id}/notifikasi_id/{notifikasi_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar');
         
     });
 
@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
         Route::get('Index',[PetugasController::class, 'index'])->name('petugas.index');
         Route::get('DaftarTugas',[PetugasController::class, 'daftar_tugas']);
     
-        Route::get('/transaksi/{transaksi_id}/permintaan/{permintaan_id}', [PetugasController::class, 'layani'])->name('petugas.layani');
+        Route::get('/transaksi/{transaksi_id}/permintaan/{permintaan_id}/notifikasi_id/{notifikasi_id}', [PetugasController::class, 'layani'])->name('petugas.layani');
         Route::get('/Transaksi_tolak/{transaksi_id}/Permintaan_tolak/{permintaan_id}', [PetugasController::class, 'layani_tolak'])->name('petugas.layani_tolak');
         Route::get('Pengaturan',[PetugasController::class, 'pengaturan'])->name('petugas.pengaturan');
     

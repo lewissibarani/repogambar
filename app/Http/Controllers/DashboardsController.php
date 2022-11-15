@@ -105,14 +105,22 @@ class DashboardsController extends Controller
     }
 
 
-    public function viewGambar ($gambar_id)
+    public function viewGambar ($gambar_id, $notifikasi_id)
     {
+        //Read Notifikasi 
+        DB::table('notifications')->where(
+            [
+                ['type', '=', 'App\Notifications\PetugasNotification'],
+                ['id', '=', $notifikasi_id], 
+            ]
+        )->update([ 'read_at' => date("Y-m-d H:i:s")]); 
+        // End of Notifikasi
         
         $Data = Gambar::with('user','source','kegunaan','file')->where('id',$gambar_id)->first();
 
         // Mencari item dengan tag yang sama untuk dijadikan rekomendasi
         $Rekomendasi= Gambar::withAnyTag($Data->tagNames())->paginate(3);
-
+        
         return view('dashboard.detailgambar', 
         compact(['Data',
                 'Rekomendasi'

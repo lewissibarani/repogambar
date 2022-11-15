@@ -182,7 +182,7 @@
             <div class="dropdown-menu dropdown-menu wide notification-dropdown scroll-out" id="notifications" style="width:390px; ">
                 <div class="scroll " style="height:300px; width:350px;">
                     <ul class="border-last-none">
-                        @forelse(auth()->user()->unreadNotifications as $notification)
+                        @forelse(auth()->user()->notifications as $notification)
                             @if( $notification->type=='App\Notifications\PermintaanNotification')
                             <li class="pb-1 border-bottom border-separator-light ">
                                 <div class="row align-items-start ">
@@ -194,9 +194,14 @@
                                     <div class=" col align-self-center">
                                         <div class="p-3">
                                             <a href="
-                                            {{route('petugas.layani',['transaksi_id'=>$notification->data['permintaan_id'], 'permintaan_id'=>$notification->data['kode_permintaan_id']])}}
-                                            "
-                                            data-id="{{ $notification->id }}" class="mark-as-read"
+                                            {{route('petugas.layani',
+                                                [
+                                                    'transaksi_id'=>$notification->data['permintaan_id'], 
+                                                    'permintaan_id'=>$notification->data['kode_permintaan_id'],
+                                                    'notifikasi_id'=>$notification->id
+                                                ]
+                                            )}}
+                                            " 
                                             >
                                             <b>{{$notification->data['namapeminta']}}</b>, membuat permintaan: {{$notification->data['kode_permintaan_id']}}.</a>
                                             <div class="d-flex flex-row">
@@ -233,8 +238,10 @@
                                     </div>
                                     <div class=" col align-self-center">
                                         <div class="p-3">
-                                            <a href="{{route('dashboard.detailgambar',['gambar_id'=>$notification->data['gambar_id']])}}"
-                                            data-id="{{ $notification->id }}"
+                                            <a href="{{route('dashboard.detailgambar',[
+                                                'gambar_id'=>$notification->data['gambar_id'],
+                                                'notifikasi_id'=>$notification->id
+                                                ])}}"
                                             >
                                                 Hai, permintaan <strong class="text-primary">{{$notification->data['kode_permintaan_id']}}</strong> sudah kami proses. Klik disini.</a>
                                             <div class="d-flex flex-row">
