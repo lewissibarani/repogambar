@@ -12,6 +12,7 @@
 @section('css')
 <link rel="stylesheet" href="/css/vendor/glide.core.min.css"/>
 <link rel="stylesheet" href="/css/vendor/baguetteBox.min.css"/>
+<link rel="stylesheet" href="/css/vendor/introjs.min.css"/>
 @endsection
 
 @section('js_vendor')
@@ -19,11 +20,13 @@
 <script src="/js/vendor/baguetteBox.min.js"></script>
 <script src="/js/vendor/jquery.validate/jquery.validate.min.js"></script>
 <script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
+<script src="/js/vendor/intro.min.js"></script>
 @endsection
 
 @section('js_page')
 <script src="/js/pages/blocks.gallery.js"></script>
 <script src="/js/pages/auth.search.js"></script>
+<script src="/js/pages/dashboard.default.js"></script>
 @endsection
 
 @section('content')
@@ -41,11 +44,19 @@
                         </div>
                         <div class="w-100 d-md-none"></div>
                         <div class="col col-md-auto d-flex align-items-start justify-content-end">
-                            <a href="/KelolaGambar/Index" class="btn btn-outline-primary btn-icon btn-icon-start ms-1 w-100 w-md-auto">
+                            <a href="/KelolaGambar/Index" class="btn btn-outline-primary btn-icon btn-icon-start ms-1 w-100 w-md-auto" 
+                            data-title="Tombol Permintaan" data-intro="Klik tombol ini untuk melakukan permintaan gambar" data-step="1" >
                                 <i data-acorn-icon="plus"></i>
                                 <span>Buat Permintaan Gambar</span>
-                            </a>
-                        </div>
+                            </a> &nbsp &nbsp
+                            <!-- Tour Button Start -->
+                            <button type="button" class="btn btn-outline-primary btn-icon btn-icon-end w-100 w-sm-auto" id="dashboardTourButton">
+                                <i data-acorn-icon="flag"></i>    
+                                <span>Perkenalan Website</span> 
+                            </button>
+                            <!-- Tour Button End --> 
+                        </div> 
+                            
                     </div>  
                     
                 </div>
@@ -57,7 +68,8 @@
             @csrf
             <div class="row">
                 <div class="col-12 col-xl-12 col-xxl-12 mb-12">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3" 
+                    data-title="Mesin Pencari Gambar" data-intro="Masukkan kata kunci gambar yang ingin dicari" data-step="2">
                         <span class="input-group-text" id="inputGroup-sizing-default">
                         <i data-acorn-icon="search" class="text-primary me-1"></i>    
                         </span>
@@ -76,7 +88,8 @@
             </div>
         </form>
         <div class="row">
-            <div class="col-12 col-xl-8 col-xxl-9 mb-5">
+            <div class="col-12 col-xl-8 col-xxl-9 mb-5"
+            data-title="Daftar Gambar" data-intro="Disini kamu bisa memilih gambar yang sudah pernah diupload oleh petugas kami" data-step="3">
                 <!-- Grid Start -->
                 <h2 class="small-title">Karya Favorit</h2>
                 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 gallery g-2 mb-5">
@@ -134,7 +147,7 @@
                 <div class="row">
 
                     <!-- Penyumbang Unggulan Start -->
-                    <div class="col-12">
+                    <div class="col-12" >
                             <h2 class="small-title">Penyumbang Unggulan</h2>
                             <div class="card mb-5">
                                 <div class="card-body mb-n2 border-last-none h-100">
@@ -176,7 +189,8 @@
                     <!-- Penyumbang Unggulan End -->
 
                     <!-- Tags Start -->
-                    <div class="col-12 col-sm-6 col-xl-12">
+                    <div class="col-12 col-sm-6 col-xl-12"
+                    data-title="Daftar Tag Gambar" data-intro="Kamu juga bisa memilih gambar berdasarkan tags disini" data-step="4">
                         <h2 class="small-title">Tags</h2>
                         <div class="card mb-5">
                             <div class="card-body">
