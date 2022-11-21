@@ -197,8 +197,7 @@
                                             {{route('petugas.layani',
                                                 [
                                                     'transaksi_id'=>$notification->data['permintaan_id'], 
-                                                    'permintaan_id'=>$notification->data['kode_permintaan_id'],
-                                                    'notifikasi_id'=>$notification->id
+                                                    'permintaan_id'=>$notification->data['kode_permintaan_id']
                                                 ]
                                             )}}
                                             " 
@@ -229,7 +228,7 @@
                                 </div>
                             </li>
                             @else
-                            <li class="mb-3 pb-3 border-bottom border-separator-light ">
+                            <li class="pb-1 border-bottom border-separator-light ">
                                 <div class="row align-items-start ">
                                     <div class="col-2 align-self-center "style="margin-b:350px;" >
                                             <div class="sw-1 mb-4">
@@ -239,8 +238,7 @@
                                     <div class=" col align-self-center">
                                         <div class="p-3">
                                             <a href="{{route('dashboard.detailgambar',[
-                                                'gambar_id'=>$notification->data['gambar_id'],
-                                                'notifikasi_id'=>$notification->id
+                                                'gambar_id'=>$notification->data['gambar_id']
                                                 ])}}"
                                             >
                                                 Hai, permintaan <strong class="text-primary">{{$notification->data['kode_permintaan_id']}}</strong> sudah kami proses. Klik disini.</a>
@@ -251,12 +249,21 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if ( $notification->read_at==null)
                                     <div id="icon-mark-as-read" class="col col-lg-1 align-self-center">
                                         <div class="sw-1 me-3">
                                             <div class="bg-gradient-light sw-1 sh-1 rounded-xl d-flex justify-content-center align-items-center">
                                             </div> 
                                         </div>
                                     </div>
+                                    @else
+                                    <div id="icon-mark-as-read" class="col col-lg-1 align-self-center">
+                                        <div class="sw-1 me-3">
+                                            <div class="sw-1 sh-1 rounded-xl d-flex justify-content-center align-items-center border border-primary">
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                             </li>
                             @endif

@@ -16,6 +16,7 @@ use App\Models\Transaksi;
 use App\Models\Gambar;
 use App\Models\PembagianTugas;
 use Conner\Tagging\Model\Tag;
+use Illuminate\Support\Facades\DB;
 
 class DashboardsController extends Controller
 {
@@ -105,21 +106,29 @@ class DashboardsController extends Controller
     }
 
 
-    public function viewGambar ($gambar_id, $notifikasi_id)
+    public function viewGambar ($gambar_id)
     {
-        //Read Notifikasi 
-        DB::table('notifications')->where(
-            [
-                ['type', '=', 'App\Notifications\PetugasNotification'],
-                ['id', '=', $notifikasi_id], 
-            ]
-        )->update([ 'read_at' => date("Y-m-d H:i:s")]); 
-        // End of Notifikasi
         
         $Data = Gambar::with('user','source','kegunaan','file')->where('id',$gambar_id)->first();
-
+        $Transaksi=Transaksi::with('gambar')->where('gambar_id',$gambar_id)->first();
         // Mencari item dengan tag yang sama untuk dijadikan rekomendasi
         $Rekomendasi= Gambar::withAnyTag($Data->tagNames())->paginate(3);
+
+        //Start Read The Notification  
+        $Notifikasi = DB::table('notifications')->where(
+            [
+                ['type', '=', 'App\Notifications\PetugasNotification']
+            ]
+        )->get();
+        
+        foreach ($Notifikasi as $notification) {  
+            if(json_decode($notification->data)->kode_permintaan_id==$Transaksi->id_permintaan)
+            {
+                $Notifikasi = DB::table('notifications')->where('id', $notification->id)
+                ->update([  'read_at' => date("Y-m-d H:i:s")]);
+            }
+        }
+        //End Read The Notification
         
         return view('dashboard.detailgambar', 
         compact(['Data',

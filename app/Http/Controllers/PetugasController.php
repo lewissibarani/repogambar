@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\User_Petugas;
 use App\Providers\PetugasPermintaan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PetugasController extends Controller
 {
@@ -64,7 +65,7 @@ class PetugasController extends Controller
     { 
         if($this->cek_sudah_di_layani_apa_belum($request->transaksi_id)){
 
-            
+            $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
             $this->validate($request, [
                 'image' => 'required|image',
                 'file' => 'mimes:zip,rar|file|max:30000',
@@ -79,30 +80,30 @@ class PetugasController extends Controller
             $gambar_size=null;
             $tipe_gambar=null;
 
-            if($request->file('image')){
-                $gambar= $request->file('image');
-                $gambar_name= date('YmdHi').$gambar->getClientOriginalName();
-                $gambar-> move(public_path('img/uploadedGambar/'), $gambar_name);
-                $gambar_size=filesize(public_path('img/uploadedGambar/'.$gambar_name));
-                $tipe_gambar=\File::extension('img/uploadedGambar/'.$gambar_name);
-                //Membuat thumbnail
-                $this->createThumbnail(public_path('img/uploadedGambar/').$gambar_name, public_path('img/thumbnail/').$gambar_name, 500);
+            if($request->file('image')){ 
+                $gambar_name=date('YmdHi').$request->file('image')->getClientOriginalName();
+                $gambar= $request->file('image')->storeAs(
+                    'public/uploadedGambar', $gambar_name
+                );    
+                $gambar_size=Storage::size('public/uploadedGambar/'.$gambar_name);
+                $tipe_gambar=\File::extension(Storage::url('public/uploadedGambar/'.$gambar_name)); 
+                //Membuat thumbnail  
+                $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 500);
             }
 
-            if($request->file('file')){
-                $file= $request->file('file');
-                $file_name= date('YmdHi').$file->getClientOriginalName();
+            if($request->file('file')){ 
+                $file_name=date('YmdHi').$request->file('file')->getClientOriginalName();
+                $file= $request->file('file')->storeAs(
+                    'public/file/', $file_name
+                );   
 
                 //Memghilangkan spesial character di path
-                $file_name = str_replace(Array("\n", "\r", "\n\r"), '', $file_name);
-
-                $file-> move(public_path('filezip/'), $file_name);
-
+                $file_name = str_replace(Array("\n", "\r", "\n\r"), '', $file_name); 
                 $filezip =File::create([
-                    'path' => 'filezip/'.$file_name,
+                    'path' => 'storage/file/'.$file_name,
                     'nama_file' => $file_name,
-                    'size' => filesize(public_path('filezip/'.$file_name)),
-                    'type' => \File::extension('filezip/'.$file_name),
+                    'size' => Storage::size('public/file/'.$file_name),  
+                    'type' => \File::extension(Storage::url('public/file/'.$file_name)),
                     ]);
 
                 $fileid=$filezip->id;
@@ -111,8 +112,7 @@ class PetugasController extends Controller
             
             if(strpos($request->link, 'freepik')){
                 $source_id=1;
-            }
-
+            } 
             if(strpos($request->link, 'shutterstock')){
                     $source_id=2;
                 }
@@ -125,8 +125,8 @@ class PetugasController extends Controller
                 'link' => $request->link,
                 'idKegunaan' => $request->idKegunaan,
                 'idUser' => Auth::id(),
-                'path' =>'img/uploadedGambar/'.$gambar_name,
-                'thumbnail_path' =>'img/thumbnail/'.$gambar_name,
+                'path' =>'storage/uploadedGambar/'.$gambar_name,
+                'thumbnail_path' =>'storage/thumbnail/'.$gambar_name,
                 'ukuran' =>$gambar_size,
                 'nama_gambar' =>$gambar_name,
                 'source_id' => $source_id,
@@ -147,6 +147,23 @@ class PetugasController extends Controller
 
             $permintaan = Transaksi::where('id', $id_permintaan)->first();
             
+            //Start Read The Notification  
+            $Notifikasi = DB::table('notifications')->where(
+                [
+                    ['type', '=', 'App\Notifications\PermintaanNotification']
+                ]
+            )->get();
+            
+            foreach ($Notifikasi as $notification) {  
+                if(json_decode($notification->data)->kode_permintaan_id==$permintaan->id_permintaan)
+                {
+                    $Notifikasi = DB::table('notifications')->where('id', $notification->id)
+                    ->update([  'read_at' => date("Y-m-d H:i:s")]);
+                }
+            }
+            //End Read The Notification
+
+            //kasih tau ke User via notifikasi kalau permintaannya sudah di selesaikan
             try {
                 event(new PetugasPermintaan($permintaan));
             } catch (Throwable $e) {
@@ -164,11 +181,11 @@ class PetugasController extends Controller
     public function tolak (Request $request)
     {
         if($this->cek_sudah_di_layani_apa_belum($request->transaksi_id)){
+
         $this->validate($request, [
             'alasanDitolak' => 'required',
         ]);
         
-
         //mencari id transaksi permitaan gambar di tabel pembagian tugas
         $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
 
@@ -177,6 +194,24 @@ class PetugasController extends Controller
         ->update([  'gambar_id' => $request->id,
                     'idStatus' => 2,
                     'alasanDitolak' => $request->alasanDitolak]);
+        
+        $permintaan = Transaksi::where('id', $id_permintaan)->first();
+
+        //Start Read The Notification  
+        $Notifikasi = DB::table('notifications')->where(
+            [
+                ['type', '=', 'App\Notifications\PermintaanNotification']
+            ]
+        )->get();
+        
+        foreach ($Notifikasi as $notification) {  
+            if(json_decode($notification->data)->kode_permintaan_id==$permintaan->id_permintaan)
+            {
+                $Notifikasi = DB::table('notifications')->where('id', $notification->id)
+                ->update([  'read_at' => date("Y-m-d H:i:s")]);
+            }
+        }
+        //End Read The Notification
 
         return redirect()->route('petugas.index');
     }
@@ -203,18 +238,10 @@ class PetugasController extends Controller
         
     }
 
-    public function layani ($transaksi_id, $permintaan_id, $notifikasi_id)
+    public function layani ($transaksi_id, $permintaan_id)
     {
         if($this->cek_sudah_di_layani_apa_belum($transaksi_id)){
-            //Start Read The Notification 
-            DB::table('notifications')->where(
-                    [
-                        ['type', '=', 'App\Notifications\PermintaanNotification'],
-                        ['id', '=', $notifikasi_id], 
-                    ]
-                )->update([ 'read_at' => date("Y-m-d H:i:s")]);
-            //End Read The Notification
-
+           
             $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
             ->where('user_id',Auth::id())
             ->where('permintaan_id', $transaksi_id)
@@ -231,7 +258,7 @@ class PetugasController extends Controller
         return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
 
     }
-
+ 
     public function pengaturan ()
     {
         $User = User::all();
