@@ -1,18 +1,3 @@
-<script>
-    function getMessage() {
-    $.ajax({
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        type:'POST',
-        url:'/Notifikasi/Dibaca',
-        data:'_token = {{csrf_token()}}',
-        success:function(data) {
-            // $("#msg").html(data.msg);
-            alert("Hello! I am an alert box!!");
-        }
-    });
-    }
-</script>
-
 <div class="nav-content d-flex">
     <!-- Logo Start -->
     <div class="logo position-relative">
