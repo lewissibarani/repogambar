@@ -27,10 +27,6 @@ Route::redirect('/', '/Dashboard/Beranda');
 |
 */
 
-Route::get('/linkstorage', function () {
-    Artisan::call('storage:link');
-});
-
 Route::middleware('auth')->group(function () {
     Route::redirect('/', '/Dashboard');
 
@@ -66,6 +62,7 @@ Route::middleware('auth')->group(function () {
         Route::get('DaftarTugas',[PetugasController::class, 'daftar_tugas']);
     
         Route::get('/transaksi/{transaksi_id}/permintaan/{permintaan_id}', [PetugasController::class, 'layani'])->name('petugas.layani');
+        Route::get('/edit_transaksi/{transaksi_id}/edit_permintaan/{permintaan_id}', [PetugasController::class, 'edit_layani'])->name('petugas.edit_layani');
         Route::get('/Transaksi_tolak/{transaksi_id}/Permintaan_tolak/{permintaan_id}', [PetugasController::class, 'layani_tolak'])->name('petugas.layani_tolak');
         Route::get('Pengaturan',[PetugasController::class, 'pengaturan'])->name('petugas.pengaturan');
     

@@ -140,13 +140,15 @@
                                                 {
                                                 @endphp
                                                                         <button
-                                                                                class="btn btn-sm btn-outline-danger align-top dropdown-toggle"
-                                                                                type="button"
+                                                                                class="btn btn-sm btn-icon btn-icon-start btn-danger mb-1 align-top dropdown-toggle"
+                                                                                type="button" 
+                                                                                title="Alasan Ditolak"
                                                                                 data-bs-toggle="dropdown"
                                                                                 aria-expanded="false"
                                                                                 aria-haspopup="true"
-                                                                        > 
-                                                                            Alasan Ditolak
+                                                                        >  
+                                                                        <i data-acorn-icon="close-circle"></i>
+                                                                        
                                                                         </button>
                                                                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end ">
                                                                             <div class="p-3">
@@ -158,19 +160,33 @@
                                                 if($datas->permintaan->idStatus==1)
                                                 { 
                                                 @endphp
-                                                <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-left">
-                                                        <button type="button" class="btn btn-sm btn-outline-primary ">      
+                                                <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-left">    
                                                                 <a data-bs-delay="0"
+                                                                class="btn btn-sm btn-icon btn-icon-start btn-outline-primary mb-1"
                                                                 data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="Layani"
                                                                 href="transaksi/{{$datas->permintaan->id}}/permintaan/{{$datas->permintaan->id_permintaan}}">
-                                                                <i data-acorn-icon="attachment"></i> Layani
-                                                                </a>
-                                                        </button>
+                                                                <i data-acorn-icon="send"></i>
+                                                                </a> 
                                                 </div>
                                                 @php
                                                 };
+                                                if($datas->permintaan->idStatus==3)
+                                                {
+                                                @endphp
+                                                <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-left">    
+                                                                <a data-bs-delay="0"
+                                                                class="btn btn-sm btn-icon btn-icon-start btn-primary mb-1"
+                                                                data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                title="Edit"
+                                                                href="edit_transaksi/{{$datas->permintaan->id}}/edit_permintaan/{{$datas->permintaan->id_permintaan}}">
+                                                                <i data-acorn-icon="edit"></i>
+                                                                </a> 
+                                                </div>
+                                                @php 
+                                                }
                                                 @endphp
                                             </td>
                                         </tr>

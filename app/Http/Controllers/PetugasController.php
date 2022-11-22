@@ -258,6 +258,26 @@ class PetugasController extends Controller
         return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
 
     }
+
+    public function edit_layani ($id_transaksi)
+    {
+         
+            $Data = Transaksi::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
+            ->where('user_id',Auth::id())
+            ->where('permintaan_id', $transaksi_id)
+            ->first();
+
+            $Source = Source::all();
+            return view('petugas.edit_layani', 
+            compact(['transaksi_id',
+                    'permintaan_id',
+                    'Source',
+                    'Data'
+                ])); 
+
+        return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
+
+    }
  
     public function pengaturan ()
     {
