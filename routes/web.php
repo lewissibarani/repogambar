@@ -27,6 +27,9 @@ Route::redirect('/', '/Dashboard/Beranda');
 |
 */
 
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 
 Route::middleware('auth')->group(function () {
     Route::redirect('/', '/Dashboard');
