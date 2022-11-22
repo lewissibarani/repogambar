@@ -100,7 +100,8 @@
                             <div class="card hover-img-scale-up hover-reveal">
                                     <img class="card-img sh-50 scale" 
                                     data-original="{{$datas->thumbnail_path}}"
-                                    alt="card image" />
+                                    alt="card image" 
+                                    src="{{$datas->thumbnail_path}}"/>
                                     <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
                                             <div class="row g-0">
                                             </div>
