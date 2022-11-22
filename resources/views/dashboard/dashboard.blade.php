@@ -93,7 +93,7 @@
             data-title="Daftar Gambar" data-intro="Disini kamu bisa memilih gambar yang sudah pernah diupload oleh petugas kami" data-step="3">
                 <!-- Grid Start -->
                 <h2 class="small-title">Karya Favorit </h2>
-                {{$Link_test}}
+                <!-- {{$Link_test}} -->
                 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 gallery g-2 mb-5">
                     @foreach ($Data as $datas)
                         <div class="col">
