@@ -17,6 +17,7 @@ use App\Models\Gambar;
 use App\Models\PembagianTugas;
 use Conner\Tagging\Model\Tag;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardsController extends Controller
 {
@@ -44,7 +45,7 @@ class DashboardsController extends Controller
 
         //menampilkan penyumbang gambar
         $Users = User_Petugas::with('users')->paginate(4);
-
+        $Link_test = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         //Menampilkan Tags
         $Tags= Tag::where('count', '>', 0)->paginate(12);
         $Data = Gambar::with('user','kegunaan','source')
@@ -54,7 +55,8 @@ class DashboardsController extends Controller
         return view('dashboard.dashboard',
         compact(['Data',
                  'Tags',
-                 'Users'
+                 'Users',
+                 'Link_test'
         ]));
     }
 
