@@ -132,6 +132,7 @@ class PetugasController extends Controller
                 'source_id' => $source_id,
                 'file_id' => $fileid,
                 'tipe_gambar' => $tipe_gambar,
+                'views' => 0,
             ]);
             
             //Menyimpan Tags
