@@ -137,12 +137,19 @@
                                             $link=substr($link,0,30).'...';
                                         }
 
+                                        $judul=$datas->judulPermintaan;
+                                        $judul_trimmed=null;
+                                        if(strlen($judul)>30){
+                                            $judul=substr($judul,0,30).'...';
+                                        }
+
+
                                         $update_terakhir=date_format($datas->updated_at,"Y/m/d_H:i:s");
                                         
                                         @endphp
                                         <tr style="height:50px;">
                                             <td>#{{$datas->id_permintaan}}</td>
-                                            <td class="text-alternate">{{$datas->judulPermintaan}}</td>
+                                            <td class="text-alternate">{{$judul}}</td>
                                             <td class="text-alternate">{{$datas->kegunaan->kegunaan}}</td>
                                             <td class="text-alternate"><a href="{{$datas->linkPermintaan}}" target="_blank" rel="noopener noreferrer">{{$link}}</a></td>
                                             <td class="text-alternate">{{$update_terakhir}}</td>
