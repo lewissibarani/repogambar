@@ -22,6 +22,7 @@
 <script src="/js/vendor/jquery.validate/jquery.validate.min.js"></script>
 <script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
 <script src="/js/vendor/intro.min.js"></script>
+<script src="/js/cs/responsivetab.js"></script>
 @endsection
 
 @section('js_page')
@@ -91,50 +92,130 @@
         <div class="row">
             <div class="col-12 col-xl-8 col-xxl-9 mb-5"
             data-title="Daftar Gambar" data-intro="Disini kamu bisa memilih gambar yang sudah pernah diupload oleh petugas kami" data-step="3">
-                <!-- Grid Start -->
-                <h2 class="small-title">Karya Favorit </h2> 
-                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 gallery g-2 mb-5">
-                    @foreach ($Data as $datas)
-                        <div class="col">
-                            <div class="card hover-img-scale-up hover-reveal">
-                                    <img class="card-img sh-50 scale" 
-                                    data-original="{{$datas->thumbnail_path}}"
-                                    alt="card image" />
-                                    <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
-                                            <div class="row g-0">
-                                            </div>
-                                            <div class="row g-0">
-                                                <div class="col pe-2">
-                                                    <a href="Dashboard/DetailGambar/{{$datas->id}}" class="stretched-link">
-                                                        <h5 class="heading text-white mb-1">{{$datas->judul}}</h5>
-                                                    </a>
-                                                    <div class="d-inline-block">
-                                                        <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->tipe_gambar}}</span></div>
+                <!-- Title Tabs Start -->
+                <ul class="nav nav-tabs nav-tabs-title nav-tabs-line-title responsive-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#projectsTab" role="tab" aria-selected="true">Terbaru</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="#collectionsTab" role="tab" aria-selected="false">Paling Banyak Dilihat</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="#friendsTab" role="tab" aria-selected="false"></a>
+                    </li>
+                    <li class="nav-item dropdown ms-auto d-none responsive-tab-dropdown">
+                        <a
+                                class="btn btn-icon btn-icon-only btn-background pt-0"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                data-diplay="static"
+                        >
+                            <i data-acorn-icon="more-horizontal"></i>
+                        </a>
+                        <ul class="dropdown-menu mt-2 dropdown-menu-end"></ul>
+                    </li>
+                </ul>
+                <!-- Title Tabs End -->
+                <div class="tab-content">
+                    <!-- Terbaru Tab Start -->
+                    <div class="tab-pane fade active show" id="projectsTab" role="tabpanel">
+                        <!-- Grid Start --> 
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 gallery g-2 mb-5">
+                            @foreach ($Data as $datas)
+                                <div class="col">
+                                    <div class="card hover-img-scale-up hover-reveal">
+                                            <img class="card-img sh-50 scale" 
+                                            data-original="{{$datas->thumbnail_path}}"
+                                            alt="card image" />
+                                            <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
+                                                    <div class="row g-0">
                                                     </div>
-                                                    @php
-                                                    if($datas->file_id!==null)
-                                                        {
-                                                        @endphp
-                                                        <div class="d-inline-block">
-                                                            <div class="text-uppercase"><span class='badge rounded-pill bg-light'>ZIP</span></div>
+                                                    <div class="row g-0">
+                                                        <div class="col pe-2">
+                                                            <a href="Dashboard/DetailGambar/{{$datas->id}}" class="stretched-link">
+                                                                <h5 class="heading text-white mb-1">{{$datas->judul}}</h5>
+                                                            </a>
+                                                            <div class="d-inline-block">
+                                                                <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->tipe_gambar}}</span></div>
+                                                            </div>
+                                                            @php
+                                                            if($datas->file_id!==null)
+                                                                {
+                                                                @endphp
+                                                                <div class="d-inline-block">
+                                                                    <div class="text-uppercase"><span class='badge rounded-pill bg-light'>ZIP</span></div>
+                                                                </div>
+                                                                @php
+                                                                    $file = "zip";
+                                                                }
+                                                            @endphp
+                                                            <div class="d-inline-block">
+                                                                <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->source->sumber_gambar}}</span></div>
+                                                            </div>
+                                                            
                                                         </div>
-                                                        @php
-                                                            $file = "zip";
-                                                        }
-                                                    @endphp
-                                                    <div class="d-inline-block">
-                                                        <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->source->sumber_gambar}}</span></div>
                                                     </div>
-                                                    
                                                 </div>
-                                            </div>
-                                        </div>
-                            </div>
+                                    </div>
+                                </div>
+                                
+                            @endforeach
                         </div>
-                        <!-- src="{{$datas->thumbnail_path}}"  -->
-                    @endforeach
-                </div>
-                <!-- Grid End -->
+                        <!-- Grid End -->
+                    </div>
+                    <!-- Terbaru Tab End -->
+
+                    <!-- Paling Banyak Dilihat Tab Start -->
+                    <div class="tab-pane fade" id="collectionsTab" role="tabpanel">
+                        <!-- Grid Start --> 
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 gallery g-2 mb-5">
+                            @foreach ($Terfavorit as $favorit)
+                                <div class="col">
+                                    <div class="card hover-img-scale-up hover-reveal">
+                                            <img class="card-img sh-50 scale" 
+                                            data-original="{{$favorit->thumbnail_path}}"
+                                            alt="card image" />
+                                            <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
+                                                    <div class="row g-0">
+                                                    </div>
+                                                    <div class="row g-0">
+                                                        <div class="col pe-2">
+                                                            <a href="Dashboard/DetailGambar/{{$favorit->id}}" class="stretched-link">
+                                                                <h5 class="heading text-white mb-1">{{$favorit->judul}}</h5>
+                                                            </a>
+                                                            <div class="d-inline-block">
+                                                                <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$favorit->tipe_gambar}}</span></div>
+                                                            </div>
+                                                            @php
+                                                            if($favorit->file_id!==null)
+                                                                {
+                                                                @endphp
+                                                                <div class="d-inline-block">
+                                                                    <div class="text-uppercase"><span class='badge rounded-pill bg-light'>ZIP</span></div>
+                                                                </div>
+                                                                @php
+                                                                    $file = "zip";
+                                                                }
+                                                            @endphp
+                                                            <div class="d-inline-block">
+                                                                <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$favorit->source->sumber_gambar}}</span></div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                </div>
+                                
+                            @endforeach
+                        </div>
+                        <!-- Grid End -->
+                    </div>
+                    <!-- Paling Banyak Dilihat Tab End -->
+                </div>      
 
                 <div class="row">
                     <div class="col-12 text-center">

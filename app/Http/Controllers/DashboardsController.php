@@ -14,6 +14,7 @@ use Illuminate\Validation\Rules;
 use SebastianBergmann\Environment\Console;
 use App\Models\Transaksi;
 use App\Models\Gambar;
+use App\Models\GambarView;
 use App\Models\PembagianTugas;
 use Conner\Tagging\Model\Tag;
 use Illuminate\Support\Facades\DB;
@@ -44,10 +45,15 @@ class DashboardsController extends Controller
     {
 
         //menampilkan penyumbang gambar
-        $Users = User_Petugas::with('users')->paginate(4);
-        $Link_test = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+        $Users = User_Petugas::with('users')->paginate(5); 
+
         //Menampilkan Tags
         $Tags= Tag::where('count', '>', 0)->paginate(12);
+
+        //Menampilkan Aset Digital Terfavorit
+        $Terfavorit = Gambar::with('user')->orderBy('views', 'desc')->get();
+        
+        //Menampilkan Aset Digital Terbaru
         $Data = Gambar::with('user','kegunaan','source')
         ->orderBy('created_at', 'desc')
         ->get();
@@ -56,7 +62,7 @@ class DashboardsController extends Controller
         compact(['Data',
                  'Tags',
                  'Users',
-                 'Link_test'
+                 'Terfavorit'
         ]));
     }
 
@@ -110,7 +116,20 @@ class DashboardsController extends Controller
 
     public function viewGambar ($gambar_id)
     {
-        
+        // Catat View Gambar
+        //Some bits from the following query ("category", "user") are made for my own application, but I felt like leaving it for inspiration. 
+        $gambar = Gambar::with('user')->find($gambar_id);
+
+        if($gambar->showGambar()){// this will test if the user viwed the gambar or not
+            // return $gambar;
+        }
+
+        $gambar->increment('views');//I have a separate column for views in the gambar table. This will increment the views column in the gambars table.
+      
+
+        GambarView::createViewLog($gambar); 
+        // End of View gambar
+
         $Data = Gambar::with('user','source','kegunaan','file')->where('id',$gambar_id)->first();
         $Transaksi=Transaksi::with('gambar')->where('gambar_id',$gambar_id)->first();
         // Mencari item dengan tag yang sama untuk dijadikan rekomendasi
