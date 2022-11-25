@@ -167,7 +167,7 @@
             <div class="dropdown-menu dropdown-menu wide notification-dropdown scroll-out" id="notifications" style="width:390px; ">
                 <div class="scroll " style="height:300px; width:350px;">
                     <ul class="border-last-none">
-                        @forelse(auth()->user()->notifications as $notification)
+                        @forelse(auth()->user()->notifications->sortBy('read_at') as $notification)
                             @if( $notification->type=='App\Notifications\PermintaanNotification')
                             <li class="pb-1 border-bottom border-separator-light ">
                                 <div class="row align-items-start ">
@@ -255,9 +255,9 @@
                             @empty
                             <li class="mb-3 pb-3 border-bottom border-separator-light ">
                                 <div class="row align-items-start ">
-                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
+                                    <div class="col-2 align-self-center">
                                         <div class="">
-                                        There are no new notifications
+                                        
                                         </div>
                                     </div>
                                 </div>
