@@ -55,8 +55,8 @@ class PetugasController extends Controller
         $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
         ->where('user_id',Auth::id())->get();
 
-        //Kalau dia taskmaster dan superadmin bisa lihat semua tugas
-        if(Auth::user()->level<=5){
+        //Kalau dia taskmaster dan superadmin bisa
+        if(Auth::user()->level<=2){
             $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
             ->get();
         }
@@ -234,6 +234,12 @@ class PetugasController extends Controller
         ->where('permintaan_id', $transaksi_id)
         ->first();
 
+        if(Auth::user()->level<=2){
+                $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan') 
+                ->where('permintaan_id', $transaksi_id)
+                ->first();
+                }
+
         return view('petugas.layani_tolak', 
         compact(['transaksi_id',
                 'permintaan_id',
@@ -247,12 +253,18 @@ class PetugasController extends Controller
 
     public function layani ($transaksi_id, $permintaan_id)
     {
-        if($this->cek_sudah_di_layani_apa_belum($transaksi_id)){
-           
+        if($this->cek_sudah_di_layani_apa_belum($transaksi_id)){ 
             $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
             ->where('user_id',Auth::id())
             ->where('permintaan_id', $transaksi_id)
-            ->first();
+            ->first(); 
+            
+            if(Auth::user()->level<=2){
+                $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan') 
+                ->where('permintaan_id', $transaksi_id)
+                ->first();
+                }
+            
 
             $Source = Source::all();
             return view('petugas.layani', 
