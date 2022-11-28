@@ -279,14 +279,18 @@
                     <span class="label">Dashboard</span>
                 </a>
             </li>
+            @php 
+            if( Auth::user()->level==4){
+            @endphp
             <li>
                 <a href="/KelolaGambar/Index">
                     <i data-acorn-icon="notebook-1" class="icon" data-acorn-size="18"></i>
                     <span class="label">Permintaan Gambar</span>
                 </a>
             </li>
-            @php 
-            if( Auth::user()->level==3){
+            @php
+            }; 
+            if( Auth::user()->level<=3){
             @endphp
                 <li>
                 <a href="/Petugas/Index">

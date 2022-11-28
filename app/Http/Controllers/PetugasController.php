@@ -54,6 +54,12 @@ class PetugasController extends Controller
         // Mengambil data didatabase
         $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
         ->where('user_id',Auth::id())->get();
+
+        //Kalau dia taskmaster dan superadmin bisa lihat semua tugas
+        if(Auth::id()<=2){
+            $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
+            ->get();
+        }
         
         $Source = Source::all();
         return view('petugas.index', compact(['Data',
