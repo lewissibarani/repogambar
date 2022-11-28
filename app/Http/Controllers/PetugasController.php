@@ -56,7 +56,7 @@ class PetugasController extends Controller
         ->where('user_id',Auth::id())->get();
 
         //Kalau dia taskmaster dan superadmin bisa lihat semua tugas
-        if(Auth::id()<=2){
+        if(Auth::user()->level<=5){
             $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
             ->get();
         }
