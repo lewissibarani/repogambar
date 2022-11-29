@@ -126,6 +126,123 @@ class PetugasController extends Controller
                     $source_id=3;
                 }
             
+            
+                $gambars=Gambar::create([
+                'judul' => $request->judul,
+                'link' => $request->link,
+                'idKegunaan' => $request->idKegunaan,
+                'idUser' => Auth::id(),
+                'path' =>'storage/uploadedGambar/'.$gambar_name,
+                'thumbnail_path' =>'storage/thumbnail/'.$gambar_name,
+                'ukuran' =>$gambar_size,
+                'nama_gambar' =>$gambar_name,
+                'source_id' => $source_id,
+                'file_id' => $fileid,
+                'tipe_gambar' => $tipe_gambar,
+                'views' => 0,
+            ]);
+            
+            //Menyimpan Tags
+            $gambars->tag($this->convertArray($request->tags));
+            
+            //mencari id transaksi permitaan gambar di tabel pembagian tugas
+            $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
+
+            //merubah status permintaan gambar menjadi selesai
+            $permintaan = Transaksi::where('id', $id_permintaan)
+            ->update(['gambar_id' => $gambars->id,
+                    'idStatus' => 3]);
+
+            $permintaan = Transaksi::where('id', $id_permintaan)->first();
+            
+            //Start Read The Notification  
+            $Notifikasi = DB::table('notifications')->where(
+                [
+                    ['type', '=', 'App\Notifications\PermintaanNotification']
+                ]
+            )->get();
+            
+            foreach ($Notifikasi as $notification) {  
+                if(json_decode($notification->data)->kode_permintaan_id==$permintaan->id_permintaan)
+                {
+                    $Notifikasi = DB::table('notifications')->where('id', $notification->id)
+                    ->update([  'read_at' => date("Y-m-d H:i:s")]);
+                }
+            }
+            //End Read The Notification
+
+            //kasih tau ke User via notifikasi kalau permintaannya sudah di selesaikan
+            try {
+                event(new PetugasPermintaan($permintaan));
+            } catch (Throwable $e) {
+                report($e);
+                return false;
+            }
+            
+            return redirect()->route('petugas.index')->with('message', 'Permintaan berhasil dilayani');
+        }
+
+        return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
+        
+    }
+
+    public function edit_store (Request $request)
+    {  
+            $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+            $this->validate($request, [
+                'image' => 'image',
+                'file' => 'mimes:zip,rar|file|max:30000',
+                'tags' => 'required',
+            ]);
+
+            //Given Constants
+            $gambar_name="";
+            $filezip=null;
+            $fileid=null;
+            $source_id=3;
+            $gambar_size=null;
+            $tipe_gambar=null;
+
+            if($request->file('image')){ 
+                $gambar_name=date('YmdHi').$request->file('image')->getClientOriginalName();
+                $gambar= $request->file('image')->storeAs(
+                    'public/uploadedGambar', $gambar_name
+                );    
+                $gambar_size=Storage::size('public/uploadedGambar/'.$gambar_name);
+                $tipe_gambar=\File::extension(Storage::url('public/uploadedGambar/'.$gambar_name)); 
+                //Membuat thumbnail  
+                $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 1000);
+            }
+
+            if($request->file('file')){ 
+                $file_name=date('YmdHi').$request->file('file')->getClientOriginalName();
+                $file= $request->file('file')->storeAs(
+                    'public/file/', $file_name
+                );   
+
+                //Memghilangkan spesial character di path
+                $file_name = str_replace(Array("\n", "\r", "\n\r"), '', $file_name); 
+                $filezip =File::create([
+                    'path' => 'storage/file/'.$file_name,
+                    'nama_file' => $file_name,
+                    'size' => Storage::size('public/file/'.$file_name),  
+                    'type' => \File::extension(Storage::url('public/file/'.$file_name)),
+                    ]);
+
+                $fileid=$filezip->id;
+                
+            }
+            
+            if(strpos($request->link, 'freepik')){
+                $source_id=1;
+            } 
+            if(strpos($request->link, 'shutterstock')){
+                    $source_id=2;
+                }
+                else{
+                    $source_id=3;
+                }
+            
             $gambars=Gambar::create([
                 'judul' => $request->judul,
                 'link' => $request->link,
@@ -178,10 +295,7 @@ class PetugasController extends Controller
                 return false;
             }
             
-            return redirect()->route('petugas.index')->with('message', 'Permintaan berhasil dilayani');;
-        }
-
-        return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
+            return redirect()->route('petugas.index')->with('message', 'Permintaan berhasil dilayani');
         
     }
 
@@ -280,18 +394,19 @@ class PetugasController extends Controller
 
     public function edit_layani ($id_transaksi)
     {
-         
-            $Data = Transaksi::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
-            ->where('user_id',Auth::id())
-            ->where('permintaan_id', $transaksi_id)
-            ->first();
-
+            $Data = Transaksi::with('user','gambar') 
+            ->where('id', $id_transaksi)
+            ->first(); 
+            
+            $Gambar =  Gambar::with('tagged')->where('id',$Data->gambar->id)->first(); 
+            $Tags = "";
+            foreach($Gambar->tagged as $tagged) {
+                $Tags= $Tags.$tagged->tag_name.', ';
+            } 
+            
             $Source = Source::all();
             return view('petugas.edit_layani', 
-            compact(['transaksi_id',
-                    'permintaan_id',
-                    'Source',
-                    'Data'
+            compact([ 'Source','Data','Tags'
                 ])); 
 
         return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaksi extends Model
 {
-    use HasFactory;
+    use HasFactory; 
 
     protected $table = 'permintaan';
 

@@ -187,7 +187,7 @@
                                                                 data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="Edit"
-                                                                href="edit_transaksi/{{$datas->permintaan->id}}/edit_permintaan/{{$datas->permintaan->id_permintaan}}">
+                                                                href="edit_transaksi/{{$datas->permintaan->id}}">
                                                                 <i data-acorn-icon="edit"></i>
                                                                 </a> 
                                                 </div>
