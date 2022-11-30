@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-        </form>  
+        </form>   
         <div class="row">
             <div class="col-12 col-xl-8 col-xxl-9 mb-5"
             data-title="Daftar Gambar" data-intro="Disini kamu bisa memilih gambar yang sudah pernah diupload oleh petugas kami" data-step="3">

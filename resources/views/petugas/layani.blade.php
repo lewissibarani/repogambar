@@ -118,34 +118,30 @@
                                         <?php echo $Data->permintaan->status->status ?>
                                     </label>              
                                 </div>
-                            </div>
-
-                            <!-- <div class="row mb-3">
-                                <label class="font-weight-bold col-sm-2 col-form-label">Source</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" name="source_id" id="select2Basic">
-                                        <option selected>Pilih...</option>
-                                        @foreach ($Source as $source)
-                                            <option value="{{ $source->id }}">{{ $source->sumber_gambar }}</option> 
-                                        @endforeach
-                                    </select>            
-                                </div>
-                            </div> -->
+                            </div> 
 
                             <div class="row mb-3">
                                 <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload Gambar</label>
                                 <div class="col-sm-10">
                                     <div class="col-sm-12 col-form-label card no-shadow">
-                                        <input type="file" class="form-control" name="image" />
+                                        <input type="file" class="form-control" 
+                                        name="image"
+                                        id="image_input" 
+                                        style="max-width: 450px;"/> 
                                     </div>   
+
+                                    <div class="col-md-12 mb-2">
+                                        <img class ="card-img sw-50 scale" id="preview-image-before-upload"  
+                                            alt="preview image"> 
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload File</label>
+                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload File  <span class="font-italic"> (Optional) </span> </label>
                                 <div class="col-sm-10">
                                     <div class="col-sm-12 col-form-label card no-shadow">
-                                        <input type="file" class="form-control" name="file" />
+                                        <input type="file" class="form-control" name="file" style="max-width: 450px;" />
                                     </div>   
                                 </div>
                             </div>
@@ -174,5 +170,27 @@
                 </div>
             </div>  
         </div> 
-</div>
+</div> 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+      
+$(document).ready(function (e) {
+ 
+   
+   $('#image_input').change(function(){
+            
+    let reader = new FileReader();
+ 
+    reader.onload = (e) => { 
+ 
+      $('#preview-image-before-upload').attr('src', e.target.result); 
+    }
+ 
+    reader.readAsDataURL(this.files[0]); 
+   
+   });
+   
+});
+ 
+</script>
 @endsection

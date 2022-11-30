@@ -190,112 +190,54 @@ class PetugasController extends Controller
     {  
             $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
             $this->validate($request, [
-                'image' => 'image',
-                'file' => 'mimes:zip,rar|file|max:30000',
+                'edit_image' => 'image',
+                'edit_file' => 'mimes:zip,rar|file|max:30000',
                 'tags' => 'required',
+                'judul' => 'required',
             ]);
 
-            //Given Constants
-            $gambar_name="";
-            $filezip=null;
-            $fileid=null;
-            $source_id=3;
-            $gambar_size=null;
-            $tipe_gambar=null;
+            //Given Constants  
+            $gambars =  Gambar::where('id',$request->id_gambar)->first();
+            $source_id=3; 
 
-            if($request->file('image')){ 
-                $gambar_name=date('YmdHi').$request->file('image')->getClientOriginalName();
-                $gambar= $request->file('image')->storeAs(
+            if($request->file('edit_image')){ 
+                $gambar_name=date('YmdHi').$request->file('edit_image')->getClientOriginalName();
+                $gambar= $request->file('edit_image')->storeAs(
                     'public/uploadedGambar', $gambar_name
                 );    
                 $gambar_size=Storage::size('public/uploadedGambar/'.$gambar_name);
                 $tipe_gambar=\File::extension(Storage::url('public/uploadedGambar/'.$gambar_name)); 
                 //Membuat thumbnail  
                 $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 1000);
+                $gambars->update(['path' => 'storage/uploadedGambar/'.$gambar_name,
+                          'thumbnail_path' => 'storage/thumbnail/'.$gambar_name,
+                ]); 
             }
 
-            if($request->file('file')){ 
-                $file_name=date('YmdHi').$request->file('file')->getClientOriginalName();
-                $file= $request->file('file')->storeAs(
+            if($request->file('edit_file')){ 
+                $file_name=date('YmdHi').$request->file('edit_file')->getClientOriginalName();
+                $file= $request->file('edit_file')->storeAs(
                     'public/file/', $file_name
                 );   
 
                 //Memghilangkan spesial character di path
-                $file_name = str_replace(Array("\n", "\r", "\n\r"), '', $file_name); 
-                $filezip =File::create([
-                    'path' => 'storage/file/'.$file_name,
-                    'nama_file' => $file_name,
-                    'size' => Storage::size('public/file/'.$file_name),  
-                    'type' => \File::extension(Storage::url('public/file/'.$file_name)),
-                    ]);
+                $file_name = str_replace(Array("\n", "\r", "\n\r"), '', $file_name);  
 
-                $fileid=$filezip->id;
+                $file_update=File::where('id',$request->id_file)
+                ->update(['path' => 'storage/file/'.$file_name,
+                          'nama_file' => $file_name,
+                ]); 
                 
-            }
-            
-            if(strpos($request->link, 'freepik')){
-                $source_id=1;
             } 
-            if(strpos($request->link, 'shutterstock')){
-                    $source_id=2;
-                }
-                else{
-                    $source_id=3;
-                }
             
-            $gambars=Gambar::create([
-                'judul' => $request->judul,
-                'link' => $request->link,
-                'idKegunaan' => $request->idKegunaan,
-                'idUser' => Auth::id(),
-                'path' =>'storage/uploadedGambar/'.$gambar_name,
-                'thumbnail_path' =>'storage/thumbnail/'.$gambar_name,
-                'ukuran' =>$gambar_size,
-                'nama_gambar' =>$gambar_name,
-                'source_id' => $source_id,
-                'file_id' => $fileid,
-                'tipe_gambar' => $tipe_gambar,
-                'views' => 0,
-            ]);
+            //update Judul
+            $gambars->update(['judul' => $request->judul]);
             
             //Menyimpan Tags
+            $gambars->untag();
             $gambars->tag($this->convertArray($request->tags));
             
-            //mencari id transaksi permitaan gambar di tabel pembagian tugas
-            $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
-
-            //merubah status permintaan gambar menjadi selesai
-            $permintaan = Transaksi::where('id', $id_permintaan)
-            ->update(['gambar_id' => $gambars->id,
-                    'idStatus' => 3]);
-
-            $permintaan = Transaksi::where('id', $id_permintaan)->first();
-            
-            //Start Read The Notification  
-            $Notifikasi = DB::table('notifications')->where(
-                [
-                    ['type', '=', 'App\Notifications\PermintaanNotification']
-                ]
-            )->get();
-            
-            foreach ($Notifikasi as $notification) {  
-                if(json_decode($notification->data)->kode_permintaan_id==$permintaan->id_permintaan)
-                {
-                    $Notifikasi = DB::table('notifications')->where('id', $notification->id)
-                    ->update([  'read_at' => date("Y-m-d H:i:s")]);
-                }
-            }
-            //End Read The Notification
-
-            //kasih tau ke User via notifikasi kalau permintaannya sudah di selesaikan
-            try {
-                event(new PetugasPermintaan($permintaan));
-            } catch (Throwable $e) {
-                report($e);
-                return false;
-            }
-            
-            return redirect()->route('petugas.index')->with('message', 'Permintaan berhasil dilayani');
+            return redirect()->route('petugas.index')->with('message', 'Permintaan berhasil Diupdate');
         
     }
 
@@ -401,7 +343,7 @@ class PetugasController extends Controller
             $Gambar =  Gambar::with('tagged')->where('id',$Data->gambar->id)->first(); 
             $Tags = "";
             foreach($Gambar->tagged as $tagged) {
-                $Tags= $Tags.$tagged->tag_name.', ';
+                $Tags= $Tags.$tagged->tag_slug.',';
             } 
             
             $Source = Source::all();
@@ -469,104 +411,7 @@ class PetugasController extends Controller
 
     /* create the physical thumbnail image to its destination */
     imagejpeg($virtual_image, $dest);
-}
-
-    // public function createThumbnail($src, $dest, $targetWidth, $targetHeight = null) {
-
-    //     // 1. Load the image from the given $src
-    //     // - see if the file actually exists
-    //     // - check if it's of a valid image type
-    //     // - load the image resource
-    
-    //     // get the type of the image
-    //     // we need the type to determine the correct loader
-    //     $type = exif_imagetype($src);
-    
-    //     // if no valid type or no handler found -> exit
-    //     if (!$type || !self::IMAGE_HANDLERS[$type]) {
-    //         return null;
-    //     }
-    
-    //     // load the image with the correct loader
-    //     $image = call_user_func(self::IMAGE_HANDLERS[$type]['load'], $src);
-    
-    //     // no image found at supplied location -> exit
-    //     if (!$image) {
-    //         return null;
-    //     }
-    
-    
-    //     // 2. Create a thumbnail and resize the loaded $image
-    //     // - get the image dimensions
-    //     // - define the output size appropriately
-    //     // - create a thumbnail based on that size
-    //     // - set alpha transparency for GIFs and PNGs
-    //     // - draw the final thumbnail
-    
-    //     // get original image width and height
-    //     $width = imagesx($image);
-    //     $height = imagesy($image);
-    
-    //     // maintain aspect ratio when no height set
-    //     if ($targetHeight == null) {
-    
-    //         // get width to height ratio
-    //         $ratio = $width / $height;
-    
-    //         // if is portrait
-    //         // use ratio to scale height to fit in square
-    //         if ($width > $height) {
-    //             $targetHeight = floor($targetWidth / $ratio);
-    //         }
-    //         // if is landscape
-    //         // use ratio to scale width to fit in square
-    //         else {
-    //             $targetHeight = $targetWidth;
-    //             $targetWidth = floor($targetWidth * $ratio);
-    //         }
-    //     }
-    
-    //     // create duplicate image based on calculated target size
-    //     $thumbnail = imagecreatetruecolor($targetWidth, $targetHeight);
-    
-    //     // set transparency options for GIFs and PNGs
-    //     if ($type == IMAGETYPE_GIF || $type == IMAGETYPE_PNG) {
-    
-    //         // make image transparent
-    //         imagecolortransparent(
-    //             $thumbnail,
-    //             imagecolorallocate($thumbnail, 0, 0, 0)
-    //         );
-    
-    //         // additional settings for PNGs
-    //         if ($type == IMAGETYPE_PNG) {
-    //             imagealphablending($thumbnail, false);
-    //             imagesavealpha($thumbnail, true);
-    //         }
-    //     }
-    
-    //     // copy entire source image to duplicate image and resize
-    //     imagecopyresampled(
-    //         $thumbnail,
-    //         $image,
-    //         0, 0, 0, 0,
-    //         $targetWidth, $targetHeight,
-    //         $width, $height
-    //     );
-    
-    
-    //     // 3. Save the $thumbnail to disk
-    //     // - call the correct save method
-    //     // - set the correct quality level
-    
-    //     // save the duplicate version of the image to disk
-    //     return call_user_func(
-    //         self::IMAGE_HANDLERS[$type]['save'],
-    //         $thumbnail,
-    //         $dest,
-    //         self::IMAGE_HANDLERS[$type]['quality']
-    //     );
-    // }
+} 
 
     public function cek_sudah_di_layani_apa_belum($permintaan_id){
         if(Transaksi::find($permintaan_id)->idStatus!==3)

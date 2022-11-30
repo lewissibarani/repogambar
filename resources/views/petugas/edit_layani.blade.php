@@ -44,7 +44,7 @@
         <!-- Title and Top Buttons End -->
 
         <!-- Content Start -->
-        <h2 class="small-title">Edit Pelayanan Permintaan Gambar</h2>
+        <h2 class="small-title">Form Edit Pelayanan Permintaan Gambar</h2>
         <div class="card mb-5"> 
             <div class="row">
                 <div class="col-12">
@@ -77,7 +77,7 @@
                             <div class="row mb-3">
                                 <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>
                                 <div class="col-sm-10">
-                                    <input type="text" value="{{$Data->judulPermintaan}}" class="form-control" id="" name="judul" />  
+                                    <input type="text" value="{{$Data->gambar->judul}}" class="form-control" id="" name="judul" />  
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -85,7 +85,7 @@
                                 <div class="col-sm-10">
                                 <label class=" col-sm-12 col-form-label">
                                     <a href ="{{$Data->linkPermintaan}}" target="_blank" rel="noopener noreferrer" > {{$Data->linkPermintaan}}</a>
-                                    <input type="hidden" value="{{$Data->linkPermintaan}}" class="form-control" name="link" />   
+                                    <input type="hidden" value="{{$Data->linkPermintaan}}" class="form-control" name="link" />
                                 </label>                  
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                                 <label class="font-weight-bold col-sm-2 col-form-label">Penggunaan</label>
                                 <div class="col-sm-10">
                                     <label class=" col-sm-12 col-form-label">
-                                    {{ $Data->kegunaan->kegunaan }}
+                                    {{$Data->kegunaan->kegunaan }}
                                         <input type="hidden" value="{{ $Data->kegunaan->kegunaan }}" class="form-control" name="idKegunaan" />  
                                     </label>               
                                 </div>
@@ -131,18 +131,41 @@
                                 <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload Gambar</label>
                                 <div class="col-sm-10">
                                     <div class="col-sm-12 col-form-label card no-shadow">
-                                        <input type="file" class="form-control" name="image" />
+                                        <input type="file" class="form-control" name="edit_image" 
+                                        id="image_input" 
+                                        style="max-width: 450px;" 
+                                        /> 
+                                        <input type="hidden" value="{{$Data->gambar->id}}" class="form-control" name="id_gambar" />
+                                        @error('image')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
                                     </div>   
+
+                                    <div class="col-md-12 mb-2">
+                                        <img class ="card-img sw-50 scale" id="preview-image-before-upload" src="/{{$Data->gambar->thumbnail_path}}"
+                                            alt="preview image"  > 
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload File</label>
+                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload File <span class="font-italic">(Optional) </span> </label>
                                 <div class="col-sm-10">
                                     <div class="col-sm-12 col-form-label card no-shadow">
-                                        <input type="file" class="form-control" name="file" />
+                                        <input type="file" class="form-control" name="edit_file" style="max-width: 450px;"/>
+                                        <input type="hidden" value="{{$Data->gambar->file->id}}" class="form-control" name="id_file"  />
                                     </div>   
+                                    <div class="col-md-12 mb-2">
+                                    @php
+                                    if (!is_null($Data->gambar->file_id)) { 
+                                    @endphp
+                                        <span class="font-weight-bold">Link File: </span> <a href ="{{$Data->gambar->file->path}}" target="_blank" rel="noopener noreferrer" > {{$Data->gambar->file->nama_file}}</a>
+                                    @php
+                                    }
+                                    @endphp    
                                 </div>
+                                </div>
+                               
                             </div>
 
                             <div class="row mb-3">
@@ -157,8 +180,7 @@
                                     <!-- <input class="form-control" type="text" data-role="tagsinput" name="tags"> -->
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
+                            <div class="modal-footer"> 
                                 <button type="submit" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
                             </div>
 
@@ -171,4 +193,26 @@
             </div>  
         </div> 
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+      
+$(document).ready(function (e) {
+ 
+   
+   $('#image_input').change(function(){
+            
+    let reader = new FileReader();
+ 
+    reader.onload = (e) => { 
+ 
+      $('#preview-image-before-upload').attr('src', e.target.result); 
+    }
+ 
+    reader.readAsDataURL(this.files[0]); 
+   
+   });
+   
+});
+ 
+</script>
 @endsection
