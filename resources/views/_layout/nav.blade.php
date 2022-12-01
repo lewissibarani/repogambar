@@ -318,22 +318,21 @@
                 </ul>
             </li>
 
-            <!-- <li>
+            @php
+            };
+            @endphp 
+            <li>
                 <a href="/Petugas/Statistik">
                     <i data-acorn-icon="activity" class="icon" data-acorn-size="18"></i>
                     <span class="label">Statistik Aplikasi</span>
                 </a>
-            </li> -->
-
-            @php
-            };
-            @endphp
+            </li>
             
             <li>
-                <!-- <a href="/Kontribusi">
+                <a href="/Kontribusi">
                     <i data-acorn-icon="camera" class="icon" data-acorn-size="18"></i>
                     <span class="label">Halaman Kontributor</span>
-                </a> -->
+                </a>
             </li>
         </ul>
     </div>

@@ -178,4 +178,22 @@ class DashboardsController extends Controller
         $path= $file->path; 
         return response()->download($path); 
     } 
+
+    public function statistik ()
+    {   
+        Flight::chunk(200, function ($flights) {
+            foreach ($flights as $flight) {
+                //
+            }
+        });
+        $Gambar = Gambar::with('user','source','kegunaan','file')->where('id',$gambar_id)->first();
+        $File = File::with('user','source','kegunaan','file')->where('id',$gambar_id)->first();
+
+        $file->increment('download');  
+        $path= $file->path; 
+        return view('dashboard.statistik', 
+        compact(['Data',
+                'Rekomendasi'
+                ]));
+    } 
 }
