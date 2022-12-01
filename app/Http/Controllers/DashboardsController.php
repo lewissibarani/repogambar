@@ -16,6 +16,7 @@ use App\Models\Transaksi;
 use App\Models\Gambar;
 use App\Models\GambarView;
 use App\Models\PembagianTugas;
+use App\Models\File;
 use Conner\Tagging\Model\Tag;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -157,4 +158,24 @@ class DashboardsController extends Controller
                 ]));
         
     }
+
+    public function downloadGambar ($gambar_id)
+    {  
+        $gambar = Gambar::find($gambar_id); 
+
+        $gambar->increment('download');  
+        $path= $gambar->path;
+  
+         
+        return response()->download($path); 
+    } 
+
+    public function downloadFile ($file_id)
+    {  
+        $file = File::find($file_id); 
+
+        $file->increment('download');  
+        $path= $file->path; 
+        return response()->download($path); 
+    } 
 }

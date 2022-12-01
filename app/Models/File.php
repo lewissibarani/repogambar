@@ -14,6 +14,7 @@ class File extends Model
         'nama_file',
         'size',
         'type',
+        'download',
     ];
 
     public function gambar ()

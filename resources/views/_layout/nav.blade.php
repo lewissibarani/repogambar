@@ -292,7 +292,7 @@
             }; 
             if( Auth::user()->level<=3){
             @endphp
-                <li>
+            <li>
                 <a href="/Petugas/Index">
                     <i data-acorn-icon="screen" class="icon" data-acorn-size="18"></i>
                     <span class="label">Halaman Petugas</span>
@@ -314,9 +314,16 @@
                                 <a href="/Petugas/Pengaturan">
                                     <span class="label">Pengaturan Petugas</span>
                                 </a>
-                            </li>
+                            </li> 
                 </ul>
             </li>
+
+            <!-- <li>
+                <a href="/Petugas/Statistik">
+                    <i data-acorn-icon="activity" class="icon" data-acorn-size="18"></i>
+                    <span class="label">Statistik Aplikasi</span>
+                </a>
+            </li> -->
 
             @php
             };

@@ -38,8 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard']);
         Route::get('Beranda', [DashboardsController::class, 'dashboard']);
-        Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar');
-        
+        Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar'); 
+        Route::get('Download/{gambar_id}',[DashboardsController::class, 'downloadGambar'])->name('dashboard.downloadgambar');
+        Route::get('DownloadFile/{file_id}',[DashboardsController::class, 'downloadFile'])->name('dashboard.downloadfile');
     });
 
     Route::prefix('hasilpencarian')->group(function () {
@@ -65,6 +66,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit_transaksi/{transaksi_id}', [PetugasController::class, 'edit_layani'])->name('petugas.edit_layani');
         Route::get('/Transaksi_tolak/{transaksi_id}/Permintaan_tolak/{permintaan_id}', [PetugasController::class, 'layani_tolak'])->name('petugas.layani_tolak');
         Route::get('Pengaturan',[PetugasController::class, 'pengaturan'])->name('petugas.pengaturan');
+        Route::get('Statistik',[PetugasController::class, 'statistik'])->name('petugas.statistik');
     
     
         Route::post('Store', [PetugasController::class, 'store'])->name('petugas.store');

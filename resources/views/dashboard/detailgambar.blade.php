@@ -6,7 +6,9 @@
     $target_download=$Data->path;
     $target_download_nama=$Data->nama_gambar;
     $tipe_file_raster_atau_vector="Raster";
-
+    $download_link='/Dashboard/Download/'.$Data->id;
+    $download_link_gambar=$download_link;
+    $download_link_file='#';
     if($Data->file_id!==null)
     {
         $target_download=$Data->file->path;
@@ -15,6 +17,8 @@
         $file_size_MB=$Data->file->size/1000000;
         $file_size=number_format((float)$file_size_MB, 2, '.', '')." MB";
         $tipe_file_raster_atau_vector="Raster dan Vector";
+        $download_link=$download_link='/Dashboard/DownloadFile/'.$Data->file->id;
+        $download_link_file=$download_link;
     }
 
     $html_tag_data = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
@@ -188,9 +192,8 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                             data-bs-delay="0"
                                             data-bs-toggle="tooltip"
                                             data-bs-placement="top"
-                                            title="Download Gambar"
-                                            download="{{$target_download_nama}}"
-                                            href="/{{$target_download}}"
+                                            title="Download Gambar" 
+                                            href="{{$download_link}}"
                                     >
                                     <h3 class="text-white"><i data-acorn-icon="download"></i> Download</h3>
                                     </a>
@@ -208,7 +211,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                         <div class="dropdown-menu dropdown-menu-lg-end mw-100"  aria-labelledby="btnGroupDrop1">
                                             <div class="row" style="width: 500px;">
                                                 <h5 class="font-weight-bold dropdown-item disabled">TIPE FILE</h5>
-                                                <a class="dropdown-item"  download="{{$Data->nama_gambar}}" href="/{{$Data->path}}">
+                                                <a class="dropdown-item"  download="{{$Data->nama_gambar}}" href="{{$download_link_gambar}}">
                                                     <div class="row">
                                                         <div class="col-2">
                                                             Gambar
@@ -218,7 +221,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                                         </div>
                                                     </div>
                                                 </a>
-                                                <a class="dropdown-item" href="/{{$target_download}}">
+                                                <a class="dropdown-item" href="{{$download_link_file}}">
 
                                                     <div class="row">
                                                         <div class="col-2">

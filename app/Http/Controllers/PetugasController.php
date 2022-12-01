@@ -393,25 +393,25 @@ class PetugasController extends Controller
         return $result;
     }
 
-    public function createThumbnail($src, $dest, $desired_width) {
+    public function createThumbnail($src, $dest, $desired_width) 
+    {
+ 
+        $source_image = imagecreatefromjpeg($src);
+        $width = imagesx($source_image);
+        $height = imagesy($source_image);
 
-    /* read the source image */
-    $source_image = imagecreatefromjpeg($src);
-    $width = imagesx($source_image);
-    $height = imagesy($source_image);
+        /* find the "desired height" of this thumbnail, relative to the desired width  */
+        $desired_height = floor($height * ($desired_width / $width));
 
-    /* find the "desired height" of this thumbnail, relative to the desired width  */
-    $desired_height = floor($height * ($desired_width / $width));
+        /* create a new, "virtual" image */
+        $virtual_image = imagecreatetruecolor($desired_width, $desired_height);
 
-    /* create a new, "virtual" image */
-    $virtual_image = imagecreatetruecolor($desired_width, $desired_height);
+        /* copy source image at a resized size */
+        imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
 
-    /* copy source image at a resized size */
-    imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
-
-    /* create the physical thumbnail image to its destination */
-    imagejpeg($virtual_image, $dest);
-} 
+        /* create the physical thumbnail image to its destination */
+        imagejpeg($virtual_image, $dest);
+    } 
 
     public function cek_sudah_di_layani_apa_belum($permintaan_id){
         if(Transaksi::find($permintaan_id)->idStatus!==3)
@@ -422,6 +422,14 @@ class PetugasController extends Controller
             return false;
         }
         
+    }
+
+    public function statistik()
+    {
+
+        return view('petugas.statistik', 
+        compact(['User','User_Petugas'
+            ]));
     }
 
 }

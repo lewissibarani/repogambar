@@ -24,6 +24,7 @@ class Gambar extends Model
         'file_id',
         'tipe_gambar',
         'views',
+        'download',
     ];
 
     public function showGambar()
