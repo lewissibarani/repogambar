@@ -110,6 +110,7 @@ class PetugasController extends Controller
                     'nama_file' => $file_name,
                     'size' => Storage::size('public/file/'.$file_name),  
                     'type' => \File::extension(Storage::url('public/file/'.$file_name)),
+                    'download'=>0
                     ]);
 
                 $fileid=$filezip->id;
@@ -140,6 +141,7 @@ class PetugasController extends Controller
                 'file_id' => $fileid,
                 'tipe_gambar' => $tipe_gambar,
                 'views' => 0,
+                'download'=>0
             ]);
             
             //Menyimpan Tags
