@@ -97,7 +97,7 @@ class PetugasController extends Controller
                 // $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 1000);
                 $gambar= $request->file('image')->storeAs(
                     'public/thumbnail', $gambar_name
-                );    
+                );
             }
 
             if($request->file('file')){ 

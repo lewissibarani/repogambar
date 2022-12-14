@@ -48,7 +48,25 @@
         <div class="card mb-5">
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-4">  
+                    <div class="card-body">
+                        
+
+                        <div class="col-sm-12 col-form-label card no-shadow">
+                            <input type="file" class="form-control" 
+                            name="image"
+                            id="image_input"  /> 
+                        </div>   
+                        <div class="col-md-12 mb-2">
+                             
+                                <img class ="card-img scale" id="preview-image-before-upload"  
+                                    alt="preview image">  
+                            
+                        </div>
+                    </div> 
+
+                </div>
+                <div class="col-8">
                     <div class="card-body">
                         <form id="petugasModalForm" action="{{route('petugas.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -78,12 +96,9 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>
-                                <div class="col-sm-10">
-                                    <input type="text" value="{{$Data->permintaan->judulPermintaan}}" class="form-control" id="" name="judul" /> 
-                                    <input type="hidden" value="{{$Data->id}}" class="form-control" id="" name="bagitugas_id"/>             
-                                </div>
+                            <div class="row mb-3">  
+                                        <input type="text" value="{{$Data->permintaan->judulPermintaan}}" class="input-judul"  name="judul" />   
+                                    <input type="hidden" value="{{$Data->id}}" class="form-control" id="" name="bagitugas_id"/>   
                             </div>
                             <div class="row mb-3">
                                 <label class="font-weight-bold col-sm-2 col-form-label">Link</label>
@@ -119,23 +134,6 @@
                                     </label>              
                                 </div>
                             </div> 
-
-                            <div class="row mb-3">
-                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload Gambar</label>
-                                <div class="col-sm-10">
-                                    <div class="col-sm-12 col-form-label card no-shadow">
-                                        <input type="file" class="form-control" 
-                                        name="image"
-                                        id="image_input" 
-                                        style="max-width: 450px;"/> 
-                                    </div>   
-
-                                    <div class="col-md-12 mb-2">
-                                        <img class ="card-img sw-50 scale" id="preview-image-before-upload"  
-                                            alt="preview image"> 
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="row mb-3">
                                 <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload File  <span class="font-italic"> (Optional) </span> </label>
