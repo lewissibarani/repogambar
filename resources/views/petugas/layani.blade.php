@@ -29,7 +29,7 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container" style="width: 65%;">
         <!-- Title and Top Buttons Start -->
         <div class="page-title-container">
             <div class="row">
@@ -43,26 +43,33 @@
         </div>
         <!-- Title and Top Buttons End -->
 
-        <!-- Content Start -->
-        <h2 class="small-title">Form Pelayanan Permintaan Gambar</h2>
+        <!-- Content Start --> 
         <div class="card mb-5">
 
             <div class="row">
                 <div class="col-4">  
                     <div class="card-body">
-                        
 
-                        <div class="col-sm-12 col-form-label card no-shadow">
-                            <input type="file" class="form-control" 
-                            name="image"
-                            id="image_input"  /> 
+                    <div class="col-sm-12 col-form-label card no-shadow"> 
+                                <input type="file" class="form-control" 
+                                name="image"
+                                id="image_input"  /> 
                         </div>   
-                        <div class="col-md-12 mb-2">
-                             
-                                <img class ="card-img scale" id="preview-image-before-upload"  
-                                    alt="preview image">  
+                        <div class="col-md-12 mb-2"> 
+                            <img class="card-img scale" id="preview-image-before-upload" hidden>
+                            <div class="container-image-preview">
+                                    <div class ="drop-container"
+                                        alt="preview image">  
+                                        <div class="drop-title">Pratinjau Gambar</div>
+                                    </div>
+                                        
+                            </div>
+                            <div> 
+                                Catatan: Gunakan gambar yang berdimensi dibawah 6000px panjang atau lebar dan ukuran file dibawah 30MB
+                            </div> 
+                                          
                             
-                        </div>
+                        </div> 
                     </div> 
 
                 </div>
@@ -96,9 +103,16 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">  
-                                        <input type="text" value="{{$Data->permintaan->judulPermintaan}}" class="input-judul"  name="judul" />   
+                            <div class="row mb-3">   
+                                <div class="col-sm-12"> 
+                                    <div class="mb-3 filled">
+                                        <i data-acorn-icon="edit"></i>
+                                    <input type="text" value="{{$Data->permintaan->judulPermintaan}}" class="input-judul"  placeholder="Judul Gambar" name="judul" />  
+                                    
+                                        <small class="form-text text-muted">Sesuaikan judul dengan gambar</small>  
+                                    </div>
                                     <input type="hidden" value="{{$Data->id}}" class="form-control" id="" name="bagitugas_id"/>   
+                                </div> 
                             </div>
                             <div class="row mb-3">
                                 <label class="font-weight-bold col-sm-2 col-form-label">Link</label>
@@ -136,10 +150,10 @@
                             </div> 
 
                             <div class="row mb-3">
-                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload File  <span class="font-italic"> (Optional) </span> </label>
+                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">File  <span class="font-italic"> (Optional) </span> </label>
                                 <div class="col-sm-10">
                                     <div class="col-sm-12 col-form-label card no-shadow">
-                                        <input type="file" class="form-control" name="file" style="max-width: 450px;" />
+                                        <input type="file" class="form-control" name="file"   />
                                     </div>   
                                 </div>
                             </div>
@@ -180,8 +194,8 @@ $(document).ready(function (e) {
     let reader = new FileReader();
  
     reader.onload = (e) => { 
- 
-      $('#preview-image-before-upload').attr('src', e.target.result); 
+        $('.container-image-preview').attr("hidden",true);
+        $('#preview-image-before-upload').attr('src', e.target.result).removeAttr('hidden'); 
     }
  
     reader.readAsDataURL(this.files[0]); 

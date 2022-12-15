@@ -1,16 +1,4 @@
-.wrapper-input-judul {
-  background-color: #FFF;
-  border-radius: 2px;
-  box-shadow: 0px 2px 1px 0px #DDD;
-  box-sizing: border-box;
-  height: 100px;
-  position: relative;
-  left: 50%;
-  margin: -150px 0 0 -150px; 
-  top: 50%;
-  width: 300px;
-}
-
+ 
 .input-judul {
   background-color: transparent;
   border: none;
@@ -19,15 +7,9 @@
   box-sizing: border-box; 
   font-size: 24px;
   font-weight: bolder;
-  height: 50px;
-  left: 50%;
-  margin: -25px 0 0 -100px;
-  padding: 10px 0px;
-  position: relative;
-  top: 50%;
-  width: 200px;
-
- 
+  height: 50px;    
+  width: 100%;
+  padding-left: 50px;
 }
 
 
@@ -36,7 +18,7 @@ input-judul::-webkit-input-placeholder {
 } 
 
 .input-judul:focus {
-  border-bottom: 1px solid dodgerblue;
+  border-bottom: 2px solid #0275d8;
   border-top: none;
   border-left: none;
   border-right: none;
@@ -50,17 +32,58 @@ input-judul:focus::-webkit-input-placeholder {
 .input-judul:focus+.underline {
   transform: scale(1);
 }
+ 
 
-.underline {
-  background-color: dodgerblue;
-  display: inline-block;
-  height: 2px;
-  left: 50px;
-  margin-top: -4px;
+.drop-container {
+  background: rgb(245, 245, 245);
+  position:relative;
+  justify-content: center;
+  align-items: center;   
+  height: 380px;
+  border-radius: 10px;
+  border: 2px dashed rgb(214, 214, 214);
+  transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.drop-container:hover { 
+  border-color: rgb(214, 214, 214);
+}
+
+.drop-container:hover .drop-title {
+  color: rgb(214, 214, 214);
+}
+
+.drop-title {
   position: absolute;
-  top: 185px;
-  -webkit-transform: scale(0, 1);
-  transform: scale(0, 0);
-  -webkit-transition: all 0.5s linear; 
-  width: 202px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  color: rgb(155, 155, 155);
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: color .2s ease-in-out;
+
+}
+.drop-title-2 {
+  position: absolute; 
+  bottom: 40px;  
+  left: 24px;
+  right: 24px;
+  font-size: 13px; 
+  text-align: center; 
+
+}
+
+.container-image-preview {
+  position: relative;
+  background: rgb(245, 245, 245);
+  border-radius: 10px;  
+  padding: 13px; 
+}
+
+.container-center{
+  /* other base style */
+  grid-row: 2/3;
+  grid-column: 2/3;
 }

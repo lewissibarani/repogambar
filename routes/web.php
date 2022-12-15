@@ -44,6 +44,11 @@ Route::middleware('auth')->group(function () {
         Route::get('Statistik',[DashboardsController::class, 'statistik'])->name('petugas.statistik');
     });
 
+    Route::prefix('Kontributor')->group(function () {
+        Route::get('/', [KontributorController::class, 'index']);
+        Route::get('ProfilUser', [KontributorController::class, 'index']); 
+    });
+
     Route::prefix('hasilpencarian')->group(function () {
         Route::post('caridashboard', [DashboardsController::class, 'hasilPencarian'])->name('dashboard.hasilpencarian');
         Route::post('cari', [DashboardsController::class, 'hasilPencarian_'])->name('dashboard.hasilpencarian_');
