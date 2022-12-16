@@ -1,8 +1,12 @@
 @php
-    $html_tag_data = [];
-    $title = 'Edit Permintaan #'.$Data->id_permintaan;
-    $description = 'Empty Page';
-    $breadcrumbs = ["/"=>"Home", "Petugas/Index"=>"Daftar Tugas", "Petugas/transaksi/$Data->id/permintaan/$Data->id_permintaan"=>"Edit Permintaan #$Data->id_permintaan"]
+    $fileid=0;
+    if (!$Data->gambar->file_id==null) { 
+        $fileid=$Data->gambar->file_id;
+    }; 
+    $html_tag_data  = [];
+    $title          = 'Edit Permintaan #'.$Data->id_permintaan;
+    $description    = 'Empty Page';
+    $breadcrumbs    = ["/"=>"Home", "Petugas/Index"=>"Daftar Tugas", "Petugas/transaksi/$Data->id/permintaan/$Data->id_permintaan"=>"Edit Permintaan #$Data->id_permintaan"]
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
@@ -29,7 +33,7 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container" style="width: 65%;">
         <!-- Title and Top Buttons Start -->
         <div class="page-title-container">
             <div class="row">
@@ -43,8 +47,7 @@
         </div>
         <!-- Title and Top Buttons End -->
 
-        <!-- Content Start -->
-        <h2 class="small-title">Form Edit Pelayanan Permintaan Gambar</h2>
+        <!-- Content Start --> 
         <div class="card mb-5"> 
             <div class="row">
                 <div class="col-12">
@@ -90,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="font-weight-bold col-sm-2 col-form-label">Tanggal Permintaan</label>
+                                <label class="font-weight-bold col-sm-2 col-form-label">Tanggal</label>
                                 <div class="col-sm-10">
                                     <label class=" col-sm-12 col-form-label">
                                     {{date_format($Data->created_at,"d M Y")}}
@@ -128,7 +131,7 @@
                             </div> -->
 
                             <div class="row mb-3">
-                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload Gambar</label>
+                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Gambar</label>
                                 <div class="col-sm-10">
                                     <div class="col-sm-12 col-form-label card no-shadow">
                                         <input type="file" class="form-control" name="edit_image" 
@@ -149,11 +152,11 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Upload File <span class="font-italic">(Optional) </span> </label>
+                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">File <span class="font-italic">(Optional) </span> </label>
                                 <div class="col-sm-10">
                                     <div class="col-sm-12 col-form-label card no-shadow">
-                                        <input type="file" class="form-control" name="edit_file" style="max-width: 450px;"/>
-                                        <input type="hidden" value="{{$Data->gambar->file->id}}" class="form-control" name="id_file"  />
+                                        <input type="file" class="form-control" name="edit_file" style="max-width: 450px;"/> 
+                                        <input type="hidden" value="{{$fileid}}" class="form-control" name="id_file"  />
                                     </div>   
                                     <div class="col-md-12 mb-2">
                                     @php

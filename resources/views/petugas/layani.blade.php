@@ -124,7 +124,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="font-weight-bold col-sm-2 col-form-label">Tanggal Permintaan</label>
+                                <label class="font-weight-bold col-sm-2 col-form-label">Tanggal</label>
                                 <div class="col-sm-10">
                                     <label class=" col-sm-12 col-form-label">
                                     {{date_format($Data->permintaan->created_at,"d M Y")}}
@@ -169,8 +169,7 @@
                                     <!-- <input class="form-control" type="text" data-role="tagsinput" name="tags"> -->
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
+                            <div class="modal-footer"> 
                                 <button type="submit" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
                             </div>
 

@@ -29,7 +29,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container" style="width: 65%;">
         <!-- Title and Top Buttons Start -->
         <div class="page-title-container">
             <div class="row">
@@ -43,8 +43,7 @@
         </div>
         <!-- Title and Top Buttons End -->
 
-        <!-- Content Start -->
-        <h2 class="small-title">Form Penolakan Permintaan Gambar</h2>
+        <!-- Content Start --> 
         <div class="card mb-5">
             <div class="card-body h-100">
 

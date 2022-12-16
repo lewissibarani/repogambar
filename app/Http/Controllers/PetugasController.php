@@ -193,6 +193,7 @@ class PetugasController extends Controller
 
     public function edit_store (Request $request)
     {  
+            $fileid=0;
             $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
             $this->validate($request, [
                 'edit_image' => 'image',
@@ -227,11 +228,29 @@ class PetugasController extends Controller
 
                 //Memghilangkan spesial character di path
                 $file_name = str_replace(Array("\n", "\r", "\n\r"), '', $file_name);  
+                
+                //check apabila sebuah gambar sudah punya fle zip maka hanya update jika belum punya maka di create baru
+                if(!$request->id_file==0){
+                    $file_update=File::where('id',$request->id_file)
+                    ->update(['path' => 'storage/file/'.$file_name,
+                            'nama_file' => $file_name,
+                    ]); 
+                }
+                else{    
+                    $filezip =File::create([
+                        'path' => 'storage/file/'.$file_name,
+                        'nama_file' => $file_name,
+                        'size' => Storage::size('public/file/'.$file_name),  
+                        'type' => \File::extension(Storage::url('public/file/'.$file_name)),
+                        'download'=>0
+                        ]);
+                        
+                    $fileid=$filezip->id;
+                    $gambars->update(['file_id' => $fileid
+                    ]); 
 
-                $file_update=File::where('id',$request->id_file)
-                ->update(['path' => 'storage/file/'.$file_name,
-                          'nama_file' => $file_name,
-                ]); 
+                };
+                
                 
             } 
             
