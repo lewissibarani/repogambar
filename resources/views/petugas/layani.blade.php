@@ -96,14 +96,10 @@
 
                 </div>
                 <div class="col-8">
-                    <div class="card-body"> 
-                            <div class="row mb-3">
-                                
+                    <div class="card-body">  
                                 <div class="col-sm-10">
                                     <input type="hidden" value="{{$transaksi_id}}" class="form-control" id="" name="transaksi_id"/>             
-                                </div>
-                            </div>
-
+                                </div> 
                             <div class="row mb-3">   
                                 <div class="col-sm-12"> 
                                     <div class="mb-3 filled">

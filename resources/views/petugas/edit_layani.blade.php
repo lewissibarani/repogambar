@@ -68,7 +68,7 @@
                         </div>
                     @endif
             </div>
-            
+
             <div class="row">
                 <div class="col-4"> 
                     <div class="card-body">
@@ -96,13 +96,8 @@
 
                 </div>
                 <div class="col-8">
-                    <div class="card-body"> 
-                            <div class="row mb-3">
-                                
-                                <div class="col-sm-10">
-                                    <input type="hidden" value="{{$Data->id}}" class="form-control" id="" name="transaksi_id"/>             
-                                </div>
-                            </div>
+                    <div class="card-body">  
+                                    <input type="hidden" value="{{$Data->id}}" class="form-control" id="" name="transaksi_id"/>   
 
                             <div class="row mb-3"> 
 
