@@ -203,7 +203,7 @@ class PetugasController extends Controller
             ]);
 
             //Given Constants  
-            $gambars =  Gambar::where('id',$request->id_gambar)->first();
+            $gambars =  Gambar::find($request->id_gambar); 
             $source_id=3; 
 
             if($request->file('edit_image')){ 
@@ -215,9 +215,12 @@ class PetugasController extends Controller
                 $tipe_gambar=\File::extension(Storage::url('public/uploadedGambar/'.$gambar_name)); 
                 //Membuat thumbnail  
                 $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 1000);
-                $gambars->update(['path' => 'storage/uploadedGambar/'.$gambar_name,
-                          'thumbnail_path' => 'storage/thumbnail/'.$gambar_name,
-                ]); 
+
+                $gambars->path = 'storage/uploadedGambar/'.$gambar_name;
+                $gambars->thumbnail_path = 'storage/thumbnail/'.$gambar_name;
+                $gambars->judul = $request->judul;
+
+                $gambars->save();
             }
 
             if($request->file('edit_file')){ 
@@ -253,11 +256,9 @@ class PetugasController extends Controller
                 
                 
             } 
+             
             
-            //update Judul
-            $gambars->update(['judul' => $request->judul]);
-            
-            //Menyimpan Tags
+            //Menyimpan Tags 
             $gambars->untag();
             $gambars->tag($this->convertArray($request->tags));
             

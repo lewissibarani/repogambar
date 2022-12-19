@@ -50,26 +50,53 @@
         <!-- Content Start --> 
         <div class="card mb-5"> 
             <div class="row">
-                <div class="col-12">
+                <form id="petugasModalForm" action="{{route('petugas.edit_store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf 
+                    @if(session()->has('message'))
+                        <div class="alert alert-danger">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+            </div>
+            
+            <div class="row">
+                <div class="col-4"> 
                     <div class="card-body">
-                        <form id="petugasModalForm" action="{{route('petugas.edit_store')}}" method="POST" enctype="multipart/form-data">
-                            @csrf 
-                            @if(session()->has('message'))
-                                <div class="alert alert-danger">
-                                    {{ session()->get('message') }}
-                                </div>
-                            @endif
+    
+                        <div class="col-sm-12 col-form-label card no-shadow"> 
+                                    <input type="file" class="form-control" 
+                                    name="edit_image" 
+                                    id="image_input"   /> 
+                            </div>   
+                            <div class="col-md-12 mb-2"> 
+                                <img class ="card-img scale" id="preview-image-before-upload" src="/{{$Data->gambar->thumbnail_path}}"
+                                alt="preview image"  > 
+                                <input type="hidden" value="{{$Data->gambar->id}}" class="form-control" name="id_gambar" />
+                                        @error('image')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                <div> 
+                                    Catatan: Gunakan gambar yang berdimensi dibawah 6000px panjang atau lebar dan ukuran file dibawah 30MB
+                                </div> 
+                             
+                                              
+                                
+                            </div> 
+                    </div>  
 
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
+                </div>
+                <div class="col-8">
+                    <div class="card-body"> 
                             <div class="row mb-3">
                                 
                                 <div class="col-sm-10">
@@ -77,10 +104,12 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label class="font-weight-bold col-sm-2 col-form-label">Judul</label>
-                                <div class="col-sm-10">
-                                    <input type="text" value="{{$Data->gambar->judul}}" class="form-control" id="" name="judul" />  
+                            <div class="row mb-3"> 
+
+                                <div class="mb-3 filled">
+                                    <i data-acorn-icon="edit"></i>
+                                    <input type="text" value="{{$Data->gambar->judul}}" class="input-judul" id="" name="judul" />
+                                    <small class="form-text text-muted">Sesuaikan judul dengan gambar</small>    
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -116,40 +145,7 @@
                                         <?php echo $Data->status->status ?>
                                     </label>              
                                 </div>
-                            </div>
-
-                            <!-- <div class="row mb-3">
-                                <label class="font-weight-bold col-sm-2 col-form-label">Source</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" name="source_id" id="select2Basic">
-                                        <option selected>Pilih...</option>
-                                        @foreach ($Source as $source)
-                                            <option value="{{ $source->id }}">{{ $source->sumber_gambar }}</option> 
-                                        @endforeach
-                                    </select>            
-                                </div>
-                            </div> -->
-
-                            <div class="row mb-3">
-                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">Gambar</label>
-                                <div class="col-sm-10">
-                                    <div class="col-sm-12 col-form-label card no-shadow">
-                                        <input type="file" class="form-control" name="edit_image" 
-                                        id="image_input" 
-                                        style="max-width: 450px;" 
-                                        /> 
-                                        <input type="hidden" value="{{$Data->gambar->id}}" class="form-control" name="id_gambar" />
-                                        @error('image')
-                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                        @enderror
-                                    </div>   
-
-                                    <div class="col-md-12 mb-2">
-                                        <img class ="card-img sw-50 scale" id="preview-image-before-upload" src="/{{$Data->gambar->thumbnail_path}}"
-                                            alt="preview image"  > 
-                                    </div>
-                                </div>
-                            </div>
+                            </div>  
 
                             <div class="row mb-3">
                                 <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">File <span class="font-italic">(Optional) </span> </label>

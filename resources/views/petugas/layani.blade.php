@@ -46,6 +46,28 @@
         <!-- Content Start --> 
         <div class="card mb-5">
 
+            <div class="row card-body" style="margin-bottom:-50px;">
+                <form id="petugasModalForm" action="{{route('petugas.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                        <div class="alert alert-primary" role="alert">
+                            Tolak permintaan gambar ini ? klik <a class="alert-link" href ="{{route('petugas.layani_tolak', ['transaksi_id' => $transaksi_id,'permintaan_id' => $permintaan_id])}}" > disini</a>
+                        </div>
+                    @if(session()->has('message'))
+                        <div class="alert alert-danger">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+            </div>
             <div class="row">
                 <div class="col-4">  
                     <div class="card-body">
@@ -74,28 +96,7 @@
 
                 </div>
                 <div class="col-8">
-                    <div class="card-body">
-                        <form id="petugasModalForm" action="{{route('petugas.store')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                                <div class="alert alert-primary" role="alert">
-                                    Tolak permintaan gambar ini ? klik <a class="alert-link" href ="{{route('petugas.layani_tolak', ['transaksi_id' => $transaksi_id,'permintaan_id' => $permintaan_id])}}" > disini</a>
-                                </div>
-                            @if(session()->has('message'))
-                                <div class="alert alert-danger">
-                                    {{ session()->get('message') }}
-                                </div>
-                            @endif
-
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
+                    <div class="card-body"> 
                             <div class="row mb-3">
                                 
                                 <div class="col-sm-10">
