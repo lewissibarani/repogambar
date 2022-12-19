@@ -321,7 +321,7 @@
             @php
             };
             @endphp 
-            {{-- <li>
+            <li>
                 <a href="/Petugas/Statistik">
                     <i data-acorn-icon="activity" class="icon" data-acorn-size="18"></i>
                     <span class="label">Statistik Aplikasi</span>
@@ -329,11 +329,11 @@
             </li>
             
             <li>
-                <a href="/Kontribusi">
+                <a href="/Kontributor/Profiluser">
                     <i data-acorn-icon="camera" class="icon" data-acorn-size="18"></i>
                     <span class="label">Halaman Kontributor</span>
                 </a>
-            </li> --}}
+            </li>
         </ul>
     </div>
     <!-- Menu End -->

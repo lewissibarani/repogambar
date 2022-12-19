@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardsController;
 use App\Http\Controllers\KelolaGambarController;
 use App\Http\Controllers\BagiTugasController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\KontributorsController; 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,12 +31,7 @@ Route::redirect('/', '/Dashboard/Beranda');
 
 Route::middleware('auth')->group(function () {
     Route::redirect('/', '/Dashboard');
-
-    Route::prefix('/Notifikasi')->group(function () {
-        Route::post('Dibaca', [AjaxController::class, 'notifikasidibaca']);
-        
-    });
-
+ 
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard']);
         Route::get('Beranda', [DashboardsController::class, 'dashboard']);
@@ -45,8 +42,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('Kontributor')->group(function () {
-        Route::get('/', [KontributorController::class, 'index']);
-        Route::get('ProfilUser', [KontributorController::class, 'index']); 
+        Route::get('/', [KontributorsController::class, 'showprofile']);
+        Route::get('Profiluser', [KontributorsController::class, 'showprofile']); 
     });
 
     Route::prefix('hasilpencarian')->group(function () {

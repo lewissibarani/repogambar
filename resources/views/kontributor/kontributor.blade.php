@@ -1,8 +1,13 @@
 @php
-    $html_tag_data = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
-    $title = 'Portfolio Home';
-    $description = 'Portfolio Home Page';
-    $breadcrumbs = ["/"=>"Home", "/Pages"=>"Pages", "/Pages/Portfolio"=>"Portfolio"]
+    $html_tag_data  = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
+    $title          = 'Halaman Kontributor';
+    $description    = 'Portfolio Home Page';
+    $breadcrumbs    = ["/"=>"Home", "/Kontributor/Profiluser"=>"Kontributor"];
+    $aboutme        = "-";
+    if(!$User->aboutme->isEmpty())
+    {
+        $aboutme = $User->aboutme;
+    }
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
@@ -38,28 +43,7 @@
                         <i data-acorn-icon="email"></i>
                         <span>Contact</span>
                     </button>
-                    <!-- Contact Button End -->
-
-                    <!-- Dropdown Button Start -->
-                    <div class="ms-1">
-                        <button
-                                type="button"
-                                class="btn btn-outline-primary btn-icon btn-icon-only"
-                                data-bs-offset="0,3"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                                data-submenu
-                        >
-                            <i data-acorn-icon="more-horizontal"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <button class="dropdown-item" type="button">Follow</button>
-                            <button class="dropdown-item" type="button">Hire</button>
-                            <button class="dropdown-item" type="button">Report</button>
-                        </div>
-                    </div>
-                    <!-- Dropdown Button End -->
+                    <!-- Contact Button End --> 
                 </div>
                 <!-- Top Buttons End -->
             </div>
@@ -70,28 +54,20 @@
             <!-- Left Side Start -->
             <div class="col-12 col-xl-4 col-xxl-3">
                 <!-- Biography Start -->
-                <h2 class="small-title">Biography</h2>
+                <h2 class="small-title">Profil Kontributor</h2>
                 <div class="card">
                     <div class="card-body mb-n5">
-                        <div class="d-flex align-items-center flex-column mb-5">
+                        <div class="d-flex align-items-center flex-column ">
                             <div class="mb-5 d-flex align-items-center flex-column">
                                 <div class="sw-13 position-relative mb-3">
-                                    <img src="/img/profile/profile-2.webp" class="img-fluid rounded-xl" alt="thumb" />
+                                    <img src="{{$User->profilepicture}}" class="img-fluid rounded-xl" alt="thumb" />
                                 </div>
-                                <div class="h5 mb-0">Blaine Cottrell</div>
-                                <div class="text-muted">Executive UI/UX Designer</div>
-                                <div class="text-muted">
-                                    <i data-acorn-icon="pin" class="me-1"></i>
-                                    <span class="align-middle">Montreal, Canada</span>
+                                <div class="h5 mb-0">{{$User->name}}</div>
+                                <div class="text-muted">{{$User->nipbaru}}</div>
+                                <div class="text-muted"> 
+                                    <span class="align-middle">{{$User->jabatan}}</span>
                                 </div>
-                            </div>
-                            <div class="d-flex flex-row justify-content-between w-100 w-sm-50 w-xl-100">
-                                <button type="button" class="btn btn-primary w-100 me-2">Hire</button>
-                                <button type="button" class="btn btn-outline-primary w-100 me-2">Follow</button>
-                                <button class="btn btn-icon btn-icon-only btn-outline-primary" type="button">
-                                    <i data-acorn-icon="more-horizontal"></i>
-                                </button>
-                            </div>
+                            </div> 
                         </div>
 
                         <div class="mb-5">
@@ -171,14 +147,7 @@
                                 Jujubes brownie marshmallow apple pie donut ice cream jelly-o jelly-o gummi bears. Tootsie roll chocolate bar dragée bonbon cheesecake
                                 icing. Danish wafer donut cookie caramels gummies topping.
                             </p>
-                        </div>
-                        <div class="mb-5">
-                            <p class="text-small text-muted mb-2">INTERESTS</p>
-                            <p>
-                                Chocolate cake biscuit donut cotton candy soufflé cake macaroon. Halvah chocolate cotton candy sweet roll jelly-o candy danish dragée.
-                                Apple pie cotton candy tiramisu biscuit cake muffin tootsie roll bear claw cake. Cupcake cake fruitcake.
-                            </p>
-                        </div>
+                        </div> 
                         <div class="mb-5">
                             <p class="text-small text-muted mb-2">CONTACT</p>
                             <a href="#" class="d-block body-link mb-1">
