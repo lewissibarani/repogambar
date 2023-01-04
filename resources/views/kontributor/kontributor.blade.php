@@ -3,11 +3,19 @@
     $title          = 'Halaman Kontributor';
     $description    = 'Portfolio Home Page';
     $breadcrumbs    = ["/"=>"Home", "/Kontributor/Profiluser"=>"Kontributor"];
+    
+    $phone          = "-";
+    if(!$User->nohp==null)
+    {
+        $phone = $User->nohp;
+    } 
     $aboutme        = "-";
-    if(!$User->aboutme->isEmpty())
+    if(!$User->aboutme==null)
     {
         $aboutme = $User->aboutme;
-    }
+    } 
+    $email          = $User->email;
+    
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
@@ -80,83 +88,31 @@
                                 <div class="col ps-3">
                                     <div class="row g-0">
                                         <div class="col">
-                                            <div class="sh-5 d-flex align-items-center lh-1-25">Project Views</div>
+                                            <div class="sh-5 d-flex align-items-center lh-1-25">Jumlah Kontribusi</div>
                                         </div>
                                         <div class="col-auto">
                                             <div class="sh-5 d-flex align-items-center">23.573</div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row g-0 align-items-center mb-2">
-                                <div class="col-auto">
-                                    <div class="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
-                                        <i data-acorn-icon="paint-roller" class="text-primary"></i>
-                                    </div>
-                                </div>
-                                <div class="col ps-3">
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <div class="sh-5 d-flex align-items-center lh-1-25">Project Saves</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="sh-5 d-flex align-items-center">1.124</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row g-0 align-items-center mb-2">
-                                <div class="col-auto">
-                                    <div class="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
-                                        <i data-acorn-icon="like" class="text-primary"></i>
-                                    </div>
-                                </div>
-                                <div class="col ps-3">
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <div class="sh-5 d-flex align-items-center lh-1-25">Likes</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="sh-5 d-flex align-items-center">12.573</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row g-0 align-items-center mb-2">
-                                <div class="col-auto">
-                                    <div class="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
-                                        <i data-acorn-icon="user" class="text-primary"></i>
-                                    </div>
-                                </div>
-                                <div class="col ps-3">
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <div class="sh-5 d-flex align-items-center lh-1-25">Followers</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="sh-5 d-flex align-items-center">1.245</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> 
                         </div>
 
                         <div class="mb-5">
                             <p class="text-small text-muted mb-2">ABOUT ME</p>
                             <p>
-                                Jujubes brownie marshmallow apple pie donut ice cream jelly-o jelly-o gummi bears. Tootsie roll chocolate bar dragée bonbon cheesecake
-                                icing. Danish wafer donut cookie caramels gummies topping.
+                                {{$aboutme}}
                             </p>
                         </div> 
                         <div class="mb-5">
                             <p class="text-small text-muted mb-2">CONTACT</p>
                             <a href="#" class="d-block body-link mb-1">
-                                <i data-acorn-icon="screen" class="me-2" data-acorn-size="17"></i>
-                                <span class="align-middle">blainecottrell.com</span>
+                                <i data-acorn-icon="phone" class="me-2" data-acorn-size="17"></i>
+                                <span class="align-middle">{{$phone}}</span>
                             </a>
                             <a href="#" class="d-block body-link">
                                 <i data-acorn-icon="email" class="me-2" data-acorn-size="17"></i>
-                                <span class="align-middle">contact@blainecottrell.com</span>
+                                <span class="align-middle">{{$email}}</span>
                             </a>
                         </div>
                     </div>
