@@ -329,7 +329,7 @@
             </li>
             
             <li>
-                <a href="/Kontributor/Profiluser">
+                <a href="/Kontributor/Profiluser/{{Auth::user()->id}}">
                     <i data-acorn-icon="camera" class="icon" data-acorn-size="18"></i>
                     <span class="label">Halaman Kontributor</span>
                 </a>

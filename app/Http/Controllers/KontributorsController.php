@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Gambar;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class KontributorsController extends Controller
 {
@@ -15,21 +16,33 @@ class KontributorsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function showprofile ()
+    public function showprofile ($id_user)
     {
-        $iduser= Auth::id(); 
+        $iduser= $id_user;
         //Data User
         $User=User::find($iduser);
 
         //Data Gambar yang pernah diupload
-        $Gambar=Gambar::with('tagged','source','kegunaan','user','file','gambarView')->where('idUser', $iduser);
+        $Gambar=Gambar::with('tagged','source','kegunaan','user','file','gambarView')->where('idUser', $iduser)->orderBy('id', 'DESC')->get();
 
-        return view('kontributor.kontributor', compact('User','Gambar'));
+        //Total Karya 
+        $Total = $Gambar->count();
+
+        //Total Karya didownload
+        $Didownload = $Gambar->sum('download');
+
+        //Total Karya dilihat
+        $Dilihat = $Gambar->sum('views');
+
+        //Total Karya dilike
+        $Dilike = rand(10,100);
+
+        return view('kontributor.kontributor', compact('User','Gambar','Total', 'Didownload','Dilihat','Dilike'));
     }
 
-    public function uploadgambar ()
+    public function uploadkarya ()
     {
-        
+        return view('kontributor.uploadkarya');
     }
 
     public function editgambar ()

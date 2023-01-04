@@ -120,7 +120,24 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                         </div>
                         <div class="card-body pt-0">
                             <div>
-                                <h4 class="mb-3 font-weight-bold">Tags </h4>
+                                <div class="row"> 
+                                    
+                                    <div class="col-6">
+                                        <h4 class="mb-3 font-weight-bold">Tags </h4>
+                                    </div>
+
+                                    <div class="col-6 d-flex align-items-start justify-content-end">
+                                        <!-- Contact Button Start -->
+                                        <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto">
+                                            <i data-acorn-icon="like"></i>
+                                            <span>Like</span>
+                                        </button>
+                                        <!-- Contact Button End --> 
+                                    </div> 
+
+
+                                </div>
+                                
                                 <div class="mb-2">
                                     @foreach($Data->tags as $tag)
                                         <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/hasilpencarian/katakunci/{{$tag->name}}">
@@ -166,6 +183,30 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Comments and Likes Start -->
+                            <div class="row align-items-center">
+                                <div class="col-12 text-muted">
+                                    <div class="d-flex align-items-center justify-content-end">
+                                        <div class="row g-3">
+                                            <div class="col-auto">
+                                                <i data-acorn-icon="eye" class="text-primary me-1" data-acorn-size="15"></i>
+                                                <span class="align-middle">{{$Data->views}}</span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i data-acorn-icon="download" class="text-primary me-1" data-acorn-size="15"></i>
+                                                <span class="align-middle">{{$Data->download}}</span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i data-acorn-icon="message" class="text-primary me-1" data-acorn-size="15"></i>
+                                                <span class="align-middle">12</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Comments and Likes End -->
+                            
                         </div>
                     </div>
                     <!-- Content End -->

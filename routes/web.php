@@ -43,7 +43,9 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('Kontributor')->group(function () {
         Route::get('/', [KontributorsController::class, 'showprofile']);
-        Route::get('Profiluser', [KontributorsController::class, 'showprofile']); 
+        Route::get('Profiluser/{user_id}', [KontributorsController::class, 'showprofile'])->name('kontributor.profil'); 
+        Route::get('UploadKarya', [KontributorsController::class, 'uploadkarya']);
+        Route::get('Store', [KontributorsController::class, 'store'])->name('kontributor.store'); 
     });
 
     Route::prefix('hasilpencarian')->group(function () {
