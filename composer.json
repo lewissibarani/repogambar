@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.5",
         "predis/predis": "^2.0",
         "pusher/pusher-php-server": "^7.2",
+        "rtconner/laravel-likeable": "^3.2",
         "rtconner/laravel-tagging": "^4.1"
     },
     "require-dev": {

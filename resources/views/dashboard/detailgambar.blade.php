@@ -198,7 +198,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                                 <span class="align-middle">{{$Data->download}}</span>
                                             </div>
                                             <div class="col-auto">
-                                                <i data-acorn-icon="message" class="text-primary me-1" data-acorn-size="15"></i>
+                                                <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
                                                 <span class="align-middle">12</span>
                                             </div>
                                         </div>

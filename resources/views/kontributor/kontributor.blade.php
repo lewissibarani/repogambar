@@ -181,8 +181,31 @@
 
             <!-- Right Side Start -->
             <div class="col-12 col-xl-8 col-xxl-9">
-                <h2 class="small-title">Daftar Karya</h2>
 
+                <!-- Title Tabs Start -->
+                <ul class="nav nav-tabs nav-tabs-title nav-tabs-line-title responsive-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#projectsTab" role="tab" aria-selected="true">Karya</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="#collectionsTab" role="tab" aria-selected="false">Favorit</a>
+                    </li> 
+                    <li class="nav-item dropdown ms-auto d-none responsive-tab-dropdown">
+                        <a
+                                class="btn btn-icon btn-icon-only btn-background pt-0"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                data-diplay="static"
+                        >
+                            <i data-acorn-icon="more-horizontal"></i>
+                        </a>
+                        <ul class="dropdown-menu mt-2 dropdown-menu-end"></ul>
+                    </li>
+                </ul>
+                <!-- Title Tabs End --> 
                 <div class="tab-content">
                     <!-- Projects Tab Start -->
                     <div class="tab-pane fade active show" id="projectsTab" role="tabpanel">
@@ -222,7 +245,11 @@
                             @endforeach
                         </div> 
                     </div>
-                    <!-- Projects Tab End --> 
+                    <!-- Projects Tab End -->  
+
+                    <div class="tab-pane fade" id="collectionsTab" role="tabpanel">
+                    Karya yang disukai oleh kontributor.
+                    </div>
                 </div>
             </div>
             <!-- Right Side End -->
