@@ -12,19 +12,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <title> PIKART | {{$title}}</title>
     <meta name="description" content="{{$description}}"/>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    @include('_layout.head')
+    <meta name="csrf-token" content="{{ csrf_token() }}"> 
+    @if ($title!=="Landing Page") 
+    @include('_layout.head') 
+    @else 
+    @include('_layout.head_lp')
+    @endif
+
 </head>
 
 <body>
 <div id="root">
-    <div id="nav" class="nav-container d-flex" @isset($custom_nav_data) @foreach ($custom_nav_data as $key=> $value)
-    data-{{$key}}="{{$value}}"
-        @endforeach
-        @endisset
-    >
-        @include('_layout.nav')
-    </div>
+    @if ($title!=="Landing Page") 
+        <div id="nav" class="nav-container d-flex" @isset($custom_nav_data) @foreach ($custom_nav_data as $key=> $value)
+        data-{{$key}}="{{$value}}"
+            @endforeach
+            @endisset
+        >
+            @include('_layout.nav')
+        </div> 
+    @endif 
     <main>
         @yield('content')
     </main>

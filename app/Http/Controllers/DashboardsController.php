@@ -42,6 +42,11 @@ class DashboardsController extends Controller
         return response()->noContent();
     }
 
+    public function landingpage()
+    {  
+        return view('landingpage.landpage');
+    }
+
     public function dashboard()
     {
 
@@ -66,6 +71,7 @@ class DashboardsController extends Controller
                  'Terfavorit'
         ]));
     }
+    
 
     public function result_pencarian($katakunci)
     {

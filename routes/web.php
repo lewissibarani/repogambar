@@ -29,8 +29,15 @@ Route::redirect('/', '/Dashboard/Beranda');
 |
 */
 
+Route::prefix('LandingPage')->group(function () {
+    Route::get('/', [DashboardsController::class, 'landingpage']);
+    Route::get('Beranda', [DashboardsController::class, 'landingpage']); 
+});
+
 Route::middleware('auth')->group(function () {
     Route::redirect('/', '/Dashboard');
+
+    
  
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard']);
