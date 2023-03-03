@@ -20,10 +20,10 @@
   ======================================================== --> 
   @section('content')
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
+  <header id="header" class="fixed ">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">Pikart</a></h1>
+      <h1 class="logo me-auto"><a href="index.html" >Pikart</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="/landpage_asset/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -33,9 +33,9 @@
           <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
           <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Tim Pengembang</a></li> 
+          {{-- <li><a class="nav-link scrollto" href="#team">Tim Pengembang</a></li>  --}}
           <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
-          <li><a class="getstarted scrollto" href="#about">Pikart</a></li>
+          <li><a class="getstarted scrollto" href="{{route('login')}}">Pikart</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -44,25 +44,30 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
+  <div id="hero" class="d-flex align-items-center">
 
     <div class="container">
-      <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+      <div class="row"> 
+        <div class="form-group">
+          <label for="name">Subject</label>
+          <input type="text" class="form-control" name="subject" id="subject" required>
+          <i class="bi bi-phone"></i>
+        </div>
+        {{-- <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
           <h1>Solusi Repositori Aset Digital BPS</h1>
-          <h2>Dapatkan inspirasi yang Anda butuhkan dengan koleksi yang dipilih dengan cermat disini</h2>
+          <h2>Dapatkan inspirasi yang anda butuhkan dengan koleksi kami</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="#about" class="btn-get-started scrollto">Pikart</a>
+            <a href="{{route('login')}}" class="btn-get-started scrollto">Pikart</a>
             <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Video Pengenalan</span></a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
           <img src="/landpage_asset/img/hero-img.png" class="img-fluid animated" alt="">
-        </div>
+        </div> --}}
       </div>
     </div>
 
-  </section><!-- End Hero -->
+  </div><!-- End Hero -->
 
   <main id="main">
 
@@ -181,7 +186,7 @@
       </div>
     </section><!-- End Why Us Section --> --}}
 
-    <!-- ======= Skills Section ======= -->
+    {{-- <!-- ======= Skills Section ======= -->
     <section id="skills" class="skills section-bg">
       <div class="container" data-aos="fade-up">
 
@@ -224,7 +229,7 @@
         </div>
 
       </div>
-    </section><!-- End Skills Section -->
+    </section><!-- End Skills Section --> --}}
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="services section-bg">
@@ -232,39 +237,39 @@
 
         <div class="section-title">
           <h2>Layanan</h2>
-          <p>Berikut adalah tata cara pelayanan permintaan gambar di Pikart</p>
+          <p>Cari apa di Pikart ?</p>
         </div>
 
         <div class="row">
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspici</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+              <h4><a href="">Permintaan Download Gambar</a></h4>
+              <p>Cukup lengkapi form dan masukkan link shutterstock atau freepik yang dibutuhkan. Petugas kami siap untuk downloadkan untuk kamu.</p>
             </div>
           </div>
 
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+              <h4><a href="">Unggah Karya Pribadi</a></h4>
+              <p>Kamu bisa unggah hasil karyamu disini loh.</p>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4><a href="">Aset Media Digital Badan Pusat Statistik</a></h4>
+              <p>Template publikasi, foto pimpinan, dan foto gedung Badan Pusat Statisitk ada disini.</p>
             </div>
           </div>
 
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-layer"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+              <h4><a href="">Browsing Gambar</a></h4>
+              <p>Kamu juga bisa sekedar melihat gambar-gambar yang sudah pernah diunggah.</p>
             </div>
           </div>
 
@@ -280,7 +285,7 @@
         <div class="row">
           <div class="col-lg-9 text-center text-lg-start">
             <h3>Jelajahi Gambar yang sedang tren di Pikart</h3>
-            <p>  Periksa apa yang populer di Pikart dan jadikan proyek Anda terlihat trendi dan profesional</p>
+            <p> Periksa apa yang populer di Pikart dan jadikan proyek Anda terlihat trendi dan profesional</p>
           </div>
           <div class="col-lg-3 cta-btn-container text-center">
             {{-- <a class="cta-btn align-middle" href="#">Pikart</a> --}}
@@ -403,13 +408,13 @@
       </div>
     </section><!-- End Portfolio Section -->
 
-    <!-- ======= Team Section ======= -->
+    {{-- <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Team</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Kenalin tim kami di Pikart</p>
         </div>
 
         <div class="row">
@@ -418,9 +423,9 @@
             <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
               <div class="pic"><img src="/landpage_asset/img/team/team-1.jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                <h4>Lewis Anggi</h4>
+                <span>Ketua Tim Pikart</span>
+                <p>Staf Diseminasi Statistik </p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -485,7 +490,7 @@
         </div>
 
       </div>
-    </section><!-- End Team Section -->
+    </section><!-- End Team Section --> --}}
 
     <!-- ======= Frequently Asked Questions Section ======= -->
     {{-- <section id="faq" class="faq section-bg">
@@ -555,8 +560,7 @@
 
         <div class="section-title">
           <h2>Contact</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
+          </div>
 
         <div class="row">
 
@@ -565,19 +569,19 @@
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <p>Jl. Dr. Sutomo 6-8 Jakarta 10710 Indonesia</p>
               </div>
 
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p>info@example.com</p>
+                <p>bpshq@bps.go.id</p>
               </div>
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
-                <p>+1 5589 55488 55s</p>
+                <p>(62-21) 3841195</p>
               </div>
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15866.945462826323!2d106.82963754831422!3d-6.166048807145971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5043d80af5b%3A0x606cc4c31fe3db80!2sBadan%20Pusat%20Statistik!5e0!3m2!1sen!2sid!4v1676019266417!5m2!1sen!2sid" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe> 
             </div>
@@ -620,7 +624,7 @@
 
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
+  {{-- <!-- ======= Footer ======= -->
   <footer id="footer">
 
     <div class="footer-newsletter">
@@ -628,7 +632,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <h4>Join Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <p></p>
             <form action="" method="post">
               <input type="email" name="email"><input type="submit" value="Subscribe">
             </form>
@@ -642,13 +646,13 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Arsha</h3>
+            <h3>Contact Person</h3>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              Jl. Dr. Sutomo 6-8  <br>
+              Jakarta, 10710 <br>
+              Indonesia <br><br>
+              <strong>Phone:</strong> 082191492198<br>
+              <strong>Email:</strong> lewis.anggi@bps.go.id<br>
             </p>
           </div>
 
@@ -702,7 +706,7 @@
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer><!-- End Footer --> --}}
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
