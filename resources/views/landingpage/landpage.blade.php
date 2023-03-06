@@ -47,12 +47,20 @@
   <div id="hero" class="d-flex align-items-center">
 
     <div class="container">
-      <div class="row"> 
-        <div class="form-group">
-          <label for="name">Subject</label>
-          <input type="text" class="form-control" name="subject" id="subject" required>
-          <i class="bi bi-phone"></i>
-        </div>
+      <div class="row">  
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div role="separator" class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </div>
+          <input type="text" class="form-control" aria-label="Text input with dropdown button">
+        </div> 
         {{-- <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
           <h1>Solusi Repositori Aset Digital BPS</h1>
           <h2>Dapatkan inspirasi yang anda butuhkan dengan koleksi kami</h2>
@@ -711,7 +719,6 @@
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
- 
   @section('js_vendor')  
   <script src="/landpage_asset/vendor/aos/aos.js"></script>
   <script src="/landpage_asset/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

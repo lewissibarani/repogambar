@@ -29,7 +29,7 @@
         </div>
     </div>
 </div>
-@include('_layout.modal_settings')
+{{-- @include('_layout.modal_settings') --}}
 @include('_layout.scripts')
 </body>
 </html>

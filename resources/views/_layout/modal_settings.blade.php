@@ -1,4 +1,4 @@
-<!-- Theme Settings Modal Start -->
+{{-- <!-- Theme Settings Modal Start -->
 <div
         class="modal fade modal-right scroll-out-negative"
         id="settings"
@@ -564,4 +564,4 @@
     </span>
     </button>
 </div>
-<!-- Theme Settings & Niches Buttons End -->
+<!-- Theme Settings & Niches Buttons End --> --}}
