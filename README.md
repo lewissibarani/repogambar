@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="![alt text](https://github.com/lewissibarani/repogambar/blob/new-main/public/img/logo/logo-light_Color.svg)" width="400"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -9,54 +9,74 @@
 
 ## Tentang Pikart
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Pikart adalah website bank gambar yang di buat untuk memnuhi kebutuhan penyimpanan aset digital Badan Pusat Statistik.
+Pengguna dapat melakukan permintaan gambar shutterstock dan freepik melalui pikart kemudian akan diunduhkan oleh petugas dari Direktorat Diseminasi Statistik.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Aset digital yang sudah diunggah oleh petugas dapat diakses bersama oleh seluruh pegawai BPS seluruh Indonesia.
+
+## Petunjuk Instalasi
+
+Untuk menggunakan aplikasi Pikart, pengguna cukup akses ke https://webapps.bps.go.id/pikart.
+
+## Framework Yang Digunakan
+
+Laravel adalah framework yang digunakan dalam pembuatan aplikasi Pikart dengan sintaks yang ekspresif dan elegan. 
+Laravel menghilangkan kesulitan dari pengembangan dengan mengurangi tugas-tugas umum yang digunakan di banyak proyek web, seperti:
+
+- [Mesin perutean sederhana dan cepat](https://laravel.com/docs/routing).
+- [Kontainer injeksi ketergantungan yang kuat](https://laravel.com/docs/container).
+- Beberapa back-end untuk penyimpanan [sesi](https://laravel.com/docs/session) dan [cache](https://laravel.com/docs/cache).
+- [ORM basis data] yang ekspresif dan intuitif (https://laravel.com/docs/eloquent).
+- Database agnostik [migrasi skema](https://laravel.com/docs/migrations).
+- [Pemrosesan pekerjaan latar belakang yang kuat](https://laravel.com/docs/queues).
+- [Siaran acara waktu nyata](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Standarisasi Coding
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Standar coding yang digunakan yang ada di Pikart adalah standar coding framework Laravel dimana codingan terbagi di beberapa folder seperti:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **app**
+Direktori aplikasi berisi kode inti aplikasi. hampir semua kelas di aplikasi Pikart akan berada di direktori ini.
 
-## Laravel Sponsors
+- **bootstrap**
+Direktori bootstrap berisi file app.php yang mem-bootstrap framework. Direktori ini juga menampung direktori cache yang berisi file kerangka yang dihasilkan untuk pengoptimalan kinerja seperti rute dan file cache layanan.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- **config**
+Direktori config, seperti namanya, berisi semua file konfigurasi Pikart.
 
-### Premium Partners
+- **database**
+Direktori database berisi migrasi database, pabrik model, dan seed.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+- **public**
+Direktori publik berisi file index.php, yang merupakan titik masuk untuk semua permintaan yang masuk ke aplikasi dan mengonfigurasi pemuatan otomatis. Direktori ini juga menampung aset seperti gambar, JavaScript, dan CSS.
 
-## Contributing
+- **recources**
+Direktori sumber daya berisi tampilan serta aset mentah yang belum dikompilasi seperti CSS atau JavaScript.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **routes**
+Direktori rute berisi semua definisi rute untuk aplikasi. Secara default, beberapa file rute disertakan dengan Laravel: web.php, api.php, console.php, dan channels.php.
 
-## Code of Conduct
+File web.php berisi rute yang ditempatkan RouteServiceProvider di grup middleware web, yang menyediakan status sesi, perlindungan CSRF, dan enkripsi cookie. Jika aplikasi tidak menawarkan stateless, RESTful API, maka semua rute Anda kemungkinan besar akan ditentukan dalam file web.php.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+File api.php berisi rute yang ditempatkan RouteServiceProvider di grup api middleware. Rute ini dimaksudkan untuk tidak memiliki kewarganegaraan, jadi permintaan yang masuk ke aplikasi melalui rute ini dimaksudkan untuk diautentikasi melalui token dan tidak akan memiliki akses ke status sesi.
 
-## Security Vulnerabilities
+File console.php adalah tempat yang dapat menentukan semua perintah konsol berbasis penutupan. Setiap penutupan terikat pada instance perintah yang memungkinkan pendekatan sederhana untuk berinteraksi dengan metode IO setiap perintah. Meskipun file ini tidak menentukan rute HTTP, file ini menentukan titik masuk (rute) berbasis konsol ke dalam aplikasi.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+File channels.php adalah tempat yang dapat mendaftarkan semua saluran penyiaran acara yang didukung aplikasi.
 
-## License
+- **storage**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Direktori penyimpanan berisi log, templat Blade yang dikompilasi, sesi berbasis file, cache file, dan file lain yang dihasilkan oleh framework. Direktori ini dipisahkan menjadi direktori app, framework, dan log. Direktori aplikasi dapat digunakan untuk menyimpan file apa pun yang dihasilkan oleh aplikasi. Direktori framework digunakan untuk menyimpan file dan cache yang dihasilkan framework. Terakhir, direktori log berisi file log aplikasi.
+
+Direktori penyimpanan/aplikasi/publik dapat digunakan untuk menyimpan file buatan pengguna, seperti avatar profil, yang harus dapat diakses publik.
+
+- **tests**
+
+Direktori tes berisi tes otomatis Anda. Contoh tes unit PHPUnit dan tes fitur disediakan di luar kotak. Setiap kelas tes harus diakhiri dengan kata Test. Anda dapat menjalankan pengujian menggunakan perintah phpunit atau php vendor/bin/phpunit. Atau, jika Anda menginginkan representasi yang lebih detail dan indah dari hasil pengujian Anda, Anda dapat menjalankan pengujian menggunakan perintah php artisan test Artisan.
+
+## Pattern Design
+
+Pattern Design yang digunakan mengikuti patern design yang ditawarkan oleh Laravel yaitu MVC (Model-View-Controller).
+Untuk model dan controller ada di foler app sedangkan untuk view ada di folder resources.
