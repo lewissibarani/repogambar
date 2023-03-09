@@ -1,12 +1,5 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
+<p align="center"><a href="[https://laravel.com](https://webapps.bps.go.id/pikart)" target="_blank">![argon-react](https://user-images.githubusercontent.com/8605473/223917590-a10d50d3-4e29-48d6-b0b4-12bf5e62a71b.png)</a></p>
+  
 ## Tentang Pikart
 
 Pikart adalah website bank gambar yang di buat untuk memnuhi kebutuhan penyimpanan aset digital Badan Pusat Statistik.
@@ -38,24 +31,31 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 Standar coding yang digunakan yang ada di Pikart adalah standar coding framework Laravel dimana codingan terbagi di beberapa folder seperti:
 
 - **app**
+
 Direktori aplikasi berisi kode inti aplikasi. hampir semua kelas di aplikasi Pikart akan berada di direktori ini.
 
 - **bootstrap**
+
 Direktori bootstrap berisi file app.php yang mem-bootstrap framework. Direktori ini juga menampung direktori cache yang berisi file kerangka yang dihasilkan untuk pengoptimalan kinerja seperti rute dan file cache layanan.
 
 - **config**
+
 Direktori config, seperti namanya, berisi semua file konfigurasi Pikart.
 
 - **database**
+
 Direktori database berisi migrasi database, pabrik model, dan seed.
 
 - **public**
+
 Direktori publik berisi file index.php, yang merupakan titik masuk untuk semua permintaan yang masuk ke aplikasi dan mengonfigurasi pemuatan otomatis. Direktori ini juga menampung aset seperti gambar, JavaScript, dan CSS.
 
 - **recources**
+
 Direktori sumber daya berisi tampilan serta aset mentah yang belum dikompilasi seperti CSS atau JavaScript.
 
 - **routes**
+
 Direktori rute berisi semua definisi rute untuk aplikasi. Secara default, beberapa file rute disertakan dengan Laravel: web.php, api.php, console.php, dan channels.php.
 
 File web.php berisi rute yang ditempatkan RouteServiceProvider di grup middleware web, yang menyediakan status sesi, perlindungan CSRF, dan enkripsi cookie. Jika aplikasi tidak menawarkan stateless, RESTful API, maka semua rute Anda kemungkinan besar akan ditentukan dalam file web.php.
