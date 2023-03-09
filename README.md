@@ -1,4 +1,7 @@
-<p align="center"><a href="[https://laravel.com](https://webapps.bps.go.id/pikart)" target="_blank">![argon-react](https://user-images.githubusercontent.com/8605473/223917590-a10d50d3-4e29-48d6-b0b4-12bf5e62a71b.png)</a></p>
+<a href="https://webapps.bps.go.id/pikart" target="_blank">![argon-react](https://user-images.githubusercontent.com/8605473/223917590-a10d50d3-4e29-48d6-b0b4-12bf5e62a71b.png)
+    </a>
+  
+  
   
 ## Tentang Pikart
 
