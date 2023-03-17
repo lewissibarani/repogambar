@@ -5,6 +5,7 @@
     $file = "";
 
 @endphp
+ 
 
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>""])
    
@@ -29,7 +30,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
           <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
           <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
@@ -44,35 +45,80 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
-  <div id="hero" class="d-flex align-items-center">
-
+  <div id="hero" class="d-flex ">  
     <div class="container">
-      <div class="row">  
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div role="separator" class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-          </div>
-          <input type="text" class="form-control" aria-label="Text input with dropdown button">
-        </div> 
-        {{-- <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-          <h1>Solusi Repositori Aset Digital BPS</h1>
-          <h2>Dapatkan inspirasi yang anda butuhkan dengan koleksi kami</h2>
-          <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="{{route('login')}}" class="btn-get-started scrollto">Pikart</a>
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Video Pengenalan</span></a>
-          </div>
-        </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-          <img src="/landpage_asset/img/hero-img.png" class="img-fluid animated" alt="">
-        </div> --}}
+      <div class="row justify-content-md-center">
+        <h1 class="text-center" style="margin-bottom: 10px; font-size: 34px;">
+          Semua aset yang Anda butuhkan, di satu tempat
+        </h1>
       </div>
+      <div class="row justify-content-md-center">
+        <h2 class="text-center" style="margin-bottom: 30px;font-size: 22px;">
+          Temukan dan unduh foto, desain, dan mockup berkualitas tinggi terbaik
+        </h1>
+      </div>
+
+      <!-- Search Input Start -->
+      <div class="row justify-content-md-center"> 
+        <div class="col-md-auto col-lg-8">  
+          <div class="card">
+            <div class="card-body p-0 d-flex flex-row align-items-center px-3 py-3">
+                <input class="form-control border-0 shadow-none" placeholder="Cari Aset..."  />
+                <div class="d-flex flex-row">  
+                    <button class="sumbit" id="chatSendButton" type="button" style="border: none;background: none">
+                        <i data-acorn-icon="search"></i>
+                    </button>
+                </div>
+            </div>
+          </div> 
+        </div>
+      </div> 
+      <!-- Search Input End -->
+
+      <!-- Daftar Layanan Start --> 
+       
+          <div class="row justify-content-md-center" style="margin-top: 80px; " >  
+              <div class="d-flex justify-content-around hover01">
+                  <div class="team-mem">
+                    <a href="#">
+                      <figure><img loading="lazy" class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-foto.jpg"></figure>
+                      <p class="layanan text-center text-white" style="font-size: 18px;">Foto</p> 
+                    </a> 
+                  </div>
+                  <div class="team-mem">
+                    <a href="#">
+                      <figure><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-ilustrasi.jpg"></figure>
+                      <p class="text-center text-white" style="font-size: 18px;">Ilustrasi</p> 
+                    </a>
+                  </div>
+                  <div class="team-mem">
+                    <a href="#">
+                      <figure><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-mockup.jpg"></figure>
+                      <p class="text-center text-white" style="font-size: 18px;">Mockup</p> 
+                    </a>
+                  </div>
+                  <div class="team-mem">
+                    <a href="#">
+                      <figure><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-font.jpg"></figure>
+                      <p class="text-center text-white" style="font-size: 18px;">Font</p> 
+                    </a>
+                  </div> 
+                  <div class="team-mem">
+                    <a href="#">
+                      <figure><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-psd.png"></figure>
+                      <p class="text-center text-white" style="font-size: 18px;">PSD</p> 
+                    </a>
+                  </div>
+                  <div class="team-mem">
+                    <a href="#">
+                      <figure><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-indesign.png"></figure>
+                      <p class="text-center text-white" style="font-size: 18px;">Indesign</p> 
+                    </a>
+                  </div>
+              </div>
+          </div>  
+      
+      <!-- Daftar Layanan End --> 
     </div>
 
   </div><!-- End Hero -->
@@ -416,8 +462,8 @@
       </div>
     </section><!-- End Portfolio Section -->
 
-    {{-- <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg">
+    <!-- ======= Team Section ======= -->
+    {{-- <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">

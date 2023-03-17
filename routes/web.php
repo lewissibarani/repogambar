@@ -19,7 +19,7 @@ use App\Http\Controllers\KontributorsController;
 */
 
 // index routing via Route feature
-Route::redirect('/', '/Dashboard/Beranda');
+Route::redirect('/', '/LandingPage');
 
 
 /*
@@ -35,7 +35,7 @@ Route::prefix('LandingPage')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::redirect('/', '/Dashboard');
+    Route::redirect('/', '/LandingPage');
 
     
  
