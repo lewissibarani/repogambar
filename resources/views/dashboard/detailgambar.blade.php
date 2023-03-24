@@ -25,6 +25,7 @@
     $title = 'Detail Gambar';
     $heading = $Data->judul;
     $description = 'Blog Detail';
+    $userid=$Data->user->id;
     $user=$Data->user->name;
     $userProfilPicture =  $Data->user->profilepicture;
     $userSatker=$Data->user->satker;
@@ -52,7 +53,7 @@
     if($Data->source_id==2)
     {
         $user = $Data->source->sumber_gambar;
-        $userSatker = "Penyedia ASet Digital";
+        $userSatker = "Penyedia Aset Digital";
         $userProfilPicture = "/img/illustration/Shutterstock.png";
     }
  
@@ -127,11 +128,16 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                     </div>
 
                                     <div class="col-6 d-flex align-items-start justify-content-end">
-                                        <!-- Contact Button Start -->
-                                        <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto">
-                                            <i data-acorn-icon="like"></i>
-                                            <span>Like</span>
-                                        </button>
+                                        <!-- Contact Button Start --> 
+                                        <form action="{{ route('like.post', $Data->id) }}"
+                                            method="post">
+                                            @csrf
+                                            <button
+                                                class="{{ $Data->liked() ? 'btn btn-primary' : 'btn btn-outline-primary' }} btn-icon btn-icon-start w-100 w-md-auto">
+                                                <i data-acorn-icon="like"></i>
+                                                <span>Like</span>
+                                            </button>
+                                        </form> 
                                         <!-- Contact Button End --> 
                                     </div> 
 
@@ -164,7 +170,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                                     </div>
                                                 </div>
                                                 <div class="col">
-                                                    <a href="#">{{$user}}</a>
+                                                    <a href="{{route('kontributor.profil', $userid)}}">{{$user}}</a>
                                                     <div class="text-muted text-small mb-2">{{$userSatker}}</div>
                                                 </div>
                                             </div>
@@ -190,16 +196,34 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                     <div class="d-flex align-items-center justify-content-end">
                                         <div class="row g-3">
                                             <div class="col-auto">
-                                                <i data-acorn-icon="eye" class="text-primary me-1" data-acorn-size="15"></i>
+                                                <i data-acorn-icon="eye" 
+                                                class="text-primary me-1" 
+                                                data-acorn-size="15"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="Jumlah Dilihat" 
+                                                ></i>
                                                 <span class="align-middle">{{$Data->views}}</span>
                                             </div>
                                             <div class="col-auto">
-                                                <i data-acorn-icon="download" class="text-primary me-1" data-acorn-size="15"></i>
+                                                <i data-acorn-icon="download" 
+                                                class="text-primary me-1" 
+                                                data-acorn-size="15"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="Jumlah Download" 
+                                                ></i>
                                                 <span class="align-middle">{{$Data->download}}</span>
                                             </div>
                                             <div class="col-auto">
-                                                <i data-acorn-icon="like" class="text-primary me-1" data-acorn-size="15"></i>
-                                                <span class="align-middle">12</span>
+                                                <i data-acorn-icon="like" 
+                                                class="text-primary me-1" 
+                                                data-acorn-size="15" 
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="Jumlah Like" 
+                                                ></i>
+                                                <span class="align-middle">{{$Data->likeCount}}</span>
                                             </div>
                                         </div>
                                     </div>

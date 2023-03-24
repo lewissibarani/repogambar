@@ -1,6 +1,6 @@
 @php
     $html_tag_data = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
-    $title = 'Knowledge Base';
+    $title = 'Hasil Pencarian';
     $description = 'Knowledge Base Page';
     $breadcrumbs = ["/"=>"Home", "/Pages"=>"Pages", "/Pages/Miscellaneous"=>"Miscellaneous"]
 @endphp

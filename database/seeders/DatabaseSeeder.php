@@ -14,11 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        $this->call([
-            StatusSeeder::class,
-            LevelSeeder::class
-            // KegunaanSeeder::class
-        ]);
+        $this->call(Kategori_FileSeeder::class);
     }
 }

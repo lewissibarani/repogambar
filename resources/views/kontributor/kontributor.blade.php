@@ -188,7 +188,7 @@
                         <a class="nav-link active" data-bs-toggle="tab" href="#projectsTab" role="tab" aria-selected="true">Karya</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="tab" href="#collectionsTab" role="tab" aria-selected="false">Favorit</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#collectionsTab" role="tab" aria-selected="false">Disukai</a>
                     </li> 
                     <li class="nav-item dropdown ms-auto d-none responsive-tab-dropdown">
                         <a
@@ -226,7 +226,7 @@
                                             </div>
                                             <div class="col-auto">
                                                 <i data-acorn-icon="like" class="text-white me-1" data-acorn-size="15"></i>
-                                                <span class="align-middle text-white">29</span>
+                                                <span class="align-middle text-white">{{ $gambars->likeCount}}</span>
                                             </div>
                                         </div>
                                         <div class="row g-0">
@@ -248,7 +248,41 @@
                     <!-- Projects Tab End -->  
 
                     <div class="tab-pane fade" id="collectionsTab" role="tabpanel">
-                    Karya yang disukai oleh kontributor.
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-xxl-3 g-2 mb-5">
+                            @foreach ($GambarLiked as $gambarliked)
+                            <div class="col">
+                                <div class="card sh-35 hover-img-scale-up hover-reveal">
+                                    <img src="/{{$gambarliked->thumbnail_path}}" class="card-img h-100 scale" alt="card image" />
+                                    <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
+                                        <div class="row g-0">
+                                            <div class="col-auto pe-3">
+                                                <i data-acorn-icon="eye" class="text-white me-1" data-acorn-size="15"></i>
+                                                <span class="align-middle text-white">{{$gambarliked->views}}</span>
+                                            </div>
+                                            <div class="col-auto pe-3">
+                                                <i data-acorn-icon="download" class="text-white me-1" data-acorn-size="15"></i>
+                                                <span class="align-middle text-white">{{$gambarliked->download}}</span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i data-acorn-icon="like" class="text-white me-1" data-acorn-size="15"></i>
+                                                <span class="align-middle text-white">{{ $gambarliked->likeCount}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row g-0">
+                                            <div class="col pe-2">
+                                                <a href="/Dashboard/DetailGambar/{{$gambars->id}}" class="stretched-link">
+                                                    <h5 class="heading text-white mb-1">{{$gambarliked->judul}}</h5>
+                                                </a>
+                                                <div class="d-inline-block">
+                                                    <div class="text-white">{{$gambarliked->user->name}}</div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div> 
                     </div>
                 </div>
             </div>

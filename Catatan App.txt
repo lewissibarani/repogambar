@@ -1,5 +1,6 @@
 12 Aug 2022 menambahkan = extension=php_gd.dll di Xampp php.ini
 Tags System Menggunakan: https://github.com/rtconner/laravel-tagging
+Like System Menggunakan: composer require rtconner/laravel-likeable
 
 DB_CONNECTION=mysql
 DB_HOST=us-cdbr-east-06.cleardb.net

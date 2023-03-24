@@ -24,7 +24,7 @@
   <header id="header" class="fixed ">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html" >Pikart</a></h1>
+      <h1 class="logo me-auto"><a href="/" >Pikart</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="/landpage_asset/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -36,7 +36,7 @@
           <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
           {{-- <li><a class="nav-link scrollto" href="#team">Tim Pengembang</a></li>  --}}
           <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
-          <li><a class="getstarted scrollto" href="{{route('login')}}">Pikart</a></li>
+          <li><a class="getstarted scrollto" href="/Dashboard">Pikart</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

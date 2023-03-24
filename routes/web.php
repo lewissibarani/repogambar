@@ -6,6 +6,7 @@ use App\Http\Controllers\KelolaGambarController;
 use App\Http\Controllers\BagiTugasController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\KontributorsController; 
+use App\Http\Controllers\LikesController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -27,20 +28,21 @@ Route::redirect('/', '/LandingPage');
 | Pages
 |--------------------------------------------------------------------------
 |
-*/
+*/ 
 
-Route::prefix('LandingPage')->group(function () {
-    Route::get('/', [DashboardsController::class, 'landingpage']);
-    Route::get('Beranda', [DashboardsController::class, 'landingpage']); 
+Route::prefix('/LandingPage')->group(function () {
+    Route::get('/', [DashboardsController::class, 'landingpage'])->name('landingpage.landpage');  
 });
 
 Route::middleware('auth')->group(function () {
-    Route::redirect('/', '/LandingPage');
+    // Route::redirect('/', '/LandingPage');
 
+    Route::post('/like-post/{id}',[LikesController::class,'likePost'])->name('like.post');
+    Route::post('/unlike-post/{id}',[LikesController::class,'unlikePost'])->name('unlike.post');
     
  
     Route::prefix('Dashboard')->group(function () {
-        Route::get('/', [DashboardsController::class, 'dashboard']);
+        Route::get('/', [DashboardsController::class, 'dashboard']); 
         Route::get('Beranda', [DashboardsController::class, 'dashboard']);
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar'); 
         Route::get('Download/{gambar_id}',[DashboardsController::class, 'downloadGambar'])->name('dashboard.downloadgambar');
@@ -83,9 +85,9 @@ Route::middleware('auth')->group(function () {
         Route::post('Store', [PetugasController::class, 'store'])->name('petugas.store');
         Route::post('Edit_Store', [PetugasController::class, 'edit_store'])->name('petugas.edit_store');
         Route::post('Tolak', [PetugasController::class, 'tolak'])->name('petugas.tolak');
-        Route::post('Tambah', [PetugasController::class, 'tambah'])->name('petugas.tambah');
-    
-        Route::view('Contoh','petugas/contoh');
+        Route::post('Tambah', [PetugasController::class, 'tambah'])->name('petugas.tambah'); 
+ 
+        
     });
 
 });

@@ -89,8 +89,24 @@
                 </div>
             </div>
         </form>   
+
+        <!-- Tags Start -->
+        <div class="col-12 col-sm-6 col-xl-12"
+        data-title="Daftar Tag Gambar" data-intro="Kamu juga bisa memilih gambar berdasarkan tags disini" data-step="5"> 
+            <div class="mb-5">
+                <div class="">
+                @foreach($Tags as $tag)
+                    <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="hasilpencarian/katakunci/{{$tag->name}}">
+                        <span>{{$tag->name}} ({{$tag->count}})</span>
+                    </a>
+                @endforeach
+                </div>
+            </div>
+        </div>
+        <!-- Tags End -->
+
         <div class="row">
-            <div class="col-12 col-xl-8 col-xxl-9 mb-5">
+            <div class="col-12 col-xl-12 col-xxl-12 mb-5">
                 <!-- Title Tabs Start -->
                 <ul class="nav nav-tabs nav-tabs-title nav-tabs-line-title responsive-tabs" role="tablist">
                     <li class="nav-item" role="presentation"
@@ -228,7 +244,7 @@
             </div>
 
             <!-- Right Side Start -->
-            <div class="col-12 col-xl-4 col-xxl-3">
+            {{-- <div class="col-12 col-xl-4 col-xxl-3">
                 <div class="row">
 
                     <!-- Penyumbang Unggulan Start -->
@@ -273,21 +289,7 @@
                     </div>
                     <!-- Penyumbang Unggulan End -->
 
-                    <!-- Tags Start -->
-                    <div class="col-12 col-sm-6 col-xl-12"
-                    data-title="Daftar Tag Gambar" data-intro="Kamu juga bisa memilih gambar berdasarkan tags disini" data-step="5">
-                        <h2 class="small-title">Tags</h2>
-                        <div class="card mb-5">
-                            <div class="card-body">
-                            @foreach($Tags as $tag)
-                                <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="hasilpencarian/katakunci/{{$tag->name}}">
-                                    <span>{{$tag->name}} ({{$tag->count}})</span>
-                                </a>
-                            @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Tags End -->
+
 
                     <!-- Mailing List Start -->
                     <div class="col-12">
@@ -313,7 +315,7 @@
                     <!-- Mailing List End -->
 
                 </div>
-            </div>
+            </div> --}}
             <!-- Right Side End -->
         </div>
     </div>
