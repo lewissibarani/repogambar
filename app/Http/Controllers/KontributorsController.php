@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Gambar;
+use App\Models\Kategori_File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -50,10 +51,11 @@ class KontributorsController extends Controller
 
     public function uploadkarya ()
     {
-        return view('kontributor.uploadkarya');
+        $Kategoris = Kategori_File::all();
+        return view('kontributor.uploadkarya',compact('Kategoris'));
     }
 
-    public function upload ()
+    public function store ()
     {
          
     }

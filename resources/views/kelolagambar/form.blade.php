@@ -20,7 +20,7 @@
     <div class="row mb-3">
         <label for="inputState" class="col-sm-3 col-form-label">Jenis Penggunaan</label>
         <div class="col-sm-9">
-            <select id="inputState" class="form-select" name="idkegunaan" onchange="showDiv('hidden_div', this)">
+            <select id="select2Multiple" class="form-select" name="idkegunaan" onchange="showDiv('hidden_div', this)">
                 <option selected>Pilih...</option>
                 @foreach ($Kegunaan as $kegunaan)
                     <option value="{{ $kegunaan->id }}">{{ $kegunaan->kegunaan }}</option> 
