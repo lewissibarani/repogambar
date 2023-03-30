@@ -15,6 +15,7 @@
         "irsadarief/jkd-sso": "^1.6",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
+        "livewire/livewire": "^2.12",
         "predis/predis": "^2.0",
         "pusher/pusher-php-server": "^7.2",
         "rtconner/laravel-likeable": "^3.2",

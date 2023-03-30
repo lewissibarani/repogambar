@@ -101,9 +101,10 @@
                             </div>
                         </div> 
                     </div>  
-                    
-                    <form action="/Kontributor/Store" method="POST" enctype="multipart/form-data">
 
+<form action="/Kontributor/Store" method="POST" enctype="multipart/form-data">
+
+                    <div class="formwizard">
                         <div class="row"> 
                             <div class="col-sm-6 mt-5"> 
                                 <div class="row">
@@ -133,7 +134,7 @@
                             </div>
                         </div> 
 
-                    </form>
+                    </div>
 
                 </div>
                 <div class="tab-pane fade" id="validationSecond" role="tabpanel">
@@ -181,11 +182,12 @@
                             </div>
                         </div> 
                     </div>
-                    <form class="tooltip-end-bottom">
+
+                    <div class="formwizard">
                         <div class="row mb-3 mt-5">
                             <label for="inputState" class="font-weight-bold col-sm-3 col-form-label">Kategori File</label>
                             <div class="col-sm-9">
-                                <select id="select2Multiple" class="form-select filekategori" name="idkegunaan">
+                                <select id="select2Multiple" class="form-select filekategori" name="kategori_file">
                                     <option selected>Pilih...</option>
                                     @foreach ($Kategoris as $kategori)
                                         <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori}}</option> 
@@ -202,7 +204,7 @@
                                 </div>   
                             </div>
                         </div> 
-                    </form>  
+                    </div>  
                 </div>
                 <div class="tab-pane fade" id="validationThird" role="tabpanel">
                     <h5 class="card-title"><i data-acorn-icon="book" class="align-top" ></i> Petunjuk Teknis</h5>
@@ -229,7 +231,7 @@
                             </div>
                         </div>   
                     </div>  
-                    <form class="tooltip-end-bottom">
+                    <div class="formwizard">
                         <div class="row mb-3 mt-5">
                             <label class="font-weight-bold col-sm-3 col-form-label">Tags</label> 
                                 <div class="col-sm-10">
@@ -239,8 +241,8 @@
                                     />
                                     <small class="form-text text-muted">Tuliskan minimal 3 tags. Setiap tag dipisahkan dengan tanda koma</small> 
                                 </div>
-                            </form>
-                        </div> 
+                        </div>
+                    </div> 
                 </div>
                 <div class="tab-pane fade" id="validationLast" role="tabpanel">
                     <div class="text-center mt-5">
@@ -251,7 +253,7 @@
                             <span>Submit</span>
                         </button>
 
-                    </form>
+</form>
 
                     </div>
                 </div>

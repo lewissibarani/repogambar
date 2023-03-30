@@ -74,4 +74,19 @@ class FormWizards {
       return false;
     }
   }
+
+  _getFormData() {
+    const data = {};
+    data.Name = document.querySelector('#addEditModal input[name=Name]').value;
+    data.Sales = document.querySelector('#addEditModal input[name=Sales]').value;
+    data.Stock = document.querySelector('#addEditModal input[name=Stock]').value;
+    data.Category = document.querySelector('#addEditModal input[name=Category]:checked')
+      ? document.querySelector('#addEditModal input[name=Category]:checked').value || ''
+      : '';
+    data.Tag = document.querySelector('#addEditModal input[name=Tag]:checked')
+      ? document.querySelector('#addEditModal input[name=Tag]:checked').value || ''
+      : '';
+    data.Check = '';
+    return data;
+  }
 }

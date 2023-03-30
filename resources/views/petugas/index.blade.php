@@ -104,7 +104,7 @@
                                     <thead>
                                         <tr>
                                             <th class="text-muted text-small text-uppercase">ID Permintaan</th>
-                                            <th class="text-muted text-small text-uppercase">Pembuat Permintaan</th>
+                                            <th class="text-muted text-small text-uppercase">Judul Permintaan</th>
                                             <th class="text-muted text-small text-uppercase">Satuan Kerja</th>
                                             <th class="text-muted text-small text-uppercase">Link</th>
                                             <th class="text-muted text-small text-uppercase">Diupdate Terakhir</th>

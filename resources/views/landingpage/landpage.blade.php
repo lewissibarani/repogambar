@@ -81,37 +81,37 @@
               <div class="d-flex justify-content-around hover01">
                   <div class="team-mem">
                     <a href="#">
-                      <figure><img loading="lazy" class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-foto.jpg"></figure>
+                      <figure style="border-style: solid;" ><img loading="lazy" class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-foto.jpg"></figure>
                       <p class="layanan text-center text-white" style="font-size: 18px;">Foto</p> 
                     </a> 
                   </div>
                   <div class="team-mem">
                     <a href="#">
-                      <figure><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-ilustrasi.jpg"></figure>
+                      <figure style="border-style: solid;" ><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-ilustrasi.jpg"></figure>
                       <p class="text-center text-white" style="font-size: 18px;">Ilustrasi</p> 
                     </a>
                   </div>
                   <div class="team-mem">
                     <a href="#">
-                      <figure><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-mockup.jpg"></figure>
+                      <figure style="border-style: solid;" ><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-mockup.jpg"></figure>
                       <p class="text-center text-white" style="font-size: 18px;">Mockup</p> 
                     </a>
                   </div>
                   <div class="team-mem">
                     <a href="#">
-                      <figure><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-font.jpg"></figure>
+                      <figure style="border-style: solid;" ><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-font.jpg"></figure>
                       <p class="text-center text-white" style="font-size: 18px;">Font</p> 
                     </a>
                   </div> 
                   <div class="team-mem">
                     <a href="#">
-                      <figure><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-psd.png"></figure>
+                      <figure style="border-style: solid;" ><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-psd.png"></figure>
                       <p class="text-center text-white" style="font-size: 18px;">PSD</p> 
                     </a>
                   </div>
                   <div class="team-mem">
                     <a href="#">
-                      <figure><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-indesign.png"></figure>
+                      <figure style="border-style: solid;" ><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-indesign.png"></figure>
                       <p class="text-center text-white" style="font-size: 18px;">Indesign</p> 
                     </a>
                   </div>

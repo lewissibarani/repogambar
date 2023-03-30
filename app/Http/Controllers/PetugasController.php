@@ -144,7 +144,9 @@ class PetugasController extends Controller
                 'file_id' => $fileid,
                 'tipe_gambar' => $tipe_gambar,
                 'views' => 0,
-                'download'=>0
+                'download'=>0,
+                'booleantayang'=>1,
+
             ]);
             
             //Menyimpan Tags

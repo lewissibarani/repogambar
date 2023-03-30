@@ -297,16 +297,16 @@
                     <i data-acorn-icon="screen" class="icon" data-acorn-size="18"></i>
                     <span class="label">Halaman Petugas</span>
                 </a>
-                <ul id="interfaceComponents">
-                            <!-- <li>
-                                <a href="/Statistik/Index">
-                                    <span class="label">Statistik Aplikasi</span>
-                                </a>
-                            </li> -->
+                <ul id="interfaceComponents"> 
 
                             <li>
                                 <a href="/Petugas/Index">
                                     <span class="label">Daftar Tugas</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Petugas/Index">
+                                    <span class="label">Daftar Karya Under Review</span>
                                 </a>
                             </li>
 

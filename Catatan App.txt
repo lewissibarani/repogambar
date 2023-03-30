@@ -13,3 +13,5 @@ Warna Gradient:
 #00c6ff RGBA(0,198,255,1)
 → 
 #0072ff RGBA(0,114,255,1)
+
+28.03.2023: Menambahkan kolom review pada tabel gambar dan menambahkan tabel baru tugas review

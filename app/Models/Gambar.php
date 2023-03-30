@@ -28,6 +28,7 @@ class Gambar extends Model
         'tipe_gambar',
         'views',
         'download',
+        'booleantayang',
     ];
 
     public function showGambar()
