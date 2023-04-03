@@ -33,6 +33,7 @@ Route::redirect('/', '/LandingPage');
 Route::prefix('/LandingPage')->group(function () {
     Route::get('/', [DashboardsController::class, 'landingpage'])->name('landingpage.landpage');  
 });
+ 
 
 Route::middleware('auth')->group(function () {
     // Route::redirect('/', '/LandingPage');
@@ -46,7 +47,8 @@ Route::middleware('auth')->group(function () {
         Route::get('Beranda', [DashboardsController::class, 'dashboard']);
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar'); 
         Route::get('Download/{gambar_id}',[DashboardsController::class, 'downloadGambar'])->name('dashboard.downloadgambar');
-        Route::get('DownloadFile/{file_id}',[DashboardsController::class, 'downloadFile'])->name('dashboard.downloadfile'); 
+        Route::get('Downl
+        oadFile/{file_id}',[DashboardsController::class, 'downloadFile'])->name('dashboard.downloadfile'); 
         Route::get('Statistik',[DashboardsController::class, 'statistik'])->name('petugas.statistik');
     });
 
