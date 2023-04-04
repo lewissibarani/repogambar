@@ -13,25 +13,27 @@
     <title> PIKART | {{$title}}</title>
     <meta name="description" content="{{$description}}"/>
     <meta name="csrf-token" content="{{ csrf_token() }}"> 
-    @if ($title!=="Landing Page") 
+    {{-- @if ($title!=="Landing Page")  --}}
     @include('_layout.head') 
-    @else 
+    {{-- @else 
     @include('_layout.head_lp')
-    @endif
+    @endif --}}
 
 </head>
 
 <body>
-<div id="root">
-    @if ($title!=="Landing Page") 
+<div id="root"> 
         <div id="nav" class="nav-container d-flex" @isset($custom_nav_data) @foreach ($custom_nav_data as $key=> $value)
         data-{{$key}}="{{$value}}"
             @endforeach
             @endisset
         >
+        @if ($title!=="Landing Page") 
             @include('_layout.nav')
-        </div> 
-    @endif 
+        @else
+        @include('_layout.navlp')
+        @endif
+        </div>  
     <main>
         @yield('content')
     </main>

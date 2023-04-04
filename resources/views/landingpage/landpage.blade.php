@@ -8,114 +8,114 @@
  
 
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>""])
-   
 
-  <!-- Template Main CSS File -->
-  {{-- <link href="assets/css/style.css" rel="stylesheet"> --}}
-
-  <!-- =======================================================
-  * Template Name: Arsha - v4.10.0
-  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== --> 
-  @section('content')
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed ">
-    <div class="container d-flex align-items-center">
-
-      <h1 class="logo me-auto"><a href="/" >Pikart</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="/landpage_asset/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
-          <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
-          <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
-          {{-- <li><a class="nav-link scrollto" href="#team">Tim Pengembang</a></li>  --}}
-          <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
-          <li><a class="getstarted scrollto" href="/Dashboard">Pikart</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
+@section('css')
+    <link rel="stylesheet" href="/css/landpagecss.css"/>
+@endsection
+    
+@section('content')   
   <div id="hero" class="d-flex ">  
-    <div class="container">
-      <div class="row justify-content-md-center">
-        <h1 class="text-center" style="margin-bottom: 10px; font-size: 34px;">
-          Semua aset yang Anda butuhkan, di satu tempat
-        </h1>
-      </div>
-      <div class="row justify-content-md-center">
-        <h2 class="text-center" style="margin-bottom: 30px;font-size: 22px;">
-          Temukan dan unduh foto, desain, dan mockup berkualitas tinggi terbaik
-        </h1>
-      </div>
+    <div class="container">   
 
-      <!-- Search Input Start -->
-      <div class="row justify-content-md-center"> 
-        <div class="col-md-auto col-lg-8">  
-          <div class="card">
-            <div class="card-body p-0 d-flex flex-row align-items-center px-3 py-3">
-                <input class="form-control border-0 shadow-none" placeholder="Cari Aset..."  />
-                <div class="d-flex flex-row">  
-                    <button class="sumbit" id="chatSendButton" type="button" style="border: none;background: none">
-                        <i data-acorn-icon="search"></i>
-                    </button>
-                </div>
+      <div class="row d-flex align-items-center feature-container">
+        <div class="row">
+          <div class="col-12 col-lg-5 " style="padding-top: 70px; ">
+            <h1 class="display-1 mb-3 text-primary">
+              <span class="d-block">Banyak Aset</span>
+              <span class="d-block">Siap Pakai</span>
+            </h1>
+              <p class="heading mb-7 pe-lg-6">
+              Pikart hadir untuk memudahkan pegawai BPS baru untuk saling berbagi aset media digital. Website ini berfungsi untuk melayani permintaan gambar shutterstock dan freepik bagi pegawai BPS di seluruh Indonesia.
+              <br> 
+              </p> 
+              <!-- Search Input Start -->   
+              <div class="card">
+                <div class="card-body p-0 d-flex flex-row align-items-center px-3 py-3">
+                    <input class="form-control border-0 shadow-none" placeholder="Cari Aset..."  />
+                    <div class="d-flex flex-row">  
+                        <button class="sumbit" id="chatSendButton" type="button" style="border: none;background: none">
+                            <i data-acorn-icon="search"></i>
+                        </button>
+                    </div>
+                </div>  
+              <!-- Search Input End -->
             </div>
+          </div>
+          <div class="col-12 col-lg-7 align-items-right ">
+          <img src="../../landpage_asset/img/cta-bg.png" class="feature-image" alt="feature image" style="max-width: 100%;">
           </div> 
         </div>
-      </div> 
-      <!-- Search Input End -->
+      </div>
 
       <!-- Daftar Layanan Start --> 
        
-          <div class="row justify-content-md-center" style="margin-top: 80px; " >  
-              <div class="d-flex justify-content-around hover01">
-                  <div class="team-mem">
-                    <a href="#">
-                      <figure style="border-style: solid;" ><img loading="lazy" class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-foto.jpg"></figure>
-                      <p class="layanan text-center text-white" style="font-size: 18px;">Foto</p> 
-                    </a> 
-                  </div>
-                  <div class="team-mem">
-                    <a href="#">
-                      <figure style="border-style: solid;" ><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-ilustrasi.jpg"></figure>
-                      <p class="text-center text-white" style="font-size: 18px;">Ilustrasi</p> 
-                    </a>
-                  </div>
-                  <div class="team-mem">
-                    <a href="#">
-                      <figure style="border-style: solid;" ><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-mockup.jpg"></figure>
-                      <p class="text-center text-white" style="font-size: 18px;">Mockup</p> 
-                    </a>
-                  </div>
-                  <div class="team-mem">
-                    <a href="#">
-                      <figure style="border-style: solid;" ><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-font.jpg"></figure>
-                      <p class="text-center text-white" style="font-size: 18px;">Font</p> 
-                    </a>
-                  </div> 
-                  <div class="team-mem">
-                    <a href="#">
-                      <figure style="border-style: solid;" ><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-psd.png"></figure>
-                      <p class="text-center text-white" style="font-size: 18px;">PSD</p> 
-                    </a>
-                  </div>
-                  <div class="team-mem">
-                    <a href="#">
-                      <figure style="border-style: solid;" ><img class ="img_layanan" src="/landpage_asset/img/foto_header/layanan-indesign.png"></figure>
-                      <p class="text-center text-white" style="font-size: 18px;">Indesign</p> 
-                    </a>
-                  </div>
-              </div>
+          <div class="row justify-content-md-center" style="margin-top: 10px; " >   
+                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+                          <div class="card hover-border-primary sh-20 sw-20">
+                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                      <i data-acorn-icon="camera" class="text-white"></i>
+                                  </div>
+                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Foto</div>
+                                  <div class="text-small text-primary">14 PRODUCTS</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+                          <div class="card hover-border-primary sh-20 sw-20">
+                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                      <i data-acorn-icon="wizard" class="text-white"></i>
+                                  </div>
+                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Ilustrasi</div>
+                                  <div class="text-small text-primary">14 PRODUCTS</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+                          <div class="card hover-border-primary sh-20 sw-20">
+                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                      <i data-acorn-icon="light-on" class="text-white"></i>
+                                  </div>
+                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">PSD</div>
+                                  <div class="text-small text-primary">14 PRODUCTS</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+                          <div class="card hover-border-primary sh-20 sw-20">
+                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                      <i data-acorn-icon="book" class="text-white"></i>
+                                  </div>
+                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Indesign</div>
+                                  <div class="text-small text-primary">14 PRODUCTS</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+                          <div class="card hover-border-primary sh-20 sw-20">
+                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                      <i data-acorn-icon="laptop" class="text-white"></i>
+                                  </div>
+                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Mockup</div>
+                                  <div class="text-small text-primary">14 PRODUCTS</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+                          <div class="card hover-border-primary sh-20 sw-20">
+                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                      <i data-acorn-icon="edit" class="text-white"></i>
+                                  </div>
+                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Font</div>
+                                  <div class="text-small text-primary">14 PRODUCTS</div>
+                              </div>
+                          </div>
+                      </div> 
           </div>  
       
       <!-- Daftar Layanan End --> 
@@ -126,7 +126,7 @@
   <main id="main">
 
     <!-- ======= Clients Section ======= -->
-    <section id="clients" class="clients section-bg">
+    {{-- <section id="clients" class="clients ">
       <div class="container">
 
         <div class="row" data-aos="zoom-in">
@@ -146,32 +146,87 @@
         </div>
 
       </div>
-    </section><!-- End Cliens Section -->
+    </section> --}}
+    <!-- End Cliens Section -->
 
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Tentang Pikart</h2>
+          <h2 class="display-s3 text-center mb-4">Tentang Pikart</h2>
         </div>
 
         <div class="row content">
           <div class="col-lg-6">
             <p>
               Pikart adalah aplikasi yang dibuat untuk melayani permintaan gambar dan media penyimpanan gambar Badan Pusat Statitsik
-            </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> <b>Konten stok berkualitas tinggi.</b> Pilihan gambar tanpa batas dengan kualitas terbaik untuk membuat proyek Anda terlihat profesional
-              </li>
-              <li><i class="ri-check-double-line"></i> <b>Aset Siap Pakai.</b> Akses ribuan gambar dan desain yang siap dipublikasikan dan siapkan proyek Anda dengan cepat.
-              </li>
-              <li><i class="ri-check-double-line"></i> <b>Hasil Pencarian Terjamin.</b> Ada gambar dengan gaya untuk setiap proyek, apa pun kebutuhan Anda 
-              </li>
-              <li><i class="ri-check-double-line"></i> <b>Konten Segar Setiap Hari.</b> Konten kami diperbarui setiap hari sehingga Anda dapat menemukan foto dan desain terbaru dan paling trendi
-              </li>
-              
-            </ul>
+            </p> 
+ 
+            <div class="row g-0 sh-10">
+                    <div class="col-auto">
+                        <div class="sw-9 sh-10 d-inline-block d-flex justify-content-center align-items-center">
+                          <i data-acorn-icon="check-circle"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
+                            <div class="d-flex flex-column">
+                                <div class="text-alternate">Konten stok berkualitas tinggi</div>
+                                <div class="text-muted">Pilihan gambar tanpa batas dengan kualitas terbaik untuk membuat proyek Anda terlihat profesional</div>
+                            </div>
+                        </div>
+                    </div> 
+            </div> 
+
+            <div class="row g-0 sh-10">
+                    <div class="col-auto">
+                        <div class="sw-9 sh-10 d-inline-block d-flex justify-content-center align-items-center">
+                          <i data-acorn-icon="check-circle"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
+                            <div class="d-flex flex-column">
+                                <div class="text-alternate">Aset Siap Pakai</div>
+                                <div class="text-muted">Akses ribuan gambar dan desain yang siap dipublikasikan dan siapkan proyek Anda dengan cepat</div>
+                            </div>
+                        </div>
+                    </div> 
+            </div>  
+
+            <div class="row g-0 sh-10">
+                    <div class="col-auto">
+                        <div class="sw-9 sh-10 d-inline-block d-flex justify-content-center align-items-center">
+                          <i data-acorn-icon="check-circle"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
+                            <div class="d-flex flex-column">
+                                <div class="text-alternate">Hasil Pencarian Terjamin</div>
+                                <div class="text-muted">Ada gambar dengan gaya untuk setiap proyek, apa pun kebutuhan Anda</div>
+                            </div>
+                        </div>
+                    </div> 
+            </div>   
+
+            <div class="row g-0 sh-10">
+                    <div class="col-auto">
+                        <div class="sw-9 sh-10 d-inline-block d-flex justify-content-center align-items-center">
+                          <i data-acorn-icon="check-circle"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
+                            <div class="d-flex flex-column">
+                                <div class="text-alternate">Konten Segar Setiap Hari</div>
+                                <div class="text-muted">Konten kami diperbarui setiap hari sehingga Anda dapat menemukan foto dan desain terbaru dan paling trending</div>
+                            </div>
+                        </div>
+                    </div> 
+            </div> 
+
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <p>
@@ -286,7 +341,7 @@
     </section><!-- End Skills Section --> --}}
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
+    <section id="services" class="services ">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -333,7 +388,7 @@
     </section><!-- End Services Section -->
 
     <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
+    {{-- <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
 
         <div class="row">
@@ -342,12 +397,13 @@
             <p> Periksa apa yang populer di Pikart dan jadikan proyek Anda terlihat trendi dan profesional</p>
           </div>
           <div class="col-lg-3 cta-btn-container text-center">
-            {{-- <a class="cta-btn align-middle" href="#">Pikart</a> --}}
+            {{-- <a class="cta-btn align-middle" href="#">Pikart</a> 
           </div>
         </div>
 
       </div>
-    </section><!-- End Cta Section -->
+    </section> --}}
+    <!-- End Cta Section -->
 
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
