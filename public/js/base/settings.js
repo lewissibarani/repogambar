@@ -31,11 +31,11 @@ class Settings {
     return {
       attributes: {
         placement: 'vertical',
-        behaviour: 'pinned',
+        behaviour: 'unpinned',
         layout: 'fluid',
         radius: 'rounded',
         color: 'light-blue',
-        navcolor: 'default',
+        navcolor: 'light',
       },
       storagePrefix: 'acorn-standard-',
       showSettings: true,

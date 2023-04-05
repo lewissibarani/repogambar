@@ -1,10 +1,9 @@
-<div class="nav-content d-flex">
+<div class="nav-content d-flex" style="padding-left: 100px;" >
     <!-- Logo Start -->
     <div class="logo position-relative">
-        <a href="/">
-            PIKART
+        <a href="/" class="text-dark"> 
             <!-- Logo can be added directly --> 
-            {{-- <img src="/img/logo/logo-light.svg" alt="logo" /> --}}
+            <img src="/img/logo/logo-light.svg" alt="logo" />
 
             <!-- Or added via css to provide different ones for different color themes -->
             <!-- <div class="img"></div> -->
@@ -12,12 +11,31 @@
     </div> 
 
     <!-- User Menu Start -->
-    <div class="user-container d-flex"> 
-        <a href="/Dashboard">
-            <i data-acorn-icon="home" class="icon" data-acorn-size="18"></i>
-            <span class="label">Tentang Pikart</span>
+    <div class="user-container d-flex"  style="margin-left :3em; margin-right: 50px;"> 
+        <a href="#tentangaplikasi" class="nav-link text-dark">
+            <i data-acorn-icon="star" class="icon" data-acorn-size="18"></i>
+            <span class="label">Tentang Aplikasi</span>
         </a>
-    </div>
+    </div>  
+    <div class="user-container d-flex"  style="margin-left :3em; margin-right: 50px;"> 
+        <a href="#jenislayanan" class="nav-link text-dark">
+            <i data-acorn-icon="support" class="icon" data-acorn-size="18"></i>
+            <span class="label">Jenis Layanan</span>
+        </a>
+    </div> 
+    {{-- <div class="user-container d-flex"  style="margin-left :3em; margin-right: 50px;"> 
+        <a href="#portofolio" class="nav-link text-dark">
+            <i data-acorn-icon="tv" class="icon" data-acorn-size="18"></i>
+            <span class="label">Portofolio</span>
+        </a>
+    </div>  --}}
+    <div class="user-container d-flex"  style="margin-left :3em; margin-right: 100px;"> 
+        <a href="/Dashboard" class="text-dark">
+            <i data-acorn-icon="login" class="icon" data-acorn-size="18"></i>
+            <span class="label">Login Pikart</span>
+        </a>
+    </div> 
+    
     <!-- User Menu End -->
 
     <!-- Icons Menu Start -->
@@ -34,7 +52,7 @@
     <!-- Menu Start -->
     <div class="menu-container flex-grow-1">
         <ul id="menu" class="menu" style="margin-left :3em;">
-            <li>
+            {{-- <li>
                 <a href="/Dashboard">
                     <i data-acorn-icon="home" class="icon" data-acorn-size="18"></i>
                     <span class="label">Tentang Pikart</span>
@@ -51,7 +69,7 @@
                     <i data-acorn-icon="activity" class="icon" data-acorn-size="18"></i>
                     <span class="label">Portofolio</span>
                 </a>
-            </li> 
+            </li>  --}}
         </ul>
     </div>
     <!-- Menu End -->

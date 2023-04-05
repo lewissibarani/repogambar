@@ -119,7 +119,7 @@ class AuthenticatedSessionController extends Controller
 
                 // Login dengan menggunakan id pengguna dari record di database aplikasi
                 if (Auths::loginUsingId($id)) {
-                    return redirect()->intended('/');
+                    return redirect()->intended('/Dashboard');
                 } else {
                     return redirect('/');
                 }

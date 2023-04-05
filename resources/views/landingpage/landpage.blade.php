@@ -12,15 +12,19 @@
 @section('css')
     <link rel="stylesheet" href="/css/landpagecss.css"/>
 @endsection
+
+@section('js_vendor')
+    <script src="/js/cs/scrollspy.js"></script>  
+@endsection
     
 @section('content')   
-  <div id="hero" class="d-flex ">  
-    <div class="container">   
-
-      <div class="row d-flex align-items-center feature-container">
+<section id="hero" class="scroll-section hero">
+  <div id="hero">  
+    <div class="container">    
+      <div class="row d-flex align-items-center">
         <div class="row">
-          <div class="col-12 col-lg-5 " style="padding-top: 70px; ">
-            <h1 class="display-1 mb-3 text-primary">
+          <div class="col-12 col-lg-6 " style="padding-top: 70px;padding-left: 200px;">
+            <h1 class="display-1 mb-3 text-dark">
               <span class="d-block">Banyak Aset</span>
               <span class="d-block">Siap Pakai</span>
             </h1>
@@ -41,8 +45,8 @@
               <!-- Search Input End -->
             </div>
           </div>
-          <div class="col-12 col-lg-7 align-items-right ">
-          <img src="../../landpage_asset/img/cta-bg.png" class="feature-image" alt="feature image" style="max-width: 100%;">
+          <div class="col-12 col-lg-6 align-items-right ">
+          <img src="../../landpage_asset/img/cta-bg.png" class="feature-image" alt="feature image" style="max-width: 80%;">
           </div> 
         </div>
       </div>
@@ -121,8 +125,8 @@
       <!-- Daftar Layanan End --> 
     </div>
 
-  </div><!-- End Hero -->
-
+  </div>
+</section><!-- End Hero -->  
   <main id="main">
 
     <!-- ======= Clients Section ======= -->
@@ -150,7 +154,7 @@
     <!-- End Cliens Section -->
 
     <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
+    <section id="tentangaplikasi" class="scroll-section about">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -158,7 +162,7 @@
         </div>
 
         <div class="row content">
-          <div class="col-lg-6">
+          <div class="col-lg-6" style="padding-left: 200px;">
             <p>
               Pikart adalah aplikasi yang dibuat untuk melayani permintaan gambar dan media penyimpanan gambar Badan Pusat Statitsik
             </p> 
@@ -229,10 +233,7 @@
 
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
-            <p>
-              Pilihan paling cerdas untuk pembuatan publikasi, spaduk, baliho, infografis, dan media promosi lainnya di satuan kerja saudara. 
-              Apakah Anda sedang mencari desain atau foto, Anda akan menemukan aset yang sempurna di Pikart.
-            </p>
+            <img src="../../landpage_asset/img/about-us.png" class="feature-image" alt="feature image" style="max-width: 200%;">
             {{-- <a href="#" class="btn-learn-more">Learn More</a> --}}
           </div>
         </div>
@@ -341,7 +342,7 @@
     </section><!-- End Skills Section --> --}}
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services ">
+    <section id="jenislayanan" class="scroll-section services ">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -406,7 +407,7 @@
     <!-- End Cta Section -->
 
     <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
+    {{-- <section id="portofolio" class="scroll-section portfolio">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -419,7 +420,7 @@
           <li data-filter=".filter-app">App</li>
           <li data-filter=".filter-card">Card</li>
           <li data-filter=".filter-web">Web</li>
-        </ul> --}}
+        </ul>  
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
@@ -516,7 +517,8 @@
         </div>
 
       </div>
-    </section><!-- End Portfolio Section -->
+    </section> --}}
+    <!-- End Portfolio Section -->
 
     <!-- ======= Team Section ======= -->
     {{-- <section id="team" class="team section-bg">
@@ -817,9 +819,9 @@
       </div>
     </div>
   </footer><!-- End Footer --> --}}
-
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+{{-- 
+  <div id="preloader"></div>--}}
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i data-acorn-icon="arrow-double-top"></i> 
 
   @section('js_vendor')  
   <script src="/landpage_asset/vendor/aos/aos.js"></script>
