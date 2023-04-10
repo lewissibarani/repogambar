@@ -30,23 +30,29 @@
                 <div class="row">  
                     <div class="col-sm-7">
                         <div class="row">
-                            <div class="col-sm-12 mt-5"> 
-                                <div class="mb-3 filled">
-                                    <i data-acorn-icon="edit"></i>
-                                    <input type="text"  required class="input-judul" wire:model="judul" placeholder="Judul Karya..." />
-                                    <small class="form-text text-muted">Sesuaikan judul dengan gambar</small>  
-                                </div> 
+                            <div class="col-sm-12 mt-5">   
+                                    <label for="description">Judul Gambar</label>
+                                    <input type="text" wire:model="judul" class="form-control" id="productAmount"/>
+                                    @error('stock') <span class="error">{{ $message }}</span> @enderror
+                                    <small class="form-text text-muted">Sesuaikan judul dengan gambar</small>   
                             </div>
         
                             <div class="col-sm-12 mt-5"> 
                                 <div class="row">
                                     <div class="col-sm-12 col-form-label card no-shadow"> 
-                                        <input type="file" class="form-control"  
-                                        wire:model="image" 
-                                        wire:submit.prevent="save"
-                                        id="image_input"  /> 
+
+                                        <!-- Images Start -->  
+                                        <label for="description">Upload Gambar</label>
+                                                    <form>
+                                                        <div class="dropzone" id="dropzoneImage"></div>
+                                                    </form>  
+                                        <!-- Images End -->
+
+                                        {{-- <input type="file" class="form-control"   
+                                        id="image_input"  />  --}}
+                                        @error('stock') <span class="error">{{ $message }}</span> @enderror
                                     </div>   
-                                    <div class="col-md-12 mb-2"> 
+                                    {{-- <div class="col-md-12 mb-2"> 
                                         <img class="card-img scale" id="preview-image-before-upload" hidden>
                                         <div class="container-image-preview">
                                                 <div class ="drop-container"
@@ -54,7 +60,7 @@
                                                     <div class="drop-title">Pratinjau Gambar</div>
                                                 </div> 
                                         </div> 
-                                    </div>
+                                    </div> --}}
                                 </div>  
                             </div> 
                         </div> 
@@ -125,11 +131,11 @@
                 <table class="table">
                     <tr>
                         <td>Product Name:</td>
-                        <td><strong>{{$name}}</strong></td>
+                        <td><strong>{{$judul}}</strong></td>
                     </tr>
                     <tr>
                         <td>Product Amount:</td>
-                        <td><strong>{{$amount}}</strong></td>
+                        <td><strong>{{$imagename}}</strong></td>
                     </tr>
                     <tr>
                         <td>Product status:</td>

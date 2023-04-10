@@ -10,7 +10,7 @@ class Wizard extends Component
 {
     use WithFileUploads;
     public $currentStep = 1;
-    public $judul,$image, $name, $amount, $description, $status = 1, $stock;
+    public $judul,$imagename,$imagepath, $name, $amount, $description, $status = 1, $stock;
     public $successMessage = '';
   
     /**
@@ -31,9 +31,10 @@ class Wizard extends Component
     public function firstStepSubmit()
     {
         $validatedData = $this->validate([
-            'judul' => 'required',
-            'image' => 'required|image|max:30000', 
-        ]);
+            'judul' => 'required', 
+        ]); 
+  
+        session()->flash('message', 'File successfully Uploaded.');
  
         $this->currentStep = 2;
     }
@@ -60,10 +61,10 @@ class Wizard extends Component
      */
     public function submitForm()
     {
-        Product::create([
-            'name' => $this->name,
-            'amount' => $this->amount,
-            'description' => $this->description,
+        Gambar::create([
+            'judul' => $this->name,
+            'imagename' => $this->imagename,
+            'imagepath' => $this->imagepath,
             'stock' => $this->stock,
             'status' => $this->status,
         ]);

@@ -28,11 +28,12 @@ class DropzoneControls {
   _initImage() {
     if (document.querySelector('#dropzoneImage')) {
       new Dropzone('#dropzoneImage', {
-        url: '{{route("petugas.store")}}',
+        url: 'https://httpbin.org/post',
         maxFilesize: 10,
+        maxFiles: 1,  
         init: function () {
           this.on('success', function (file, responseText) {
-            console.log(responseText);
+            console.log("Suses upload "+responseText);
           });
         },
         acceptedFiles: 'image/*',

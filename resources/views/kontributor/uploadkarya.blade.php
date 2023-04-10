@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css"/>
 <link rel="stylesheet" href="/css/vendor/tagify.css"/>
 <link rel="stylesheet" href="/css/wizard.css"/>
+<link rel="stylesheet" href="/css/vendor/dropzone.min.css"/>
 @endsection
 
 @livewireStyles
@@ -22,12 +23,16 @@
 <script src="/js/vendor/mousetrap.min.js"></script>
 <script src="/js/vendor/select2.full.min.js"></script>
 <script src="/js/vendor/tagify.min.js"></script>  
+<script src="/js/vendor/dropzone.min.js"></script>
 @endsection
 
 @section('js_page')
 <script src="/js/forms/controls.select2.js"></script>
 <script src="/js/forms/controls.tag.js"></script> 
+<script src="/js/cs/dropzone.templates.js"></script>
+<script src="/js/forms/controls.dropzone.js"></script>
 @endsection
+  
 
 @section('content') 
 <div class="container" style="width: 65%;">

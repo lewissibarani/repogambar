@@ -23,7 +23,7 @@
     <div class="container">    
       <div class="row d-flex align-items-center">
         <div class="row">
-          <div class="col-12 col-lg-6 " style="padding-top: 70px;padding-left: 200px;">
+          <div class="col-12 col-lg-6 " style="padding-top: 70px;">
             <h1 class="display-1 mb-3 text-dark">
               <span class="d-block">Banyak Aset</span>
               <span class="d-block">Siap Pakai</span>
@@ -53,8 +53,8 @@
 
       <!-- Daftar Layanan Start --> 
        
-          <div class="row justify-content-md-center" style="margin-top: 10px; " >   
-                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+          <div class="row justify-content-md-center" style="margin-top: 30px; " >   
+                      <div class="col-auto mb-5" style="margin-right: 50px; ">
                           <div class="card hover-border-primary sh-20 sw-20">
                               <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
                                   <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
@@ -65,7 +65,7 @@
                               </div>
                           </div>
                       </div>
-                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+                      <div class="col-auto mb-5" style="margin-right: 60px; ">
                           <div class="card hover-border-primary sh-20 sw-20">
                               <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
                                   <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
@@ -76,7 +76,7 @@
                               </div>
                           </div>
                       </div>
-                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+                      <div class="col-auto mb-5" style="margin-right: 60px; ">
                           <div class="card hover-border-primary sh-20 sw-20">
                               <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
                                   <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
@@ -87,7 +87,7 @@
                               </div>
                           </div>
                       </div>
-                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+                      <div class="col-auto mb-5" style="margin-right: 60px; ">
                           <div class="card hover-border-primary sh-20 sw-20">
                               <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
                                   <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
@@ -98,7 +98,7 @@
                               </div>
                           </div>
                       </div>
-                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+                      <div class="col-auto mb-5" style="margin-right: 60px; ">
                           <div class="card hover-border-primary sh-20 sw-20">
                               <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
                                   <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
@@ -109,7 +109,7 @@
                               </div>
                           </div>
                       </div>
-                      <div class="col-auto mb-5" style="margin-right: 40px; ">
+                      <div class="col-auto mb-5" style="margin-right: 60px; ">
                           <div class="card hover-border-primary sh-20 sw-20">
                               <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
                                   <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
