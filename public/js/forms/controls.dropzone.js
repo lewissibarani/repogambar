@@ -33,7 +33,7 @@ class DropzoneControls {
         maxFiles: 1,  
         init: function () {
           this.on('success', function (file, responseText) {
-            console.log("Suses upload "+responseText);
+            console.log("Sukses upload "+responseText);
           });
         },
         acceptedFiles: 'image/*',

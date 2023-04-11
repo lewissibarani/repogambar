@@ -5,12 +5,15 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Gambar;
+use App\Models\Kategori_File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
   
 class Wizard extends Component
 {
     use WithFileUploads;
     public $currentStep = 1;
-    public $judul,$imagename,$imagepath, $name, $amount, $description, $status = 1, $stock;
+    public $judul,$image,$imagename,$imagepath, $jenisfile,$file, $tags, $Jenisfile;
     public $successMessage = '';
   
     /**
@@ -19,8 +22,9 @@ class Wizard extends Component
      * @return response()
      */
     public function render()
-    {
-        return view('livewire.wizard');
+    {  
+        $this->Jenisfile =  Kategori_File::all();
+        return view('livewire.wizard') ;
     }
   
     /**
@@ -29,12 +33,13 @@ class Wizard extends Component
      * @return response()
      */
     public function firstStepSubmit()
-    {
+    { 
         $validatedData = $this->validate([
             'judul' => 'required', 
+            'image' => 'required|image|max:30000', //30MB Max
         ]); 
-  
-        session()->flash('message', 'File successfully Uploaded.');
+   
+        // $this->photo->store('image');
  
         $this->currentStep = 2;
     }
@@ -46,9 +51,10 @@ class Wizard extends Component
      */
     public function secondStepSubmit()
     {
-        $validatedData = $this->validate([
-            'stock' => 'required',
-            'status' => 'required',
+        
+        
+        $validatedData = $this->validate([ 
+            'Jenisfile' => 'required', 
         ]);
   
         $this->currentStep = 3;
@@ -65,8 +71,8 @@ class Wizard extends Component
             'judul' => $this->name,
             'imagename' => $this->imagename,
             'imagepath' => $this->imagepath,
-            'stock' => $this->stock,
-            'status' => $this->status,
+            'file' => $this->file,
+            'jenisfile' => $this->jenisfile,
         ]);
   
         $this->successMessage = 'Product Created Successfully.';
@@ -96,7 +102,6 @@ class Wizard extends Component
         $this->name = '';
         $this->amount = '';
         $this->description = '';
-        $this->stock = '';
-        $this->status = 1;
+        $this->stock = ''; 
     }
 }
