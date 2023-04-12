@@ -8,21 +8,29 @@ use App\Models\Gambar;
 use App\Models\Kategori_File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
   
 class Wizard extends Component
 {
     use WithFileUploads;
     public $currentStep = 1;
-    public $judul,$image,$imagename,$imagepath, $jenisfile,$file, $tags, $Jenisfile;
+    public $judul,$image,$imagename,$imagepath,$file,$Jenisfile,$kegunaan;
     public $successMessage = '';
+    public $jenisfile="";
+    public $pembuatkarya="";
+    public $tags=[];
   
     /**
      * Write code on Method
      *
      * @return response()
      */
+ 
+
     public function render()
     {  
+        $this->pembuatkarya =  User::where('id',Auth::id())->first();
         $this->Jenisfile =  Kategori_File::all();
         return view('livewire.wizard') ;
     }
@@ -51,11 +59,10 @@ class Wizard extends Component
      */
     public function secondStepSubmit()
     {
-        
-        
-        $validatedData = $this->validate([ 
-            'Jenisfile' => 'required', 
-        ]);
+         
+        // $validatedData = $this->validate([ 
+        //     'Jenisfile' => 'required', 
+        // ]);
   
         $this->currentStep = 3;
     }
@@ -68,9 +75,11 @@ class Wizard extends Component
     public function submitForm()
     {
         Gambar::create([
-            'judul' => $this->name,
-            'imagename' => $this->imagename,
-            'imagepath' => $this->imagepath,
+            'judul' => $this->judul,
+            'link' => "nolink",
+            'path' => "",
+            'idKegunaan' =>"",
+            
             'file' => $this->file,
             'jenisfile' => $this->jenisfile,
         ]);
@@ -104,4 +113,5 @@ class Wizard extends Component
         $this->description = '';
         $this->stock = ''; 
     }
+ 
 }

@@ -35,5 +35,4 @@
 <link rel="stylesheet" href="/css/styles.css" />
 <link rel="stylesheet" href="/css/main.css" />
 <!-- Template Base Styles End -->
-<script src="/js/base/loader.js"></script>  
-
+<script src="/js/base/loader.js"></script>   

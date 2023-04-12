@@ -39,6 +39,7 @@
     </main>
     @include('_layout.footer')
 </div>
+@stack('scripts')
 @include('_layout.modal_settings')
 @include('_layout.modal_search')
 @include('_layout.scripts')
