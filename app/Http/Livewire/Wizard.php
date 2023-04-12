@@ -5,22 +5,34 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Gambar;
+use App\Models\Kategori_File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
   
 class Wizard extends Component
 {
     use WithFileUploads;
     public $currentStep = 1;
-    public $judul,$imagename,$imagepath, $name, $amount, $description, $status = 1, $stock;
+    public $judul,$image,$imagename,$imagepath,$file,$Jenisfile,$kegunaan;
     public $successMessage = '';
+    public $jenisfile="";
+    public $pembuatkarya="";
+    public $tags=[];
   
     /**
      * Write code on Method
      *
      * @return response()
      */
+ 
+
     public function render()
-    {
-        return view('livewire.wizard');
+    {  
+        $this->pembuatkarya =  User::where('id',Auth::id())->first();
+        $this->Jenisfile =  Kategori_File::all();
+        return view('livewire.wizard') ;
     }
   
     /**
@@ -29,12 +41,13 @@ class Wizard extends Component
      * @return response()
      */
     public function firstStepSubmit()
-    {
+    { 
         $validatedData = $this->validate([
             'judul' => 'required', 
+            'image' => 'required|image|max:30000', //30MB Max
         ]); 
-  
-        session()->flash('message', 'File successfully Uploaded.');
+   
+        // $this->photo->store('image');
  
         $this->currentStep = 2;
     }
@@ -46,10 +59,10 @@ class Wizard extends Component
      */
     public function secondStepSubmit()
     {
-        $validatedData = $this->validate([
-            'stock' => 'required',
-            'status' => 'required',
-        ]);
+         
+        // $validatedData = $this->validate([ 
+        //     'Jenisfile' => 'required', 
+        // ]);
   
         $this->currentStep = 3;
     }
@@ -62,11 +75,13 @@ class Wizard extends Component
     public function submitForm()
     {
         Gambar::create([
-            'judul' => $this->name,
-            'imagename' => $this->imagename,
-            'imagepath' => $this->imagepath,
-            'stock' => $this->stock,
-            'status' => $this->status,
+            'judul' => $this->judul,
+            'link' => "nolink",
+            'path' => "",
+            'idKegunaan' =>"",
+            
+            'file' => $this->file,
+            'jenisfile' => $this->jenisfile,
         ]);
   
         $this->successMessage = 'Product Created Successfully.';
@@ -96,7 +111,7 @@ class Wizard extends Component
         $this->name = '';
         $this->amount = '';
         $this->description = '';
-        $this->stock = '';
-        $this->status = 1;
+        $this->stock = ''; 
     }
+ 
 }

@@ -6,33 +6,30 @@
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
+@livewireStyles
 @section('css') 
-<link rel="stylesheet" href="/css/main.css"/>
+<link rel="stylesheet" href="/css/main.css"/> 
 <link rel="stylesheet" href="/css/tag.css"/>
+<link rel="stylesheet" href="/css/wizard.css"/>
 <link rel="stylesheet" href="/css/vendor/select2.min.css"/>
 <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css"/>
-<link rel="stylesheet" href="/css/vendor/tagify.css"/>
-<link rel="stylesheet" href="/css/wizard.css"/>
-<link rel="stylesheet" href="/css/vendor/dropzone.min.css"/>
+<link rel="stylesheet" href="/css/vendor/tagify.css"/> 
 @endsection
 
-@livewireStyles
 
 @section('js_vendor')
 <script src="/js/vendor/bootstrap-submenu.js"></script>
 <script src="/js/vendor/mousetrap.min.js"></script>
 <script src="/js/vendor/select2.full.min.js"></script>
-<script src="/js/vendor/tagify.min.js"></script>  
-<script src="/js/vendor/dropzone.min.js"></script>
+<script src="/js/vendor/tagify.min.js"></script>   
 @endsection
 
 @section('js_page')
 <script src="/js/forms/controls.select2.js"></script>
-<script src="/js/forms/controls.tag.js"></script> 
-<script src="/js/cs/dropzone.templates.js"></script>
-<script src="/js/forms/controls.dropzone.js"></script>
+<script src="/js/forms/controls.tag.js"></script>  
 @endsection
   
+
 
 @section('content') 
 <div class="container" style="width: 65%;">
@@ -50,9 +47,13 @@
         <!-- Title and Top Buttons End -->  
             <livewire:wizard />   
 </div> 
-@livewireScripts
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
+@livewireScripts 
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+
+
+
+{{-- <script type="text/javascript">
       
 $(document).ready(function (e) {
  
@@ -72,7 +73,7 @@ $(document).ready(function (e) {
    
 });
  
-</script>
+</script> --}}
  
 
 @endsection
