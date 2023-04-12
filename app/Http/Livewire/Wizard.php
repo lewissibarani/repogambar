@@ -79,7 +79,6 @@ class Wizard extends Component
             'link' => "nolink",
             'path' => "",
             'idKegunaan' =>"",
-            
             'file' => $this->file,
             'jenisfile' => $this->jenisfile,
         ]);
@@ -108,10 +107,7 @@ class Wizard extends Component
      */
     public function clearForm()
     {
-        $this->name = '';
-        $this->amount = '';
-        $this->description = '';
-        $this->stock = ''; 
+        $this->judul = '';
     }
  
 }

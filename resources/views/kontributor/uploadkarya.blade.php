@@ -21,12 +21,14 @@
 <script src="/js/vendor/bootstrap-submenu.js"></script>
 <script src="/js/vendor/mousetrap.min.js"></script>
 <script src="/js/vendor/select2.full.min.js"></script>
-<script src="/js/vendor/tagify.min.js"></script>   
+<script src="/js/vendor/tagify.min.js"></script>  
+<script src="/js/vendor/progressbar.min.js"></script> 
 @endsection
 
 @section('js_page')
 <script src="/js/forms/controls.select2.js"></script>
 <script src="/js/forms/controls.tag.js"></script>  
+<script src="/js/plugins/progressbars.js"></script>
 @endsection
   
 

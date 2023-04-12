@@ -26,7 +26,7 @@
     <div class="row setup-content card  {{ $currentStep != 1 ? 'displayNone' : '' }}" id="step-1" style="padding:20px">
         <div class="col-xs-12">
             <div class="col-md-12"> 
-                
+            {{-- <div x-data x-init="alert('asjacjad')"></div> --}}
                 <div class="row">  
                     <div class="col-sm-7">
                         <div class="form-group">
@@ -44,6 +44,12 @@
                             </div>
                             <label >Gambar</label> 
                             <input class="form-control"  type="file" wire:model="image"> 
+                            <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                                <label class="mb-3">Animated</label>
+                                <div class="sw-13">
+                                    <div role="progressbar" class="progress-bar-line" id="progressLineAnimated"></div>
+                                </div>
+                            </div>
                                 @error('image') <span class="text-danger">{{ $message }}</span> @enderror 
                         </div>  
                     </div>
@@ -88,7 +94,7 @@
                             <label for="description">Jenis Karya (opsional)</label> 
                             <div wire:ignore>
                                 <select id="select2Multiple" class="form-select" >
-                                    <option selected>Karya saya adalah foto</option>
+                                    <option selected>Foto</option>
                                     @foreach ($Jenisfile as $jenis)
                                         <option value="{{ $jenis->id }}">{{ $jenis->nama_kategori }}</option> 
                                     @endforeach
@@ -99,7 +105,7 @@
                         <div wire:ignore>
                             <div class="form-group mt-3">
                                 <label for="description">Upload File (opsional)</label><br/>
-                                <input id="inputuploadfile" type="file" wire:model="file" class="form-control mb-3"  disabled>
+                                <input id="inputuploadfile" type="file" class="form-control mb-3"  disabled>
                                 @error('file') <span class="error">{{ $message }}</span> @enderror
                             </div> 
                         </div> 
@@ -229,10 +235,31 @@
  
             $('#tagsBasic').on('change', function (e) {
                 var data = $('#tagsBasic').val();  
-                console.log(data)
-
+                // console.log(data) 
             @this.set('tags', data);
             });
+
+            let file = document.querySelector('input[type="file"]').files[0]
+
+            // Upload a file:
+            @this.upload('file', file, (uploadedFilename) => {
+                // Success callback.
+                console.log("Sukses");
+            }, () => {
+                // Error callback.
+                console.log("Gagal");
+            }, (event) => {
+                // Progress callback.
+                // event.detail.progress contains a number between 1 and 100 as the upload progresses.
+            });
+  
+            var pb = new ProgressBars.Line('#progressLineAnimated', {
+                color: Globals.primary,
+                trailColor: Globals.separator,
+                val: 10,
+                max: 100,
+                duration: 500,
+            }).animate(75 / 100); 
         });
     </script> 
 @endpush 
