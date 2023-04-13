@@ -9,12 +9,12 @@
 
 class DashboardVisual {
   constructor() {
-    // Initialization of the page plugins
-    if (jQuery().barrating) {
-      this._initRatings();
-    } else {
-      console.error('[CS] jQuery().barrating is undefined.');
-    }
+    // // Initialization of the page plugins
+    // if (jQuery().barrating) {
+    //   this._initRatings();
+    // } else {
+    //   console.error('[CS] jQuery().barrating is undefined.');
+    // }
     this._initProgressBars();
   }
 

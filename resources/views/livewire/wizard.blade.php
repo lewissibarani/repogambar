@@ -35,22 +35,42 @@
                             @error('judul') <span class="text-danger">{{ $message }}</span> @enderror
                         </div> 
                         <div class="form-group mt-3">  
-                            @if ($image) 
-                                    Gambar Preview: 
-                                <img class="card-img scale mb-3" src="{{ $image->temporaryUrl() }}"> 
-                            @endif 
-                            <div wire:loading wire:target="image">
-                                <div class=" mb-3 spinner-border" style="width: 1rem; height: 1rem" role="status"></div>
-                            </div>
-                            <label >Gambar</label> 
-                            <input class="form-control"  type="file" wire:model="image"> 
-                            <div class="col-12 col-sm-6 col-lg-3 mb-4">
-                                <label class="mb-3">Animated</label>
-                                <div class="sw-13">
-                                    <div role="progressbar" class="progress-bar-line" id="progressLineAnimated"></div>
+                            <div x-data="{isUploading:true,progress:0}"
+                                 x-on:livewire-upload-start="isUploading=true"
+                                 x-on:livewire-upload-finish="isUploading=false"
+                                 x-on:livewire-upload-error="isUploading=false"
+                                 x-on:livewire-upload-progress="progress=$event.detail.progress"
+                            > 
+                                <label >Gambar</label> 
+                                <input class="form-control"  type="file" wire:model="image"> 
+                                <div wire:loading wire:target="image">
+                                    <div class="row g-0">
+                                        <div class="col">
+                                            <div class="sh-5 d-flex align-items-center">Upload</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="cta-3 text-primary sh-5 d-flex align-items-center">${progress}%</div>
+                                        </div>
+                                    </div>
+                                    <div class="row g-0">
+                                        <div class="col mt-3">
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                                                x-bind:style="`width:${progress}`"
+                                                ></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                
+                                    @error('image') <span class="text-danger">{{ $message }}</span> @enderror 
+                                
                             </div>
-                                @error('image') <span class="text-danger">{{ $message }}</span> @enderror 
+
+                            @if ($image)  
+                                <img class="card-img scale mb-3" src="{{ $image->temporaryUrl() }}"> 
+                            @endif  
+
                         </div>  
                     </div>
                     
@@ -239,27 +259,19 @@
             @this.set('tags', data);
             });
 
-            let file = document.querySelector('input[type="file"]').files[0]
+            // let file = document.querySelector('input[type="file"]').files[0]
 
-            // Upload a file:
-            @this.upload('file', file, (uploadedFilename) => {
-                // Success callback.
-                console.log("Sukses");
-            }, () => {
-                // Error callback.
-                console.log("Gagal");
-            }, (event) => {
-                // Progress callback.
-                // event.detail.progress contains a number between 1 and 100 as the upload progresses.
-            });
-  
-            var pb = new ProgressBars.Line('#progressLineAnimated', {
-                color: Globals.primary,
-                trailColor: Globals.separator,
-                val: 10,
-                max: 100,
-                duration: 500,
-            }).animate(75 / 100); 
+            // // Upload a file:
+            // @this.upload('file', file, (uploadedFilename) => {
+            //     // Success callback.
+            //     console.log("Sukses");
+            // }, () => {
+            //     // Error callback.
+            //     console.log("Gagal");
+            // }, (event) => {
+            //     // Progress callback.
+            //     // event.detail.progress contains a number between 1 and 100 as the upload progresses.
+            // });  
         });
     </script> 
 @endpush 

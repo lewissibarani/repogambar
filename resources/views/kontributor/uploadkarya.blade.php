@@ -28,7 +28,7 @@
 @section('js_page')
 <script src="/js/forms/controls.select2.js"></script>
 <script src="/js/forms/controls.tag.js"></script>  
-<script src="/js/plugins/progressbars.js"></script>
+<script src="/js/pages/dashboard.visual.js"></script>
 @endsection
   
 
