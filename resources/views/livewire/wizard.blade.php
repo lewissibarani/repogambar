@@ -43,20 +43,12 @@
                             > 
                                 <label >Gambar</label> 
                                 <input class="form-control"  type="file" wire:model="image"> 
-                                <div wire:loading wire:target="image">
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <div class="sh-5 d-flex align-items-center">Upload</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="cta-3 text-primary sh-5 d-flex align-items-center">${progress}%</div>
-                                        </div>
-                                    </div>
+                                <div wire:loading wire:target="image"> 
                                     <div class="row g-0">
                                         <div class="col mt-3">
                                             <div class="progress progress-xs">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                                                x-bind:style="`width:${progress}`"
+                                                x-bind:style="`width:${progress}%`"
                                                 ></div>
                                             </div>
                                         </div>
@@ -66,7 +58,7 @@
                                     @error('image') <span class="text-danger">{{ $message }}</span> @enderror 
                                 
                             </div>
-
+                            <br/>
                             @if ($image)  
                                 <img class="card-img scale mb-3" src="{{ $image->temporaryUrl() }}"> 
                             @endif  
