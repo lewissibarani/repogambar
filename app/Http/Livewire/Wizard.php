@@ -42,10 +42,10 @@ class Wizard extends Component
      */
     public function firstStepSubmit()
     { 
-        $validatedData = $this->validate([
-            'judul' => 'required', 
-            'image' => 'required|image|max:30000', //30MB Max
-        ]); 
+        // $validatedData = $this->validate([
+        //     'judul' => 'required', 
+        //     'image' => 'required|image|max:30000',  
+        // ]); 
    
         // $this->photo->store('image');
  
@@ -60,9 +60,9 @@ class Wizard extends Component
     public function secondStepSubmit()
     {
          
-        // $validatedData = $this->validate([ 
-        //     'Jenisfile' => 'required', 
-        // ]);
+        $validatedData = $this->validate([ 
+            'file' => 'mimes:zip,rar|file|max:30000', 
+        ]);
   
         $this->currentStep = 3;
     }

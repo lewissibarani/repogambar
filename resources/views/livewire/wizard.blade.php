@@ -27,7 +27,7 @@
         <div class="col-xs-12">
             <div class="col-md-12"> 
             {{-- <div x-data x-init="alert('asjacjad')"></div> --}}
-                <div class="row">  
+                <div class="row">   
                     <div class="col-sm-7">
                         <div class="form-group">
                             <label >Judul Karya</label> 
@@ -43,7 +43,15 @@
                             > 
                                 <label >Gambar</label> 
                                 <input class="form-control"  type="file" wire:model="image"> 
-                                <div wire:loading wire:target="image"> 
+                                <div wire:loading.grid wire:target="image">
+                                    <div class="row g-0">
+                                        <div class="col">
+                                            <div class="sh-5 d-flex align-items-center">Uploading...</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div x-text="`${progress}%`" class=" cta-3 text-primary sh-5 d-flex align-items-center"></div>
+                                        </div>
+                                    </div> 
                                     <div class="row g-0">
                                         <div class="col mt-3">
                                             <div class="progress progress-xs">
@@ -113,15 +121,29 @@
                                 </select> 
                                 @error('Jenisfile') <span class="error">{{ $message }}</span> @enderror
                             </div>
-                        </div>
+                        </div>  
                         <div wire:ignore>
-                            <div class="form-group mt-3">
-                                <label for="description">Upload File (opsional)</label><br/>
-                                <input id="inputuploadfile" type="file" class="form-control mb-3"  disabled>
-                                @error('file') <span class="error">{{ $message }}</span> @enderror
+                            <div class="form-group mt-3"> 
+                                <div    x-data="{ isUploading: false, progress: 0 }"
+                                        x-on:livewire-upload-start="isUploading = true"
+                                        x-on:livewire-upload-finish="isUploading = false"
+                                        x-on:livewire-upload-error="isUploading = false"
+                                        x-on:livewire-upload-progress="progress = $event.detail.progress"
+                                >
+                                    <label for="description">Upload File (opsional)</label><br/>
+                                    <input id="inputuploadfile" type="file" wire:model="file" class="form-control mb-3" disabled> 
+
+                                    <!-- Progress Bar -->
+                                    <div x-show="isUploading">
+                                        <progress max="100" x-bind:value="progress"></progress>
+                                    </div> 
+                                    @error('file') <span class="error">{{ $message }}</span> @enderror 
+                                </div>
                             </div> 
+                            @if ($file)  
+                                <a href="{{ $file->temporaryUrl() }}"> Link file</a>
+                            @endif 
                         </div> 
-                       
                         <div class="form-group mt-3">
                             <div wire:ignore>
                                 <label for="description">Tags</label>
@@ -231,7 +253,9 @@
 
 @push('scripts') 
     <script type="text/javascript">
-        $(document).ready(function () {  
+    
+        $(document).ready(function () {   
+            
             $('#select2Multiple').select2();
             $('#select2Multiple').on('change', function (e) {
                 var data = $('#select2Multiple').select2("val");
@@ -249,6 +273,28 @@
                 var data = $('#tagsBasic').val();  
                 // console.log(data) 
             @this.set('tags', data);
+            });
+
+
+            $('#inputuploadfile').change(function(){
+                console.log("masuk sini");
+                var uploadedFilename =  $('#inputuploadfile').val().replace(/C:\\fakepath\\/i, '');
+                console.log("uploadedfilename: "+uploadedFilename);
+                let file = document.querySelector('#inputuploadfile').files[0];
+                console.log("letfile: "+file);
+
+                // Upload a file:
+                @this.upload('file', file, (uploadedFilename) => {
+                    // Success callback.
+                    console.log("Sukses");
+                }, () => {
+                    // Error callback.
+                    console.log("Gagal");
+                }, (event) => {
+                    console.log(event.detail.progress); 
+                   
+                });   
+                 
             });
 
             // let file = document.querySelector('input[type="file"]').files[0]
