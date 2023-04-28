@@ -4,21 +4,23 @@ namespace App\Http\Livewire;
   
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Http\UploadedFile;
 use App\Models\Gambar;
 use App\Models\Kategori_File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Validator;
+use Illuminate\Validation\Validator; 
   
 class Wizard extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads; 
     public $currentStep = 1;
     public $judul,$image,$imagename,$imagepath,$file,$Jenisfile,$kegunaan;
     public $successMessage = '';
     public $jenisfile="";
+    public $jenisfilenama="";
     public $pembuatkarya="";
     public $tags=[];
   
@@ -40,7 +42,7 @@ class Wizard extends Component
     public function render()
     {  
         $this->pembuatkarya =  User::where('id',Auth::id())->first();
-        $this->Jenisfile =  Kategori_File::all();
+        $this->Jenisfile =  Kategori_File::all();  
         return view('livewire.wizard') ;
     }
   
@@ -56,8 +58,6 @@ class Wizard extends Component
             'image' => 'required|image|max:30000|mimes:jpg,jpeg,png',  
         ]); 
    
-        // $this->photo->store('image');
- 
         $this->currentStep = 2;
     }
   
@@ -86,19 +86,22 @@ class Wizard extends Component
      */
     public function submitForm()
     {
+        $this->image->storeAs('/public/uploadedGambar', ); 
+        $this->file->storeAs('/public/file', ); 
+
         Gambar::create([
             'judul' => $this->judul,
             'link' => "nolink",
             'path' => "",
             'idKegunaan' =>"",
+            'idUser' =>Auth::id(),
+            'ukuran' =>Auth::id(),
             'file' => $this->file,
             'jenisfile' => $this->jenisfile,
         ]);
   
-        $this->successMessage = 'Product Created Successfully.';
-  
-        $this->clearForm();
-  
+        $this->successMessage = 'Karya berhasil diupload dan akan direview oleh tim kami. Kami akan memberitahu kamu jika karya kamu layak tayang';  
+        $this->reset(); 
         $this->currentStep = 1;
     }
   
@@ -120,6 +123,10 @@ class Wizard extends Component
     public function clearForm()
     {
         $this->judul = '';
-    }
+        $this->file = '';
+        $this->image="";
+
+    } 
+ 
  
 }

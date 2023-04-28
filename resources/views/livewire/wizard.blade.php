@@ -71,8 +71,8 @@
                                 @if ($image->getMimeType()=="image/png"||
                                     $image->getMimeType()=="image/jpg" ||
                                     $image->getMimeType()=="image/jpeg")
-                                    <img class="card-img scale mb-3" src="{{ $image->temporaryUrl() }}"> 
-                                @endif  
+                                <img class="card-img scale mb-3" src="{{ $image->temporaryUrl() }}"> 
+                            @endif  
                             @endif  
 
                         </div>  
@@ -204,10 +204,10 @@
                                     <div class="col-auto">
                                         <div class="sw-3 me-1">
                                            3
-                                        </div>
+                                        </div> 
                                     </div>
                                     <div class="col lh-1-25">
-                                        Tuliskan minimal 3 tang yang sesuai dengan karya kamu. Gunakan tanda koma (,) atau spasi sebagai pemisah tag.
+                                        Tuliskan minimal 3 tags yang sesuai dengan karya kamu. Gunakan tanda koma (,) atau spasi sebagai pemisah tag.
                                     </div>
                                 </div> 
                             </div>  
@@ -228,23 +228,28 @@
                     <div class="col-sm-7">
                         <table class="table table-borderless mb-3">
                             <tr>
-                                <td>Judul Gambar:</td>
+                                <td>Judul Gambar</td>
+                                <td>:</td>
                                 <td><strong>{{$judul}}</strong></td>
                             </tr>  
                             <tr>
-                                <td>Penyumbang Karya:</td>
+                                <td>Penyumbang Karya</td>
+                                <td>:</td>
                                 <td><strong>{{$pembuatkarya->name}}</strong></td>
                             </tr>
                             <tr>
-                                <td>Jenis File:</td>
-                                <td><strong>{{$jenisfile}}</strong> </td>
+                                <td>Jenis File</td>
+                                <td>:</td>
+                                <td><strong>{{$jenisfilenama}}</strong> </td>
                             </tr>  
                             <tr>
-                                <td>Nama File:</td>
+                                <td>Nama File</td>
+                                <td>:</td>
                                 <td>@if ($file)  <a href="{{$file->temporaryUrl()}}"><i data-acorn-icon="file"></i> File Terlampir </a>  @endif</td>
                             </tr> 
                             <tr>
-                                <td>Tags:</td>  
+                                <td>Tags</td>  
+                                <td>:</td>
                                 <td> @if ($tags) 
                                         @foreach(json_decode($tags) as $tag)
                                         <div class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" >
@@ -275,19 +280,21 @@
     <script type="text/javascript">
     
         $(document).ready(function () {   
- 
+            
             
             $('#select2Multiple').select2();
             $('#select2Multiple').on('change', function (e) {
                 var data = $('#select2Multiple').select2("val");
+                var datanama = $('#select2Multiple option:selected').text();
             @this.set('jenisfile', data);
+            @this.set('jenisfilenama', datanama);
             if(data>=1)
             {
                 $("#inputuploadfile").prop('disabled', false);  
             }else{
                 var uploadedFilename =  $('#inputuploadfile').val().replace(/C:\\fakepath\\/i, '');  
                 $("#inputuploadfile").prop('disabled', true);  
-                $("#inputuploadfile").val('');    
+                $("#inputuploadfile").val('');  
                 @this.removeUpload('file', uploadedFilename, "Berhasil ");
                 console.log("Berhasil Remove File");
             } 
@@ -300,18 +307,17 @@
             });
 
 
-            $('#inputuploadfile').change(function(){   
+            $('#inputuploadfile').change(function(){ 
                 var uploadedFilename =  $('#inputuploadfile').val().replace(/C:\\fakepath\\/i, ''); 
                 let file = document.querySelector('#inputuploadfile').files[0]; 
+
                 // Upload a file:
                 @this.upload('file', file, (uploadedFilename) => {
-                    // Success callback.
-                    // console.log("Sukses");
+                    // Success callback. 
                 }, () => {
-                    // Error callback.
-                    // console.log("Gagal");
+                    // Error callback. 
                 }, (event) => {
-                    // console.log(event.detail.progress); 
+                    console.log(event.detail.progress); 
                    
                 });   
                  
