@@ -14,6 +14,7 @@ class User_Petugas extends Model
         'users_id',
         'count_task',
         'aktif',
+        'countreviewtask',
     ];
 
     public function users ()

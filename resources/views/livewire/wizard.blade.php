@@ -68,7 +68,11 @@
                             </div>
                             <br/>
                             @if ($image)  
-                                <img class="card-img scale mb-3" src="{{ $image->temporaryUrl() }}"> 
+                                @if ($image->getMimeType()=="image/png"||
+                                    $image->getMimeType()=="image/jpg" ||
+                                    $image->getMimeType()=="image/jpeg")
+                                    <img class="card-img scale mb-3" src="{{ $image->temporaryUrl() }}"> 
+                                @endif  
                             @endif  
 
                         </div>  
@@ -114,7 +118,7 @@
                             <label for="description">Jenis Karya (opsional)</label> 
                             <div wire:ignore>
                                 <select id="select2Multiple" class="form-select" >
-                                    <option selected>Foto</option>
+                                    <option selected>Fotografi</option>
                                     @foreach ($Jenisfile as $jenis)
                                         <option value="{{ $jenis->id }}">{{ $jenis->nama_kategori }}</option> 
                                     @endforeach
@@ -134,8 +138,24 @@
                                     <input id="inputuploadfile" type="file" wire:model="file" class="form-control mb-3" disabled> 
 
                                     <!-- Progress Bar -->
-                                    <div x-show="isUploading">
-                                        <progress max="100" x-bind:value="progress"></progress>
+                                    <div x-show="isUploading" wire:target="file"> 
+                                            <div class="row g-0">
+                                                <div class="col">
+                                                    <div class="sh-5 d-flex align-items-center">Uploading...</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div x-text="`${progress}%`" class=" cta-3 text-primary sh-5 d-flex align-items-center"></div>
+                                                </div>
+                                            </div> 
+                                            <div class="row g-0">
+                                                <div class="col mt-3">
+                                                    <div class="progress progress-xs">
+                                                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                                                        x-bind:style="`width:${progress}%`"
+                                                        ></div>
+                                                    </div>
+                                                </div>
+                                            </div> 
                                     </div> 
                                     @error('file') <span class="error">{{ $message }}</span> @enderror 
                                 </div>
@@ -206,7 +226,7 @@
                 <div class="row">  
                     <h3 class="display">Preview Karya</h3>
                     <div class="col-sm-7">
-                        <table class="table mb-3">
+                        <table class="table table-borderless mb-3">
                             <tr>
                                 <td>Judul Gambar:</td>
                                 <td><strong>{{$judul}}</strong></td>
@@ -255,6 +275,7 @@
     <script type="text/javascript">
     
         $(document).ready(function () {   
+ 
             
             $('#select2Multiple').select2();
             $('#select2Multiple').on('change', function (e) {
@@ -264,8 +285,11 @@
             {
                 $("#inputuploadfile").prop('disabled', false);  
             }else{
+                var uploadedFilename =  $('#inputuploadfile').val().replace(/C:\\fakepath\\/i, '');  
                 $("#inputuploadfile").prop('disabled', true);  
-                $("#inputuploadfile").val('');  
+                $("#inputuploadfile").val('');    
+                @this.removeUpload('file', uploadedFilename, "Berhasil ");
+                console.log("Berhasil Remove File");
             } 
             });
  
@@ -276,22 +300,18 @@
             });
 
 
-            $('#inputuploadfile').change(function(){
-                console.log("masuk sini");
-                var uploadedFilename =  $('#inputuploadfile').val().replace(/C:\\fakepath\\/i, '');
-                console.log("uploadedfilename: "+uploadedFilename);
-                let file = document.querySelector('#inputuploadfile').files[0];
-                console.log("letfile: "+file);
-
+            $('#inputuploadfile').change(function(){   
+                var uploadedFilename =  $('#inputuploadfile').val().replace(/C:\\fakepath\\/i, ''); 
+                let file = document.querySelector('#inputuploadfile').files[0]; 
                 // Upload a file:
                 @this.upload('file', file, (uploadedFilename) => {
                     // Success callback.
-                    console.log("Sukses");
+                    // console.log("Sukses");
                 }, () => {
                     // Error callback.
-                    console.log("Gagal");
+                    // console.log("Gagal");
                 }, (event) => {
-                    console.log(event.detail.progress); 
+                    // console.log(event.detail.progress); 
                    
                 });   
                  

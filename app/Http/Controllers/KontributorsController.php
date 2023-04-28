@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Gambar;
 use App\Models\TugasReview;
+use App\Models\User_Petugas;
+use App\Models\File;
 use App\Models\Kategori_File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class KontributorsController extends Controller
 {
@@ -25,10 +28,10 @@ class KontributorsController extends Controller
         $User=User::find($iduser);
 
         //Data Gambar yang pernah diupload
-        $Gambar=Gambar::with('tagged','source','kegunaan','user','file','gambarView')->where('idUser', $iduser)->orderBy('id', 'DESC')->get();
+        $Gambar=Gambar::with('tagged','source','kegunaan','user','file','gambarView','likeCounter')->where('idUser', $iduser)->orderBy('id', 'DESC')->get();
         
         //Data Gambar yang pernah disukai user 
-        $GambarLiked=Gambar::whereLikedBy($iduser)->with('likeCounter')->orderBy('id', 'DESC')->get();
+        $GambarLiked=Gambar::whereLikedBy($iduser)->with('likeCounter','user')->orderBy('id', 'DESC')->get();
 
         //Total Karya 
         $Total = $Gambar->count();
@@ -41,7 +44,7 @@ class KontributorsController extends Controller
 
         //Total Karya dilike
         $likecounter=0;
-        $JumlahDilike = Gambar::where('idUser', '=', $iduser)->get();  
+        $JumlahDilike = Gambar::with('likeCounter','user')->where('idUser', '=', $iduser)->get();  
         foreach($JumlahDilike as $gambar) {
            $likecounter = $likecounter + $gambar->likeCount;
         } 
@@ -56,7 +59,7 @@ class KontributorsController extends Controller
         return view('kontributor.uploadkarya',compact('Kategoris'));
     }
 
-    public function store ()
+    public function store ($request)
     {
         $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
 

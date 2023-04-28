@@ -57,7 +57,7 @@ class DashboardsController extends Controller
         $Tags= Tag::where('count', '>', 0)->paginate(12);
 
         //Menampilkan Aset Digital Terfavorit
-        $Terfavorit = Gambar::with('user')->orderBy('views', 'desc')->get();
+        $Terfavorit = Gambar::with('user','source')->orderBy('views', 'desc')->get();
         
         //Menampilkan Aset Digital Terbaru
         $Data = Gambar::with('user','kegunaan','source')
@@ -187,19 +187,19 @@ class DashboardsController extends Controller
 
     public function statistik ()
     {   
-        Flight::chunk(200, function ($flights) {
-            foreach ($flights as $flight) {
-                //
-            }
-        });
-        $Gambar = Gambar::with('user','source','kegunaan','file')->where('id',$gambar_id)->first();
-        $File = File::with('user','source','kegunaan','file')->where('id',$gambar_id)->first();
+        // Flight::chunk(200, function ($flights) {
+        //     foreach ($flights as $flight) {
+        //         //
+        //     }
+        // });
+        // $Gambar = Gambar::with('user','source','kegunaan','file')->where('id',$gambar_id)->first();
+        // $File = File::with('user','source','kegunaan','file')->where('id',$gambar_id)->first();
 
-        $file->increment('download');  
-        $path= $file->path; 
-        return view('dashboard.statistik', 
-        compact(['Data',
-                'Rekomendasi'
-                ]));
+        // $file->increment('download');  
+        // $path= $file->path; 
+        // return view('dashboard.statistik', 
+        // compact(['Data',
+        //         'Rekomendasi'
+        //         ]));
     } 
 }

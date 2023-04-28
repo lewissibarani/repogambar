@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Validator;
   
 class Wizard extends Component
 {
@@ -21,6 +22,14 @@ class Wizard extends Component
     public $pembuatkarya="";
     public $tags=[];
   
+    protected $messages = [
+        'image.max' => 'File terlalu besar.',
+        'image.image' => 'File yang diterima hanyalah jpg,jpeg, atau png.',
+        'judul.required' => 'Isian ini harus diisi.',
+        'image.required' => 'Isian ini harus diisi.',
+    ];
+  
+
     /**
      * Write code on Method
      *
@@ -42,10 +51,10 @@ class Wizard extends Component
      */
     public function firstStepSubmit()
     { 
-        // $validatedData = $this->validate([
-        //     'judul' => 'required', 
-        //     'image' => 'required|image|max:30000',  
-        // ]); 
+        $validatedData = $this->validate([
+            'judul' => 'required', 
+            'image' => 'required|image|max:30000|mimes:jpg,jpeg,png',  
+        ]); 
    
         // $this->photo->store('image');
  
@@ -60,10 +69,13 @@ class Wizard extends Component
     public function secondStepSubmit()
     {
          
-        $validatedData = $this->validate([ 
-            'file' => 'mimes:zip,rar|file|max:30000', 
-        ]);
-  
+        // $validatedData = $this->validate([ 
+        //     'file' => 'mimes:zip,rar|file|max:30000', 
+        // ]);
+        if($this->file)
+        {
+
+        }
         $this->currentStep = 3;
     }
   
