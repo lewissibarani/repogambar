@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label >Judul Karya</label> 
                             <input type="text" wire:model="judul" class="form-control mb-3"  >
-                            @error('judul') <span class="text-danger">{{ $message }}</span> @enderror
+                            @error('judul') <span class="text-danger fst-italic">{{ $message }}</span> @enderror
                         </div> 
                         <div class="form-group mt-3">  
                             <div x-data="{isUploading:true,progress:0}"
@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                                 
-                                    @error('image') <span class="text-danger">{{ $message }}</span> @enderror 
+                                    @error('image') <span class="text-danger fst-italic">{{ $message }}</span> @enderror 
                                 
                             </div>
                             <br/>
@@ -75,7 +75,7 @@
                             @endif  
                             @endif  
 
-                        </div>  
+                        </div>   
                     </div>
                     
                     <div class="col-sm-5">
@@ -118,12 +118,12 @@
                             <label for="description">Jenis Karya (opsional)</label> 
                             <div wire:ignore>
                                 <select id="select2Multiple" class="form-select" >
-                                    <option selected>Fotografi</option>
+                                    <option selected>{{$jenisfilenama}}</option>
                                     @foreach ($Jenisfile as $jenis)
                                         <option value="{{ $jenis->id }}">{{ $jenis->nama_kategori }}</option> 
                                     @endforeach
                                 </select> 
-                                @error('Jenisfile') <span class="error">{{ $message }}</span> @enderror
+                                @error('Jenisfile') <span class="text-danger fst-italic">{{ $message }}</span> @enderror
                             </div>
                         </div>  
                         <div wire:ignore>
@@ -156,14 +156,15 @@
                                                     </div>
                                                 </div>
                                             </div> 
-                                    </div> 
-                                    @error('file') <span class="error">{{ $message }}</span> @enderror 
+                                    </div>  
                                 </div>
                             </div> 
                             @if ($file)  
                                 <a href="{{ $file->temporaryUrl() }}"> Link file</a>
                             @endif 
                         </div> 
+                        @error('file') <span class="text-danger fst-italic">{{ $message }}</span> @enderror 
+                        
                         <div class="form-group mt-3">
                             <div wire:ignore>
                                 <label for="description">Tags</label>
@@ -171,9 +172,22 @@
                                 type="text"
                                 id="tagsBasic" 
                                 /> 
-                                @error('tags') <span class="error">{{ $message }}</span> @enderror
                             </div>
-                        </div>
+                                @error('tags') <span class="text-danger fst-italic">{{ $message }}</span> @enderror
+                            
+                        </div> 
+                        <div class="form-group mt-3">
+                            <label for="description">Sumber Karya</label> 
+                            <div wire:ignore>
+                                <select id="select2Basic" class="form-select" >
+                                    <option selected><i>Pilih...</i></option>
+                                    @foreach ($sumberlist as $sumbers)
+                                        <option value="{{ $sumbers->id }}">{{ $sumbers->sumber_gambar}}</option> 
+                                    @endforeach
+                                </select> 
+                                @error('sumber') <span class="text-danger fst-italic">{{ $message }}</span> @enderror
+                            </div>
+                        </div> 
                     </div> 
                       
                         <div class="col-sm-5">
@@ -210,6 +224,16 @@
                                         Tuliskan minimal 3 tags yang sesuai dengan karya kamu. Gunakan tanda koma (,) atau spasi sebagai pemisah tag.
                                     </div>
                                 </div> 
+                                <div class="row g-0 mb-2">
+                                    <div class="col-auto">
+                                        <div class="sw-3 me-1">
+                                           4
+                                        </div> 
+                                    </div>
+                                    <div class="col lh-1-25"> 
+                                        Pilih "Badan Pusat Statistik" pada sumber karya, jika karya kamu bukan berasal dari freepik atau shutterstock.
+                                    </div>
+                                </div> 
                             </div>  
                         </div> 
                 </div>
@@ -238,15 +262,30 @@
                                 <td><strong>{{$pembuatkarya->name}}</strong></td>
                             </tr>
                             <tr>
-                                <td>Jenis File</td>
+                                <td>Jenis Karya</td>
                                 <td>:</td>
                                 <td><strong>{{$jenisfilenama}}</strong> </td>
                             </tr>  
                             <tr>
-                                <td>Nama File</td>
+                                <td>Sumber Karya</td>
                                 <td>:</td>
-                                <td>@if ($file)  <a href="{{$file->temporaryUrl()}}"><i data-acorn-icon="file"></i> File Terlampir </a>  @endif</td>
-                            </tr> 
+                                <td><strong>{{$sumbernama}}</strong> </td>
+                            </tr>  
+
+                            @if ($file)
+                                <tr>
+                                    <td>Nama File</td>
+                                    <td>:</td>
+                                    <td><a href="{{$file->temporaryUrl()}}"><i data-acorn-icon="file"></i> File Terlampir </a> </td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <td>Nama File</td>
+                                    <td>:</td>
+                                    <td> <i>Tidak ada file terlampir</i></td>
+                                </tr>
+                            @endif  
+
                             <tr>
                                 <td>Tags</td>  
                                 <td>:</td>
@@ -263,7 +302,7 @@
                             </tr>
                         </table>
         
-                        <button class="btn btn-success btn-lg pull-right" wire:click="submitForm" type="button">Publikasikan!</button>
+                        <button class="btn btn-primary btn-lg pull-right" wire:click="submitForm" type="button">Publikasikan!</button>
                         <button class="btn btn-danger nextBtn btn-lg pull-right" type="button" wire:click="back(2)">Kembali</button> 
                     </div>
                     <div class="col-sm-5">
@@ -295,9 +334,17 @@
                 var uploadedFilename =  $('#inputuploadfile').val().replace(/C:\\fakepath\\/i, '');  
                 $("#inputuploadfile").prop('disabled', true);  
                 $("#inputuploadfile").val('');  
-                @this.removeUpload('file', uploadedFilename, "Berhasil ");
-                console.log("Berhasil Remove File");
+                @this.removeUpload('file', uploadedFilename, "Berhasil "); 
             } 
+            });
+
+            $('#select2Basic').select2(); 
+            $("#select2Basic option[value=3]").attr('selected', 'selected');
+            $('#select2Basic').on('change', function (e) {
+                var sumber = $('#select2Basic').select2("val");
+                var sumbernama = $('#select2Basic option:selected').text();
+                @this.set('sumber', sumber);
+                @this.set('sumbernama', sumbernama); 
             });
  
             $('#tagsBasic').on('change', function (e) {
