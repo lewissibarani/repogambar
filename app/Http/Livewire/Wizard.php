@@ -8,11 +8,14 @@ use Illuminate\Http\UploadedFile;
 use App\Models\Gambar;
 use App\Models\Kategori_File;
 use App\Models\Source;
+use App\Models\TugasReview;
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Validator; 
+use Illuminate\Validation\Validator;   
+use Image;
   
 class Wizard extends Component
 {
@@ -90,12 +93,37 @@ class Wizard extends Component
         $fileid=null;
 
         try {
-            $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
-            $gambar_name=date('YmdHi').$this->image->getClientOriginalName(); 
-            $this->image->storeAs('/public/uploadedGambar', $gambar_name); 
-            $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 1000);
-            $tipe_gambar=\File::extension(Storage::url('public/uploadedGambar/'.$gambar_name));
-            $gambar_size=Storage::size('public/uploadedGambar/'.$gambar_name);
+            $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();  
+
+            // $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 1000);
+            
+            $image =  $this->image;
+            $nameImage =  $this->image->getClientOriginalName();
+        
+            // $thumbImage = Image::make($image->getRealPath())->resize(500);
+            // $thumbPath = $storagePath.'public/thumbnail/'.$nameImage; 
+            // $thumbImage = Image::make($thumbImage)->save($thumbPath);
+
+            // This will generate an image with transparent background
+            // If you need to have a background you can pass a third parameter (e.g: '#000000')
+            $canvas = Image::canvas(245, 245);
+            
+            $thumbPath = $storagePath.'public/thumbnail/'.$nameImage; 
+            $thumbImage  = Image::make($image->getRealPath())->resize(245, 245, function($constraint)
+            {
+                $constraint->aspectRatio();
+            });
+
+            $canvas->insert($image, 'center');
+            $canvas->save($thumbPath);
+            
+            $oriPath = $storagePath.'public/uploadedGambar/'.$nameImage;
+            $oriImage = Image::make($image)->save($oriPath); 
+             
+            // get ukuran dan ekstension gambar
+            $tipe_gambar=\File::extension(Storage::url('public/uploadedGambar/'.$nameImage));
+            $gambar_size=Storage::size('public/uploadedGambar/'.$nameImage);
+
         } catch (Throwable $e) {
             report($e);
      
@@ -125,13 +153,13 @@ class Wizard extends Component
                 return false;
             }
         }
-       
-        Gambar::create([
+        
+        $creategambar= Gambar::create([
             'judul' => $this->judul,
-            'nama_gambar' =>$gambar_name,
+            'nama_gambar' =>$nameImage,
             'link' => "nolink",
-            'path' =>'storage/uploadedGambar/'.$gambar_name,
-            'thumbnail_path' =>'storage/thumbnail/'.$gambar_name,
+            'path' =>'storage/uploadedGambar/'.$nameImage,
+            'thumbnail_path' =>'storage/thumbnail/'.$nameImage,
             'idKegunaan' =>"Upload Personal",
             'idUser' =>Auth::id(),
             'ukuran' =>$gambar_size,
@@ -140,9 +168,17 @@ class Wizard extends Component
             'tipe_gambar' => $tipe_gambar,
             'views' => 0,
             'download'=>0,
-            'booleantayang'=>1,
+            'booleantayang'=>0,
         ]);
-  
+
+        //membuat seolah olah pengupload melakukan permintaan
+        $this->createpermintaan($creategambar->id,Auth::id()); 
+
+        //membuat task review untuk petugas
+        $this->createreview($creategambar->id);
+
+        $this->clearform();
+
         $this->successMessage = 'Karya berhasil diupload dan akan direview oleh tim kami. Kami akan memberitahu kamu jika karya kamu layak tayang';  
         
         $this->currentStep = 1;
@@ -168,27 +204,36 @@ class Wizard extends Component
         $this->judul = '';
         $this->file = '';
         $this->image="";
+        $this->jenisfile=1;
+        $this->sumber=3;
+        $this->sumbernama="Badan Pusat Statistik";
+        $this->jenisfilenama="Fotografi";
+        $this->tags=[];
 
     } 
 
-    public function createThumbnail($src, $dest, $desired_width) 
+    public function createreview($gambarid) 
     {
+        $tugasreview= new TugasReview;
+        $tugasreview->gambarid=$gambarid;
+        $tugasreview->petugasid=null;
+        $tugasreview->statusreviewid=3;
+        $tugasreview->komentar=null;  
+    }  
  
-        $source_image = imagecreatefromjpeg($src);
-        $width = imagesx($source_image);
-        $height = imagesy($source_image);
+    public function createpermintaan($gambarid,$idpengupload) 
+    {
+        $permintaan= new Transaksi;
+        $permintaan->judulPermintaan = "Upload Pribadi";
+        $permintaan->idStatus = 3;
+        $permintaan->idKegunaan = 4;
+        $permintaan->alasanDitolak = null; 
+        $permintaan->linkPermintaan = "Upload Pribadi"; 
+        $permintaan->idUserPeminta = $idpengupload; 
+        $permintaan->gambar_id = $gambarid; 
+        $permintaan->id_permintaan = "Upload Pribadi"; 
+        $permintaan->kegunaan_lainnya = "null"; 
 
-        /* find the "desired height" of this thumbnail, relative to the desired width  */
-        $desired_height = floor($height * ($desired_width / $width));
-
-        /* create a new, "virtual" image */
-        $virtual_image = imagecreatetruecolor($desired_width, $desired_height);
-
-        /* copy source image at a resized size */
-        imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
-
-        /* create the physical thumbnail image to its destination */
-        imagejpeg($virtual_image, $dest);
     } 
  
  
