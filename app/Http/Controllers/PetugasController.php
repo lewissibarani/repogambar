@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kegunaan;
 use App\Models\Transaksi;
 use App\Models\Gambar;
+use App\Models\TugasReview;
 use App\Models\File;
 use App\Models\PembagianTugas;
 use Illuminate\Support\Facades\Auth;
@@ -459,4 +460,9 @@ class PetugasController extends Controller
             ]));
     }
 
+    public function reviewdaftar(){
+        $Data = TugasReview::with('userpetugas','gambar.user','gambar.file')->get();  
+        return view('petugas.reviewdaftar', compact(['Data', 
+        ]));
+    }
 }

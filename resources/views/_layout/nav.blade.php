@@ -305,7 +305,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/Petugas/Index">
+                                <a href="/Petugas/Review/Daftar">
                                     <span class="label">Daftar Karya Under Review</span>
                                 </a>
                             </li>

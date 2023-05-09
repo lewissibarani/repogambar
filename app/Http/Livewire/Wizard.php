@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Http\UploadedFile;
 use App\Models\Gambar;
+use App\Models\File;
 use App\Models\Kategori_File;
 use App\Models\Source;
 use App\Models\TugasReview;
@@ -97,26 +98,21 @@ class Wizard extends Component
 
             // $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 1000);
             
+            //constant
             $image =  $this->image;
             $nameImage =  $this->image->getClientOriginalName();
         
-            // $thumbImage = Image::make($image->getRealPath())->resize(500);
-            // $thumbPath = $storagePath.'public/thumbnail/'.$nameImage; 
-            // $thumbImage = Image::make($thumbImage)->save($thumbPath);
-
-            // This will generate an image with transparent background
-            // If you need to have a background you can pass a third parameter (e.g: '#000000')
-            $canvas = Image::canvas(245, 245);
-            
+            //membuat thumbnail
+            $width = 600; // your max width
+            $height = 600; // your max height
             $thumbPath = $storagePath.'public/thumbnail/'.$nameImage; 
-            $thumbImage  = Image::make($image->getRealPath())->resize(245, 245, function($constraint)
-            {
+            $thumbImage = Image::make($image->getRealPath());
+            $thumbImage->height() > $thumbImage->width() ? $width=null : $height=null;
+            $thumbImage->resize($width, $height, function ($constraint) {
                 $constraint->aspectRatio();
-            });
-
-            $canvas->insert($image, 'center');
-            $canvas->save($thumbPath);
+            })->save($thumbPath); 
             
+            //menyimpan gambar original
             $oriPath = $storagePath.'public/uploadedGambar/'.$nameImage;
             $oriImage = Image::make($image)->save($oriPath); 
              
@@ -141,7 +137,7 @@ class Wizard extends Component
                     'nama_file' => $file_name,
                     'size' => Storage::size('public/file/'.$file_name),  
                     'type' => \File::extension(Storage::url('public/file/'.$file_name)),
-                    'kategori_file'=>$this->$sumber,
+                    'kategori_file'=>$this->jenisfile,
                     'download'=>0
                     ]);
         
@@ -163,7 +159,7 @@ class Wizard extends Component
             'idKegunaan' =>"Upload Personal",
             'idUser' =>Auth::id(),
             'ukuran' =>$gambar_size,
-            'source_id' => 3,
+            'source_id' => $this->sumber,
             'file_id' => $fileid,  
             'tipe_gambar' => $tipe_gambar,
             'views' => 0,
@@ -176,6 +172,9 @@ class Wizard extends Component
 
         //membuat task review untuk petugas
         $this->createreview($creategambar->id);
+
+        //menambah 1 statistik upload user
+        $this->statuploaduser(Auth::id());
 
         $this->clearform();
 
@@ -218,7 +217,8 @@ class Wizard extends Component
         $tugasreview->gambarid=$gambarid;
         $tugasreview->petugasid=null;
         $tugasreview->statusreviewid=3;
-        $tugasreview->komentar=null;  
+        $tugasreview->komentar=null; 
+        $tugasreview->save();
     }  
  
     public function createpermintaan($gambarid,$idpengupload) 
@@ -233,8 +233,13 @@ class Wizard extends Component
         $permintaan->gambar_id = $gambarid; 
         $permintaan->id_permintaan = "Upload Pribadi"; 
         $permintaan->kegunaan_lainnya = "null"; 
-
+        $permintaan->save(); 
     } 
- 
- 
+
+    public function statuploaduser ($iduser) {
+        $user = User::find($iduser);
+        $user->increment('sum_upload'); 
+        $user->save();
+    }
+  
 }

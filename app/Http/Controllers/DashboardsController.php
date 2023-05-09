@@ -57,11 +57,12 @@ class DashboardsController extends Controller
         $Tags= Tag::where('count', '>', 0)->paginate(12);
 
         //Menampilkan Aset Digital Terfavorit
-        $Terfavorit = Gambar::with('user','source')->orderBy('views', 'desc')->get();
+        $Terfavorit = Gambar::with('user','source')->orderBy('views', 'desc')->where('booleantayang',1)->get();
         
         //Menampilkan Aset Digital Terbaru
         $Data = Gambar::with('user','kegunaan','source')
         ->orderBy('created_at', 'desc')
+        ->where('booleantayang', 1)
         ->get();
 
         return view('dashboard.dashboard',

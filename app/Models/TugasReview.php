@@ -19,8 +19,12 @@ class TugasReview extends Model
     ];
 
     public function userpetugas()
-    {
-        
-        return $this->belongsTo('App\Models\User','petugasid','id');
+    { 
+        return $this->hasOne('App\Models\User','id','petugasid');
+    }
+    
+    public function gambar()
+    { 
+        return $this->hasOne('App\Models\Gambar','id','gambarid');
     }
 }

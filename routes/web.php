@@ -77,6 +77,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [PetugasController::class, 'index']);
         Route::get('Index',[PetugasController::class, 'index'])->name('petugas.index');
         Route::get('DaftarTugas',[PetugasController::class, 'daftar_tugas']);
+        Route::get('Review/Daftar',[PetugasController::class, 'reviewdaftar'])->name('review.daftar');
+        Route::get('Review/Layani',[PetugasController::class, 'reviewlayani'])->name('review.layani');
     
         Route::get('/transaksi/{transaksi_id}/permintaan/{permintaan_id}', [PetugasController::class, 'layani'])->name('petugas.layani');
         Route::get('/edit_transaksi/{transaksi_id}', [PetugasController::class, 'edit_layani'])->name('petugas.edit_layani');
