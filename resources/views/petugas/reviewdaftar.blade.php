@@ -1,7 +1,7 @@
 @php
     $html_tag_data = [];
     $title = 'Halaman Review Karya';
-    $description= 'A table enhancing plug-in for the jQuery Javascript library, adding sorting, paging and filtering abilities to plain HTML tables with minimal effort.';
+    $description= 'Karya yang layak tayang akan tampil pada halaman beranda website.';
     $breadcrumbs = ["/"=>"Home","/Petugas/Review"=>"Halaman Review Karya"]
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
@@ -99,7 +99,7 @@
                                 <table
                                         class=" table data-table-pagination data-table-standard responsive nowrap hover"
                                         id="datatableHover"
-                                        data-order='[[ 0, "asc" ]]'
+                                        data-order='[[ 0, "desc" ]]'
                                 >
                                     <thead>
                                         <tr>
@@ -155,7 +155,7 @@
                                                 alt="card image" />
                                             </td>
                                             <td style="vertical-align: middle;" class="text-alternate"> <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
-                                                <a href="{{route()}}"  class="btn btn-secondary">Detail</a> 
+                                                <a href="{{route('review.layani',['reviewid'=>$datas->id])}}"  class="btn btn-secondary">Detail</a> 
                                               </div>
                                             </td>
                                         </tr>

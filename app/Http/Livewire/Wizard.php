@@ -24,7 +24,7 @@ class Wizard extends Component
     public $currentStep = 1;
     public $judul,$image,$imagename,$imagepath,$file,$Jenisfile,$kegunaan;
     public $successMessage = '';
-    public $jenisfile=1;
+    public $jenisfile="";
     public $sumber=3;
     public $sumbernama="Badan Pusat Statistik";
     public $jenisfilenama="Fotografi";
@@ -59,6 +59,17 @@ class Wizard extends Component
      *
      * @return response()
      */
+
+    private function convertArray($array)
+    {
+        $converted_array=array();
+        foreach(json_decode($array, true) as $key=> $data )
+        {
+            array_push($converted_array,$data['value']);
+        }
+        return $converted_array;
+    }
+
     public function firstStepSubmit()
     { 
         $validatedData = $this->validate([
@@ -167,6 +178,9 @@ class Wizard extends Component
             'booleantayang'=>0,
         ]);
 
+        //menyimpan tags
+        $creategambar->tag($this->convertArray($this->tags));
+
         //membuat seolah olah pengupload melakukan permintaan
         $this->createpermintaan($creategambar->id,Auth::id()); 
 
@@ -203,7 +217,7 @@ class Wizard extends Component
         $this->judul = '';
         $this->file = '';
         $this->image="";
-        $this->jenisfile=1;
+        $this->jenisfile="";
         $this->sumber=3;
         $this->sumbernama="Badan Pusat Statistik";
         $this->jenisfilenama="Fotografi";

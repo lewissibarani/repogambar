@@ -4,12 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
 class TugasReview extends Model
 {
     use HasFactory;
+    use HasRichText;
 
     protected $table = 'tugasreview';
+
+    protected $richTextFields = [
+        'komentar', 
+    ];
 
     protected $fillable = [
         'gambarid',

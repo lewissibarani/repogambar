@@ -465,4 +465,9 @@ class PetugasController extends Controller
         return view('petugas.reviewdaftar', compact(['Data', 
         ]));
     }
+    public function reviewlayani($reviewid){
+        $Data = TugasReview::with('gambar','userpetugas','gambar.user','gambar.file')->where('id',$reviewid)->first(); 
+        return view('petugas.reviewkarya', compact(['Data', 
+        ]));
+    }
 }

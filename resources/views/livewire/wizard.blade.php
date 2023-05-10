@@ -30,7 +30,7 @@
                 <div class="row">   
                     <div class="col-sm-7">
                         <div class="form-group">
-                            <label >Judul Karya</label> 
+                            <label >Judul Karya:</label> 
                             <input type="text" wire:model="judul" class="form-control mb-3"  >
                             @error('judul') <span class="text-danger fst-italic">{{ $message }}</span> @enderror
                         </div> 
@@ -41,7 +41,7 @@
                                  x-on:livewire-upload-error="isUploading=false"
                                  x-on:livewire-upload-progress="progress=$event.detail.progress"
                             > 
-                                <label >Gambar</label> 
+                                <label >Visual Karya:</label> 
                                 <input class="form-control"  type="file" wire:model="image"> 
                                 <div wire:loading.grid wire:target="image">
                                     <div class="row g-0">
@@ -71,7 +71,7 @@
                                 @if ($image->getMimeType()=="image/png"||
                                     $image->getMimeType()=="image/jpg" ||
                                     $image->getMimeType()=="image/jpeg")
-                                <img class="card-img scale mb-3" src="{{ $image->temporaryUrl() }}"> 
+                                <img style="max-height: 300px;"    class="card-img scale mb-3" src="{{ $image->temporaryUrl() }}"> 
                             @endif  
                             @endif  
 
@@ -115,12 +115,12 @@
                 <div class="row">  
                     <div class="col-sm-7"> 
                         <div class="form-group mt-3">
-                            <label for="description">Jenis Karya (opsional)</label> 
+                            <label for="description">Jenis Karya:</label> 
                             <div wire:ignore>
                                 <select id="select2Multiple" class="form-select" >
-                                    <option selected>{{$jenisfilenama}}</option>
+                                    <option selected> <i>Pilih...</i></option>
                                     @foreach ($Jenisfile as $jenis)
-                                        <option value="{{ $jenis->id }}">{{ $jenis->nama_kategori }}</option> 
+                                        <option value="{{ $jenis->id}}">{{ $jenis->nama_kategori }}</option> 
                                     @endforeach
                                 </select> 
                                 @error('Jenisfile') <span class="text-danger fst-italic">{{ $message }}</span> @enderror
@@ -135,7 +135,7 @@
                                         x-on:livewire-upload-progress="progress = $event.detail.progress"
                                 >
                                     <label for="description">Upload File (opsional)</label><br/>
-                                    <input id="inputuploadfile" type="file" wire:model="file" class="form-control mb-3" disabled> 
+                                    <input id="inputuploadfile" type="file" wire:model="file" class="form-control mb-3"> 
 
                                     <!-- Progress Bar -->
                                     <div x-show="isUploading" wire:target="file"> 
@@ -359,14 +359,7 @@
                 let file = document.querySelector('#inputuploadfile').files[0]; 
 
                 // Upload a file:
-                @this.upload('file', file, (uploadedFilename) => {
-                    // Success callback. 
-                }, () => {
-                    // Error callback. 
-                }, (event) => {
-                    console.log(event.detail.progress); 
-                   
-                });   
+                @this.upload('file', file);   
                  
             });
 

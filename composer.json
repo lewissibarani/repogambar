@@ -20,7 +20,8 @@
         "predis/predis": "^2.0",
         "pusher/pusher-php-server": "^7.2",
         "rtconner/laravel-likeable": "^3.2",
-        "rtconner/laravel-tagging": "^4.1"
+        "rtconner/laravel-tagging": "^4.1",
+        "tonysm/rich-text-laravel": "^1.7"
     },
     "require-dev": {
         "beyondcode/laravel-query-detector": "^1.7",
