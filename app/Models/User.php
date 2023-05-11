@@ -33,7 +33,8 @@ class User extends Authenticatable
         'golongan',
         'jabatan',
         'sums_download',
-        'sums_upload'
+        'sums_upload',
+        'sum_permintaan'
     ];
 
     /**

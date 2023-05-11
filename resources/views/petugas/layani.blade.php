@@ -29,7 +29,7 @@
 @endsection
 
 @section('content')
-<div class="container" style="width: 65%;">
+<div class="container">
         <!-- Title and Top Buttons Start -->
         <div class="page-title-container">
             <div class="row">

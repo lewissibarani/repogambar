@@ -304,6 +304,13 @@
         
                         <button class="btn btn-primary btn-lg pull-right" wire:click="submitForm" type="button">Publikasikan!</button>
                         <button class="btn btn-danger nextBtn btn-lg pull-right" type="button" wire:click="back(2)">Kembali</button> 
+                        <div wire:loading wire:target="submitForm">
+                            <div class="toast-container position-absolute p-3 top-50 start-50 translate-middle" id="toastPlacement">
+                                <div class="toast fade show"> 
+                                    <div class="toast-body">Process...</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-sm-5">
                        

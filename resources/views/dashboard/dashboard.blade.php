@@ -16,8 +16,8 @@
 <link rel="stylesheet" href="/css/vendor/introjs.min.css"/>
 @endsection
 
-@section('js_vendor')
-<script src="/js/cs/scrollspy.js"></script>
+@section('js_vendor')  
+<script src="/js/vendor/masonry.pkgd.min.js"></script>  
 <script src="/js/vendor/baguetteBox.min.js"></script>
 <script src="/js/vendor/jquery.validate/jquery.validate.min.js"></script>
 <script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
@@ -29,6 +29,7 @@
 <script src="/js/pages/blocks.gallery.js"></script>
 <script src="/js/pages/auth.search.js"></script>
 <script src="/js/pages/dashboard.default.js"></script>
+<script src="/js/components/cards.js"></script>
 @endsection
 
 @section('content')
@@ -142,46 +143,9 @@
                     <!-- Terbaru Tab Start -->
                     <div class="tab-pane fade active show" id="projectsTab" role="tabpanel">
                         <!-- Grid Start --> 
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 gallery g-2 mb-5">
-                            @foreach ($Data as $datas)
-                                <div class="col">
-                                    <div class="card hover-img-scale-up hover-reveal">
-                                            <img class="card-img sh-50 scale" 
-                                            data-original="{{$datas->thumbnail_path}}"
-                                            alt="card image" />
-                                            <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
-                                                    <div class="row g-0">
-                                                    </div>
-                                                    <div class="row g-0">
-                                                        <div class="col pe-2">
-                                                            <a href="Dashboard/DetailGambar/{{$datas->id}}" class="stretched-link">
-                                                                <h5 class="heading text-white mb-1">{{$datas->judul}}</h5>
-                                                            </a>
-                                                            <div class="d-inline-block">
-                                                                <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->tipe_gambar}}</span></div>
-                                                            </div>
-                                                            @php
-                                                            if($datas->file_id!==null)
-                                                                {
-                                                                @endphp
-                                                                <div class="d-inline-block">
-                                                                    <div class="text-uppercase"><span class='badge rounded-pill bg-light'>ZIP</span></div>
-                                                                </div>
-                                                                @php
-                                                                    $file = "zip";
-                                                                }
-                                                            @endphp
-                                                            <div class="d-inline-block">
-                                                                <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->source->sumber_gambar}}</span></div>
-                                                            </div>
-                                                            
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                    </div>
-                                </div>
-                                
-                            @endforeach
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4" id="masonryCardsExample">
+                            
+                            @include('dashboard.data')
                         </div>
                         <!-- Grid End -->
                     </div>
@@ -233,90 +197,69 @@
                         </div>
                         <!-- Grid End -->
                     </div>
-                    <!-- Paling Banyak Dilihat Tab End -->
-                </div>      
+                    <!-- Paling Banyak Dilihat Tab End -->  
+  
 
-                <div class="row">
-                    <div class="col-12 text-center">
-                        
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Side Start -->
-            {{-- <div class="col-12 col-xl-4 col-xxl-3">
-                <div class="row">
-
-                    <!-- Penyumbang Unggulan Start -->
-                    <div class="col-12" >
-                            <h2 class="small-title">Penyumbang Unggulan</h2>
-                            <div class="card mb-5">
-                                <div class="card-body mb-n2 border-last-none h-100">
-                                    <div class="mb-2 pb-2">
-                                            <div class="col">
-                                                <div class="d-flex flex-row pt-0 pb-0 ps-3 pe-0 align-items-center justify-content-between">
-                                                    <div class="d-flex flex-column">
-                                                        <div></div>
-                                                        <div class="text-small text-muted"></div>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        Jumlah Upload
-                                                </div>
-                                            </div>
-                                    </div>
-                                    @foreach($Users as $users)
-                                    <div class="border-bottom border-separator-light mb-2 pb-2">
-                                        <div class="row g-0 sh-6">
-                                            <div class="col-auto">
-                                                <img src="{{$users->users->profilepicture}}" class="card-img rounded-xl sh-6 sw-6" alt="thumb" />
-                                            </div>
-                                            <div class="col">
-                                                <div class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                    <div class="d-flex flex-column">
-                                                        <div><a href="#">{{$users->users->name}}</a></div>
-                                                        <div class="text-small text-muted">{{$users->users->satker}}</div>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                    {{$users->count_task}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                    </div>
-                    <!-- Penyumbang Unggulan End -->
-
-
-
-                    <!-- Mailing List Start -->
-                    <div class="col-12">
-                        <div class="card mb-5">
-                            <div class="card-body row g-0">
-                                <div class="col-12">
-                                    <div class="cta-3">Siap untuk berkarya?</div>
-                                    <div class="mb-3 cta-3 text-primary">Ayo berlangganan dengan e-mail anda !</div>
-                                    <div class="text-muted mb-3">Kami akan mengirimkan berita terbaru seputar digital aset BPS.</div>
-                                    <div class="d-flex flex-column justify-content-start">
-                                        <div class="text-muted mb-2">
-                                            <input type="email" class="form-control" placeholder="E-mail" />
-                                        </div>
-                                    </div>
-                                    <a href="#" class="btn btn-icon btn-icon-start btn-primary">
-                                        <i data-acorn-icon="chevron-right"></i>
-                                        <span>Join</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Mailing List End -->
-
-                </div>
-            </div> --}}
-            <!-- Right Side End -->
+                </div>       
+            </div> 
         </div>
+
+        
+                     <!-- Data Loader -->
+    <div class="auto-load text-center" style="display: none;">
+        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+            <path fill="#000"
+                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                    from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+            </path>
+        </svg>
     </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var ENDPOINT = "{{ route('dashboard.halamanutama') }}";
+    var page = 1;
+  
+    /*------------------------------------------
+    --------------------------------------------
+    Call on Scroll
+    --------------------------------------------
+    --------------------------------------------*/
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
+            page++;
+            infinteLoadMore(page);
+        }
+    });
+  
+    /*------------------------------------------
+    --------------------------------------------
+    call infinteLoadMore()
+    --------------------------------------------
+    --------------------------------------------*/
+    function infinteLoadMore(page) {
+        $.ajax({
+                url: ENDPOINT + "?page=" + page,
+                datatype: "html",
+                type: "get",
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if (response.html == '') {
+                    $('.auto-load').html("We don't have more data to display :(");
+                    return;
+                }
+  
+                $('.auto-load').hide();
+                $("#data-wrapper").append(response.html);
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occured');
+            });
+    }
+</script>
 @endsection

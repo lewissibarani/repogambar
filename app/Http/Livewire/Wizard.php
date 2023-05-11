@@ -257,7 +257,7 @@ class Wizard extends Component
 
     public function statuploaduser ($iduser) {
         $user = User::find($iduser);
-        $user->increment('sum_upload'); 
+        $user->increment('sums_upload'); 
         $user->save();
     }
 

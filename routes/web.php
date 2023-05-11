@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
  
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard']); 
-        Route::get('Beranda', [DashboardsController::class, 'dashboard']);
+        Route::get('Beranda', [DashboardsController::class, 'dashboard'])->name('dashboard.halamanutama');
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar'); 
         Route::get('Download/{gambar_id}',[DashboardsController::class, 'downloadGambar'])->name('dashboard.downloadgambar');
         Route::get('Downl

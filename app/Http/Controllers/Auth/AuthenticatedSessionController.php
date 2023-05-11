@@ -113,6 +113,9 @@ class AuthenticatedSessionController extends Controller
                         'kodesatker' =>$user->getKodeOrganisasi(),
                         'satker' =>$user->getEselon(),
                         'password' =>Hash::make('pks2022'),
+                        'sums_download' =>0,
+                        'sums_upload' =>0,
+                        'sum_permintaan' =>0, 
                     ]);
                     $id = $newUser->id;
                 }

@@ -322,12 +322,12 @@
             @php
             };
             @endphp 
-            <li>
+            {{-- <li>
                 <a href="/Petugas/Statistik">
                     <i data-acorn-icon="activity" class="icon" data-acorn-size="18"></i>
                     <span class="label">Statistik Aplikasi</span>
                 </a>
-            </li>
+            </li> --}}
             
             <li>
                 <a href="/Kontributor/Profiluser/{{Auth::user()->id}}">

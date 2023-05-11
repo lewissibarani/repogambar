@@ -452,7 +452,9 @@ class PetugasController extends Controller
 
         $gambars=User_Petugas::create([
             'users_id' =>$request->users_id,
-            'aktif' => 1
+            'aktif' => 1,
+            'count_task' => 0,
+            'countreviewtask' => 0, 
         ]);
 
         return redirect()->route('petugas.pengaturan');

@@ -47,14 +47,14 @@ class DashboardsController extends Controller
         return view('landingpage.landpage');
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-
+        
         //menampilkan penyumbang gambar
-        $Users = User_Petugas::with('users')->paginate(5); 
+        // $Users = User_Petugas::with('users')->paginate(5); 
 
         //Menampilkan Tags
-        $Tags= Tag::where('count', '>', 0)->paginate(12);
+        $Tags= Tag::where('count', '>', 0)->paginate(10);
 
         //Menampilkan Aset Digital Terfavorit
         $Terfavorit = Gambar::with('user','source')->orderBy('views', 'desc')->where('booleantayang',1)->get();
@@ -63,12 +63,17 @@ class DashboardsController extends Controller
         $Data = Gambar::with('user','kegunaan','source')
         ->orderBy('created_at', 'desc')
         ->where('booleantayang', 1)
-        ->get();
+        ->paginate(5);
+
+        if ($request->ajax()) {
+            $view = view('dashboard.data', compact('Data'))->render();
+  
+            return response()->json(['html' => $view]);
+        }
 
         return view('dashboard.dashboard',
         compact(['Data',
-                 'Tags',
-                 'Users',
+                 'Tags', 
                  'Terfavorit'
         ]));
     }
