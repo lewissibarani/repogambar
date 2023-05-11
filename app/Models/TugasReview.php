@@ -3,34 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
+use Illuminate\Database\Eloquent\Model; 
 
 class TugasReview extends Model
 {
-    use HasFactory;
-    use HasRichText;
+    use HasFactory; 
 
     protected $table = 'tugasreview';
-
-    protected $richTextFields = [
-        'komentar', 
-    ];
-
-    protected $fillable = [
-        'gambarid',
-        'petugasid',
-        'statusreviewid',
-        'komentar',
+ 
+    protected $fillable = [ 
+        'petugasid', 
+        'transaksiid', 
     ];
 
     public function userpetugas()
     { 
         return $this->hasOne('App\Models\User','id','petugasid');
     }
-    
-    public function gambar()
+     
+    public function transaksi()
     { 
-        return $this->hasOne('App\Models\Gambar','id','gambarid');
-    }
+        return $this->hasOne('App\Models\Transaksi','id','transaksiid');
+    } 
+
 }

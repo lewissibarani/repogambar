@@ -280,7 +280,8 @@
                 </a>
             </li>
             @php 
-            if( Auth::user()->level==4){
+            // if( Auth::user()->level==4){
+            if( true){
             @endphp
             <li>
                 <a href="/KelolaGambar/Index">
@@ -301,7 +302,7 @@
 
                             <li>
                                 <a href="/Petugas/Index">
-                                    <span class="label">Daftar Tugas</span>
+                                    <span class="label">Daftar Permintaan Gambar</span>
                                 </a>
                             </li>
                             <li>

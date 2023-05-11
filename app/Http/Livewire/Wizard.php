@@ -111,11 +111,11 @@ class Wizard extends Component
             
             //constant
             $image =  $this->image;
-            $nameImage =  $this->image->getClientOriginalName();
+            $nameImage =  date('YmdHi').$this->image->getClientOriginalName();
         
             //membuat thumbnail
-            $width = 600; // your max width
-            $height = 600; // your max height
+            $width = config('imageresize.size.width'); // your max width
+            $height =  config('imageresize.size.height'); // your max height
             $thumbPath = $storagePath.'public/thumbnail/'.$nameImage; 
             $thumbImage = Image::make($image->getRealPath());
             $thumbImage->height() > $thumbImage->width() ? $width=null : $height=null;
@@ -147,8 +147,7 @@ class Wizard extends Component
                     'path' => 'storage/file/'.$file_name,
                     'nama_file' => $file_name,
                     'size' => Storage::size('public/file/'.$file_name),  
-                    'type' => \File::extension(Storage::url('public/file/'.$file_name)),
-                    'kategori_file'=>$this->jenisfile,
+                    'type' => \File::extension(Storage::url('public/file/'.$file_name)), 
                     'download'=>0
                     ]);
         
@@ -164,7 +163,7 @@ class Wizard extends Component
         $creategambar= Gambar::create([
             'judul' => $this->judul,
             'nama_gambar' =>$nameImage,
-            'link' => "nolink",
+            'link' => $oriPath,
             'path' =>'storage/uploadedGambar/'.$nameImage,
             'thumbnail_path' =>'storage/thumbnail/'.$nameImage,
             'idKegunaan' =>"Upload Personal",
@@ -172,6 +171,7 @@ class Wizard extends Component
             'ukuran' =>$gambar_size,
             'source_id' => $this->sumber,
             'file_id' => $fileid,  
+            'kategori_file'=>$this->jenisfile,
             'tipe_gambar' => $tipe_gambar,
             'views' => 0,
             'download'=>0,
@@ -182,10 +182,10 @@ class Wizard extends Component
         $creategambar->tag($this->convertArray($this->tags));
 
         //membuat seolah olah pengupload melakukan permintaan
-        $this->createpermintaan($creategambar->id,Auth::id()); 
+        $idtransaksi  = $this->createpermintaan($creategambar->id,Auth::id(),$this->judul,$oriPath); 
 
         //membuat task review untuk petugas
-        $this->createreview($creategambar->id);
+        $this->createreview($creategambar->id,$idtransaksi);
 
         //menambah 1 statistik upload user
         $this->statuploaduser(Auth::id());
@@ -225,35 +225,54 @@ class Wizard extends Component
 
     } 
 
-    public function createreview($gambarid) 
+    public function createreview($gambarid,$idtransaksi) 
     {
-        $tugasreview= new TugasReview;
-        $tugasreview->gambarid=$gambarid;
-        $tugasreview->petugasid=null;
-        $tugasreview->statusreviewid=3;
-        $tugasreview->komentar=null; 
+        $tugasreview= new TugasReview; 
+        $tugasreview->petugasid=null; 
+        $tugasreview->transaksiid=$idtransaksi;
         $tugasreview->save();
     }  
  
-    public function createpermintaan($gambarid,$idpengupload) 
+    public function createpermintaan($gambarid,$idpengupload,$judulpermintaan,$link) 
     {
+        //---start proses pemberian id permintaan
+        $kodesatker = Auth::user()->kodesatker;
+        $digiterakhir_idpermintaan= $this->pemberian_id_permintaan($kodesatker);
+        $id_permintaan = $kodesatker.$digiterakhir_idpermintaan; 
+
         $permintaan= new Transaksi;
-        $permintaan->judulPermintaan = "Upload Pribadi";
-        $permintaan->idStatus = 3;
+        $permintaan->jenispermintaanid = 2;
+        $permintaan->judulPermintaan = $judulpermintaan;
+        $permintaan->idStatus = 7;
         $permintaan->idKegunaan = 4;
         $permintaan->alasanDitolak = null; 
-        $permintaan->linkPermintaan = "Upload Pribadi"; 
+        $permintaan->linkPermintaan = $link; 
         $permintaan->idUserPeminta = $idpengupload; 
         $permintaan->gambar_id = $gambarid; 
-        $permintaan->id_permintaan = "Upload Pribadi"; 
+        $permintaan->id_permintaan = $id_permintaan; 
         $permintaan->kegunaan_lainnya = "null"; 
         $permintaan->save(); 
+        return $permintaan->id;
     } 
 
     public function statuploaduser ($iduser) {
         $user = User::find($iduser);
         $user->increment('sum_upload'); 
         $user->save();
+    }
+
+    private function pemberian_id_permintaan($kodesatker)
+    {   
+        $lastnumber=0;
+        $permintaan = Transaksi::where(DB::raw('substr(id_permintaan, 1, 12)'), '=' , $kodesatker)->latest("id")->first();
+        if($permintaan!=null)
+        {
+            $lastnumber_2 = $permintaan->id_permintaan;
+            $sisa_digit_terakhir = substr($lastnumber_2, 12);
+            $lastnumber = $sisa_digit_terakhir +1;
+        }
+
+        return $lastnumber;
     }
   
 }

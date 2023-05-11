@@ -31,6 +31,11 @@
                     </div>
                 </section>
                 <!-- Title End -->
+                            @if(session()->has('message'))
+                                <div class="alert alert-info">
+                                {!! session()->get('message') !!}
+                                </div>
+                            @endif
 
                     <!-- Hover Start -->
                     <section class="scroll-section" id="hover">
@@ -119,39 +124,34 @@
                                     @foreach ($Data as $datas) 
                                         <tr style="height:50px;">
                                             <td style="vertical-align: middle;">{{$nomorurut++}}</td>
-                                            <td style="vertical-align: middle;" class="text-alternate">{{$datas->gambar->judul}}</td> 
+                                            <td style="vertical-align: middle;" class="text-alternate">{{$datas->transaksi->gambar->judul}}</td> 
 
                                             {{-- Jenis Karya --}}
-                                            @if($datas->gambar->fileid===null)
+                                            @if($datas->transaksi->gambar->fileid===null)
                                             <td style="vertical-align: middle;" class="text-alternate">Fotografi</td> 
-                                            @elseif($datas->gambar->file->kategori_file===1) 
+                                            @elseif($datas->transaksi->gambar->file->kategori_file===1) 
                                                 <td style="vertical-align: middle;" class="text-alternate">Indesign</td> 
-                                            @elseif($datas->gambar->file->kategori_file===2) 
+                                            @elseif($datas->transaksi->gambar->file->kategori_file===2) 
                                                 <td style="vertical-align: middle;" class="text-alternate">Illustrator</td> 
-                                            @elseif($datas->gambar->file->kategori_file===3) 
+                                            @elseif($datas->transaksi->gambar->file->kategori_file===3) 
                                                 <td style="vertical-align: middle;" class="text-alternate">Photoshop</td> 
-                                            @elseif($datas->gambar->file->kategori_file===4) 
+                                            @elseif($datas->transaksi->gambar->file->kategori_file===4) 
                                                 <td style="vertical-align: middle;" class="text-alternate">Font</td> 
                                             @else
                                                 <td style="vertical-align: middle;" class="text-alternate">Tidak Diketahui</td> 
                                             @endif  
 
-                                            {{-- Status Review --}} 
-                                            @if ($datas->statusreviewid===1)
-                                            <td style="vertical-align: middle;" class="text-alternate"> <span class="badge rounded-pill bg-primary"> Tayang </span></td>
-                                            @endif 
-                                            @if ($datas->statusreviewid===2)
-                                            <td style="vertical-align: middle;" class="text-alternate"> <span class="badge rounded-pill bg-warning"> Tidak Tayang </span></td>
-                                            @endif 
-                                            @if ($datas->statusreviewid===3)
-                                            <td style="vertical-align: middle;" class="text-alternate"> <span class="badge rounded-pill bg-outline-primary"> Sedang Diriviu</span></td>
-                                            @endif 
+                                            {{-- Status Review --}}  
+                                            <td style="vertical-align: middle;" class="text-alternate">
+                                                @php echo $datas->transaksi->status->status;
+                                                @endphp
+                                             </td> 
                                              
                                             <td style="vertical-align: middle;" class="text-alternate">{{$datas->updated_at}}</td>
                                             <td class="text-alternate"> 
                                                 <img class="card-img sh-50 scale" 
                                                 style="max-height:80px;"
-                                                src="/{{$datas->gambar->thumbnail_path}}"
+                                                src="/{{$datas->transaksi->gambar->thumbnail_path}}"
                                                 alt="card image" />
                                             </td>
                                             <td style="vertical-align: middle;" class="text-alternate"> <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">

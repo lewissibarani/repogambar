@@ -34,7 +34,7 @@ class KelolaGambarController extends Controller
     public function index ()
     {
 
-        $Data = Transaksi::with('kegunaan','user','status','gambar')
+        $Data = Transaksi::with('jenispermintaan','kegunaan','user','status','gambar','gambar.file',)
         ->where('idUserPeminta', Auth::id())->get(); 
 
         //Populate Option kegunaan untuk form permintaan
@@ -90,7 +90,8 @@ class KelolaGambarController extends Controller
                 'idkegunaan' => 'required',
             ]);
 
-            $create_transaksi=Transaksi::create([
+            $create_transaksi=Transaksi::create([ 
+                'jenispermintaanid' => 1,
                 'judulPermintaan' => $request->judulPermintaan,
                 'linkPermintaan' => $request->linkPermintaan,
                 'idKegunaan' => $request->idkegunaan,

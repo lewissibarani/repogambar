@@ -1,6 +1,6 @@
 @php
     $html_tag_data = [];
-    $title = 'Daftar Permintaan Gambar';
+    $title = 'Daftar Permintaan Layanan';
     $description= 'A table enhancing plug-in for the jQuery Javascript library, adding sorting, paging and filtering abilities to plain HTML tables with minimal effort.';
     $breadcrumbs = ["/"=>"Home","/KelolaGambar/Index"=>"Daftar Permintaan Gambar"]
 @endphp
@@ -119,9 +119,9 @@
                                 >
                                     <thead>
                                     <tr>
-                                        <th class="text-muted text-small text-uppercase">ID</th>
-                                        <th class="text-muted text-small text-uppercase">Judul Permintaan</th>
-                                        <th class="text-muted text-small text-uppercase">Kegunaan</th>
+                                        <th class="text-muted text-small text-uppercase">ID</th> 
+                                        <th class="text-muted text-small text-uppercase">Jenis Layanan</th>
+                                        <th class="text-muted text-small text-uppercase">Nama Permintaan</th>
                                         <th class="text-muted text-small text-uppercase">Link</th>
                                         <th class="text-muted text-small text-uppercase">Diupdate Terakhir</th>
                                         <th class="text-muted text-small text-uppercase">Status</th>
@@ -149,8 +149,8 @@
                                         @endphp
                                         <tr style="height:50px;">
                                             <td>#{{$datas->id_permintaan}}</td>
-                                            <td class="text-alternate">{{$judul}}</td>
-                                            <td class="text-alternate">{{$datas->kegunaan->kegunaan}}</td>
+                                            <td class="text-alternate">{{$datas->jenispermintaan->jenispermintaan}}</td> 
+                                            <td class="text-alternate">{{$judul}}</td> 
                                             <td class="text-alternate"><a href="{{$datas->linkPermintaan}}" target="_blank" rel="noopener noreferrer">{{$link}}</a></td>
                                             <td class="text-alternate">{{$update_terakhir}}</td>
                                             <td class="text-alternate">
@@ -228,7 +228,7 @@
                     <!-- Hover End -->
                     </div>
 
-                     <!-- Add Edit Modal Start -->
+                <!-- Add Edit Modal Start -->
                 <div class="modal modal-left large fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">

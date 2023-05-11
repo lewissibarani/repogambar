@@ -13,8 +13,7 @@ class File extends Model
         'path',
         'nama_file',
         'size',
-        'type',
-        'kategori_file',
+        'type', 
         'download',
     ];
 

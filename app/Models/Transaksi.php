@@ -12,6 +12,7 @@ class Transaksi extends Model
     protected $table = 'permintaan';
 
     protected $fillable = [
+        'jenispermintaanid',
         'judulPermintaan',
         'idStatus',
         'idKegunaan',
@@ -26,6 +27,11 @@ class Transaksi extends Model
     public function kegunaan ()
     {
         return $this->hasOne('App\Models\Kegunaan','id','idKegunaan');
+    }
+    
+    public function jenispermintaan ()
+    {
+        return $this->hasOne('App\Models\JenisPermintaan','id','jenispermintaanid');
     }
 
     public function user()

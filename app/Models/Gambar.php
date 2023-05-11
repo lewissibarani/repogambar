@@ -25,6 +25,7 @@ class Gambar extends Model
         'nama_gambar',
         'source_id',
         'file_id',
+        'kategori_file',
         'tipe_gambar',
         'views',
         'download',
@@ -68,5 +69,9 @@ class Gambar extends Model
     public function gambarView()
     {
         return $this->hasMany(GambarView::class);
+    }
+    public function kategorifile()
+    {
+        return $this->hasOne('App\Models\Kategori_File','id','kategori_file');
     }
 }

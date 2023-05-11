@@ -156,6 +156,19 @@
                             </div>
 
                             <div class="row mb-3">
+                                <label class="font-weight-bold col-sm-2 col-form-label">Kategori File</label>
+                                <div class="col-sm-10">
+                                    <select id="select2Multiple" class="form-select" name="kategori_file" >
+                                        <option selected> <i>Pilih...</i></option>
+                                        @foreach ($Kategori_File as $kategori)
+                                            <option value="{{ $kategori->id}}">{{ $kategori->nama_kategori }}</option> 
+                                        @endforeach
+                                    </select> 
+                                    {{-- <small class="form-text text-muted">Tuliskan minimal 3 tags. Setiap tag dipisahkan dengan tanda koma</small> --}}
+                                    <!-- <input class="form-control" type="text" data-role="tagsinput" name="tags"> -->
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <label class="font-weight-bold col-sm-2 col-form-label">Tags</label>
                                 <div class="col-sm-10">
                                     <input 
