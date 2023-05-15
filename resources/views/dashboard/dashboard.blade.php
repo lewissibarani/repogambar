@@ -142,124 +142,16 @@
                 <div class="tab-content">
                     <!-- Terbaru Tab Start -->
                     <div class="tab-pane fade active show" id="projectsTab" role="tabpanel">
-                        <!-- Grid Start --> 
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4" id="masonryCardsExample">
-                            
-                            @include('dashboard.data')
-                        </div>
-                        <!-- Grid End -->
+                        <!-- Grid Start -->  
+                            <div class="infinite-scroll row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" id="masonryCardsExample"> 
+                               @include('dashboard.data')  
+                            </div>
+                        <!-- Grid End -->  
                     </div>
-                    <!-- Terbaru Tab End -->
-
-                    <!-- Paling Banyak Dilihat Tab Start -->
-                    <div class="tab-pane fade" id="collectionsTab" role="tabpanel">
-                        <!-- Grid Start --> 
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 gallery g-2 mb-5">
-                            @foreach ($Terfavorit as $favorit)
-                                <div class="col">
-                                    <div class="card hover-img-scale-up hover-reveal">
-                                            <img class="card-img sh-50 scale" 
-                                            data-original="{{$favorit->thumbnail_path}}"
-                                            alt="card image" />
-                                            <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
-                                                    <div class="row g-0">
-                                                    </div>
-                                                    <div class="row g-0">
-                                                        <div class="col pe-2">
-                                                            <a href="Dashboard/DetailGambar/{{$favorit->id}}" class="stretched-link">
-                                                                <h5 class="heading text-white mb-1">{{$favorit->judul}}</h5>
-                                                            </a>
-                                                            <div class="d-inline-block">
-                                                                <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$favorit->tipe_gambar}}</span></div>
-                                                            </div>
-                                                            @php
-                                                            if($favorit->file_id!==null)
-                                                                {
-                                                                @endphp
-                                                                <div class="d-inline-block">
-                                                                    <div class="text-uppercase"><span class='badge rounded-pill bg-light'>ZIP</span></div>
-                                                                </div>
-                                                                @php
-                                                                    $file = "zip";
-                                                                }
-                                                            @endphp
-                                                            <div class="d-inline-block">
-                                                                <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$favorit->source->sumber_gambar}}</span></div>
-                                                            </div>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                    </div>
-                                </div>
-                                
-                            @endforeach
-                        </div>
-                        <!-- Grid End -->
-                    </div>
-                    <!-- Paling Banyak Dilihat Tab End -->  
-  
-
+                    <!-- Terbaru Tab End -->  
                 </div>       
             </div> 
-        </div>
-
-        
-                     <!-- Data Loader -->
-    <div class="auto-load text-center" style="display: none;">
-        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
-            <path fill="#000"
-                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
-                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
-                    from="0 50 50" to="360 50 50" repeatCount="indefinite" />
-            </path>
-        </svg>
-    </div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    var ENDPOINT = "{{ route('dashboard.halamanutama') }}";
-    var page = 1;
-  
-    /*------------------------------------------
-    --------------------------------------------
-    Call on Scroll
-    --------------------------------------------
-    --------------------------------------------*/
-    $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
-            page++;
-            infinteLoadMore(page);
-        }
-    });
-  
-    /*------------------------------------------
-    --------------------------------------------
-    call infinteLoadMore()
-    --------------------------------------------
-    --------------------------------------------*/
-    function infinteLoadMore(page) {
-        $.ajax({
-                url: ENDPOINT + "?page=" + page,
-                datatype: "html",
-                type: "get",
-                beforeSend: function () {
-                    $('.auto-load').show();
-                }
-            })
-            .done(function (response) {
-                if (response.html == '') {
-                    $('.auto-load').html("We don't have more data to display :(");
-                    return;
-                }
-  
-                $('.auto-load').hide();
-                $("#data-wrapper").append(response.html);
-            })
-            .fail(function (jqXHR, ajaxOptions, thrownError) {
-                console.log('Server error occured');
-            });
-    }
-</script>
+        </div>  
+    </div>    
 @endsection
+ 

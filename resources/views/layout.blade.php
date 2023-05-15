@@ -49,7 +49,7 @@
         {
             $('img').lazyload();
         });
-</script> --}}
+</script> --}} 
 </body>
 
 </html>

@@ -36,4 +36,5 @@
                                     </div>
                                 </div>
                                 
-                            @endforeach
+                            @endforeach 
+                            <div class="mt-5">{{ $Data->links()}}</div> 

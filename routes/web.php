@@ -36,19 +36,16 @@ Route::prefix('/LandingPage')->group(function () {
  
 
 Route::middleware('auth')->group(function () {
-    // Route::redirect('/', '/LandingPage');
-
+    // Route::redirect('/', '/LandingPage'); 
     Route::post('/like-post/{id}',[LikesController::class,'likePost'])->name('like.post');
     Route::post('/unlike-post/{id}',[LikesController::class,'unlikePost'])->name('unlike.post');
     
  
     Route::prefix('Dashboard')->group(function () {
-        Route::get('/', [DashboardsController::class, 'dashboard']); 
-        Route::get('Beranda', [DashboardsController::class, 'dashboard'])->name('dashboard.halamanutama');
+        Route::get('/', [DashboardsController::class, 'dashboard'])->name('dashboard.halamandepan');  
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar'); 
         Route::get('Download/{gambar_id}',[DashboardsController::class, 'downloadGambar'])->name('dashboard.downloadgambar');
-        Route::get('Downl
-        oadFile/{file_id}',[DashboardsController::class, 'downloadFile'])->name('dashboard.downloadfile'); 
+        Route::get('DownloadFile/{file_id}',[DashboardsController::class, 'downloadFile'])->name('dashboard.downloadfile'); 
         Route::get('Statistik',[DashboardsController::class, 'statistik'])->name('petugas.statistik');
     });
 

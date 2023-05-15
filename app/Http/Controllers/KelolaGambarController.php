@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kegunaan;
+use App\Models\User;
 use App\Models\Transaksi;
 use App\Models\PembagianTugas;
 use App\Models\User_Petugas;
@@ -113,6 +114,11 @@ class KelolaGambarController extends Controller
                 'user_id' =>$petugas_id,
             ]);
             //end of distribusi tugas
+
+            //Start nambah statistik permintaan pada tabel user
+            $peminta = User::find($idpeminta);
+            $peminta->increment('sum_permintaan'); 
+            $peminta->save();
 
             try {
                 event(new NewPermintaan($create_transaksi));

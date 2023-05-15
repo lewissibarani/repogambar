@@ -36,4 +36,5 @@
 <link rel="stylesheet" href="/css/main.css" />
 <!-- Template Base Styles End -->
 <script src="/js/base/loader.js"></script>   
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>    
+
