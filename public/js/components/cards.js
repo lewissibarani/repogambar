@@ -25,6 +25,7 @@ class ComponentsCards {
           percentPosition: true,
           transitionDuration: 0,
         });
+
       }
     }
   }
