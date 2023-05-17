@@ -46,6 +46,10 @@ class DashboardsController extends Controller
     {  
         return view('landingpage.landpage');
     }
+    public function maintenance()
+    {  
+        return view('pages.miscellaneous.maintenance');
+    }
 
     public function dashboard(Request $request)
     {

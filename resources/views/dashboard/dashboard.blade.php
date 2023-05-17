@@ -175,10 +175,8 @@
     var ENDPOINT = "{{route('dashboard.halamandepan')}}";
     var page = 1;
   
-    /*------------------------------------------
-    --------------------------------------------
-    Call on Scroll
-    --------------------------------------------
+    /*------------------------------------------ 
+    Call on Scroll 
     --------------------------------------------*/
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
@@ -187,10 +185,8 @@
         }
     });
   
-    /*------------------------------------------
-    --------------------------------------------
-    call infinteLoadMore()
-    --------------------------------------------
+    /*------------------------------------------ 
+    call infinteLoadMore() 
     --------------------------------------------*/
     function infinteLoadMore(page) {
 
@@ -212,7 +208,19 @@
                 }
   
                 $('.auto-load').hide();
+                
                 $("#masonryCardsExample").append(response.html);
+                
+                var $grid = $('#masonryCardsExample').masonry({
+                itemSelector: '.col',
+                percentPosition: true, 
+                }); 
+
+                $grid.imagesLoaded().progress( function() {  
+                $grid.masonry('layout'); 
+                });
+                
+
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('Server error occured');
