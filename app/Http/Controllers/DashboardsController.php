@@ -69,11 +69,11 @@ class DashboardsController extends Controller
         ->where('booleantayang', 1)
         ->paginate(6);
 
-        if ($request->ajax()) {
-            $view = view('dashboard.data', compact('Data'))->render();
+        // if ($request->ajax()) {
+        //     $view = view('dashboard.data', compact('Data'))->render();
   
-            return response()->json(['html' => $view]);
-        }
+        //     return response()->json(['html' => $view]);
+        // }
 
         return view('dashboard.dashboard',
         compact(['Data',
