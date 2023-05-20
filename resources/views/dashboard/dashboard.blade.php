@@ -168,64 +168,6 @@
     
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script>
-  
-    var ENDPOINT = "{{route('dashboard.halamandepan')}}";
-    var page = 1;
-  
-    /*------------------------------------------ 
-    Call on Scroll 
-    --------------------------------------------*/
-    $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
-            page++;
-            infinteLoadMore(page);
-        }
-    });
-  
-    /*------------------------------------------ 
-    call infinteLoadMore() 
-    --------------------------------------------*/
-    function infinteLoadMore(page) {
-
-  
-
-        $.ajax({
-                url: ENDPOINT + "?page=" + page,
-                datatype: "html",
-                type: "get",
-                beforeSend: function () {
-
-                    $('.auto-load').show();
-                }
-            })
-            .done(function (response) {
-                if (response.html == '') {
-                    $('.auto-load').html("We don't have more data to display :(");
-                    return;
-                }
-  
-                $('.auto-load').hide();
-                
-                $("#masonryCardsExample").append(response.html);
-                
-                var $grid = $('#masonryCardsExample').masonry({
-                itemSelector: '.col',
-                percentPosition: true, 
-                }); 
-
-                $grid.imagesLoaded().progress( function() {  
-                $grid.masonry('layout'); 
-                });
-                
-
-            })
-            .fail(function (jqXHR, ajaxOptions, thrownError) {
-                console.log('Server error occured');
-            });
-    }
-</script>
 @endsection
  
