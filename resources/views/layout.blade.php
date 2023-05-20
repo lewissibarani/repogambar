@@ -13,6 +13,7 @@
     <title> PIKART | {{$title}}</title>
     <meta name="description" content="{{$description}}"/>
     <meta name="csrf-token" content="{{ csrf_token() }}"> 
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
     {{-- @if ($title!=="Landing Page")  --}}
     @include('_layout.head') 
     {{-- @else 
