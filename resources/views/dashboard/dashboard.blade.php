@@ -102,12 +102,7 @@
                 </div>
             </div>
         </div>
-        <!-- Tags End -->
-        <img class="card-img scale" 
-        style="min-height:200px;
-        max-height:300px;" 
-        src="/storage/uploadedGambar/202211150530SHUTTERSTOCK_336689483.jpg"
-        alt="card image" />
+        <!-- Tags End --> 
 
         <div class="row">
             <div class="col-12 col-xl-12 col-xxl-12 mb-5">
