@@ -106,7 +106,7 @@
 
         <div class="row">
             <div class="col-12 col-xl-12 col-xxl-12 mb-5"> 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" id="masonryCardsExample">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" id="">
                     @foreach ($Data as $datas)
                     <div class="col">
                         Disini
