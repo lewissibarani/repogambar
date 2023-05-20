@@ -172,7 +172,7 @@
 
 <script>
   
-    var ENDPOINT = "{{route('dashboard.halamandepan')}}";
+    var ENDPOINT = "https://webapps.bps.go.id/simrad/Dashboard";
     var page = 1;
   
     /*------------------------------------------ 
