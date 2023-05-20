@@ -172,7 +172,8 @@
 
 <script>
   
-    var ENDPOINT = "https://webapps.bps.go.id/simrad/Dashboard";
+    // var ENDPOINT = "{{route('dashboard.halamandepan')}}";
+    var ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";
     var page = 1;
   
     /*------------------------------------------ 
