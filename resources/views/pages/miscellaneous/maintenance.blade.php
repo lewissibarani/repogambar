@@ -20,13 +20,13 @@
 @section('content_right')
     <div class="sw-lg-80 min-h-100 bg-foreground d-flex justify-content-center align-items-center shadow-deep py-5 full-page-content-right-border">
         <div class="sw-lg-60 px-5">
-            <div class="sh-11">
+            <div class="sh-18">
                 <a href="/">
                     <img src="/img/logo/logo-light.svg" alt="logo" />
                 </a>
             </div>
             <div class="mb-3">
-                <h2 class="cta-1 mb-0 text-primary">Pikart will be available soon!</h2>
+                <h2 class="cta-1 mb-0 text-primary">will be available soon!</h2>
             </div>
             <div class="mb-5 sh-9">
                 <div id="timer"></div>
