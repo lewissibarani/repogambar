@@ -31,6 +31,10 @@ Route::redirect('/', '/maintenance');
 |
 */ 
 
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
+
 Route::prefix('/maintenance')->group(function () {
     Route::get('/', [DashboardsController::class, 'maintenance'])->name('landingpage.maintenance');  
 });
