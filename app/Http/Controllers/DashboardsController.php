@@ -51,7 +51,7 @@ class DashboardsController extends Controller
         return view('pages.miscellaneous.maintenance');
     }
 
-    public function dashboard(Request $request)
+    public function dashboard()
     {
         
         //menampilkan penyumbang gambar
