@@ -105,9 +105,38 @@
         <!-- Tags End --> 
 
         <div class="row">
-            <div class="col-12 col-xl-12 col-xxl-12 mb-5"> 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" id="">
-                    Halo
+            <div class="col-12 col-xl-12 col-xxl-12 mb-5">
+                <!-- Title Tabs Start -->
+                {{-- <ul class="nav nav-tabs nav-tabs-title nav-tabs-line-title responsive-tabs" role="tablist">
+                    <li class="nav-item" role="presentation"
+                    data-title="Daftar gambar terbaru " data-intro="Disini kamu bisa memilih gambar terbar yang sudah pernah diupload oleh petugas kami" data-step="3"
+                    >
+                        <a class="nav-link active" data-bs-toggle="tab" href="#projectsTab" role="tab" aria-selected="true">Terbaru</a>
+                    </li>
+                    <li class="nav-item" role="presentation"
+                    data-title="Daftar gambar terfavorit" data-intro="Disini kamu bisa memilih gambar terfavorit yang sudah pernah diupload oleh petugas kami" data-step="4"
+                    >
+                        <a class="nav-link" data-bs-toggle="tab" href="#collectionsTab" role="tab" aria-selected="false">Paling Banyak Dilihat</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="#friendsTab" role="tab" aria-selected="false"></a>
+                    </li>
+                    <li class="nav-item dropdown ms-auto d-none responsive-tab-dropdown">
+                        <a
+                                class="btn btn-icon btn-icon-only btn-background pt-0"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                data-diplay="static"
+                        >
+                            <i data-acorn-icon="more-horizontal"></i>
+                        </a>
+                        <ul class="dropdown-menu mt-2 dropdown-menu-end"></ul>
+                    </li>
+                </ul> --}}
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" id="masonryCardsExample">
                     @foreach ($Data as $datas)
                     <div class="col">
                         Disini
@@ -169,6 +198,64 @@
     
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script>
+  
+    var ENDPOINT = "{{route('dashboard.halamandepan')}}";
+    var page = 1;
+  
+    /*------------------------------------------ 
+    Call on Scroll 
+    --------------------------------------------*/
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
+            page++;
+            infinteLoadMore(page);
+        }
+    });
+  
+    /*------------------------------------------ 
+    call infinteLoadMore() 
+    --------------------------------------------*/
+    function infinteLoadMore(page) {
+
+  
+
+        $.ajax({
+                url: ENDPOINT + "?page=" + page,
+                datatype: "html",
+                type: "get",
+                beforeSend: function () {
+
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if (response.html == '') {
+                    $('.auto-load').html("We don't have more data to display :(");
+                    return;
+                }
+  
+                $('.auto-load').hide();
+                
+                $("#masonryCardsExample").append(response.html);
+                
+                var $grid = $('#masonryCardsExample').masonry({
+                itemSelector: '.col',
+                percentPosition: true, 
+                }); 
+
+                $grid.imagesLoaded().progress( function() {  
+                $grid.masonry('layout'); 
+                });
+                
+
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occured');
+            });
+    }
+</script>
 @endsection
  
