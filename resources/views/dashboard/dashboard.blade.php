@@ -102,12 +102,12 @@
                 </div>
             </div>
         </div>
-        <!-- Tags End --> 
+        <!-- Tags End -->
 
         <div class="row">
             <div class="col-12 col-xl-12 col-xxl-12 mb-5">
                 <!-- Title Tabs Start -->
-                {{-- <ul class="nav nav-tabs nav-tabs-title nav-tabs-line-title responsive-tabs" role="tablist">
+                <ul class="nav nav-tabs nav-tabs-title nav-tabs-line-title responsive-tabs" role="tablist">
                     <li class="nav-item" role="presentation"
                     data-title="Daftar gambar terbaru " data-intro="Disini kamu bisa memilih gambar terbar yang sudah pernah diupload oleh petugas kami" data-step="3"
                     >
@@ -135,49 +135,19 @@
                         </a>
                         <ul class="dropdown-menu mt-2 dropdown-menu-end"></ul>
                     </li>
-                </ul> --}}
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" id="masonryCardsExample">
-                    @foreach ($Data as $datas)
-                    <div class="col">
-                        Disini
-                        <div class="card hover-img-scale-up hover-reveal">
-                                <img class="card-img scale" 
-                                style="min-height:200px;
-                                max-height:300px;" 
-                                src="{{$datas->thumbnail_path}}"
-                                alt="card image" />
-                                <div class="card-img-overlay justify-content-between reveal-content">  
-                                            <div style="
-                                                position: absolute;
-                                                bottom: 30px;
-                                                width: 100%;">
-                                                <a href="Dashboard/DetailGambar/{{$datas->id}}" class="stretched-link">
-                                                    <h5 class="heading text-white mb-1">{{$datas->judul}}</h5>
-                                                </a>
-                                                <div class=" ">
-                                                    <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->tipe_gambar}}</span></div>
-                                                </div>
-                                                @php
-                                                if($datas->file_id!==null)
-                                                    {
-                                                    @endphp
-                                                    <div class=" ">
-                                                        <div class="text-uppercase"><span class='badge rounded-pill bg-light'>ZIP</span></div>
-                                                    </div>
-                                                    @php
-                                                        $file = "zip";
-                                                    }
-                                                @endphp
-                                                <div class=" ">
-                                                    <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->source->sumber_gambar}}</span></div>
-                                                </div>
-                                                
-                                            </div> 
-                                </div>
-                        </div>
+                </ul>
+                <!-- Title Tabs End -->
+                <div class="tab-content">
+                    <!-- Terbaru Tab Start -->
+                    <div class="tab-pane fade active show" id="projectsTab" role="tabpanel">
+                        <!-- Grid Start -->  
+                            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" id="masonryCardsExample"> 
+                               @include('dashboard.data')  
+                            </div>
+                        <!-- Grid End -->  
                     </div>
-                 @endforeach  
-                </div>
+                    <!-- Terbaru Tab End -->  
+                </div>  
                 
                 <!-- Data Loader -->
                 <div class="auto-load text-center" style="display: none;">

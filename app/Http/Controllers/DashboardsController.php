@@ -68,6 +68,7 @@ class DashboardsController extends Controller
         ->orderBy('created_at', 'asc')
         ->where('booleantayang', 1)
         ->paginate(6);
+        dd($Data);
 
         if ($request->ajax()) {
             $view = view('dashboard.data', compact('Data'))->render();

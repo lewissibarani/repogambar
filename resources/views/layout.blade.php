@@ -54,7 +54,14 @@
 <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.js"></script>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script> 
 <script>
-        
+        var $grid = $('#masonryCardsExample').masonry({
+                itemSelector: '.col',
+                percentPosition: true, 
+                }); 
+
+                $grid.imagesLoaded().progress( function() {  
+                $grid.masonry('layout'); 
+                });
          
 </script> 
  
