@@ -91,7 +91,7 @@
 
         <!-- Tags Start -->
         <div class="col-12 col-sm-6 col-xl-12"
-        data-title="Daftar Tag Gambar" data-intro="Kamu juga bisa memilih gambar berdasarkan tags disini" data-step="5"> 
+        data-title="Daftar Tag Gambar" data-intro="Kamu juga bisa memilih gambar berdasarkan tags disini" data-step="4"> 
             <div class="mb-5">
                 <div class="">
                 @foreach($Tags as $tag)
@@ -112,14 +112,6 @@
                     data-title="Daftar gambar terbaru " data-intro="Disini kamu bisa memilih gambar terbar yang sudah pernah diupload oleh petugas kami" data-step="3"
                     >
                         <a class="nav-link active" data-bs-toggle="tab" href="#projectsTab" role="tab" aria-selected="true">Terbaru</a>
-                    </li>
-                    <li class="nav-item" role="presentation"
-                    data-title="Daftar gambar terfavorit" data-intro="Disini kamu bisa memilih gambar terfavorit yang sudah pernah diupload oleh petugas kami" data-step="4"
-                    >
-                        <a class="nav-link" data-bs-toggle="tab" href="#collectionsTab" role="tab" aria-selected="false">Paling Banyak Dilihat</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="tab" href="#friendsTab" role="tab" aria-selected="false"></a>
                     </li>
                     <li class="nav-item dropdown ms-auto d-none responsive-tab-dropdown">
                         <a
