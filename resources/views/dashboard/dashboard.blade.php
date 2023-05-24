@@ -174,7 +174,7 @@
 <script>
     
     var ENDPOINT = "{{route('dashboard.halamandepan')}}";
-    if ("'{{ env('NAME') }}" == 'production')
+    if ('{{ env('NAME') }}' == 'production')
     {
         ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";
     }
