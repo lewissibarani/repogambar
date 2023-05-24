@@ -21,8 +21,7 @@
 <script src="/js/vendor/jquery.validate/jquery.validate.min.js"></script>
 <script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
 <script src="/js/vendor/intro.min.js"></script>
-<script src="/js/cs/responsivetab.js"></script>
-<script src="/js/components/cards.js"></script>
+<script src="/js/cs/responsivetab.js"></script> 
 @endsection
 
 @section('js_page')
