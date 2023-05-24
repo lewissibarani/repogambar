@@ -67,7 +67,7 @@ class DashboardsController extends Controller
         $Data = Gambar::with('user','kegunaan','source')
         ->orderBy('created_at', 'desc')
         ->where('booleantayang', 1)
-        ->paginate(20); 
+        ->paginate(12); 
 
         if ($request->ajax()) {
             $view = view('dashboard.data', compact('Data'))->render();
