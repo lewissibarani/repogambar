@@ -162,7 +162,7 @@
         </div>
 
         <div class="row content">
-          <div class="col-lg-6" style="padding-left: 200px;">
+          <div class="col-lg-6" >
             <p>
               Pikart adalah aplikasi yang dibuat untuk melayani permintaan gambar dan media penyimpanan gambar Badan Pusat Statitsik
             </p> 

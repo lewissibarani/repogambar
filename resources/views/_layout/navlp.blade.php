@@ -30,7 +30,7 @@
         </a>
     </div>  --}}
     <div class="user-container d-flex"  style="margin-left :3em; margin-right: 100px;"> 
-        <a href="/Dashboard" class="text-dark">
+        <a href="/Dashboard" class="btn btn-primary btn-lg pull-right">
             <i data-acorn-icon="login" class="icon" data-acorn-size="18"></i>
             <span class="label">Login Pikart</span>
         </a>

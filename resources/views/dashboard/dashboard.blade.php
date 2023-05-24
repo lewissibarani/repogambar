@@ -22,6 +22,7 @@
 <script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
 <script src="/js/vendor/intro.min.js"></script>
 <script src="/js/cs/responsivetab.js"></script>
+<script src="/js/components/cards.js"></script>
 @endsection
 
 @section('js_page')
@@ -171,9 +172,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
-  
-    // var ENDPOINT = "{{route('dashboard.halamandepan')}}";
-    var ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";
+    
+    var ENDPOINT = "{{route('dashboard.halamandepan')}}";
+    if ("'{{ env('NAME') }}" == 'production')
+    {
+        ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";
+    }
+     
     var page = 1;
   
     /*------------------------------------------ 
@@ -212,13 +217,13 @@
                 
                 $("#masonryCardsExample").append(response.html);
                 
-                var $grid = $('#masonryCardsExample').masonry({
+                var $msnry = $('#masonryCardsExample').masonry({
                 itemSelector: '.col',
                 percentPosition: true, 
                 }); 
 
-                $grid.imagesLoaded().progress( function() {  
-                $grid.masonry('layout'); 
+                $msnry.imagesLoaded().progress( function() {  
+                $msnry.masonry('layout'); 
                 });
                 
 
