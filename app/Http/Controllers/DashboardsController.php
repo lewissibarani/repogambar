@@ -65,7 +65,7 @@ class DashboardsController extends Controller
         
         //Menampilkan Aset Digital Terbaru
         $Data = Gambar::with('user','kegunaan','source')
-        ->orderBy('created_at', 'dsc')
+        ->orderBy('created_at', 'desc')
         ->where('booleantayang', 1)
         ->paginate(20); 
 
