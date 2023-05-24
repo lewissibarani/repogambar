@@ -216,14 +216,14 @@
                 
                 $("#masonryCardsExample").append(response.html);
                 
-                var $msnry = $('#masonryCardsExample').masonry({
-                itemSelector: '.col',
-                percentPosition: true, 
-                }); 
+                // var $msnry = $('#masonryCardsExample').masonry({
+                // itemSelector: '.col',
+                // percentPosition: true, 
+                // }); 
 
-                $msnry.imagesLoaded().progress( function() {  
-                $msnry.masonry('layout'); 
-                });
+                // $msnry.imagesLoaded().progress( function() {  
+                // $msnry.masonry('layout'); 
+                // });
                 
 
             })

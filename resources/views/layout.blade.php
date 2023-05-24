@@ -55,9 +55,7 @@
 </script> --}} 
 
 <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.js"></script>
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script> 
-<script> 
-</script> 
+{{-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>   --}}
  
 </body>
 
