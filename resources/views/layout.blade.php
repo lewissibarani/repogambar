@@ -38,7 +38,9 @@
     <main>
         @yield('content')
     </main>
+    @if ($title!=="Beranda")  
     @include('_layout.footer')
+    @endif
 </div>
 @stack('scripts')
 @include('_layout.modal_settings')
