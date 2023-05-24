@@ -2,8 +2,7 @@
     <div class="col">
         <div class="card hover-img-scale-up hover-reveal">
                 <img class="card-img scale" 
-                style="min-height:200px;
-                max-height:300px;" 
+                style=" height:500px;" 
                 src="{{$datas->thumbnail_path}}"
                 alt="card image" />
                 <div class="card-img-overlay justify-content-between reveal-content">  
