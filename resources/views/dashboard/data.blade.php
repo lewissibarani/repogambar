@@ -1,8 +1,7 @@
 @php
 $ENDPOINT = "/Dashboard"; 
-@endphp 
-
-@if('{{ env('APP_ENV') }}' == 'production') 
+@endphp  
+@if(App::environment() == 'production') 
 @php
 $ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard"; 
 @endphp
