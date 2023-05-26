@@ -224,18 +224,20 @@ class PetugasController extends Controller
 
     public function edit_store (Request $request)
     {  
-            $fileid=0;
+            
             $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
             $this->validate($request, [
                 'edit_image' => 'image',
                 'edit_file' => 'mimes:zip,rar|file|max:30000',
                 'tags' => 'required',
-                'judul' => 'required',
+                'edit_judul' => 'required',
             ]);
 
             //Given Constants  
             $gambars =  Gambar::find($request->id_gambar); 
-            $source_id=3; 
+            $fileid=$gambars->file_id;
+            $Path= $gambars->path;
+            $thumbnailPath= $gambars->thumbnail_path; 
 
             if($request->file('edit_image')){  
                  //constant
@@ -251,29 +253,16 @@ class PetugasController extends Controller
                  $thumbImage->resize($width, $height, function ($constraint) {
                      $constraint->aspectRatio();
                  })->save($thumbPath); 
+                 $thumbnailPath='storage/thumbnail/'.$nameImage;
                  
                  //menyimpan gambar original
                  $oriPath = $storagePath.'public/uploadedGambar/'.$nameImage;
                  $oriImage = Image::make($image)->save($oriPath); 
+                 $Path='storage/uploadedGambar/'.$nameImage; 
                   
                  // get ukuran dan ekstension gambar
                  $tipe_gambar=\File::extension(Storage::url('public/uploadedGambar/'.$nameImage));
-                 $gambar_size=Storage::size('public/uploadedGambar/'.$nameImage);
-
-                // $gambar_name=date('YmdHi').$request->file('edit_image')->getClientOriginalName();
-                // $gambar= $request->file('edit_image')->storeAs(
-                //     'public/uploadedGambar', $gambar_name
-                // );    
-                // $gambar_size=Storage::size('public/uploadedGambar/'.$gambar_name);
-                // $tipe_gambar=\File::extension(Storage::url('public/uploadedGambar/'.$gambar_name)); 
-                // //Membuat thumbnail  
-                // $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 1000);
-
-                // $gambars->path = 'storage/uploadedGambar/'.$gambar_name;
-                // $gambars->thumbnail_path = 'storage/thumbnail/'.$gambar_name;
-                // $gambars->judul = $request->judul;
-
-                // $gambars->save();
+                 $gambar_size=Storage::size('public/uploadedGambar/'.$nameImage); 
             }
 
             if($request->file('edit_file')){ 
@@ -309,11 +298,17 @@ class PetugasController extends Controller
                 
                 
             } 
-             
-            
+             //Menyimpan Judul, Oriptah image, thumbail dan file
+            $gambars->judul = $request->edit_judul;  
+            $gambars->path = $Path;
+            $gambars->thumbnail_path = $thumbnailPath;  
+            $gambars->file_id = $fileid;
+
             //Menyimpan Tags 
             $gambars->untag();
             $gambars->tag($this->convertArray($request->tags));
+
+            $gambars->save();
             
             return redirect()->route('petugas.index')->with('message', 'Permintaan berhasil Diupdate');
         

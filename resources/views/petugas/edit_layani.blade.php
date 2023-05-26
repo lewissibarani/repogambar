@@ -103,7 +103,7 @@
 
                                 <div class="mb-3 filled">
                                     <i data-acorn-icon="edit"></i>
-                                    <input type="text" value="{{$Data->gambar->judul}}" class="input-judul" id="" name="judul" />
+                                    <input type="text" value="{{$Data->gambar->judul}}" class="input-judul" id="" name="edit_judul" />
                                     <small class="form-text text-muted">Sesuaikan judul dengan gambar</small>    
                                 </div>
                             </div>
