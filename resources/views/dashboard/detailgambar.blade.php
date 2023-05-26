@@ -93,6 +93,13 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
         <!-- Title End -->
 
         <div class="row">
+
+            @if (Auth::user()->level <=3)
+            <div class="col-12 col-xl-8 col-xxl-9 mb-5"> 
+                <a class="btn btn-quaternary" href="{{route('petugas.edit_layani',['transaksi_id' => $Transaksi->id])}}"> Edit Karya Ini</a> 
+            </div>
+            @endif
+             
             <div class="col-12 col-xl-8 col-xxl-9 mb-5">
                 <div class="card mb-5">
                     <!-- Content Start -->

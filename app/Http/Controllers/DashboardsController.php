@@ -89,7 +89,7 @@ class DashboardsController extends Controller
         $ResultbyJudul=Gambar::with('file','source')->where('judul','like',"%".$katakunci."%");
 
         //mencari berdasarkan Tag kemudian di gabung dengan Result berdasarkan Judul
-        $Data=Gambar::withAnyTag([$katakunci])
+        $Data=Gambar::with('file','source')->withAnyTag([$katakunci])
         ->union($ResultbyJudul)
         ->orderBy('created_at', 'asc')
         ->get();
@@ -136,6 +136,7 @@ class DashboardsController extends Controller
         // Catat View Gambar
         //Some bits from the following query ("category", "user") are made for my own application, but I felt like leaving it for inspiration. 
         $gambar = Gambar::with('user')->find($gambar_id);
+ 
 
         if($gambar->showGambar()){// this will test if the user viwed the gambar or not
             // return $gambar;
@@ -170,7 +171,8 @@ class DashboardsController extends Controller
         
         return view('dashboard.detailgambar', 
         compact(['Data',
-                'Rekomendasi'
+                'Rekomendasi',
+                'Transaksi'
                 ]));
         
     }
