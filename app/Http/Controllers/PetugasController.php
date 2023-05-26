@@ -250,8 +250,7 @@ class PetugasController extends Controller
                  $width = 600; // your max width
                  $height = 600; // your max height
                  $thumbPath = $storagePath.'public/thumbnail/'.$nameImage; 
-                 $thumbImage = Image::make($image->getRealPath());
-                 dd('Masuk sini');
+                 $thumbImage = Image::make($image->getRealPath()); 
                  $thumbImage->height() > $thumbImage->width() ? $width=null : $height=null;
                  $thumbImage->resize($width, $height, function ($constraint) {
                      $constraint->aspectRatio();
