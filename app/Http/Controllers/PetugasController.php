@@ -249,8 +249,8 @@ class PetugasController extends Controller
                  ini_set('memory_limit','2048M');
 
                  //membuat thumbnail
-                 $width = 600; // your max width
-                 $height = 600; // your max height
+                 $width = config('imageresize.size.width'); // your max width
+                 $height =  config('imageresize.size.height'); // your max height
                  $thumbPath = $storagePath.'public/thumbnail/'.$nameImage; 
                  $thumbImage = Image::make($image->getRealPath()); 
                  $thumbImage->height() > $thumbImage->width() ? $width=null : $height=null;
