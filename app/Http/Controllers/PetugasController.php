@@ -244,7 +244,7 @@ class PetugasController extends Controller
                  $image = $request->file('edit_image');
                  $nameImage =  date('YmdHi').$request->file('edit_image')->getClientOriginalName();
              
-                 ini_set('memory_limit','256M');
+                 ini_set('memory_limit','2048M');
 
                  //membuat thumbnail
                  $width = 600; // your max width
