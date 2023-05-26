@@ -67,13 +67,13 @@
                                 
                             </div>
                             <br/>
-                            {{-- @if ($image)  
+                            @if ($image)  
                                 @if ($image->getMimeType()=="image/png"||
                                     $image->getMimeType()=="image/jpg" ||
                                     $image->getMimeType()=="image/jpeg")
                                 <img style="max-height: 300px;"    class="card-img scale mb-3" src="{{ $image->temporaryUrl() }}"> 
                                 @endif  
-                            @endif   --}}
+                            @endif  
 
                         </div>   
                     </div>
