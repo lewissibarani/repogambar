@@ -1,3 +1,14 @@
+@php
+$ENDPOINT = "/Dashboard"; 
+@endphp 
+
+@if('{{ env('APP_ENV') }}' == 'production') 
+@php
+$ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard"; 
+@endphp
+
+@endif
+
 @foreach ($Data as $datas)
 <div class="col">
     <div class="card hover-img-scale-up hover-reveal">
@@ -9,8 +20,7 @@
                 </div>
                 <div class="row g-0">
                     <div class="col pe-2">
-                        {{-- <a href="/Dashboard/DetailGambar/{{$datas->id}}" class="stretched-link"> --}}
-                        <a href="{{route('dashboard.detailgambar', ['gambar_id' => $datas->id])}}" class="stretched-link">
+                        <a href="{{$ENDPOINT}}/DetailGambar/{{$datas->id}}" class="stretched-link">
                             <h5 class="heading text-white mb-1">{{$datas->judul}}</h5>
                         </a>
                         <div class="d-inline-block">
