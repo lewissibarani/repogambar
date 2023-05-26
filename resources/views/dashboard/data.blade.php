@@ -9,7 +9,8 @@
                 </div>
                 <div class="row g-0">
                     <div class="col pe-2">
-                        <a href="/Dashboard/DetailGambar/{{$datas->id}}" class="stretched-link">
+                        {{-- <a href="/Dashboard/DetailGambar/{{$datas->id}}" class="stretched-link"> --}}
+                        <a href="{{route('dashboard.detailgambar', ['gambar_id' => $datas->id])}}" class="stretched-link">
                             <h5 class="heading text-white mb-1">{{$datas->judul}}</h5>
                         </a>
                         <div class="d-inline-block">
