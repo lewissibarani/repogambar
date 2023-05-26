@@ -244,11 +244,14 @@ class PetugasController extends Controller
                  $image = $request->file('edit_image');
                  $nameImage =  date('YmdHi').$request->file('edit_image')->getClientOriginalName();
              
+                 ini_set('memory_limit','256M');
+
                  //membuat thumbnail
                  $width = 600; // your max width
                  $height = 600; // your max height
                  $thumbPath = $storagePath.'public/thumbnail/'.$nameImage; 
                  $thumbImage = Image::make($image->getRealPath());
+                 dd('Masuk sini');
                  $thumbImage->height() > $thumbImage->width() ? $width=null : $height=null;
                  $thumbImage->resize($width, $height, function ($constraint) {
                      $constraint->aspectRatio();
