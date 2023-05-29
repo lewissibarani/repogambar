@@ -76,6 +76,8 @@ $(document).ready(function (e) {
 });
  
 </script> --}}
- 
+<script>
+    window.livewire_app_url="/laravel";
+</script>
 
 @endsection
