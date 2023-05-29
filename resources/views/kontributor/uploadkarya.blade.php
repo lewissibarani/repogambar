@@ -50,11 +50,11 @@
             <livewire:wizard />   
 </div> 
 @livewireScripts 
+<script>
+    window.livewire_app_url='{{route('app.index')}}';
+</script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
-
-
-
+{{-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  --}} 
 {{-- <script type="text/javascript">
       
 $(document).ready(function (e) {
@@ -75,9 +75,6 @@ $(document).ready(function (e) {
    
 });
  
-</script> --}}
-<script>
-    window.livewire_app_url='{{route('app.index')}}';
-</script>
+</script> --}} 
 
 @endsection
