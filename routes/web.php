@@ -44,6 +44,9 @@ Route::prefix('/LandingPage')->group(function () {
  
 
 Route::middleware('auth')->group(function () {
+
+    Route::post('/pikart/livewire/message/{name}', '\Livewire\Controllers\HttpConnectionHandler');
+
     // Route::redirect('/', '/LandingPage'); 
     Route::post('/like-post/{id}',[LikesController::class,'likePost'])->name('like.post');
     Route::post('/unlike-post/{id}',[LikesController::class,'unlikePost'])->name('unlike.post');
