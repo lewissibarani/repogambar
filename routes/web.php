@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardsController;
 use App\Http\Controllers\KelolaGambarController;
-use App\Http\Controllers\BagiTugasController;
+use Livewire\Controllers\HttpConnectionHandler;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\KontributorsController; 
 use App\Http\Controllers\LikesController; 
@@ -45,7 +45,9 @@ Route::prefix('/LandingPage')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::post('/pikart/livewire/message/{name}', '\Livewire\Controllers\HttpConnectionHandler');
+    Route::get('/', [AppController::class, 'index'])->name('app.index'); 
+
+    Route::post('livewire/message/{name}', [HttpConnectionHandler::class, '__invoke']);
 
     // Route::redirect('/', '/LandingPage'); 
     Route::post('/like-post/{id}',[LikesController::class,'likePost'])->name('like.post');

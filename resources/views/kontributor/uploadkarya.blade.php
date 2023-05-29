@@ -77,7 +77,7 @@ $(document).ready(function (e) {
  
 </script> --}}
 <script>
-    window.livewire_app_url="/pikart";
+    window.livewire_app_url='{{route('app.index')}}';
 </script>
 
 @endsection
