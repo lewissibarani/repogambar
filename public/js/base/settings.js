@@ -34,11 +34,11 @@ class Settings {
         behaviour: 'unpinned',
         layout: 'fluid',
         radius: 'rounded',
-        color: 'light-sky',
+        color: 'light-blue',
         navcolor: 'light',
       },
       storagePrefix: 'acorn-standard-',
-      showSettings: true,
+      showSettings: false,
       carryParams: false,
     };
   }

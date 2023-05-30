@@ -13,6 +13,54 @@
     <link rel="stylesheet" href="/css/landpagecss.css"/>
 @endsection
 
+@push('landpage')
+  <style>
+  :root { 
+    --main-spacing-horizontal: 0rem; 
+    --main-spacing-vertical:0rem;
+  } 
+  main { 
+    padding-left: calc(var(--nav-size) + var(--main-spacing-horizontal));
+    padding-right: var(--main-spacing-horizontal);
+    padding-top: var(--main-spacing-vertical);
+    padding-bottom: var(--main-spacing-vertical);
+  }
+
+  html[data-placement=horizontal] .nav-container .nav-shadow,
+  html[data-placement=vertical] .nav-container .nav-shadow {
+    width: 0%;
+    height: 0%;
+    position: absolute;
+    box-shadow: var(--menu-shadow);
+    pointer-events: none;
+    z-index: 1001;
+  }
+
+  html[data-placement=horizontal] main {
+  padding-left: var(--main-spacing-horizontal); 
+  padding-top: 0px; 
+  /* margin-top: calc(var(--nav-size-slim) + calc(var(--main-spacing-horizontal) / 2)); */
+  }
+
+  html[data-placement=horizontal] .nav-container {
+  height: var(--nav-size-slim);
+  right: 0;
+  left: 0;
+  width: 100%;
+  justify-content: center;
+  flex-direction: row;
+  padding-left: calc(var(--main-spacing-horizontal) + 200px);
+  padding-right: calc(var(--main-spacing-horizontal) + 200px);
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: var(--border-radius-lg);
+  border-bottom-left-radius: var(--border-radius-lg);
+}
+
+  </style>  
+
+@endpush
+
 @section('js_vendor')
     <script src="/js/cs/scrollspy.js"></script>  
 @endsection
@@ -23,7 +71,7 @@
     <div class="container">    
       <div class="row d-flex align-items-center">
         <div class="row">
-          <div class="col-12 col-lg-6 " style="padding-top: 70px;">
+          <div class="col-12 col-lg-6 " style="padding-top: 220px;">
             <h1 class="display-1 mb-3 text-dark">
               <span class="d-block">Banyak Aset</span>
               <span class="d-block">Siap Pakai</span>
@@ -33,100 +81,39 @@
               <br> 
               </p> 
               <!-- Search Input Start -->   
-              <div class="card">
-                <div class="card-body p-0 d-flex flex-row align-items-center px-3 py-3">
-                    <input class="form-control border-0 shadow-none" placeholder="Cari Aset..."  />
+              <div class="card w-75 mb-7">
+                <div class="card-body p-0 d-flex flex-row align-items-center px-3 py-3 ">
+                    <input class="form-control border-0 shadow-none " placeholder="Cari Aset..."  />
                     <div class="d-flex flex-row">  
                         <button class="sumbit" id="chatSendButton" type="button" style="border: none;background: none">
                             <i data-acorn-icon="search"></i>
                         </button>
-                    </div>
+                    </div> 
                 </div>  
               <!-- Search Input End -->
-            </div>
+              </div> 
+                  <a href="/Dashboard" class="btn-xl btn-primary btn-lg rounded-xl"> 
+                    <span class="label">Permintaan Gambar</span>
+                  </a>  &nbsp 
+                  <a href="/Dashboard"  class="btn-xl btn-primary btn-lg rounded-xl">
+                    <span class="label">Upload Karya</span>
+                  </a>  &nbsp 
+                  <a href="/Dashboard"  class="btn-xl btn-outline-primary btn-lg rounded-xl">
+                    <span class="label">Dokumentasi</span>
+                  </a>  
+              <!-- Search Input End --> 
           </div>
-          <div class="col-12 col-lg-6 align-items-right ">
-          <img src="{{url('/landpage_asset/img/cta-bg.png')}}" class="feature-image" alt="feature image" style="max-width: 80%;">
-          </div> 
+           <div class="col-12 col-lg-6 align-items-right ">
+           
+           </div> 
         </div>
       </div>
 
-      <!-- Daftar Layanan Start --> 
-       
-          <div class="row justify-content-md-center" style="margin-top: 30px; " >   
-                      <div class="col-auto mb-5" style="margin-right: 50px; ">
-                          <div class="card hover-border-primary sh-20 sw-20">
-                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                      <i data-acorn-icon="camera" class="text-white"></i>
-                                  </div>
-                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Foto</div>
-                                  <div class="text-small text-primary">14 PRODUCTS</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-auto mb-5" style="margin-right: 60px; ">
-                          <div class="card hover-border-primary sh-20 sw-20">
-                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                      <i data-acorn-icon="wizard" class="text-white"></i>
-                                  </div>
-                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Ilustrasi</div>
-                                  <div class="text-small text-primary">14 PRODUCTS</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-auto mb-5" style="margin-right: 60px; ">
-                          <div class="card hover-border-primary sh-20 sw-20">
-                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                      <i data-acorn-icon="light-on" class="text-white"></i>
-                                  </div>
-                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">PSD</div>
-                                  <div class="text-small text-primary">14 PRODUCTS</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-auto mb-5" style="margin-right: 60px; ">
-                          <div class="card hover-border-primary sh-20 sw-20">
-                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                      <i data-acorn-icon="book" class="text-white"></i>
-                                  </div>
-                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Indesign</div>
-                                  <div class="text-small text-primary">14 PRODUCTS</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-auto mb-5" style="margin-right: 60px; ">
-                          <div class="card hover-border-primary sh-20 sw-20">
-                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                      <i data-acorn-icon="laptop" class="text-white"></i>
-                                  </div>
-                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Mockup</div>
-                                  <div class="text-small text-primary">14 PRODUCTS</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-auto mb-5" style="margin-right: 60px; ">
-                          <div class="card hover-border-primary sh-20 sw-20">
-                              <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                                  <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                      <i data-acorn-icon="edit" class="text-white"></i>
-                                  </div>
-                                  <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Font</div>
-                                  <div class="text-small text-primary">14 PRODUCTS</div>
-                              </div>
-                          </div>
-                      </div> 
-          </div>  
-      
-      <!-- Daftar Layanan End --> 
-    </div>
 
+    </div> 
   </div>
 </section><!-- End Hero -->  
+
   <main id="main">
  
 
@@ -137,6 +124,79 @@
         <div class="section-title">
           <h2 class="display-s3 text-center mb-4">Tentang Pikart</h2>
         </div>
+        
+              <!-- Daftar Layanan Start --> 
+       
+              <div class="row justify-content-md-center" style="margin-top: 30px; " >   
+                <div class="col-auto mb-5" style="margin-right: 50px; ">
+                    <div class="card hover-border-primary sh-20 sw-20">
+                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                <i data-acorn-icon="camera" class="text-white"></i>
+                            </div>
+                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Foto</div>
+                            <div class="text-small text-primary">14 PRODUCTS</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto mb-5" style="margin-right: 60px; ">
+                    <div class="card hover-border-primary sh-20 sw-20">
+                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                <i data-acorn-icon="wizard" class="text-white"></i>
+                            </div>
+                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Ilustrasi</div>
+                            <div class="text-small text-primary">14 PRODUCTS</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto mb-5" style="margin-right: 60px; ">
+                    <div class="card hover-border-primary sh-20 sw-20">
+                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                <i data-acorn-icon="light-on" class="text-white"></i>
+                            </div>
+                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">PSD</div>
+                            <div class="text-small text-primary">14 PRODUCTS</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto mb-5" style="margin-right: 60px; ">
+                    <div class="card hover-border-primary sh-20 sw-20">
+                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                <i data-acorn-icon="book" class="text-white"></i>
+                            </div>
+                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Indesign</div>
+                            <div class="text-small text-primary">14 PRODUCTS</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto mb-5" style="margin-right: 60px; ">
+                    <div class="card hover-border-primary sh-20 sw-20">
+                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                <i data-acorn-icon="laptop" class="text-white"></i>
+                            </div>
+                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Mockup</div>
+                            <div class="text-small text-primary">14 PRODUCTS</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto mb-5" style="margin-right: 60px; ">
+                    <div class="card hover-border-primary sh-20 sw-20">
+                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
+                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                <i data-acorn-icon="edit" class="text-white"></i>
+                            </div>
+                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Font</div>
+                            <div class="text-small text-primary">14 PRODUCTS</div>
+                        </div>
+                    </div>
+                </div> 
+    </div>  
+
+<!-- Daftar Layanan End --> 
 
         <div class="row content">
           <div class="col-lg-6" >

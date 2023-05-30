@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardsController;
 use App\Http\Controllers\KelolaGambarController;
-use Livewire\Controllers\HttpConnectionHandler;
+use App\Http\Controllers\BagiTugasController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\KontributorsController; 
 use App\Http\Controllers\LikesController; 
@@ -20,8 +20,8 @@ use App\Http\Controllers\LikesController;
 */
 
 // index routing via Route feature
-// Route::redirect('/', '/LandingPage');
-Route::redirect('/', '/maintenance');
+Route::redirect('/', '/LandingPage');
+// Route::redirect('/', '/maintenance');
 
 
 /*
@@ -35,20 +35,15 @@ Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
 });
 
-Route::prefix('/maintenance')->group(function () {
-    Route::get('/', [DashboardsController::class, 'maintenance'])->name('landingpage.maintenance');  
-});
+// Route::prefix('/maintenance')->group(function () {
+//     Route::get('/', [DashboardsController::class, 'maintenance'])->name('landingpage.maintenance');  
+// });
 Route::prefix('/LandingPage')->group(function () {
     Route::get('/', [DashboardsController::class, 'landingpage'])->name('landingpage.landpage');  
 });
  
 
 Route::middleware('auth')->group(function () {
-
-    // Route::get('/', [AppController::class, 'index'])->name('app.index'); 
-
-    // Route::post('livewire/message/{name}', [HttpConnectionHandler::class, '__invoke']);
-
     // Route::redirect('/', '/LandingPage'); 
     Route::post('/like-post/{id}',[LikesController::class,'likePost'])->name('like.post');
     Route::post('/unlike-post/{id}',[LikesController::class,'unlikePost'])->name('unlike.post');

@@ -1,23 +1,23 @@
-<div class="nav-content d-flex" style="padding-left: 100px;" >
+<div class="nav-content d-flex">
     <!-- Logo Start -->
     <div class="logo position-relative">
         <a href="/" class="text-dark"> 
             <!-- Logo can be added directly --> 
-            <img src="/img/logo/logo-light.svg" alt="logo" />
-
+            {{-- <img src="/img/logo/logo-light.svg" alt="logo" /> --}}
+            <h1 class="display">P I K <strong class="">A R T</strong></h1>
             <!-- Or added via css to provide different ones for different color themes -->
             <!-- <div class="img"></div> -->
         </a>
     </div> 
 
     <!-- User Menu Start -->
-    <div class="user-container d-flex"  style="margin-left :3em; margin-right: 50px;"> 
+    <div class="user-container d-flex"  style="margin-left :3em;  "> 
         <a href="#tentangaplikasi" class="nav-link text-dark">
             <i data-acorn-icon="star" class="icon" data-acorn-size="18"></i>
             <span class="label">Tentang Aplikasi</span>
         </a>
     </div>  
-    <div class="user-container d-flex"  style="margin-left :3em; margin-right: 50px;"> 
+    <div class="user-container d-flex"  style="margin-left :3em;  "> 
         <a href="#jenislayanan" class="nav-link text-dark">
             <i data-acorn-icon="support" class="icon" data-acorn-size="18"></i>
             <span class="label">Jenis Layanan</span>
@@ -29,7 +29,7 @@
             <span class="label">Portofolio</span>
         </a>
     </div>  --}}
-    <div class="user-container d-flex"  style="margin-left :3em; margin-right: 100px;"> 
+    <div class="user-container d-flex"  style="margin-left :3em;  "> 
         <a href="/Dashboard" class="btn btn-primary btn-lg pull-right">
             <i data-acorn-icon="login" class="icon" data-acorn-size="18"></i>
             <span class="label">Login Pikart</span>

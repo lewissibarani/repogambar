@@ -1,14 +1,14 @@
 <div class="nav-content d-flex">
     <!-- Logo Start -->
     <div class="logo position-relative">
-        <a href="/">
+        <a href="/" class="text-dark"> 
             <!-- Logo can be added directly --> 
-            <img src="/img/logo/logo-light.svg" alt="logo" />
-
+            {{-- <img src="/img/logo/logo-light.svg" alt="logo" /> --}}
+            <h1 class="display">P I K <strong class="">A R T</strong></h1>
             <!-- Or added via css to provide different ones for different color themes -->
             <!-- <div class="img"></div> -->
         </a>
-    </div>
+    </div> 
     <!-- Logo End -->
 
     <!-- Language Switch Start -->

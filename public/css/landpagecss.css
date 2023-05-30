@@ -38,7 +38,7 @@
     -webkit-animation: animate-preloader 1s linear infinite;
     animation: animate-preloader 1s linear infinite;
   } */
-  
+ 
   @-webkit-keyframes animate-preloader {
     0% {
       transform: rotate(0deg);
@@ -371,8 +371,15 @@
   /*--------------------------------------------------------------
   # Hero Section
   --------------------------------------------------------------*/
-  #hero {
-    width: 100%;    
+  #hero {  
+    /* background-image: url("https://nicolaslule.com/wp-content/uploads/hero-image-flex-example-1.jpg"); */
+    background-image: url(../landpage_asset/img/landpage_image.jpg);
+    height: 100vh;
+    align-self: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    align-items: center;
+    justify-content: center;
   }
   
   #hero .container { 
@@ -506,6 +513,11 @@
   h2{
       text-align: center;
   }   
+
+  .scroll-section {
+    margin-bottom: 170px;
+}
+
   
   .img_layanan{
     width: 120px;
@@ -541,7 +553,7 @@
   # Sections General
   --------------------------------------------------------------*/
   section {
-    padding: 60px 0;
+    /* padding: 60px 0; */
     overflow: hidden;
   }
   
@@ -564,25 +576,11 @@
   }
   
   .section-title h2::before {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 120px;
-    height: 1px;
-    background: #ddd;
-    bottom: 1px;
-    left: calc(50% - 60px);
+     
   }
   
   .section-title h2::after {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 40px;
-    height: 3px;
-    background: #00c6ff;
-    bottom: 0;
-    left: calc(50% - 20px);
+   
   }
   
   .section-title p {
