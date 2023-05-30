@@ -31,9 +31,9 @@ Route::redirect('/', '/LandingPage');
 |
 */ 
 
-Route::get('/linkstorage', function () {
-    Artisan::call('storage:link');
-});
+// Route::get('/linkstorage', function () {
+//     Artisan::call('storage:link');
+// });
 
 // Route::prefix('/maintenance')->group(function () {
 //     Route::get('/', [DashboardsController::class, 'maintenance'])->name('landingpage.maintenance');  
@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('Kontributor')->group(function () {
         Route::get('/', [KontributorsController::class, 'showprofile']);
         Route::get('Profiluser/{user_id}', [KontributorsController::class, 'showprofile'])->name('kontributor.profil'); 
-        Route::get('UploadKarya', [KontributorsController::class, 'uploadkarya']);
+        Route::get('UploadKarya', [KontributorsController::class, 'uploadkarya'])->name('kontributor.uploadkarya');
         Route::get('Store', [KontributorsController::class, 'store']); 
     });
 
@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('KelolaGambar')->group(function () {
         Route::get('/', [KelolaGambarController::class, 'index']);
         Route::get('Index',[KelolaGambarController::class, 'index'])->name('kelolagambar.index');
-        Route::get('DaftarPermintaan',[KelolaGambarController::class, 'daftar_permintaan']);
+        Route::get('DaftarPermintaan',[KelolaGambarController::class, 'daftar_permintaan'])->name('kelolagambar.daftar');
         Route::post('Store', [KelolaGambarController::class, 'store'])->name('kelolagambar.store');
         // Route::view('Update', 'kelolagambar/update');
     });

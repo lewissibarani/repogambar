@@ -66,12 +66,12 @@
 @endsection
     
 @section('content')   
-<section id="hero" class="scroll-section hero">
+<section id="hero" class="scroll-section hero" style="margin-bottom: 0px">
   <div id="hero">  
     <div class="container">    
       <div class="row d-flex align-items-center">
         <div class="row">
-          <div class="col-12 col-lg-6 " style="padding-top: 220px;">
+          <div class="col-12 col-lg-6 " style="padding-top: 10%;">
             <h1 class="display-1 mb-3 text-dark">
               <span class="d-block">Banyak Aset</span>
               <span class="d-block">Siap Pakai</span>
@@ -92,14 +92,11 @@
                 </div>  
               <!-- Search Input End -->
               </div> 
-                  <a href="/Dashboard" class="btn-xl btn-primary btn-lg rounded-xl"> 
-                    <span class="label">Permintaan Gambar</span>
-                  </a>  &nbsp 
-                  <a href="/Dashboard"  class="btn-xl btn-primary btn-lg rounded-xl">
-                    <span class="label">Upload Karya</span>
-                  </a>  &nbsp 
-                  <a href="/Dashboard"  class="btn-xl btn-outline-primary btn-lg rounded-xl">
-                    <span class="label">Dokumentasi</span>
+                  <a type="button" href="{{route('kelolagambar.index')}}" class="btn-xl btn-primary  rounded-xl mt-1"> 
+                    <span class="label">Buat Permintaan</span>
+                  </a>   
+                  <a type="button" href="/Dashboard"  class="btn-xl btn-outline-primary rounded-xl mt-1">
+                    <span class="label">Docs</span>
                   </a>  
               <!-- Search Input End --> 
           </div>
@@ -116,6 +113,19 @@
 
   <main id="main">
  
+
+    <!-- ======= CTA Section ======= -->
+    <section id="CTA" class="cta scroll-section " style="padding-top: 20px; padding-bottom: 20px; background: #d3f2f0;">
+      <div class="container" data-aos="fade-up">
+
+        <h5 class="display-s4 text-center">Punya karya yang bagus ? kamu bisa sumbangkan karya kamu kedalam website Pikart &nbsp<a type="button" href="{{route('kontributor.uploadkarya')}}" class="btn-xl btn-primary  rounded-xl mt-1"> 
+          <span class="label">Upload Karya</span>
+          </a>  
+        </h5>
+         
+          
+      </div>  
+    </section>
 
     <!-- ======= About Us Section ======= -->
     <section id="tentangaplikasi" class="scroll-section about">

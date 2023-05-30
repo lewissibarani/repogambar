@@ -20,17 +20,25 @@
 
 <body>
 <div id="root"> 
-        <div id="nav" style="background:transparent;" class="nav-container d-flex" @isset($custom_nav_data) @foreach ($custom_nav_data as $key=> $value)
-        data-{{$key}}="{{$value}}"
-            @endforeach
-            @endisset
-        >
-            @if ($title!=="Landing Page") 
-                @include('_layout.nav')
-            @else
-            @include('_layout.navlp')
-            @endif
-        </div>  
+        @if ($title=="Landing Page") 
+            <div id="nav" style="background:transparent;" class="nav-container d-flex" @isset($custom_nav_data) @foreach ($custom_nav_data as $key=> $value)
+            data-{{$key}}="{{$value}}"
+                @endforeach
+                @endisset
+            >   
+                @include('_layout.navlp')
+                
+            </div>  
+        @else 
+            <div id="nav" class="nav-container d-flex" @isset($custom_nav_data) @foreach ($custom_nav_data as $key=> $value)
+                data-{{$key}}="{{$value}}"
+                    @endforeach
+                    @endisset
+                >  
+                        @include('_layout.nav') 
+                    
+            </div>   
+        @endif
     <main>
         @yield('content')
     </main>
