@@ -20,8 +20,8 @@ use App\Http\Controllers\LikesController;
 */
 
 // index routing via Route feature
-Route::redirect('/', '/LandingPage');
-// Route::redirect('/', '/maintenance');
+// Route::redirect('/', '/LandingPage');
+Route::redirect('/', '/maintenance');
 
 
 /*
@@ -35,9 +35,9 @@ Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
 });
 
-// Route::prefix('/maintenance')->group(function () {
-//     Route::get('/', [DashboardsController::class, 'maintenance'])->name('landingpage.maintenance');  
-// });
+Route::prefix('/maintenance')->group(function () {
+    Route::get('/', [DashboardsController::class, 'maintenance'])->name('landingpage.maintenance');  
+});
 Route::prefix('/LandingPage')->group(function () {
     Route::get('/', [DashboardsController::class, 'landingpage'])->name('landingpage.landpage');  
 });
