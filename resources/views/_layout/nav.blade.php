@@ -8,21 +8,7 @@
             <!-- Or added via css to provide different ones for different color themes -->
             <!-- <div class="img"></div> -->
         </a>
-    </div> 
-    <!-- Logo End -->
-
-    <!-- Language Switch Start -->
-    <!-- <div class="language-switch-container">
-        <button class="btn btn-empty language-button dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">EN</button>
-        <div class="dropdown-menu">
-            <a href="#" class="dropdown-item">DE</a>
-            <a href="#" class="dropdown-item active">EN</a>
-            <a href="#" class="dropdown-item">ES</a>
-        </div>
-    </div> -->
-    <!-- Language Switch End -->
-
-    <!-- User Menu Start -->
+    </div>  
     <div class="user-container d-flex">
 
         @auth
@@ -30,60 +16,7 @@
             <img class="profile" alt="profile" src="{{ Auth::user()->profilepicture}}" />
             <div class="name">{{ Auth::user()->name }}</div>
         </a>
-        <div class="dropdown-menu dropdown-menu-end user-menu wide">
-            <!-- <div class="row mb-3 ms-0 me-0">
-                <div class="col-12 ps-1 mb-2">
-                    <div class="text-extra-small text-primary">ACCOUNT</div>
-                </div>
-                <div class="col-6 ps-1 pe-1">
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#">User Info</a>
-                        </li>
-                        <li>
-                            <a href="#">Preferences</a>
-                        </li>
-                        <li>
-                            <a href="#">Calendar</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-6 pe-1 ps-1">
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#">Security</a>
-                        </li>
-                        <li>
-                            <a href="#">Billing</a>
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
-            <!-- <div class="row mb-1 ms-0 me-0">
-                <div class="col-12 p-1 mb-2 pt-2">
-                    <div class="text-extra-small text-primary">APPLICATION</div>
-                </div>
-                <div class="col-6 ps-1 pe-1">
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#">Themes</a>
-                        </li>
-                        <li>
-                            <a href="#">Language</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-6 pe-1 ps-1">
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#">Devices</a>
-                        </li>
-                        <li>
-                            <a href="#">Storage</a>
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
+        <div class="dropdown-menu dropdown-menu-end user-menu wide"> 
             <div class="row mb-1 ms-0 me-0">
                 <div class="col-6 ps-1 pe-1">
                     <ul class="list-unstyled">
@@ -135,18 +68,7 @@
     <!-- User Menu End -->
 
     <!-- Icons Menu Start -->
-    <ul class="list-unstyled list-inline text-center menu-icons">
-        <!-- <li class="list-inline-item">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#searchPagesModal">
-                <i data-acorn-icon="search" data-acorn-size="18"></i>
-            </a>
-        </li> -->
-        <!-- <li class="list-inline-item">
-            <a href="#" id="pinButton" class="pin-button">
-                <i data-acorn-icon="lock-on" class="unpin" data-acorn-size="18"></i>
-                <i data-acorn-icon="lock-off" class="pin" data-acorn-size="18"></i>
-            </a>
-        </li> -->
+    <ul class="list-unstyled list-inline text-center menu-icons"> 
         <li class="list-inline-item">
             <a href="#" id="colorButton">
                 <i data-acorn-icon="light-on" class="light" data-acorn-size="18"></i>
@@ -314,6 +236,11 @@
                             <li>
                                 <a href="/Petugas/Pengaturan">
                                     <span class="label">Pengaturan Petugas</span>
+                                </a>
+                            </li> 
+                            <li>
+                                <a href="{{route('landpagesetting.index')}}">
+                                    <span class="label">Pengaturan Landpage</span>
                                 </a>
                             </li> 
                 </ul>

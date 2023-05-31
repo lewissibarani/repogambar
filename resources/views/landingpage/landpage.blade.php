@@ -71,7 +71,7 @@
     <div class="container">    
       <div class="row d-flex align-items-center">
         <div class="row">
-          <div class="col-12 col-lg-6 " style="padding-top: 10%;">
+          <div class="col-12 col-lg-6 " style="padding-top: 15%;">
             <h1 class="display-1 mb-3 text-dark">
               <span class="d-block">Banyak Aset</span>
               <span class="d-block">Siap Pakai</span>
@@ -115,15 +115,93 @@
  
 
     <!-- ======= CTA Section ======= -->
-    <section id="CTA" class="cta scroll-section " style="padding-top: 20px; padding-bottom: 20px; background: #d3f2f0;">
+    <section id="CTA" class="cta scroll-section " style="padding-top: 20px; padding-bottom: 20px; background: #FFDF5A;">
       <div class="container" data-aos="fade-up">
 
-        <h5 class="display-s4 text-center">Punya karya yang bagus ? kamu bisa sumbangkan karya kamu kedalam website Pikart &nbsp<a type="button" href="{{route('kontributor.uploadkarya')}}" class="btn-xl btn-primary  rounded-xl mt-1"> 
-          <span class="label">Upload Karya</span>
+        <h5 class="display-s4 text-center">Punya karya yang bagus ? kamu bisa sumbangkan karya kamu kedalam website Pikart &nbsp &nbsp
+          <a type="button" href="{{route('kontributor.uploadkarya')}}" class="btn-xl btn-primary  rounded-xl mt-1"> 
+           Upload Karya 
           </a>  
         </h5>
          
           
+      </div>  
+    </section>
+
+    <!-- ======= Koleksi Section ======= -->
+    <section id="koleksi" class="scroll-section about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2 class="display-s3 text-center mb-4">Koleksi Pikart</h2>
+        </div>
+        
+              <!-- Daftar Layanan Start --> 
+       
+              <div class="col" style="margin-top: 10px; " >   
+
+                <div class="card hover-img-scale-up hover-reveal">
+                  <img class="card-img sh-50 scale" 
+                  src=" "
+                  alt="card image" />
+                  <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
+                      <div class="row g-0">
+                      </div>
+                      <div class="row g-0">
+                          <div class="col pe-2">
+                              <a href="#" class="stretched-link">
+                                  <h5 class="heading text-white mb-1">Judul Dummy</h5>
+                              </a>
+                              <div class="d-inline-block">
+                                  <div class="text-uppercase"><span class='badge rounded-pill bg-light'>tipe gambar</span></div>
+                              </div>   
+                          </div>
+                      </div>
+                  </div>
+                </div> 
+
+                <div class="card hover-img-scale-up hover-reveal">
+                  <img class="card-img sh-50 scale" 
+                  src=" "
+                  alt="card image" />
+                  <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
+                      <div class="row g-0">
+                      </div>
+                      <div class="row g-0">
+                          <div class="col pe-2">
+                              <a href="#" class="stretched-link">
+                                  <h5 class="heading text-white mb-1">Judul Dummy</h5>
+                              </a>
+                              <div class="d-inline-block">
+                                  <div class="text-uppercase"><span class='badge rounded-pill bg-light'>tipe gambar</span></div>
+                              </div>   
+                          </div>
+                      </div>
+                  </div>
+                </div> 
+
+                <div class="card hover-img-scale-up hover-reveal">
+                  <img class="card-img sh-50 scale" 
+                  src=" "
+                  alt="card image" />
+                  <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
+                      <div class="row g-0">
+                      </div>
+                      <div class="row g-0">
+                          <div class="col pe-2">
+                              <a href="#" class="stretched-link">
+                                  <h5 class="heading text-white mb-1">Judul Dummy</h5>
+                              </a>
+                              <div class="d-inline-block">
+                                  <div class="text-uppercase"><span class='badge rounded-pill bg-light'>tipe gambar</span></div>
+                              </div>   
+                          </div>
+                      </div>
+                  </div>
+                </div> 
+
+              </div>  
+         
       </div>  
     </section>
 
@@ -135,78 +213,8 @@
           <h2 class="display-s3 text-center mb-4">Tentang Pikart</h2>
         </div>
         
-              <!-- Daftar Layanan Start --> 
-       
-              <div class="row justify-content-md-center" style="margin-top: 30px; " >   
-                <div class="col-auto mb-5" style="margin-right: 50px; ">
-                    <div class="card hover-border-primary sh-20 sw-20">
-                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                <i data-acorn-icon="camera" class="text-white"></i>
-                            </div>
-                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Foto</div>
-                            <div class="text-small text-primary">14 PRODUCTS</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto mb-5" style="margin-right: 60px; ">
-                    <div class="card hover-border-primary sh-20 sw-20">
-                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                <i data-acorn-icon="wizard" class="text-white"></i>
-                            </div>
-                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Ilustrasi</div>
-                            <div class="text-small text-primary">14 PRODUCTS</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto mb-5" style="margin-right: 60px; ">
-                    <div class="card hover-border-primary sh-20 sw-20">
-                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                <i data-acorn-icon="light-on" class="text-white"></i>
-                            </div>
-                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">PSD</div>
-                            <div class="text-small text-primary">14 PRODUCTS</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto mb-5" style="margin-right: 60px; ">
-                    <div class="card hover-border-primary sh-20 sw-20">
-                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                <i data-acorn-icon="book" class="text-white"></i>
-                            </div>
-                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Indesign</div>
-                            <div class="text-small text-primary">14 PRODUCTS</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto mb-5" style="margin-right: 60px; ">
-                    <div class="card hover-border-primary sh-20 sw-20">
-                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                <i data-acorn-icon="laptop" class="text-white"></i>
-                            </div>
-                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Mockup</div>
-                            <div class="text-small text-primary">14 PRODUCTS</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto mb-5" style="margin-right: 60px; ">
-                    <div class="card hover-border-primary sh-20 sw-20">
-                        <div class="h-100 d-flex flex-column justify-content-between card-body align-items-center">
-                            <div class="bg-gradient-light sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
-                                <i data-acorn-icon="edit" class="text-white"></i>
-                            </div>
-                            <div class="heading text-center mb-0 sh-4 d-flex align-items-center lh-1">Font</div>
-                            <div class="text-small text-primary">14 PRODUCTS</div>
-                        </div>
-                    </div>
-                </div> 
-    </div>  
 
-<!-- Daftar Layanan End --> 
+        <!-- Daftar Layanan End --> 
 
         <div class="row content">
           <div class="col-lg-6" >

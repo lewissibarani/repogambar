@@ -7,6 +7,7 @@ use App\Http\Controllers\BagiTugasController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\KontributorsController; 
 use App\Http\Controllers\LikesController; 
+use App\Http\Controllers\LandpageSettingController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -43,12 +44,17 @@ Route::prefix('/LandingPage')->group(function () {
 });
  
 
+
 Route::middleware('auth')->group(function () {
     // Route::redirect('/', '/LandingPage'); 
     Route::post('/like-post/{id}',[LikesController::class,'likePost'])->name('like.post');
     Route::post('/unlike-post/{id}',[LikesController::class,'unlikePost'])->name('unlike.post');
     
  
+    Route::resource('landpagesetting', LandpageSettingController::class)->missing(function (Request $request) {
+        return Redirect::route('landpagesetting.index');
+        }); 
+
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard'])->name('dashboard.halamandepan');  
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar'); 
