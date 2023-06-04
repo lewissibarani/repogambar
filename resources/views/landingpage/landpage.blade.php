@@ -1,8 +1,11 @@
 @php  
+
+    use App\Models\Gambar;
     $html_tag_data = ["override"=>'{"attributes" : { "layout": "none" }}'];
     $title = 'Landing Page'; 
     $breadcrumbs = ["/"=>"Home","/Dashboard"=>"Beranda"];
     $file = "";
+    
 
 @endphp
  
@@ -136,73 +139,43 @@
           <h2 class="display-s3 text-center mb-4">Koleksi Pikart</h2>
         </div>
         
-              <!-- Daftar Layanan Start --> 
-       
-              <div class="col" style="margin-top: 10px; " >   
-
-                <div class="card hover-img-scale-up hover-reveal">
-                  <img class="card-img sh-50 scale" 
-                  src=" "
-                  alt="card image" />
-                  <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
-                      <div class="row g-0">
+        <div class="col-12 col-sm-6 col-lg-6 col-xxl-6 mb-5">
+          <div class="">
+              <div class="sh-35 mb-4">
+                  <div class="row g-1 h-100 gallery">
+                      <div class="col h-100">
+                          <a
+                                  href="/img/product/large/product-6.webp"
+                                  class="w-100 h-100 rounded-md-start bg-cover-center d-block"
+                                  style="background-image: url('/img/product/small/product-6.webp')"
+                          >
+                        </a>
                       </div>
-                      <div class="row g-0">
-                          <div class="col pe-2">
-                              <a href="#" class="stretched-link">
-                                  <h5 class="heading text-white mb-1">Judul Dummy</h5>
-                              </a>
-                              <div class="d-inline-block">
-                                  <div class="text-uppercase"><span class='badge rounded-pill bg-light'>tipe gambar</span></div>
-                              </div>   
+                      <div class="col d-flex flex-column justify-content-stretch h-100">
+                          <div class="d-flex mb-1 flex-grow-1">
+                              <a
+                                      href="/img/product/large/product-6.webp"
+                                      class="w-100 h-100 rounded-md-top-end bg-cover-center d-block"
+                                      style="background-image: url('/img/product/small/product-6.webp')"
+                              ></a>
+                          </div>
+                          <div class="d-flex flex-grow-1">
+                              <a
+                                      href="/img/product/large/product-6.webp"
+                                      class="w-100 h-100 rounded-md-bottom-end bg-cover-center d-block"
+                                      style="background-image: url('/img/product/small/product-6.webp')"
+                              ></a>
                           </div>
                       </div>
                   </div>
-                </div> 
-
-                <div class="card hover-img-scale-up hover-reveal">
-                  <img class="card-img sh-50 scale" 
-                  src=" "
-                  alt="card image" />
-                  <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
-                      <div class="row g-0">
-                      </div>
-                      <div class="row g-0">
-                          <div class="col pe-2">
-                              <a href="#" class="stretched-link">
-                                  <h5 class="heading text-white mb-1">Judul Dummy</h5>
-                              </a>
-                              <div class="d-inline-block">
-                                  <div class="text-uppercase"><span class='badge rounded-pill bg-light'>tipe gambar</span></div>
-                              </div>   
-                          </div>
-                      </div>
-                  </div>
-                </div> 
-
-                <div class="card hover-img-scale-up hover-reveal">
-                  <img class="card-img sh-50 scale" 
-                  src=" "
-                  alt="card image" />
-                  <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
-                      <div class="row g-0">
-                      </div>
-                      <div class="row g-0">
-                          <div class="col pe-2">
-                              <a href="#" class="stretched-link">
-                                  <h5 class="heading text-white mb-1">Judul Dummy</h5>
-                              </a>
-                              <div class="d-inline-block">
-                                  <div class="text-uppercase"><span class='badge rounded-pill bg-light'>tipe gambar</span></div>
-                              </div>   
-                          </div>
-                      </div>
-                  </div>
-                </div> 
-
-              </div>  
-         
-      </div>  
+              </div>
+              <div class="pb-3">
+                <h5 class="heading mb-0 d-flex"> 
+                    <a href="#" class="font-weight-bold">Foto Pimpinan</a>
+                </h5>
+            </div>
+          </div>
+        </div>   
     </section>
 
     <!-- ======= About Us Section ======= -->

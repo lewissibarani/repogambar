@@ -1,3 +1,4 @@
+  
  <!-- Add Edit Modal Start -->
                 
  <div class="modal large fade" id="storeModalLandpage" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
@@ -25,7 +26,7 @@
                     <div class="row mb-3">
                         <label for="colFormLabel" class="col-sm-3 col-form-label">Nama Koleksi</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="colFormLabel" name="namakoleksi" /> 
+                            <input type="text" class="form-control" id="namakoleksi" name="namakoleksi" /> 
                         </div>
                     </div> 
                     <div class="row mb-3">
@@ -38,12 +39,12 @@
                             <small class="form-text text-muted">Isian ini berfungsi agar semua yang memiliki tag serupa masuk ke dalam koleksi ini.</small>
                             <!-- <input class="form-control" type="text" data-role="tagsinput" name="tags"> -->
                         </div>
-                    </div> 
+                    </div>   
                 </section> 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary" >Kirim</button>
+                <button id="landpage-submit" type="submit" class="btn btn-primary" >Kirim</button>
             </div>
             </form>
         </div>

@@ -16,10 +16,21 @@ class LandpageSettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private function convertArray2($array)
+    {
+         $converted_array=array();
+         foreach(json_decode($array, true) as $key=> $data )
+         {
+             array_push($converted_array,$data['value']);
+         }
+         return $converted_array;
+     }
+    
     public function index()
     {
          // Mengambil data didatabase
-         $Data = KoleksiAsset::with('user')->get();  
+         $Data = KoleksiAsset::with('user','gambar','tagged')->get();  
          return view('petugas.landpagesetting.index', compact(['Data'
          ]));
     }
@@ -51,10 +62,13 @@ class LandpageSettingController extends Controller
         ]);
 
         $KoleksiAsset = new KoleksiAsset;
-        $KoleksiAsset->namakoleksi = $request->namakoleksi;
-        $KoleksiAsset->tagname = $request->tagname;
+        $KoleksiAsset->namakoleksi = $request->namakoleksi; 
+        $KoleksiAsset->thumbnailid = 1;
         $KoleksiAsset->petugasid = Auth::id();
         $KoleksiAsset->save();
+
+        //menyimpan tag koleksi ini
+        $KoleksiAsset->tag($this->convertArray2($request->tagname));
 
         return redirect()->route('landpagesetting.index')->with('message', 'Koleksi berhasil ditambah.');
     }

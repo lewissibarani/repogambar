@@ -238,11 +238,11 @@
                                     <span class="label">Pengaturan Petugas</span>
                                 </a>
                             </li> 
-                            <li>
+                            {{--  <li>
                                 <a href="{{route('landpagesetting.index')}}">
-                                    <span class="label">Pengaturan Landpage</span>
+                                <span class="label">Pengaturan Landpage</span>
                                 </a>
-                            </li> 
+                             </li>  --}}
                 </ul>
             </li>
 

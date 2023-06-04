@@ -28,16 +28,29 @@ class DropzoneControls {
   _initImage() {
     if (document.querySelector('#dropzoneImage')) {
       new Dropzone('#dropzoneImage', {
-        url: 'https://httpbin.org/post',
+        autoProcessQueue: false,
+        url: 'route("landpagesetting.store")',
         maxFilesize: 10,
         maxFiles: 1,  
-        init: function () {
-          this.on('success', function (file, responseText) {
-            console.log("Sukses upload "+responseText);
+        init: function() {
+          dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
+  
+          // for Dropzone to process the queue (instead of default form behavior):
+          document.getElementById("landpage-submit").addEventListener("click", function(e) {
+              // Make sure that the form isn't actually being sent.
+              e.preventDefault();
+              e.stopPropagation();
+              dzClosure.processQueue();
+          });
+  
+          //send all the form data along with the files:
+          this.on("sendingmultiple", function(data, xhr, formData) {
+              formData.append("namakoleksi", jQuery("#firstname").val());
+              formData.append("tagname", jQuery("#tagsBasic").val());
           });
         },
-        acceptedFiles: 'image/*',
-        thumbnailWidth: 160,
+        acceptedFiles: 'image/*', 
+        thumbnailWidth: 160, 
         previewTemplate: DropzoneTemplates.previewTemplate,
       });
     }

@@ -308,9 +308,8 @@ class PetugasController extends Controller
             $gambars->thumbnail_path = $thumbnailPath;  
             $gambars->file_id = $fileid;
 
-            //Menyimpan Tags 
-            $gambars->untag();
-            $gambars->tag($this->convertArray($request->tags));
+            //Menyimpan Tags  
+            $gambars->retag($this->convertArray($request->tags));
 
             $gambars->save();
             

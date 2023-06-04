@@ -9,18 +9,26 @@
 @section('css')
     <link rel="stylesheet" href="/css/vendor/datatables.min.css"/>
     <link rel="stylesheet" href="/css/vendor/tagify.css"/>
+
+    <link rel="stylesheet" href="/css/vendor/dropzone.min.css"/>
 @endsection
 
 @section('js_vendor')
     <script src="/js/cs/scrollspy.js"></script>
     <script src="/js/vendor/datatables.min.js"></script>
     <script src="/js/vendor/tagify.min.js"></script>
+
+    <script src="/js/vendor/dropzone.min.js"></script>
+    <script src="/js/vendor/singleimageupload.js"></script>
 @endsection
 
 @section('js_page')
     <script src="/js/cs/datatable.extend.js"></script>
     <script src="/js/plugins/datatable.boxedvariations.js"></script>
     <script src="/js/forms/controls.tag.js"></script>
+
+    <script src="/js/cs/dropzone.templates.js"></script>
+    <script src="/js/forms/controls.dropzone.js"></script>
 @endsection
 
 @section('content')
@@ -140,20 +148,11 @@
                                         <tr style="height:50px;">
                                             <td>{{$datas->id}}</td>
                                             <td class="text-alternate">{{$datas->namakoleksi}}</td>
-                                            <td class="text-alternate">
-                                                
-                                            @php
-                                                $converted_array=array();
-                                                foreach(json_decode($datas->tagname, true) as $key=> $data )
-                                                {
-                                                    array_push($converted_array,$data['value']);
-                                                } 
-                                                $converted_array;
-                                            @endphp 
+                                            <td class="text-alternate"> 
 
-                                            @foreach ($converted_array as $tags)
-                                            <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="hasilpencarian/katakunci/{{$tags}}">
-                                                <span>{{$tags}}</span>
+                                            @foreach ($datas->tags as $tags)
+                                            <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="hasilpencarian/katakunci/{{$tags->name}}">
+                                                <span>{{$tags->name}}</span>
                                             </a>
                                                 
                                             @endforeach

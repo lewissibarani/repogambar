@@ -17,6 +17,7 @@ use App\Models\Gambar;
 use App\Models\GambarView;
 use App\Models\PembagianTugas;
 use App\Models\File;
+use App\Models\KoleksiAsset;
 use Conner\Tagging\Model\Tag;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -44,7 +45,11 @@ class DashboardsController extends Controller
 
     public function landingpage()
     {  
-        return view('landingpage.landpage');
+        $koleksi = KoleksiAsset::with('user','gambar','tagged')->paginate(5);  
+
+        return view('landingpage.landpage' ,
+        compact(['koleksi', 
+        ]));
     }
     public function maintenance()
     {  
