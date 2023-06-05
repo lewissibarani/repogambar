@@ -139,8 +139,10 @@
           <h2 class="display-s3 text-center mb-4">Koleksi Pikart</h2>
         </div>
         
-        <div class="col-12 col-sm-6 col-lg-6 col-xxl-6 mb-5">
-          <div class="">
+        <div class="row">
+          @foreach($koleksi as $datas)
+          <div class="col">
+            <a href="{{route('album.show',['albumid' => $datasid])}}">
               <div class="sh-35 mb-4">
                   <div class="row g-1 h-100 gallery">
                       <div class="col h-100">
@@ -171,10 +173,12 @@
               </div>
               <div class="pb-3">
                 <h5 class="heading mb-0 d-flex"> 
-                    <a href="#" class="font-weight-bold">Foto Pimpinan</a>
+                    <p class="font-weight-bold">{{$datas->judulalbum}}</p>
                 </h5>
-            </div>
+              </div>
+            </a>
           </div>
+          @endforeach
         </div>   
     </section>
 

@@ -117,14 +117,5 @@ class LandpageSettingController extends Controller
     {
         //
     }
-
-    private function convertArray($array)
-    {
-        $converted_array=array();
-        foreach(json_decode($array, true) as $key=> $data )
-        {
-            array_push($converted_array,$data['value']);
-        }
-        return $converted_array;
-    }
+ 
 }

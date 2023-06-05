@@ -50,9 +50,13 @@
                 <!-- Top Buttons Start -->
                 <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
                     <!-- Contact Button Start -->
-                    <a href="/Kontributor/UploadKarya" type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto">
+                    <a href="/Kontributor/UploadKarya" type="button" class="btn btn-primary btn-icon btn-icon-start w-100 w-md-auto" style="margin-right: 5px;">
                         <i data-acorn-icon="upload"></i>
                         <span>Upload Karya</span>
+                    </a>
+                    <a href="{{route('album.index')}}" type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto">
+                        <i data-acorn-icon="folder"></i>
+                        <span>Buat Album</span>
                     </a>
                     <!-- Contact Button End --> 
                 </div>

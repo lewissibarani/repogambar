@@ -8,6 +8,7 @@ use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\KontributorsController; 
 use App\Http\Controllers\LikesController; 
 use App\Http\Controllers\LandpageSettingController; 
+use App\Http\Controllers\AlbumController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,10 @@ Route::middleware('auth')->group(function () {
         return Redirect::route('landpagesetting.index');
         }); 
 
+    Route::resource('album', AlbumController::class)->missing(function (Request $request) {
+        return Redirect::route('album.index');
+        }); 
+
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard'])->name('dashboard.halamandepan');  
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar'); 
@@ -69,6 +74,8 @@ Route::middleware('auth')->group(function () {
         Route::get('UploadKarya', [KontributorsController::class, 'uploadkarya'])->name('kontributor.uploadkarya');
         Route::get('Store', [KontributorsController::class, 'store']); 
     });
+
+   
 
     Route::prefix('hasilpencarian')->group(function () {
         Route::post('caridashboard', [DashboardsController::class, 'hasilPencarian'])->name('dashboard.hasilpencarian');

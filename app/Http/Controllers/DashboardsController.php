@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\User_Petugas;
+use App\Models\Album;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class DashboardsController extends Controller
 
     public function landingpage()
     {  
-        $koleksi = KoleksiAsset::with('user','gambar','tagged')->paginate(5);  
+        $koleksi = Album::with('user','gambar','tagged')->paginate(5);  
 
         return view('landingpage.landpage' ,
         compact(['koleksi', 
