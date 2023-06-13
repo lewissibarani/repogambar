@@ -168,7 +168,7 @@
                         <div class="form-group mt-3">
                             <div wire:ignore>
                                 <label for="description">Tags</label>
-                                <input 
+                                <input  
                                 type="text"
                                 id="tagsBasic" 
                                 /> 
@@ -323,6 +323,7 @@
 </div>
 
 @push('scripts') 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
     
         $(document).ready(function () {   

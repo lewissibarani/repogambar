@@ -140,9 +140,8 @@
         </div>
         
         <div class="row">
-          @foreach($koleksi as $datas)
-          <div class="col">
-            <a href="{{route('album.show',['albumid' => $datasid])}}">
+          @foreach($koleksi as $datas) 
+          <div class="col"> 
               <div class="sh-35 mb-4">
                   <div class="row g-1 h-100 gallery">
                       <div class="col h-100">
@@ -171,6 +170,7 @@
                       </div>
                   </div>
               </div>
+              <a href="{{route('album.show',['album' => $datas->id])}}">
               <div class="pb-3">
                 <h5 class="heading mb-0 d-flex"> 
                     <p class="font-weight-bold">{{$datas->judulalbum}}</p>

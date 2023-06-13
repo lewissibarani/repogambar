@@ -86,11 +86,7 @@ class Wizard extends Component
      * @return response()
      */
     public function secondStepSubmit()
-    {
-         
-        $validatedData = $this->validate([   
-            'tags' => 'required',
-        ]);
+    { 
 
         $this->currentStep = 3;
     }
