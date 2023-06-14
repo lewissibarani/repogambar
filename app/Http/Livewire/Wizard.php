@@ -101,7 +101,7 @@ class Wizard extends Component
         $fileid=null;
 
         try {
-            $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();  
+            $storagePath  = Storage::disk('s3');  
 
             // $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 1000);
             
@@ -112,12 +112,17 @@ class Wizard extends Component
             //membuat thumbnail
             $width = config('imageresize.size.width'); // your max width
             $height =  config('imageresize.size.height'); // your max height
-            $thumbPath = $storagePath.'public/thumbnail/'.$nameImage; 
+            $thumbPath = 'thumbnail/'.$nameImage; 
             $thumbImage = Image::make($image->getRealPath());
             $thumbImage->height() > $thumbImage->width() ? $width=null : $height=null;
+            // $thumbImage->resize($width, $height, function ($constraint) {
+            //     $constraint->aspectRatio();
+            // })->save($thumbPath); 
             $thumbImage->resize($width, $height, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save($thumbPath); 
+            });  
+            $storagePath->put($thumbPath, 
+            file_get_contents( $thumbImage),'public'); 
             
             //menyimpan gambar original
             $oriPath = $storagePath.'public/uploadedGambar/'.$nameImage;
