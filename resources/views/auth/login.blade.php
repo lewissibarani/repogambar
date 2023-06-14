@@ -55,7 +55,7 @@
                 </p>
             </div>
             <div>
-                <form id="loginForm" class="tooltip-end-bottom" novalidate>
+                <form action="{{route('login')}}" method="POST"  id="loginForm" class="tooltip-end-bottom" novalidate>
                 @csrf
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="email"></i>

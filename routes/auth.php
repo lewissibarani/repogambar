@@ -11,6 +11,10 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 //Otentikasi
 Route::middleware('guest')->group(function () {
+   
+    Route::get('loginpage', [AuthenticatedSessionController::class, 'loginpage'])
+                ->name('loginpage');
+
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
 
@@ -18,6 +22,7 @@ Route::middleware('guest')->group(function () {
 
     Route::get('login', [AuthenticatedSessionController::class, 'actionSso'])
                 ->name('login');
+                
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 

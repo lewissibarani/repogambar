@@ -51,6 +51,7 @@ class RegisteredUserController extends Controller
             'kodesatker' => $request->kodesatker,
             'satker' => $request->satker,
             'level' => '4',
+            'sum_permintaan'=>0
         ]);
         event(new Registered($user));
 
