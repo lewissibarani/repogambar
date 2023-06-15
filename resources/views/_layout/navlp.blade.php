@@ -30,8 +30,7 @@
         </a>
     </div>  --}}
     <div class="user-container d-flex"  style="margin-left :3em;  "> 
-        {{-- <a href="/Dashboard" class="btn btn-primary  rounded-xl"> --}}
-        <a href="{{route('loginpage')}}" class="btn btn-primary  rounded-xl">
+        <a href="/Dashboard" class="btn btn-primary  rounded-xl"> 
             <i data-acorn-icon="login" class="icon" data-acorn-size="18"></i>
             <span class="label">Login Pikart</span>
         </a>

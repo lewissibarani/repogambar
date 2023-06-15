@@ -55,110 +55,110 @@ class AuthenticatedSessionController extends Controller
         return redirect('login');
     }
 
-    public function actionSso(Request $request)
-    {  
-
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
- 
-        if (Auth::attempt($credentials)) {
-           
-            $request->session()->regenerate();
- 
-            return redirect()->intended('dashboard.halamandepan');
-        }
- 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
-
-            // Gunakan token ini untuk berinteraksi dengan API di sisi pengguna
-    } 
-    public function loginpage()
-    {  
-
-        return view('auth.login');
-    } 
     // public function actionSso(Request $request)
-    // {
+    // {  
 
-    //      /** Implement SSO Dec 2020 */
-    //     $provider = new Keycloak([
-    //         'authServerUrl'         => 'https://sso.bps.go.id',
-    //         'realm'                 => 'pegawai-bps',
-    //         'clientId'              => env('KEYCLOAK_CLIENT_ID'),
-    //         'clientSecret'          => env('KEYCLOAK_CLIENT_SECRET'),
-    //         'redirectUri'           => env('KEYCLOAK_REDIRECT_URI'),
+    //     $credentials = $request->validate([
+    //         'email' => ['required', 'email'],
+    //         'password' => ['required'],
     //     ]);
-        
-    //     if (!isset($_GET['code'])) {
-
-    //         // Untuk mendapatkan authorization code
-    //         $authUrl = $provider->getAuthorizationUrl();
-    //         $request->session()->put('oauth2state', $provider->getState());
-    //         header('Location: '.$authUrl);
-    //         exit;
-
-    //     } elseif (empty($_GET['state']))
-    //         {
-    //             $request->session()->forget('oauth2state');
-    //             exit('Invalid state');
+ 
+    //     if (Auth::attempt($credentials)) {
+           
+    //         $request->session()->regenerate();
+ 
+    //         return redirect()->intended('dashboard.halamandepan');
     //     }
-    //     else {
-    //         try {
-    //             $token = $provider->getAccessToken('authorization_code', [
-    //                 'code' => $_GET['code']
-    //             ]);
-    //         } catch (\Exception $e) {
-    //             exit('Gagal mendapatkan akses token : '.$e->getMessage());
-    //         }
-            
-    //         // Opsional: Setelah mendapatkan token, anda dapat melihat data profil pengguna
-    //         try {
-                
-    //             $user = $provider->getResourceOwner($token);
-
-    //             $email = $user->getEmail();
-    //             $id = User::where('email', $email)->first();
-
-    //             if (!empty($id)) {
-    //                 $id = $id->id;
-    //             } else {
-    //                 $newUser = User::create([
-    //                     'name' => $user->getName(),
-    //                     'email' => $user->getEmail(),
-    //                     'level' => 4,
-    //                     'nip' => $user->getNip(),
-    //                     'nipbaru' => $user->getNipBaru(),
-    //                     'alamatkantor' => $user->getAlamatKantor(),
-    //                     'golongan' => $user->getGolongan(),
-    //                     'jabatan' => $user->getJabatan(),
-    //                     'profilepicture' => $user->getUrlFoto(),
-    //                     'kodesatker' =>$user->getKodeOrganisasi(),
-    //                     'satker' =>$user->getEselon(),
-    //                     'password' =>Hash::make('pks2022'),
-    //                     'sums_download' =>0,
-    //                     'sums_upload' =>0,
-    //                     'sum_permintaan' =>0, 
-    //                 ]);
-    //                 $id = $newUser->id;
-    //             }
-
-    //             // Login dengan menggunakan id pengguna dari record di database aplikasi
-    //             if (Auths::loginUsingId($id)) {
-    //                 return redirect()->intended('/Dashboard');
-    //             } else {
-    //                 return redirect('/');
-    //             }
-
-    //         } catch (\Exception $e) {
-    //             exit('Gagal Mendapatkan Data Pengguna: '.$e->getMessage());
-    //         }
+ 
+    //     return back()->withErrors([
+    //         'email' => 'The provided credentials do not match our records.',
+    //     ])->onlyInput('email');
 
     //         // Gunakan token ini untuk berinteraksi dengan API di sisi pengguna
-    //     }
-    // }
+    // } 
+    // public function loginpage()
+    // {  
+
+    //     return view('auth.login');
+    // } 
+    public function actionSso(Request $request)
+    {
+
+         /** Implement SSO Dec 2020 */
+        $provider = new Keycloak([
+            'authServerUrl'         => 'https://sso.bps.go.id',
+            'realm'                 => 'pegawai-bps',
+            'clientId'              => env('KEYCLOAK_CLIENT_ID'),
+            'clientSecret'          => env('KEYCLOAK_CLIENT_SECRET'),
+            'redirectUri'           => env('KEYCLOAK_REDIRECT_URI'),
+        ]);
+        
+        if (!isset($_GET['code'])) {
+
+            // Untuk mendapatkan authorization code
+            $authUrl = $provider->getAuthorizationUrl();
+            $request->session()->put('oauth2state', $provider->getState());
+            header('Location: '.$authUrl);
+            exit;
+
+        } elseif (empty($_GET['state']))
+            {
+                $request->session()->forget('oauth2state');
+                exit('Invalid state');
+        }
+        else {
+            try {
+                $token = $provider->getAccessToken('authorization_code', [
+                    'code' => $_GET['code']
+                ]);
+            } catch (\Exception $e) {
+                exit('Gagal mendapatkan akses token : '.$e->getMessage());
+            }
+            
+            // Opsional: Setelah mendapatkan token, anda dapat melihat data profil pengguna
+            try {
+                
+                $user = $provider->getResourceOwner($token);
+
+                $email = $user->getEmail();
+                $id = User::where('email', $email)->first();
+
+                if (!empty($id)) {
+                    $id = $id->id;
+                } else {
+                    $newUser = User::create([
+                        'name' => $user->getName(),
+                        'email' => $user->getEmail(),
+                        'level' => 4,
+                        'nip' => $user->getNip(),
+                        'nipbaru' => $user->getNipBaru(),
+                        'alamatkantor' => $user->getAlamatKantor(),
+                        'golongan' => $user->getGolongan(),
+                        'jabatan' => $user->getJabatan(),
+                        'profilepicture' => $user->getUrlFoto(),
+                        'kodesatker' =>$user->getKodeOrganisasi(),
+                        'satker' =>$user->getEselon(),
+                        'password' =>Hash::make('pks2022'),
+                        'sums_download' =>0,
+                        'sums_upload' =>0,
+                        'sum_permintaan' =>0, 
+                    ]);
+                    $id = $newUser->id;
+                }
+
+                // Login dengan menggunakan id pengguna dari record di database aplikasi
+                if (Auths::loginUsingId($id)) {
+                    return redirect()->intended('/Dashboard');
+                } else {
+                    return redirect('/');
+                }
+
+            } catch (\Exception $e) {
+                exit('Gagal Mendapatkan Data Pengguna: '.$e->getMessage());
+            }
+
+            // Gunakan token ini untuk berinteraksi dengan API di sisi pengguna
+        }
+    }
 
 }

@@ -115,17 +115,15 @@ class Wizard extends Component
             $thumbPath = 'thumbnail/'.$nameImage; 
             $thumbImage = Image::make($image->getRealPath());
             $thumbImage->height() > $thumbImage->width() ? $width=null : $height=null;
-            // $thumbImage->resize($width, $height, function ($constraint) {
-            //     $constraint->aspectRatio();
-            // })->save($thumbPath); 
             $thumbImage->resize($width, $height, function ($constraint) {
                 $constraint->aspectRatio();
-            });  
+            })->save($thumbPath);  
+            // $thumbImage->storeAs('thumbnail/',$nameImage,'s3');
             $storagePath->put($thumbPath, 
-            file_get_contents( $thumbImage),'public'); 
+            $image,'public'); 
             
             //menyimpan gambar original
-            $oriPath = $storagePath.'public/uploadedGambar/'.$nameImage;
+            $oriPath = 'uploadedGambar/'.$nameImage;
             $oriImage = Image::make($image)->save($oriPath); 
              
             // get ukuran dan ekstension gambar
