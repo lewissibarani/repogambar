@@ -473,7 +473,25 @@ class PetugasController extends Controller
         return $result;
     }
 
-  
+    public function createThumbnail($src, $dest, $desired_width) 
+    {
+ 
+        $source_image = imagecreatefromjpeg($src);
+        $width = imagesx($source_image);
+        $height = imagesy($source_image);
+
+        /* find the "desired height" of this thumbnail, relative to the desired width  */
+        $desired_height = floor($height * ($desired_width / $width));
+
+        /* create a new, "virtual" image */
+        $virtual_image = imagecreatetruecolor($desired_width, $desired_height);
+
+        /* copy source image at a resized size */
+        imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
+
+        /* create the physical thumbnail image to its destination */
+        imagejpeg($virtual_image, $dest);
+    } 
 
     public function cek_sudah_di_layani_apa_belum($permintaan_id){
         if(Transaksi::find($permintaan_id)->idStatus!==3)
@@ -554,96 +572,5 @@ class PetugasController extends Controller
         // }else{  
         //     return redirect()->route('review.daftar')->with('message', 'Permintaan sudah pernah dilayani');
         // } 
-    }
-
-    public function saveImagetoDatabase (
-                          $albumid, 
-                          $judul,
-                          $link,
-                          $idKegunaan,
-                          $idUser,
-                          $path,
-                          $thumbnail_path,
-                          $ukuran,
-                          $nama_gambar,
-                          $source_id,
-                          $file_id,
-                          $kategori_file,
-                          $tipe_gambar,   
-                          )
-    {
-        $model = 
-        $gambars=Gambar::create([
-            'albumid' => $albumid,
-            'judul' => $judul,
-            'link' => $link,
-            'idKegunaan' => $idKegunaan,
-            'idUser' => $idUser,
-            'path' => $path,
-            'thumbnail_path' =>$thumbnail_path,
-            'ukuran' =>$gambar_size,
-            'nama_gambar' =>$nameImage,
-            'source_id' => $source_id,
-            'file_id' => $fileid,
-            'kategori_file' =>$kategori_file,
-            'tipe_gambar' => $tipe_gambar,
-            'views' => 0,
-            'download'=>0,
-            'booleantayang'=>1,
-        ]);
-    }
-
-    public function storeDisk ($image)
-    {
-        $storagePaths3  = Storage::disk('s3'); 
-        $nameImage =  date('YmdHi').$image->getClientOriginalName();
-        $extension = $image->getClientOriginalExtension();
-
-        ini_set('memory_limit','2048M');
-    
-        //membuat thumbnail
-        $width = config('imageresize.size.width'); // your max width
-        $height =  config('imageresize.size.height'); // your max height
-        $thumbPath = 'thumbnail/'.$nameImage; 
-        $thumbImage = Image::make($image->getRealPath());
-        $thumbImage->height() > $thumbImage->width() ? $width=null : $height=null;
-        $thumbImage->resize($width, $height, function ($constraint) {
-            $constraint->aspectRatio();
-        })->encode($extension);
-  
-        $path_thumbnail = Storage::disk('s3')->put($thumbPath, $thumbImage); 
-
-        //menyimpan gambar original
-        $oriPath = 'uploadedGambar/'.$nameImage;
-        $gambar_size= Image::make($image)->filesize();
-
-        $path_ori = Storage::disk('s3')->put($oriPath, $image); 
-        
-            
-        // get ukuran dan ekstension gambar  
-        
-
-        return [$gambar_size,$extension];
-         
-    }
-
-    public function storeFile($file)
-    {
-        $file_name=date('YmdHi').$request->file('file')->getClientOriginalName();
-        $file= $request->file('file')->storeAs(
-            'public/file/', $file_name
-        );   
-
-        //Memghilangkan spesial character di path
-        $file_name = str_replace(Array("\n", "\r", "\n\r"), '', $file_name); 
-        $filezip =File::create([
-            'path' => 'storage/file/'.$file_name,
-            'nama_file' => $file_name,
-            'size' => Storage::size('public/file/'.$file_name),  
-            'type' => \File::extension(Storage::url('public/file/'.$file_name)),
-            'download'=>0
-            ]);
-
-        $fileid=$filezip->id;
     }
 }
