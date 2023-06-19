@@ -102,6 +102,9 @@ class Wizard extends Component
 
         try {
             $storagePath  = Storage::disk('s3');  
+            // if (!Storage::disk('s3')->exists('file.jpg')) {
+            //     dd('Bisa Retrieve File');
+            // }
 
             // $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 1000);
             
@@ -112,20 +115,19 @@ class Wizard extends Component
             //membuat thumbnail
             $width = config('imageresize.size.width'); // your max width
             $height =  config('imageresize.size.height'); // your max height
-            $thumbPath = 'thumbnail/'.$nameImage; 
+            $thumbPath = 'thumbnail/'; 
             $thumbImage = Image::make($image->getRealPath());
             $thumbImage->height() > $thumbImage->width() ? $width=null : $height=null;
             $thumbImage->resize($width, $height, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($thumbPath);  
             // $thumbImage->storeAs('thumbnail/',$nameImage,'s3');
-            $storagePath->put($thumbPath, 
+            $storagePath->put('', 
             $image,'public'); 
             
             //menyimpan gambar original
-            $oriPath = 'uploadedGambar/'.$nameImage;
-            $oriImage = Image::make($image)->save($oriPath); 
-             
+            $oriPath = 'uploadedGambar/'.$nameImage; 
+            $image->store('uploadedGambar/', 's3');  
             // get ukuran dan ekstension gambar
             $tipe_gambar=\File::extension(Storage::url('public/uploadedGambar/'.$nameImage));
             $gambar_size=Storage::size('public/uploadedGambar/'.$nameImage);

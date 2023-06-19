@@ -11,6 +11,5 @@ use Illuminate\Support\Facades\Storage;
 
 class Image_File_Controller extends Controller
 {
-    
-    
+     
 }
