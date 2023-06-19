@@ -11,8 +11,8 @@ $ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";
 @foreach ($Data as $datas)
 <div class="col">
     <div class="card hover-img-scale-up hover-reveal">
-            <img class="card-img sh-50 scale" 
-            src="{{$datas->thumbnail_path}}"
+            <img class="card-img sh-50 scale"  
+            src="{{Storage::temporaryUrl($datas->thumbnail_path,now()->addMinutes(30))}}" 
             alt="card image" />
             <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
                 <div class="row g-0">

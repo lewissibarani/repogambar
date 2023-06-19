@@ -58,7 +58,8 @@
     }
  
 // Calling getimagesize() function
-$imageinfo = getimagesize($Data->path);
+
+$imageinfo = getimagesize(Storage::temporaryUrl($Data->path,now()->addMinutes(30)));
 $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
 
 @endphp
@@ -117,7 +118,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                             <a href="/{{$Data->path}}">
                                                 <img
                                                     alt="detail"
-                                                    src="/{{$Data->path}}"
+                                                    src="{{Storage::temporaryUrl($Data->path,now()->addMinutes(30))}}"
                                                     class="responsive border-0 img-fluid mb-3 sh-80 w-100"
                                                 />
                                             </a>
@@ -324,8 +325,8 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                                 <div class="card sh-11 sh-sm-14">
                                                     <div class="row g-0 h-100">
                                                         <div class="col-4 card-img card-img-horizontal sw-10 sw-sm-14"
-                                                            
-                                                             style="background-position: center; background-image: url('/{{$rekomendasi->thumbnail_path}}')">
+                                                        
+                                                             style="background-position: center; background-image: url('{{Storage::temporaryUrl($rekomendasi->thumbnail_path,now()->addMinutes(30))}}')">
                                                             
                                                         </div>
                                                         <div class="col position-static">

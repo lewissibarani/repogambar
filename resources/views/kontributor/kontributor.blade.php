@@ -217,7 +217,7 @@
                             @foreach ($Gambar as $gambars)
                             <div class="col">
                                 <div class="card sh-35 hover-img-scale-up hover-reveal">
-                                    <img src="/{{$gambars->thumbnail_path}}" class="card-img h-100 scale" alt="card image" />
+                                    <img src="{{Storage::temporaryUrl($gambars->thumbnail_path,now()->addMinutes(30))}}" class="card-img h-100 scale" alt="card image" />
                                     <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
                                         <div class="row g-0">
                                             <div class="col-auto pe-3">
@@ -256,7 +256,8 @@
                             @foreach ($GambarLiked as $gambarliked)
                             <div class="col">
                                 <div class="card sh-35 hover-img-scale-up hover-reveal">
-                                    <img src="/{{$gambarliked->thumbnail_path}}" class="card-img h-100 scale" alt="card image" />
+                                    
+                                    <img src="{{Storage::temporaryUrl($gambarliked->thumbnail_path,now()->addMinutes(30))}}" class="card-img h-100 scale" alt="card image" />
                                     <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
                                         <div class="row g-0">
                                             <div class="col-auto pe-3">

@@ -12,7 +12,7 @@ return [
     | based disks are available to your application. Just store away!
     |
     */
-
+ 
     'default' => env('FILESYSTEM_DRIVER', 'local'),
 
     /*
@@ -48,14 +48,15 @@ return [
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'), 
-             
+            'url' => env('AWS_URL'),  
+
              // the below 'endpoint' url is actually used:
-            'endpoint' => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
             // prevent bucket name from being added to the hostname:
             'bucket_endpoint' => false,
             // use older urls:
             'use_path_style_endpoint' => true,
+            'visibility' => 'public',
         ],
 
     ],
