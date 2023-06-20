@@ -16,6 +16,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">   
     @include('_layout.head')  
     @stack('landpage')  
+    @stack('show.album') 
 </head>
 
 <body>

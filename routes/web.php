@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
         return Redirect::route('album.index');
         }); 
 
+        Route::resource('album/{albumid}/edit', AlbumController::class)->middleware('owneralbum');
+
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard'])->name('dashboard.halamandepan');  
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar'); 
@@ -109,9 +111,7 @@ Route::middleware('auth')->group(function () {
         Route::post('Store', [PetugasController::class, 'store'])->name('petugas.store');
         Route::post('Edit_Store', [PetugasController::class, 'edit_store'])->name('petugas.edit_store');
         Route::post('Tolak', [PetugasController::class, 'tolak'])->name('petugas.tolak');
-        Route::post('Tambah', [PetugasController::class, 'tambah'])->name('petugas.tambah'); 
- 
-        
+        Route::post('Tambah', [PetugasController::class, 'tambah'])->name('petugas.tambah');  
     });
 
 });

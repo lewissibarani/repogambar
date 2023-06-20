@@ -150,7 +150,8 @@
                                                 
                                             @endforeach
                                             </td> 
-                                            <td class="text-alternate"><a href="{{route('kontributor.profil',['user_id'=> $datas->user->id])}}" target="_blank" rel="noopener noreferrer">{{$datas->user->name}}</a></td>
+                                            {{-- <td class="text-alternate"><a href="{{route('kontributor.profil',['user_id'=> $datas->user->id])}}" target="_blank" rel="noopener noreferrer">{{$datas->user->name}}</a></td> --}}
+                                            <td class="text-alternate"><a href="" target="_blank" rel="noopener noreferrer"> </a></td>
                                             <td class="text-alternate">{{$datas->updated_at}}</td> 
                                             <td class="text-alternate">
                                                 <button

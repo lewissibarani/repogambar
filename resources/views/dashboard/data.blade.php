@@ -45,5 +45,5 @@ $ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";
             </div>
     </div>
 </div>
-<!-- src="{{$datas->thumbnail_path}}"  -->
+{{-- <!-- src="{{$datas->thumbnail_path}}"  --> --}}
  @endforeach 

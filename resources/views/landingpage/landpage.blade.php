@@ -1,6 +1,6 @@
 @php  
 
-    use App\Models\Gambar;
+     
     $html_tag_data = ["override"=>'{"attributes" : { "layout": "none" }}'];
     $title = 'Landing Page'; 
     $breadcrumbs = ["/"=>"Home","/Dashboard"=>"Beranda"];
@@ -146,7 +146,7 @@
                   <div class="row g-1 h-100 gallery">
                       <div class="col h-100">
                           <a
-                                  href="/img/product/large/product-6.webp"
+                                  href="{{route('album.show',['album'=>$datas->id])}}"
                                   class="w-100 h-100 rounded-md-start bg-cover-center d-block"
                                   style="background-image: url('/img/product/small/product-6.webp')"
                           >
@@ -155,14 +155,14 @@
                       <div class="col d-flex flex-column justify-content-stretch h-100">
                           <div class="d-flex mb-1 flex-grow-1">
                               <a
-                                      href="/img/product/large/product-6.webp"
+                                      href="{{route('album.show',['album'=>$datas->id])}}"
                                       class="w-100 h-100 rounded-md-top-end bg-cover-center d-block"
                                       style="background-image: url('/img/product/small/product-6.webp')"
                               ></a>
                           </div>
                           <div class="d-flex flex-grow-1">
                               <a
-                                      href="/img/product/large/product-6.webp"
+                                      href="{{route('album.show',['album'=>$datas->id])}}"
                                       class="w-100 h-100 rounded-md-bottom-end bg-cover-center d-block"
                                       style="background-image: url('/img/product/small/product-6.webp')"
                               ></a>
@@ -171,15 +171,20 @@
                   </div>
               </div>
               <a href="{{route('album.show',['album' => $datas->id])}}">
-              <div class="pb-3">
+              <div class=" ">
                 <h5 class="heading mb-0 d-flex"> 
                     <p class="font-weight-bold">{{$datas->judulalbum}}</p>
+                </h5>
+              </div>
+              <div class="pb-3">
+                <h5 class="heading mb-0 d-flex"> 
+                    <p class="font-weight-bold">100+ Koleksi</p>
                 </h5>
               </div>
             </a>
           </div>
           @endforeach
-        </div>   
+        </div>     
     </section>
 
     <!-- ======= About Us Section ======= -->

@@ -39,11 +39,15 @@ class AlbumController extends Controller
     }
     public function show ($albumid)
     {  
+        $resource=null;
+        $album=null;
+
         if($albumid !== null){
-            $Gambar = Gambar::with('tagged','user')->where('album_id', '=', $albumid)->get();
-            return view('album.show',compact('Gambar')); 
-        } 
-        return redirect()->route('album.index');
+            $resource = Gambar::with('tagged','user')->where('album_id', '=', $albumid)->get();
+        }  
+        $childalbum = Album::with('gambar','children','user')->where('albumparentid', '=', $albumid)->get();  
+        $currentalbum = Album::with('user')->where('id', $albumid)->find(1);
+            return view('album.show',compact('resource','childalbum','currentalbum'));  
     }
 
     public function create()
