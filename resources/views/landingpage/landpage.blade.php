@@ -137,13 +137,18 @@
 
         <div class="section-title">
           <h2 class="display-s3 text-center mb-4">Koleksi Pikart</h2>
-        </div>
-        
+        </div> 
+
         <div class="row">
           @foreach($koleksi as $datas) 
           <div class="col"> 
               <div class="sh-35 mb-4">
                   <div class="row g-1 h-100 gallery">
+
+                      @if(isset($datas['gambar']))
+                        @include ('album._thumbnail', ['gambar' => $datas['gambar']])
+                      @endif 
+
                       <div class="col h-100">
                           <a
                                   href="{{route('album.show',['album'=>$datas->id])}}"

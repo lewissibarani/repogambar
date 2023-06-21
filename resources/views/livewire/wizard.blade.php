@@ -289,7 +289,7 @@
                             <tr>
                                 <td>Tags</td>  
                                 <td>:</td>
-                                <td> @if ($tags) 
+                                <td>@if ($tags) 
                                         @foreach(json_decode($tags) as $tag)
                                         <div class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" >
                                             <span>{{$tag->value}}</span>

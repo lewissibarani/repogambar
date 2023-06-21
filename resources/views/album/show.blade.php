@@ -1,11 +1,13 @@
 @php  
  
-    $html_tag_data = ["override"=>'{"attributes" : { "layout": "none" }}'];
+    $html_tag_data = ["override"=>'{"attributes" : { "layout": "none" }}']; 
     $title = $currentalbum->judulalbum; 
-    $deskripsialbum = $currentalbum->deskripsi; 
-    $thumb1=null;
-    $thumb2=null;
-    $thumb3=null;
+    $deskripsialbum = $currentalbum->deskripsi;  
+    $albumid = $currentalbum->id; 
+    $resourcecount = $countresource;
+    if($resourcecount>=100){
+      $resourcecount = "100 + ";
+    }
     // $breadcrumbs = ["/"=>"Home","/Dashboard"=>"Beranda"];
     // $file = ""; 
 
@@ -65,9 +67,9 @@
             {{$deskripsialbum}}
             </p> 
              
-                <p class="text-muted text-small mb-2">Album dibuat oleh:  <a href="{{route('kontributor.profil',['user_id'=> $currentalbum->user->id])}}">{{$currentalbum->user->name}}</a> </p>
+                <p class="text-muted mb-2">Album dibuat oleh:  <a href="{{route('kontributor.profil',['user_id'=> $currentalbum->user->id])}}">{{$currentalbum->user->name}}</a> |  {{$resourcecount}} Aset</p>
                    
-                    <div class="text text-small   mb-2">{{$currentalbum->user->satker}}</div>  
+                    <div class="     mb-2">{{$currentalbum->user->satker}}</div>  
           
 
       </div>
@@ -86,47 +88,22 @@
     </section><!-- End Judul Album Section -->
 
     <!-- ======= Daftar Album Section ======= -->
-    @if ($childalbum!=null)
+    @if ($childalbum->count()!=0)
     <section id="daftar album" class="showalbum scroll-section about">
       <div class="container" data-aos="fade-up">
 
-        <h1 class="mb-4">Daftar Koleksi </h1>
+        <h1 class="mb-4">Daftar Koleksi</h1>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" > 
 
-          @foreach($childalbum as $datas)  
-            @foreach($childalbum->gambar as $images)  
-            
-            @endforeach
-
+          @foreach($childalbum as $datas)    
+           
           <div class="col"> 
               <div class="sh-35 mb-4">
-                  <div class="row g-1 h-100 gallery">
-                      <div class="col h-100">
-                          <a
-                                  href="{{route('album.show',['album'=>$datas->id])}}"
-                                  class="w-100 h-100 rounded-md-start bg-cover-center d-block"
-                                  style="background-image: url('{{$thumb1}}')"
-                          >
-                        </a>
-                      </div>
-                      <div class="col d-flex flex-column justify-content-stretch h-100">
-                          <div class="d-flex mb-1 flex-grow-1">
-                              <a
-                                      href="{{route('album.show',['album'=>$datas->id])}}"
-                                      class="w-100 h-100 rounded-md-top-end bg-cover-center d-block"
-                                      style="background-image: url('{{$thumb2}}')"
-                              ></a>
-                          </div>
-                          <div class="d-flex flex-grow-1">
-                              <a
-                                      href="{{route('album.show',['album'=>$datas->id])}}"
-                                      class="w-100 h-100 rounded-md-bottom-end bg-cover-center d-block"
-                                      style="background-image: url('{{$thumb3}}')"
-                              ></a>
-                          </div>
-                      </div>
-
+                  <div class="row g-1 h-100 gallery"> 
+                    @if(isset($datas['gambar']))
+                        @include ('album._thumbnail', ['gambar' => $datas['gambar']])
+                    @endif 
                   </div>
               </div>
               <a href="{{route('album.show',['album' => $datas->id])}}">
@@ -137,7 +114,7 @@
               </div> 
               </a>
               <div class="pb-3"> 
-                    <span class="text-muted">100+ Aset | Dibuat oleh: </span> <a href="{{route('kontributor.profil',['user_id'=> $datas->user->id])}}">{{$datas->user->name}}</a>  
+                    <span class="text-muted">{{$datas['gambar']->count()}} Aset | Dibuat oleh: </span> <a href="{{route('kontributor.profil',['user_id'=> $datas->user->id])}}">{{$datas->user->name}}</a>  
               </div>
           </div>
           @endforeach
@@ -150,7 +127,7 @@
     @endif
 
     <!-- ======= Daftar Image Section ======= -->
-    @if ($resource!=null)
+    @if ($resource->count()!=0) 
     <section id="daftar image" class="showalbum scroll-section about">
       <div class="container" data-aos="fade-up">
 
@@ -185,6 +162,55 @@
     </section><!-- End Daftar Image Section -->
     @endif
 
-    @include('album.modalstore') 
+    @include('album.modaledit') 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script> 
+
+    $('body').on('click', '#submit', function (event) {
+        event.preventDefault() 
+        var id = $("#albumid").val(); 
+        var judulalbum = $("#editjudulalbum").val();
+        var deskripsi = $("#editdeskripsi").val();
+        // var tags = $("#tagsBasic").val();
+        var url="{{route('album.index') }}" + "/"+id;  
+      
+        $.ajax({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: url,
+          type: "PUT",
+          data: {
+            id: id,
+            judulalbum: judulalbum,
+            deskripsi: deskripsi,
+            // tags: tags 
+          },
+          dataType: 'json',
+          success: function (data) {
+              
+              $('#formEditModalAlbum').trigger("reset");
+              $('#editModalAlbum').modal('hide');
+              window.location.reload(true);
+          }
+      });
+    });
+
+      
+    $("#modaleditAlbum").click(function (e) {
+
+    event.preventDefault();
+    var id = "{{$albumid}}"; 
+    $.get(id + '/edit', function (data) {
+      $('#editModalAlbum').modal('show');  
+      $('#albumid').val(data.data.id);
+      $('#editjudulalbum').val(data.data.judulalbum);
+      $('#editdeskripsi').val(data.data.deskripsi); 
+      // $('#tagsBasic').val(data.tags); 
+    })
+    }); 
+</script>
    
   @endsection

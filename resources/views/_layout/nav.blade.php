@@ -1,3 +1,5 @@
+
+
 <div class="nav-content d-flex">
     <!-- Logo Start -->
     <div class="logo position-relative">
@@ -16,36 +18,55 @@
             <img class="profile" alt="profile" src="{{ Auth::user()->profilepicture}}" />
             <div class="name">{{ Auth::user()->name }}</div>
         </a>
-        <div class="dropdown-menu dropdown-menu-end user-menu wide"> 
+        <div class="dropdown-menu dropdown-menu-end user-menu wide w-120"> 
             <div class="row mb-1 ms-0 me-0">
-                <div class="col-6 ps-1 pe-1">
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#">
-                                <i data-acorn-icon="help" class="me-2" data-acorn-size="17"></i>
-                                <span class="align-middle">Help</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i data-acorn-icon="file-text" class="me-2" data-acorn-size="17"></i>
-                                <span class="align-middle">Docs</span>
-                            </a>
-                        </li>
-                    </ul>
+
+                <div class="col-12 ps-1 mb-2">
+                    <div class="text-extra-small text-primary mb-2">ACCOUNT</div>
+
+                    <div class="row mg-bottom-lv2-i"> 
+                        <div class="sw-10 me-1 mb-1 d-inline-block">
+                            <img src="{{ Auth::user()->profilepicture}}" class="img-fluid rounded-md" alt="thumb">
+                        </div> 
+
+                        <div class="col mg-none pd-none">
+                            <span class="" style="font-size: 12px;">{{ Auth::user()->name }}</span>
+                            <span class="mb-1" style="font-size: 12px;">{{ Auth::user()->email }}</span>
+                            <a href="" style="background:rgb(0, 183, 255);" class="mt-3  btn btn-sm"><span class="text-white"> Edit Profile </span></a>
+                        </div>
+                    </div> 
                 </div>
-                <div class="col-6 pe-1 ps-1">
+                <hr class="full-width mg-bottom-lv2">
+                <div class="col-12 pe-1 ps-1">
+
+                    <div class="text-extra-small text-primary mb-2">MENU APLIKASI</div>
+
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#">
-                                <i data-acorn-icon="gear" class="me-2" data-acorn-size="17"></i>
-                                <span class="align-middle">Settings</span>
+                            <a href="/Petugas/Review/Daftar">
+                                <i data-acorn-icon="form" class="me-2" data-acorn-size="17"></i>
+                                <span class="label">Karya Under Review</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="/Petugas/Review/Daftar">
+                                <i data-acorn-icon="download" class="me-2" data-acorn-size="17"></i>
+                                <span class="label">Downloads</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Kontributor/Profiluser/{{Auth::user()->id}}">
+                                <i data-acorn-icon="camera" class="me-2" data-acorn-size="17"></i>
+                                <span class="label">Halaman Kontributor</span>
+                            </a> 
+                        </li>
+
+                        <hr class="full-width mg-bottom-lv2">
+
                         <li>
                             <form id="logoutForm" action="{{route('logout')}}" method="post">
                             @csrf
-                                <a onclick="document.getElementById('logoutForm').submit();">
+                                <a href="" onclick="document.getElementById('logoutForm').submit();">
                                     <i data-acorn-icon="logout" class="me-2" data-acorn-size="17"></i>
                                     <span class="align-middle">Logout</span>
                                 </a>
@@ -256,12 +277,12 @@
                 </a>
             </li> --}}
             
-            <li>
+            {{-- <li>
                 <a href="/Kontributor/Profiluser/{{Auth::user()->id}}">
                     <i data-acorn-icon="camera" class="icon" data-acorn-size="18"></i>
                     <span class="label">Halaman Kontributor</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
     <!-- Menu End -->
