@@ -162,7 +162,7 @@
                 </a>
                 <div class="pb-3">  
                     @if($datas['gambar']->count()>=100) 
-                        <span class="text-muted">{{$datas['gambar']->count()}} 100+ Aset </span> 
+                        <span class="text-muted"> 100+ Aset </span> 
                     @else
                       <span class="text-muted">  {{$datas['gambar']->count()}} Aset </span>
                     @endif
@@ -273,40 +273,65 @@
           <p>Cari apa di Pikart ?</p>
         </div>
 
-        <div class="row">
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Permintaan Download Gambar</a></h4>
-              <p>Cukup lengkapi form dan masukkan link shutterstock atau freepik yang dibutuhkan. Petugas kami siap untuk downloadkan untuk kamu.</p>
-            </div>
+        <div class="row g-2 mb-5">
+          <div class="col-12 col-sm-6 col-xl-3">
+              <div class="card w-100 sh-23 hover-img-scale-up">
+                  <img src="/img/banner/cta-vertical-1.webp" class="card-img h-100 scale" alt="card image">
+                  <div class="card-img-overlay d-flex flex-column justify-content-between bg-transparent">
+                      <div class="d-flex flex-column h-100 justify-content-between align-items-start">
+                          <div class="cta-2 text-black w-75">Permintaan Download Gambar</div>
+                          <a href="/Pages/Blog/List" class="btn btn-icon btn-icon-start btn-primary mt-3 stretched-link">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-chevron-right text-white"><path d="M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"></path></svg>
+                              <span>View</span>
+                          </a>
+                      </div>
+                  </div>
+              </div>
           </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Unggah Karya Pribadi</a></h4>
-              <p>Kamu bisa unggah hasil karyamu disini loh.</p>
-            </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+              <div class="card w-100 sh-23 hover-img-scale-up">
+                  <img src="/img/banner/cta-vertical-2.webp" class="card-img h-100 scale" alt="card image">
+                  <div class="card-img-overlay d-flex flex-column justify-content-between bg-transparent">
+                      <div class="d-flex flex-column h-100 justify-content-between align-items-start">
+                          <div class="cta-2 text-black w-75">Unggah Karya Pribadi</div>
+                          <a href="/Pages/Blog/List" class="btn btn-icon btn-icon-start btn-primary mt-3 stretched-link">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-chevron-right text-white"><path d="M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"></path></svg>
+                              <span>View</span>
+                          </a>
+                      </div>
+                  </div>
+              </div>
           </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Aset Media Digital Badan Pusat Statistik</a></h4>
-              <p>Template publikasi, foto pimpinan, dan foto gedung Badan Pusat Statisitk ada disini.</p>
-            </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+              <div class="card w-100 sh-23 hover-img-scale-up">
+                  <img src="/img/banner/cta-vertical-3.webp" class="card-img h-100 scale" alt="card image">
+                  <div class="card-img-overlay d-flex flex-column justify-content-between bg-transparent">
+                      <div class="d-flex flex-column h-100 justify-content-between align-items-start">
+                          <div class="cta-2 text-black w-75">Browsing Gambar</div>
+                          <a href="/Pages/Blog/List" class="btn btn-icon btn-icon-start btn-primary mt-3 stretched-link">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-chevron-right text-white"><path d="M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"></path></svg>
+                              <span>View</span>
+                          </a>
+                      </div>
+                  </div>
+              </div>
           </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-layer"></i></div>
-              <h4><a href="">Browsing Gambar</a></h4>
-              <p>Kamu juga bisa sekedar melihat gambar-gambar yang sudah pernah diunggah.</p>
-            </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+              <div class="card w-100 sh-23 hover-img-scale-up">
+                  <img src="/img/banner/cta-vertical-4.webp" class="card-img h-100 scale" alt="card image">
+                  <div class="card-img-overlay d-flex flex-column justify-content-between bg-transparent">
+                      <div class="d-flex flex-column h-100 justify-content-between align-items-start">
+                          <div class="cta-2 text-black w-75">Browsing Koleksi</div>
+                          <a href="/Pages/Blog/List" class="btn btn-icon btn-icon-start btn-primary mt-3 stretched-link">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-chevron-right text-white"><path d="M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"></path></svg>
+                              <span>View</span>
+                          </a>
+                      </div>
+                  </div>
+              </div>
           </div>
-
         </div>
+ 
 
       </div>
     </section><!-- End Services Section -->

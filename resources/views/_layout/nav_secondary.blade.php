@@ -2,7 +2,7 @@
 <div class="col-auto side-menu-container">
     <ul class="sw-25 side-menu mb-0 primary" id="menuSide">
         <section class="scroll-section" id="default">
-            <div class="card mb-5">
+            <div class=" mb-5">
                 <div class=" ">
                     <div class="accordion" id="accordionExample">
                         <div class="accordion-item">
@@ -67,7 +67,7 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="card-body d-flex flex-column pt-0 pb-0 ps-3 pe-0 h-100 justify-content-center">
+                                            <div class=" d-flex flex-column pt-0 pb-0 ps-3 pe-0 h-100 justify-content-center">
                                                 <div class="d-flex flex-column">
                                                     <div class="text-alternate mt-n1 lh-1-25">Biru</div>
                                                 </div>
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="card-body d-flex flex-column pt-0 pb-0 ps-3 pe-0 h-100 justify-content-center">
+                                            <div class=" d-flex flex-column pt-0 pb-0 ps-3 pe-0 h-100 justify-content-center">
                                                 <div class="d-flex flex-column">
                                                     <div class="text-alternate mt-n1 lh-1-25">Oranye</div>
                                                 </div>
@@ -111,7 +111,7 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="card-body d-flex flex-column pt-0 pb-0 ps-3 pe-0 h-100 justify-content-center">
+                                            <div class="d-flex flex-column pt-0 pb-0 ps-3 pe-0 h-100 justify-content-center">
                                                 <div class="d-flex flex-column">
                                                     <div class="text-alternate mt-n1 lh-1-25">Hijau</div>
                                                 </div>
@@ -133,7 +133,7 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="card-body d-flex flex-column pt-0 pb-0 ps-3 pe-0 h-100 justify-content-center">
+                                            <div class="d-flex flex-column pt-0 pb-0 ps-3 pe-0 h-100 justify-content-center">
                                                 <div class="d-flex flex-column">
                                                     <div class="text-alternate mt-n1 lh-1-25">Merah</div>
                                                 </div>
@@ -155,7 +155,7 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="card-body d-flex flex-column pt-0 pb-0 ps-3 pe-0 h-100 justify-content-center">
+                                            <div class="d-flex flex-column pt-0 pb-0 ps-3 pe-0 h-100 justify-content-center">
                                                 <div class="d-flex flex-column">
                                                     <div class="text-alternate mt-n1 lh-1-25">Kuning</div>
                                                 </div>

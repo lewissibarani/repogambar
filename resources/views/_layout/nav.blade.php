@@ -55,6 +55,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{route('album.index')}}">
+                                <i data-acorn-icon="folder" class="me-2" data-acorn-size="17"></i>
+                                <span class="label">Koleksi Saya</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="/Kontributor/Profiluser/{{Auth::user()->id}}">
                                 <i data-acorn-icon="camera" class="me-2" data-acorn-size="17"></i>
                                 <span class="label">Halaman Kontributor</span>

@@ -12,8 +12,9 @@ class AlbumController extends Controller
 {
     public function index ()
     {
-        $Data = Album::with('tagged','user','gambar')->get();
-
+        $Data = Album::with('tagged','user','gambar')->where('creatorid',Auth::id())->get()->slice(1)->sortByDesc('updated_at');
+        
+        $Data = $Data->all();
         return view('album.index',compact('Data'));
     }
 
