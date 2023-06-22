@@ -5,6 +5,8 @@
     $title = 'Landing Page'; 
     $breadcrumbs = ["/"=>"Home","/Dashboard"=>"Beranda"];
     $file = "";
+    $jumlahresourcekoleksichild=null;
+    $jumlahresourcekoleksi=null;
     
 
 @endphp
@@ -142,52 +144,31 @@
         <div class="row">
           @foreach($koleksi as $datas) 
           <div class="col"> 
-              <div class="sh-35 mb-4">
-                  <div class="row g-1 h-100 gallery">
-
-                      @if(isset($datas['gambar']))
+              <div class="sh-35 mb-2">
+                  <div class="row g-1 h-100 gallery"> 
+                      @if($datas['children']->count()>=1) 
+                        @include ('album._thumbnaillandpage', ['childkoleksi' => $datas['children']])
+                      @else 
                         @include ('album._thumbnail', ['gambar' => $datas['gambar']])
                       @endif 
-
-                      <div class="col h-100">
-                          <a
-                                  href="{{route('album.show',['album'=>$datas->id])}}"
-                                  class="w-100 h-100 rounded-md-start bg-cover-center d-block"
-                                  style="background-image: url('/img/product/small/product-6.webp')"
-                          >
-                        </a>
-                      </div>
-                      <div class="col d-flex flex-column justify-content-stretch h-100">
-                          <div class="d-flex mb-1 flex-grow-1">
-                              <a
-                                      href="{{route('album.show',['album'=>$datas->id])}}"
-                                      class="w-100 h-100 rounded-md-top-end bg-cover-center d-block"
-                                      style="background-image: url('/img/product/small/product-6.webp')"
-                              ></a>
-                          </div>
-                          <div class="d-flex flex-grow-1">
-                              <a
-                                      href="{{route('album.show',['album'=>$datas->id])}}"
-                                      class="w-100 h-100 rounded-md-bottom-end bg-cover-center d-block"
-                                      style="background-image: url('/img/product/small/product-6.webp')"
-                              ></a>
-                          </div>
-                      </div>
                   </div>
               </div>
-              <a href="{{route('album.show',['album' => $datas->id])}}">
-              <div class=" ">
-                <h5 class="heading mb-0 d-flex"> 
-                    <p class="font-weight-bold">{{$datas->judulalbum}}</p>
-                </h5>
-              </div>
-              <div class="pb-3">
-                <h5 class="heading mb-0 d-flex"> 
-                    <p class="font-weight-bold">100+ Koleksi</p>
-                </h5>
-              </div>
-            </a>
+                <a href="{{route('album.show',['album' => $datas->id])}}">
+                <div class=" ">
+                  <h5 class="heading mb-0 d-flex"> 
+                      <p class="font-weight-bold">{{$datas->judulalbum}}</p>
+                  </h5>
+                </div> 
+                </a>
+                <div class="pb-3">  
+                    @if($datas['gambar']->count()>=100) 
+                        <span class="text-muted">{{$datas['gambar']->count()}} 100+ Aset </span> 
+                    @else
+                      <span class="text-muted">  {{$datas['gambar']->count()}} Aset </span>
+                    @endif
+                </div>
           </div>
+            
           @endforeach
         </div>     
     </section>

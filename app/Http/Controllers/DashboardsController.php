@@ -19,6 +19,7 @@ use App\Models\GambarView;
 use App\Models\PembagianTugas;
 use App\Models\File;
 use App\Models\KoleksiAsset;
+use App\Models\Kategori_File;
 use Conner\Tagging\Model\Tag;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -46,7 +47,7 @@ class DashboardsController extends Controller
 
     public function landingpage()
     {  
-        $koleksi = Album::with('user','gambar','tagged')->paginate(5);  
+        $koleksi = Album::with('children.gambar','user','gambar','tagged')->paginate(5);  
 
         return view('landingpage.landpage' ,
         compact(['koleksi', 
@@ -66,6 +67,9 @@ class DashboardsController extends Controller
         //Menampilkan Tags
         $Tags= Tag::where('count', '>', 0)->paginate(10);
 
+        //Filter Tipe File
+        $TagsTipeFile= Kategori_File::all();
+
         //Menampilkan Aset Digital Terfavorit
         $Terfavorit = Gambar::with('user','source')->orderBy('views', 'desc')->where('booleantayang',1)->get();
         
@@ -84,12 +88,13 @@ class DashboardsController extends Controller
         return view('dashboard.dashboard',
         compact(['Data',
                  'Tags', 
-                 'Terfavorit'
+                 'Terfavorit',
+                 'TagsTipeFile'
         ]));
     }
     
 
-    public function result_pencarian($katakunci)
+    public function result_pencarian($katakunci, $tipe_file, $warna, $ukuran)
     {
         //mencari berdasarkan judul
         $ResultbyJudul=Gambar::with('file','source')->where('judul','like',"%".$katakunci."%");

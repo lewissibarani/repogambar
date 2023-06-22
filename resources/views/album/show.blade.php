@@ -131,7 +131,7 @@
     <section id="daftar image" class="showalbum scroll-section about">
       <div class="container" data-aos="fade-up">
 
-        <h1 class="mb-4">Daftar Foto </h1>
+        <h1 class="mb-4">Daftar Aset </h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" > 
             @foreach($resource as $datas)
                 <div class="col">

@@ -59,13 +59,12 @@ class AlbumController extends Controller
 
     public function update (Request $request, $id)
     {     
-            $album = Album::updateOrCreate(
-            ['id' => $id],
-            [
-            'judulalbum' => $request->judulalbum,
-            'deskripsi' => $request->deskripsi
-            ]
-           );  
+        Album::where('id', $id) 
+        ->update( [
+                    'judulalbum' => $request->judulalbum,
+                    'deskripsi' => $request->deskripsi
+                  ] 
+                ); 
            return response()->json([ 'success' => true ]);
     }
 
