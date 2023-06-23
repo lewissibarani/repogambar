@@ -1,3 +1,23 @@
+
+<div class="col-auto side-menu-container">
+    <a class="nav-link px-0 dropdown-toggle" href="#collapseTags" data-bs-toggle="collapse" aria-expanded="true">
+        <i data-acorn-icon="tag" data-acorn-size="17" class="me-2"></i>
+        <span class="align-middle">Tags</span>
+    </a>
+    <div class="collapse show" id="collapseTags"> 
+        @foreach($TagsTipeFile as $tags) 
+        <a
+                class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1 nav-link px-0 mailbox-menu-item"
+                href="hasilpencarian/katakunci/{{$tags->nama_kategori}}" 
+        > 
+            <span class="d-inline-block mt-1 align-middle">{{$tags->nama_kategori}}</span>
+        </a> 
+        @endforeach  
+    </div>
+</div>
+
+
+
 <!-- Menu Start -->
 <div class="col-auto side-menu-container">
     <ul class="sw-25 side-menu mb-0 primary" id="menuSide">

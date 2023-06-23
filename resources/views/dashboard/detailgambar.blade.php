@@ -133,13 +133,20 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                     
                                     <div class="col-6">
                                         <h4 class="mb-3 font-weight-bold">Tags </h4>
-                                    </div>
+                                    </div> 
 
                                     <div class="col-6 d-flex align-items-start justify-content-end">
                                         <!-- Contact Button Start --> 
+                                        <button
+                                                class="btn btn-primary btn-icon btn-icon-start w-100 w-md-auto">
+                                                <i data-acorn-icon="like"></i>
+                                                <span>Masukkan Ke Koleksi Saya</span>
+                                        </button>
+
                                         <form action="{{ route('like.post', $Data->id) }}"
                                             method="post">
                                             @csrf
+                                            
                                             <button
                                                 class="{{ $Data->liked() ? 'btn btn-primary' : 'btn btn-outline-primary' }} btn-icon btn-icon-start w-100 w-md-auto">
                                                 <i data-acorn-icon="like"></i>
