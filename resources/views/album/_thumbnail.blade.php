@@ -1,6 +1,23 @@
     @php
-    $thumb=array();
+    $thumb=array(); 
     @endphp
+
+    @if($gambar->count()==null||$gambar->count()==0)
+        @foreach($gambar->take(1) as $gambars)
+            @php
+                $thumb[]=$gambars->thumbnail_path;
+            @endphp 
+        @endforeach
+        <div class="col h-100"> 
+            <div class="w-100 h-100 rounded bg-cover-center d-block" style="
+                        width: 100%;
+                        padding: 0;
+                        background-color: #e3e9ed;
+                        height: 100%;"
+            >    
+            </div>
+        </div>
+    @endif
     
     @if($gambar->count()==1)
         @foreach($gambar->take(1) as $gambars)

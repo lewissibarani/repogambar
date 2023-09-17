@@ -15,6 +15,10 @@ return [
     |
     */
 
-    'driver' => 'gd'
+    'driver' => 'gd',
+    // 'placeholder_image' => 'gd',
+    // 'placeholder_koleksi' => 'gd',
+    // 'placeholder_profilepicture' => 'gd',
+    
 
-];
+];  

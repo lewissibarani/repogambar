@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/css/landpagecss.css"/>
 @endsection
 
-@push('landpage')
+@push('pushcss')
   <style>
   :root { 
     --main-spacing-horizontal: 0rem; 

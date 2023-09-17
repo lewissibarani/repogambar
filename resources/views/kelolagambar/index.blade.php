@@ -46,14 +46,14 @@
                                 <!-- Hover Controls Start -->
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-start justify-content-left">
-                                                        <section class="scroll-section" id="default">
-                                                            <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
-                                                                data-bs-toggle="modal"        
-                                                                data-bs-target="#addEditModal">
-                                                                    <i data-acorn-icon="plus"></i>
-                                                                    <span>Tambah Baru</span>
-                                                            </button>
-                                                        </section>
+                                        <section class="scroll-section" id="default">
+                                            <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
+                                                data-bs-toggle="modal"        
+                                                data-bs-target="#addEditModal">
+                                                    <i data-acorn-icon="plus"></i>
+                                                    <span>Tambah Baru</span>
+                                            </button>
+                                        </section>
                                     </div>
 
                                     <div class="col-12 col-sm-7 col-lg-9 col-xxl-10 text-end mb-1">

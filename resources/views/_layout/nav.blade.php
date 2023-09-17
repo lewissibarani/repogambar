@@ -227,21 +227,14 @@
                     <i data-acorn-icon="home" class="icon" data-acorn-size="18"></i>
                     <span class="label">Dashboard</span>
                 </a>
-            </li>
-            @php 
-            // if( Auth::user()->level==4){
-            if( true){
-            @endphp
+            </li> 
             <li>
                 <a href="/KelolaGambar/Index">
                     <i data-acorn-icon="notebook-1" class="icon" data-acorn-size="18"></i>
                     <span class="label">Permintaan Gambar</span>
                 </a>
-            </li>
-            @php
-            }; 
-            if( Auth::user()->level<=3){
-            @endphp
+            </li> 
+            @if( Auth::user()->level<=3)
             <li>
                 <a href="/Petugas/Index">
                     <i data-acorn-icon="screen" class="icon" data-acorn-size="18"></i>
@@ -264,31 +257,17 @@
                                 <a href="/Petugas/Pengaturan">
                                     <span class="label">Pengaturan Petugas</span>
                                 </a>
-                            </li> 
-                            {{--  <li>
-                                <a href="{{route('landpagesetting.index')}}">
-                                <span class="label">Pengaturan Landpage</span>
-                                </a>
-                             </li>  --}}
+                            </li>  
                 </ul>
-            </li>
-
-            @php
-            };
-            @endphp 
-            {{-- <li>
-                <a href="/Petugas/Statistik">
-                    <i data-acorn-icon="activity" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Statistik Aplikasi</span>
-                </a>
-            </li> --}}
+            </li> 
+            @endif 
             
-            {{-- <li>
+            <li>
                 <a href="/Kontributor/Profiluser/{{Auth::user()->id}}">
                     <i data-acorn-icon="camera" class="icon" data-acorn-size="18"></i>
                     <span class="label">Halaman Kontributor</span>
                 </a>
-            </li> --}}
+            </li> 
         </ul>
     </div>
     <!-- Menu End -->

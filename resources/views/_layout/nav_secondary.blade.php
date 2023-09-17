@@ -1,20 +1,44 @@
+@push('pushcss')
+  <style> 
+    .accordion-item { 
+    border: 0px solid rgba(0,0,0,0.125); 
+    }
 
-<div class="col-auto side-menu-container">
-    <a class="nav-link px-0 dropdown-toggle" href="#collapseTags" data-bs-toggle="collapse" aria-expanded="true">
-        <i data-acorn-icon="tag" data-acorn-size="17" class="me-2"></i>
-        <span class="align-middle">Tags</span>
-    </a>
-    <div class="collapse show" id="collapseTags"> 
-        @foreach($TagsTipeFile as $tags) 
-        <a
-                class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1 nav-link px-0 mailbox-menu-item"
-                href="hasilpencarian/katakunci/{{$tags->nama_kategori}}" 
-        > 
-            <span class="d-inline-block mt-1 align-middle">{{$tags->nama_kategori}}</span>
-        </a> 
-        @endforeach  
-    </div>
-</div>
+    .dot {
+    height: 20px;
+    width: 20px; 
+    border-radius: 50%;
+    display: inline-block;
+    } 
+
+    .tag {
+    font-size: 14px;
+    padding: .3em .4em .4em;
+    margin: 0 .1em;
+    }
+    .tag a {
+    color: #bbb;
+    cursor: pointer;
+    opacity: 0.6;
+    }
+    .tag a:hover {
+    opacity: 1.0
+    }
+    .tag .remove {
+    vertical-align: bottom;
+    top: 0;
+    }
+    .tag a {
+    margin: 0 0 0 .3em;
+    }
+    .tag a .glyphicon-white {
+    color: #fff;
+    margin-bottom: 2px;
+    }
+
+  </style>  
+
+@endpush
 
 
 
@@ -25,11 +49,14 @@
             <div class=" mb-5">
                 <div class=" ">
                     <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                            <div style="padding: 1rem 1.25rem;">   
-                                <h2 class="display-4">Filter</h2> 
-                            </div> 
-                            <hr>
+                        <div class="accordion-item" style="border-bottom:1px solid #ced4da;">  
+                            <div style="padding: 1rem 1.25rem;"> 
+                                <strong> <i data-acorn-icon="settings-1" class="me-2" data-acorn-size="17"></i> 
+                                Filter</strong>  
+                            </div>
+                        </div>     
+
+                        <div class="accordion-item"> 
                             <div class="accordion-header" id="headingOne">
                                 <button
                                         class="accordion-button collapsed"
@@ -40,23 +67,27 @@
                                         aria-controls="collapseOne"
                                 >
                                 
-                                <i data-acorn-icon="file-image" class="me-2" data-acorn-size="17"></i>
+                                <i data-acorn-icon="wizard" class="me-2" data-acorn-size="17"></i>
                                     Tipe Aset
                                 </button>
                             </div>
+
+                            
+
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="">
-                                        @foreach($TagsTipeFile as $tags)
-                                            <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="hasilpencarian/katakunci/{{$tags->nama_kategori}}">
-                                                <span>{{$tags->nama_kategori}}</span>
-                                            </a>
-                                        @endforeach
-                                        </div>
+                                <div class="accordion-body"> 
+                                    <div class="col-12 col-sm-6 col-xl-12">
+                                        <ul id="filterTipeAset"> 
+                                            @foreach($TagsTipeFile as $tags)
+                                                <li  class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" value="{{$tags->id}}">{{$tags->nama_kategori}}</li>
+                                            @endforeach 
+                                        <ul> 
+                                    </div> 
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-item">
+                        <!-- Filter Warna -->
+                        <!-- <div class="accordion-item">
                             <div class="accordion-header" id="headingTwo">
                                 <button
                                         class="accordion-button collapsed"
@@ -76,13 +107,7 @@
                                         <div class="col-auto">
                                             <div class="sw-2 d-inline-block d-flex justify-content-start align-items-center h-100">
                                                 <div class="sh-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" 
-                                                    width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" 
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" 
-                                                    class="acorn-icons acorn-icons-circle align-top"
-                                                    style="color:rgb(0, 132, 255)">
-                                                        <circle cx="10" cy="10" r="7"></circle>
-                                                    </svg>
+                                                <span class="dot" style="background-color:rgb(0, 132, 255);"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -98,13 +123,7 @@
                                         <div class="col-auto">
                                             <div class="sw-2 d-inline-block d-flex justify-content-start align-items-center h-100">
                                                 <div class="sh-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" 
-                                                    width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" 
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" 
-                                                    class="acorn-icons acorn-icons-circle align-top"
-                                                    style="color:orange">
-                                                        <circle cx="10" cy="10" r="7"></circle>
-                                                    </svg>
+                                                <span class="dot" style="background-color:orange"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -120,13 +139,7 @@
                                         <div class="col-auto">
                                             <div class="sw-2 d-inline-block d-flex justify-content-start align-items-center h-100">
                                                 <div class="sh-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" 
-                                                    width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" 
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" 
-                                                    class="acorn-icons acorn-icons-circle align-top"
-                                                    style="color:rgb(92, 173, 0)">
-                                                        <circle cx="10" cy="10" r="7"></circle>
-                                                    </svg>
+                                                <span class="dot" style="background-color:rgb(92, 173, 0)"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,13 +155,7 @@
                                         <div class="col-auto">
                                             <div class="sw-2 d-inline-block d-flex justify-content-start align-items-center h-100">
                                                 <div class="sh-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" 
-                                                    width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" 
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" 
-                                                    class="acorn-icons acorn-icons-circle align-top"
-                                                    style="color:rgb(211, 0, 0)">
-                                                        <circle cx="10" cy="10" r="7"></circle>
-                                                    </svg>
+                                                <span class="dot" style="background-color:rgb(211, 0, 0)"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,13 +171,7 @@
                                         <div class="col-auto">
                                             <div class="sw-2 d-inline-block d-flex justify-content-start align-items-center h-100">
                                                 <div class="sh-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" 
-                                                    width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" 
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" 
-                                                    class="acorn-icons acorn-icons-circle align-top"
-                                                    style="color:rgb(228, 224, 0)">
-                                                        <circle cx="10" cy="10" r="7"></circle>
-                                                    </svg>
+                                                <span class="dot" style="background-color:#FCDB7E"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -185,29 +186,31 @@
                                         
                                 </div>
                             </div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header" id="headingThree">
+                        </div> -->
+                        <!-- End Filter Warna -->
+                        
+                        <!-- <div class="accordion-item">
+                            <div class="accordion-header" id="headingTwo">
                                 <button
                                         class="accordion-button collapsed"
                                         type="button"
                                         data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree"
+                                        data-bs-target="#collapseTwo"
                                         aria-expanded="false"
-                                        aria-controls="collapseThree"
+                                        aria-controls="collapseTwo"
                                 >
                                 <i data-acorn-icon="maximize" class="me-2" data-acorn-size="17"></i>
                                     Ukuran
                                 </button>
                             </div>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">  
                                                     <label class="form-label">Ukuran dalam pixel</label>
-                                                    <div id="sliderStep"></div> 
-                                <!-- Steps End -->
+                                                    <div id="sliderStep"></div>  
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+
                     </div>
                 </div>
             </div>

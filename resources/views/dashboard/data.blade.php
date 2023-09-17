@@ -1,15 +1,15 @@
 @php
 $ENDPOINT = "/Dashboard"; 
 @endphp  
-@if(App::environment() == 'production') 
+<!-- @if(App::environment() == 'production') 
 @php
-$ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard"; 
+$ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";  
 @endphp
 
-@endif
-
+@endif  -->
 @foreach ($Data as $datas)
-<div class="col">
+
+<div class="col"> 
     <div class="card hover-img-scale-up hover-reveal">
             <img class="card-img sh-50 scale"  
             src="{{Storage::temporaryUrl($datas->thumbnail_path,now()->addMinutes(30))}}" 
@@ -44,6 +44,7 @@ $ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";
                 </div>
             </div>
     </div>
-</div>
-{{-- <!-- src="{{$datas->thumbnail_path}}"  --> --}}
+</div> 
  @endforeach 
+ 
+      

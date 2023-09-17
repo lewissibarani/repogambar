@@ -15,7 +15,7 @@
     <meta name="description" content="{{$description}}"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">   
     @include('_layout.head')  
-    @stack('landpage')  
+    @stack('pushcss')  
     @stack('show.album') 
 </head>
 

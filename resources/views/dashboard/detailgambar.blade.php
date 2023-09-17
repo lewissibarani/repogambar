@@ -126,37 +126,39 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                     </ul>
                                 </div>
                             </div>
+                        </div> 
+                        <div class="card-body pt-0 pb-0">
+                            <div class="col-12 d-flex align-items-start justify-content-end">
+                                <!-- Contact Button Start -->  
+
+                                <button
+                                        class="btn btn-primary btn-icon btn-icon-start w-100 w-md-auto" 
+                                        style="margin-right:5px;"
+                                        data-bs-toggle="modal"        
+                                        data-bs-target="#putModalAlbum">
+                                        <i data-acorn-icon="plus"></i>
+                                        <span>Masukkan Ke Koleksi Saya</span>
+                                </button>
+
+                                <form action="{{route('like.post', $Data->id)}}"
+                                    method="post">
+                                    @csrf
+                                    
+                                    <button
+                                        class="{{ $Data->liked() ? 'btn btn-primary' : 'btn btn-outline-primary' }} btn-icon btn-icon-start w-100 w-md-auto">
+                                        <i data-acorn-icon="like"></i>
+                                        <span>Like</span>
+                                    </button>
+                                </form> 
+                                <!-- Contact Button End --> 
+                            </div> 
                         </div>
                         <div class="card-body pt-0">
                             <div>
-                                <div class="row"> 
-                                    
+                                <div class="row">  
                                     <div class="col-6">
                                         <h4 class="mb-3 font-weight-bold">Tags </h4>
-                                    </div> 
-
-                                    <div class="col-6 d-flex align-items-start justify-content-end">
-                                        <!-- Contact Button Start --> 
-                                        <button
-                                                class="btn btn-primary btn-icon btn-icon-start w-100 w-md-auto">
-                                                <i data-acorn-icon="like"></i>
-                                                <span>Masukkan Ke Koleksi Saya</span>
-                                        </button>
-
-                                        <form action="{{ route('like.post', $Data->id) }}"
-                                            method="post">
-                                            @csrf
-                                            
-                                            <button
-                                                class="{{ $Data->liked() ? 'btn btn-primary' : 'btn btn-outline-primary' }} btn-icon btn-icon-start w-100 w-md-auto">
-                                                <i data-acorn-icon="like"></i>
-                                                <span>Like</span>
-                                            </button>
-                                        </form> 
-                                        <!-- Contact Button End --> 
-                                    </div> 
-
-
+                                    </div>  
                                 </div>
                                 
                                 <div class="mb-2">
@@ -360,4 +362,6 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
             <!-- Right Side End -->
         </div>
     </div>
+
+@include('album.modalputtoalbum')
 @endsection

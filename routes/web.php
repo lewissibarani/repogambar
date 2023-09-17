@@ -64,10 +64,13 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard'])->name('dashboard.halamandepan');  
+        Route::post('/', [DashboardsController::class, 'dashboard'])->name('dashboard.halamandepan');  
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar'); 
         Route::get('Download/{gambar_id}',[DashboardsController::class, 'downloadGambar'])->name('dashboard.downloadgambar');
         Route::get('DownloadFile/{file_id}',[DashboardsController::class, 'downloadFile'])->name('dashboard.downloadfile'); 
         Route::get('Statistik',[DashboardsController::class, 'statistik'])->name('petugas.statistik');
+
+        Route::post('MasukKoleksi', [DashboardsController::class, 'puttoalbum'])->name('dashboard.puttoalbum'); 
     });
 
     Route::prefix('Kontributor')->group(function () {
@@ -82,7 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('hasilpencarian')->group(function () {
         Route::post('caridashboard', [DashboardsController::class, 'hasilPencarian'])->name('dashboard.hasilpencarian');
         Route::post('cari', [DashboardsController::class, 'hasilPencarian_'])->name('dashboard.hasilpencarian_');
-        Route::get('/katakunci/{katakunci}', [DashboardsController::class, 'result_pencarian'])->name('result_pencarian');
+        Route::get('/katakunci/{katakunci}/filter/{tipeaset}/{tipehasil}', [DashboardsController::class, 'result_pencarian'])->name('result_pencarian');
     });
 
     Route::prefix('KelolaGambar')->group(function () {

@@ -58,12 +58,40 @@ class DashboardsController extends Controller
         return view('pages.miscellaneous.maintenance');
     }
 
+    // public function dashboard(Request $request)
+    // {
+          
+    //     //Menampilkan Tags
+    //     $Tags= Tag::where('count', '>', 0)->paginate(10);
+
+    //     //Filter Tipe File
+    //     $TagsTipeFile= Kategori_File::all();
+
+    //     //Menampilkan Aset Digital Terfavorit
+    //     $Terfavorit = Gambar::with('user','source')->orderBy('views', 'desc')->where('booleantayang',1)->get();
+        
+    //     //Menampilkan Aset Digital Terbaru
+    //     $Data = Gambar::with('user','kegunaan','source')
+    //     ->orderBy('created_at', 'desc')
+    //     ->where('booleantayang', 1)
+    //     ->paginate(12); 
+       
+    //     if ($request->ajax()) { 
+    //         $view = view('dashboard.data', compact('Data'))->render();
+  
+    //         return response()->json(['html' => $view]);
+    //     }
+
+    //     return view('dashboard.dashboard',
+    //     compact(['Data',
+    //              'Tags', 
+    //              'Terfavorit',
+    //              'TagsTipeFile'
+    //     ]));
+    // }
+
     public function dashboard(Request $request)
     {
-        
-        //menampilkan penyumbang gambar
-        // $Users = User_Petugas::with('users')->paginate(5); 
-
         //Menampilkan Tags
         $Tags= Tag::where('count', '>', 0)->paginate(10);
 
@@ -72,17 +100,25 @@ class DashboardsController extends Controller
 
         //Menampilkan Aset Digital Terfavorit
         $Terfavorit = Gambar::with('user','source')->orderBy('views', 'desc')->where('booleantayang',1)->get();
+
         
         //Menampilkan Aset Digital Terbaru
         $Data = Gambar::with('user','kegunaan','source')
         ->orderBy('created_at', 'desc')
         ->where('booleantayang', 1)
-        ->paginate(12); 
+        ->paginate(20);
+        
+        if($request->filled('katakunci')){ 
 
-        if ($request->ajax()) {
-            $view = view('dashboard.data', compact('Data'))->render();
-  
-            return response()->json(['html' => $view]);
+            $this->validate($request, [
+                'katakunci' => 'required'
+            ]);
+
+            return redirect()->route('result_pencarian',['katakunci' => $request->katakunci,
+                                                         'tipeaset'=>$request->tipeasetFilter,
+                                                         'tipehasil'=>$request->tipepencarianFilter
+                                                        ]);
+ 
         }
 
         return view('dashboard.dashboard',
@@ -94,21 +130,75 @@ class DashboardsController extends Controller
     }
     
 
-    public function result_pencarian($katakunci, $tipe_file, $warna, $ukuran)
-    {
-        //mencari berdasarkan judul
-        $ResultbyJudul=Gambar::with('file','source')->where('judul','like',"%".$katakunci."%");
+    public function result_pencarian( $katakunci, $tipe_aset, $tipe_hasil ) 
+    {   
+         //Menampilkan Tags
+         $Tags= Tag::where('count', '>', 0)->paginate(10);
 
-        //mencari berdasarkan Tag kemudian di gabung dengan Result berdasarkan Judul
-        $Data=Gambar::with('file','source')->withAnyTag([$katakunci])
-        ->union($ResultbyJudul)
-        ->orderBy('created_at', 'asc')
-        ->get();
-        $Katakunci=$katakunci;
-        return view('dashboard.hasilpencarian',
-        compact(['Data',
-                 'Katakunci'
-        ]));
+         //Filter Tipe File
+         $TagsTipeFile= Kategori_File::all();
+
+        if($tipe_hasil=="Gambar"){
+            //mencari berdasarkan judul
+            $ResultbyJudul=Gambar::with('file','source')->where('judul','like',"%".$katakunci."%"); 
+
+            if($tipe_aset!=="null" ){ 
+            $ResultbyJudul->where('kategori_file',$tipe_aset);
+            } 
+            //mencari berdasarkan Tag kemudian di gabung dengan Result berdasarkan Judul
+            $Data=Gambar::with('file','source')->withAnyTag([$katakunci]);
+
+            if($tipe_aset!=="null" ){
+            $Data->where('kategori_file',$tipe_aset);
+            } 
+
+            $Data->union($ResultbyJudul)
+            ->orderBy('created_at', 'asc')
+            ->where('booleantayang', 1)
+            ->paginate(20);
+
+            // $Data = Gambar::with('user','kegunaan','source')
+            // ->orderBy('created_at', 'desc')
+            // ->where('judul','like',"% sawit%")
+            // ->where('booleantayang', 1)
+            // ->paginate(20);
+ 
+            //Filter
+            $Katakunci=$katakunci; 
+            
+            return view('dashboard.hasilpencarian',
+            compact(['Data',
+                     'Katakunci',
+                     'Tags',  
+                     'TagsTipeFile'
+            ]));
+
+           
+
+        }else {
+
+            //mencari koleksi berdasarkan judul
+            $ResultAlbumbyJudul=Album::with('gambar','children','user')->where('judulalbum','like',"%".$katakunci."%");
+            $ResultAlbumbyDeksripsi=Album::with('gambar','children','user')->where('deskripsi','like',"%".$katakunci."%");
+
+            //mencari berdasarkan Tag kemudian di gabung dengan Result berdasarkan Judul
+            $DataAlbum=Album::with('gambar','children','user')->withAnyTag([$katakunci])
+            ->union($ResultAlbumbyJudul)
+            ->union($ResultAlbumbyDeksripsi)
+            ->orderBy('created_at', 'asc')
+            ->paginate(20);
+
+            //Filter
+            $Katakunci=$katakunci;
+
+            return view('dashboard.hasilpencariankoleksi',
+            compact(['Data',
+                     'Katakunci',
+                     'Tags',  
+                     'TagsTipeFile'
+            ]));
+        }
+       
     }
 
     /**
@@ -126,31 +216,28 @@ class DashboardsController extends Controller
         ]);
         
         $Katakunci=$request->katakunci;
-        return redirect()->route('result_pencarian',['katakunci'=> $Katakunci]);
-        
-    }
+        $tipe_aset = $request->tipeasetFilter;
+        $tipe_hasil = $request->tipepencarianFilter;
 
-    public function hasilPencarian_(Request $request)
-    {
-        $this->validate($request, [
-            'katakunci_' => 'required'
-        ]);
-        
-        $Katakunci=$request->katakunci_;
-        return redirect()->route('result_pencarian',['katakunci'=> $Katakunci]);
+        return redirect()->route('result_pencarian',['katakunci'=> $Katakunci,
+                                                     'tipeaset'=> $tipe_aset,
+                                                     'tipehasil'=> $tipe_hasil,]);
         
     }
 
 
     public function viewGambar ($gambar_id)
     {
+
+        //Daftar Koleksiku
+        $Album= Album::with('user','gambar','children','parents')->where('creatorid',Auth::id())->get();
+
         // Catat View Gambar
-        //Some bits from the following query ("category", "user") are made for my own application, but I felt like leaving it for inspiration. 
         $gambar = Gambar::with('user')->find($gambar_id);
  
 
         if($gambar->showGambar()){// this will test if the user viwed the gambar or not
-            // return $gambar;
+        // return $gambar;
         }
 
         $gambar->increment('views');//I have a separate column for views in the gambar table. This will increment the views column in the gambars table.
@@ -181,9 +268,10 @@ class DashboardsController extends Controller
         //End Read The Notification
         
         return view('dashboard.detailgambar', 
-        compact(['Data',
-                'Rekomendasi',
-                'Transaksi'
+        compact([   'Data',
+                    'Album',
+                    'Rekomendasi',
+                    'Transaksi'
                 ]));
         
     }
@@ -194,9 +282,10 @@ class DashboardsController extends Controller
 
         $gambar->increment('download');  
         $path= $gambar->path;
-  
-         
-        return response()->download($path); 
+ 
+
+        return Storage::download($path);
+ 
     } 
 
     public function downloadFile ($file_id)
@@ -205,7 +294,16 @@ class DashboardsController extends Controller
 
         $file->increment('download');  
         $path= $file->path; 
-        return response()->download($path); 
+        return Storage::download($path); 
+    } 
+
+    public function puttoalbum (Request $request)
+    {  
+        $Notifikasi = Gambar::where('id', $request->gambar_id)
+        ->update([  'album_id' => $request->album_id]);
+        
+        return redirect()->route('dashboard.detailgambar',['gambar_id' => $request->gambar_id]);
+
     } 
 
     public function statistik ()

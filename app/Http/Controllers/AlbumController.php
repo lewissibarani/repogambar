@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Gambar;
 use App\Models\Album;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AlbumController extends Controller
 {
@@ -23,7 +24,7 @@ class AlbumController extends Controller
         $request->validate([
             'judulalbum' => 'required',
             'tags' => 'required',
-            'deskripsi' =>'required', 
+            'deskripsi' =>'required',
         ]);
 
         $Album = Album::create([
@@ -45,28 +46,43 @@ class AlbumController extends Controller
             $Data = Album::with('tagged','user','gambar')->find($albumid); 
             $Tags = "";
            
-            // if(isset($Data->tagged)){
-            //     foreach($Data->tagged as $tagged) {
-            //         $Tags= $Tags.$tagged->tag_slug.',';
-            //     }   
-            // }
+            if(isset($Data->tagged)){
+                foreach($Data->tagged as $tagged) {
+                    $Tags= $Tags.$tagged->tag_slug.',';
+                }   
+            }
             
             return response()->json([
-                'data' => $Data,
-                // 'tags' =>$Tags
+                'datas' => $Data,
+                'tags' =>$Tags
               ]); 
               
     }
 
-    public function update (Request $request, $id)
-    {     
-        Album::where('id', $id) 
-        ->update( [
+    public function update (Request $request, Album $album)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'judulalbum'     => 'required',
+            'deskripsi'   => 'required',
+        ]);
+
+        //check if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+ 
+        $album->update( [
                     'judulalbum' => $request->judulalbum,
                     'deskripsi' => $request->deskripsi
                   ] 
-                ); 
-           return response()->json([ 'success' => true ]);
+                );  
+        $album->retag($this->convertArray($request->tags));
+
+           return response()->json([ 'success' => true,
+                                     'message' => 'Data Berhasil Diudapte!',
+                                     'data'    => $album                                
+        ]);
     }
 
     public function show ($albumid)
@@ -78,10 +94,14 @@ class AlbumController extends Controller
             $resource = Gambar::with('tagged','user')->where('album_id', '=', $albumid)->get();
         }  
         $childalbum = Album::with('gambar','children','user')->where('albumparentid', '=', $albumid)->get();  
-        $currentalbum = Album::with('user')->find($albumid); 
+        $currentalbum = Album::with('tagged','user')->find($albumid); 
         $countresource = $this->getresourcecount($currentalbum);
+        $Tags = "";
+            foreach($currentalbum->tagged as $tagged) {
+                $Tags= $Tags.$tagged->tag_slug.',';
+            } 
 
-            return view('album.show',compact('resource','childalbum','currentalbum','countresource'));  
+            return view('album.show',compact('Tags','resource','childalbum','currentalbum','countresource'));  
     }
 
     public function create()
@@ -127,7 +147,5 @@ class AlbumController extends Controller
             }  
          
         return $count; 
-    }
-    
-    
+    } 
 }

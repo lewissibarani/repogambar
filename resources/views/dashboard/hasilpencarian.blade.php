@@ -1,119 +1,202 @@
-@php
-    $html_tag_data = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
-    $title = 'Hasil Pencarian';
-    $description = 'Knowledge Base Page';
-    $breadcrumbs = ["/"=>"Home", "/Pages"=>"Pages", "/Pages/Miscellaneous"=>"Miscellaneous"]
+@php 
+    $html_tag_data = ["override"=>'{"attributes" : { "placement": "horizontal"}}']; 
+    $title = 'Beranda';
+    $path = public_path();
+    $description = 'Beranda';
+    $breadcrumbs = ["/"=>"Home","/Dashboard"=>"Beranda"];
+    $file = "";
+
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
 @section('css')
+<link rel="stylesheet" href="/css/vendor/glide.core.min.css"/>
+<link rel="stylesheet" href="/css/vendor/baguetteBox.min.css"/>
+<link rel="stylesheet" href="/css/vendor/introjs.min.css"/>
+<link rel="stylesheet" href="/css/vendor/nouislider.min.css"/>
+<link rel="stylesheet" href="/css/vendor/tagify.css"/>
 @endsection
 
-@section('js_vendor')
+@section('js_vendor')    
+<script src="/js/vendor/baguetteBox.min.js"></script>
 <script src="/js/vendor/jquery.validate/jquery.validate.min.js"></script>
 <script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
+<script src="/js/vendor/intro.min.js"></script>
+<script src="/js/cs/responsivetab.js"></script> 
+<script src="/js/vendor/nouislider.min.js"></script>
+<script src="/js/vendor/tagify.min.js"></script>
 @endsection
 
 @section('js_page')
-<script src="/js/pages/auth.search_.js"></script>
+<script src="/js/pages/blocks.gallery.js"></script>
+<script src="/js/pages/auth.search.js"></script>
+<script src="/js/pages/dashboard.default.js"></script>  
+<script src="/js/forms/controls.slider.js"></script>
+<script src="/js/forms/controls.tag.js"></script>
 @endsection
 
 @section('content')
     <div class="container">
-
+        
         <div class="row">
-            <!-- Top Search Start -->
-            <div class="col-12">
-                <div class="card w-100 sh-30 sh-md-25 mb-5">
-                    <img src="/img/banner/cta-wide-3.webp" class="card-img h-100" alt="card image" />
-                    <div class="card-img-overlay d-flex flex-column justify-content-center bg-transparent">
-                        <div class="row d-flex">
-                            <div class="col-12 text-center">
-                                <div class="cta-3 text-primary">Ingin mencari gambar?</div>
-                                <div class="cta-3 text-black mb-3">Ketik kata kuncinya di bawah ini!</div>
-                                <form id="searchGambarForm_" action="{{route('dashboard.hasilpencarian_')}}" method="POST">                                
-                                    <div class="row g-2 justify-content-center">
-                                        <div class="col-12 col-sm-6">
-                                            <div class="d-flex flex-column justify-content-start">
-                                            @csrf
-                                            @if ($errors->any())
-                                                <div class="alert alert-danger">
-                                                    <ul>
-                                                        @foreach ($errors->all() as $error)
-                                                            <li>{{ $error }}</li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            @endif
-                                                    <div class="text-muted mb-3 mb-sm-0">
-                                                        <input type="text" class="form-control" value="{{$Katakunci}}" placeholder="kata kunci pencarian..." name="katakunci_" />
-                                                    </div>
-                                                </div>
-                                                </div>
-                                                <div class="col-12 col-sm-auto">
-                                                    <button type="submit" class="btn btn-icon btn-icon-start btn-primary" >
-                                                        <i data-acorn-icon="search"></i>
-                                                        <span>Cari Gambar</span>
-                                                    </button> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
+            @include('_layout.nav_secondary')
+            <div class="col">
+                <!-- Title Start -->
+                <div class="row"> 
+                    <div class="col-12">
+                        <div class="page-title-container">
+                            <div class="row g-0">
+                                <div class="col-auto mb-2 mb-md-0 me-auto">
+                                    <div class="w-auto sw-md-30">
+                                        <h1 class="mb-0 pb-0 display-4" id="title">{{ $title }}</h1>
+                                        @include('_layout.breadcrumb',['breadcrumbs'=>$breadcrumbs])
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-auto d-flex align-items-start justify-content-end">
+                                    <a href="/KelolaGambar/Index" class="btn btn-outline-primary btn-icon btn-icon-start ms-1 w-100 w-md-auto" 
+                                    data-title="Tombol Permintaan" data-intro="Klik tombol ini untuk melakukan permintaan gambar" data-step="1" >
+                                        <i data-acorn-icon="plus"></i>
+                                        <span>Buat Permintaan Gambar</span>
+                                    </a> &nbsp &nbsp
+                                    <!-- Tour Button Start -->
+                                    <button type="button" class="btn btn-outline-primary btn-icon btn-icon-end w-100 w-sm-auto" id="dashboardTourButton">
+                                        <i data-acorn-icon="flag"></i>    
+                                        <span>Perkenalan Website</span> 
+                                    </button>
+                                    <!-- Tour Button End --> 
+                                </div> 
+                                    
+                            </div>  
+                            
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Top Search End -->
+            
+                <!-- Title End -->
+                <form id="searchGambarForm" action="{{route('dashboard.halamandepan')}}" method="POST">
+                    @csrf
+                    <div class="row"> 
 
-            <!-- Categories Start -->
-            <div class="col-12 col-xl-12 col-xxl-12 mb-5">
-                <h3 class="small-title">Hasil Pencarian untuk "{{$Katakunci}}" | <span class=""><i data-acorn-icon="image"></i> </span> ({{$Data->count()}}) </h3>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-5 gallery g-2 mb-5">
-                    @foreach ($Data as $datas)
-                        <div class="col">
-                            <div class="card hover-img-scale-up hover-reveal">
-                                    <img class="card-img sh-50 scale" 
-                                    src="/{{$datas->thumbnail_path}}"
-                                    alt="card image" />
-                                    <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
-                                        <div class="row g-0">
-                                        </div>
-                                        <div class="row g-0">
-                                            <div class="col pe-2">
-                                                <a href="/Dashboard/DetailGambar/{{$datas->id}}" class="stretched-link">
-                                                    <h5 class="heading text-white mb-1">{{$datas->judul}}</h5>
-                                                </a>
-                                                <div class="d-inline-block">
-                                                    <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->tipe_gambar}}</span></div>
-                                                </div>
-                                                @php
-                                                if($datas->file_id!==null)
-                                                    {
-                                                    @endphp
-                                                    <div class="d-inline-block">
-                                                        <div class="text-uppercase"><span class='badge rounded-pill bg-light'>ZIP</span></div>
-                                                    </div>
-                                                    @php
-                                                        $file = "zip";
-                                                    }
-                                                @endphp
-                                                <div class="d-inline-block">
-                                                    <div class="text-uppercase"><span class='badge rounded-pill bg-light'>{{$datas->source->sumber_gambar}}</span></div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="col-12 col-xl-12 col-xxl-12 mb-12">
+                            <div class="input-group mb-3" 
+                            data-title="Mesin Pencari Gambar" data-intro="Masukkan kata kunci gambar yang ingin dicari" data-step="2">
+                                    <button id="tipepencarianButton" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Gambar
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a id="tipepencarianList" class="dropdown-item" href="#">Koleksi</a>
+                                        </li> 
+                                        <!-- <li>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Separated link</a></li> -->
+                                    </ul> 
+                                <input type="text" placeholder="Kata kunci pencarian..." class="form-control" 
+                                aria-label="Sizing example input" 
+                                aria-describedby="inputGroup-sizing-default"
+                                value="{{$Katakunci}}"
+                                name="katakunci"/> 
+
+                                <input type="hidden" id="tipeasetFilter" value="null" name="tipeasetFilter"/> 
+                                <input type="hidden" id="tipepencarianFilter" value="Gambar" name="tipepencarianFilter"/>  
+
+                                <button type="submit" class="btn btn-icon btn-icon-start btn-primary stretched-link" >
+                                <i data-acorn-icon="search" class="me-1"></i>  
+                                </button> 
+                                
                             </div>
                         </div>
-                        <!-- src="{{$datas->thumbnail_path}}"  -->
-                    @endforeach
+                    </div>
+                </form>   
+
+                <!-- Tags Start -->
+                <div class="col-12 col-sm-6 col-xl-12"
+                data-title="Daftar Tag Gambar" data-intro="Kamu juga bisa memilih gambar berdasarkan tags disini" data-step="4"> 
+                    <div class="mb-5">
+                        <div class="">
+                        @foreach($Tags as $tag)
+                            <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" 
+                            href="#"
+                            >
+                                <span>{{$tag->name}} ({{$tag->count}})</span>
+                            </a>
+                        @endforeach
+                        </div>
+                    </div>
+                </div>
+                <!-- Tags End -->
+
+                <div class="row">
+                    <div class="col-12 col-xl-12 col-xxl-12 mb-5">  
+                                <!-- Grid Start -->  
+                                    <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" id="masonryCardsExample"> 
+                                    @include('dashboard.dataSearchGambar')  
+                                    </div>
+
+                                    @if ($Data->count()>=20)
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <a href="{{$Data->nextPageUrl()}}" class="btn btn-xl btn-outline-primary sw-30">Muat Lebih Banyak</a>
+                                        </div>
+                                    </div>
+                                    @endif
+                                <!-- Grid End -->    
+                    </div> 
                 </div>
             </div>
-            <!-- Categories End -->
-        </div>
-    </div>
+        </div>  
+    </div>  
+    
+    
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script> 
+
+$(document).ready(function(){
+   
+ 
+    $('ul#filterTipeAset li').click( function() {
+        const value = $(this).attr('value'); 
+
+        if($(this).hasClass("btn-primary")){
+            $(this).removeClass("btn-primary");
+            $(this).addClass("btn-outline-primary");   
+            $("#tipeasetFilter").val(""); 
+        } else { 
+        $('ul#filterTipeAset li').removeClass();
+        $('ul#filterTipeAset li').addClass("btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1");  
+        $(this).removeClass("btn-outline-primary"); 
+        $(this).addClass("btn-primary"); 
+        $("#tipeasetFilter").val(value); 
+        }
+         
+
+        
+        
+    });
+
+    $("#tipepencarianList").click(function(){
+        if( $("#tipepencarianList").html()=="Gambar"){
+            $("#tipepencarianList").html("Koleksi");
+            $("#tipepencarianButton").html("Gambar"); 
+
+             //set filter
+            $("#tipepencarianFilter").val("Gambar"); 
+            
+
+        } else   {
+            $("#tipepencarianList").html("Gambar");
+            $("#tipepencarianButton").html("Koleksi");  
+
+            //set filter
+            $("#tipepencarianFilter").val("Koleksi"); 
+        }
+    });
+});
+</script> 
 @endsection
+ 

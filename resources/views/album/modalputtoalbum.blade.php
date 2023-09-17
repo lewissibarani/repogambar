@@ -1,63 +1,53 @@
   
- <!-- Add Edit Modal Start -->
+ <!-- Add Edit Modal Start --> 
+ <div class="modal fade" id="putModalAlbum" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content"> 
+            <div class="modal-body" style="padding:0px;"> 
                 
- <div class="modal large fade" id="storeModalAlbum" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title font-weight-bold" id="modalTitle">Form Penambahan Album</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{{route('album.store')}}" method="POST" novalidate>
-                @csrf
-                @error('judulalbum')
-                <div class="mb-3 text-danger">
-                    {{$message}}
-                </div>
-                @enderror
-                @error('deskripsi')
-                <div class="mb-3 text-danger">
-                    {{$message}}
-                </div>
-                @enderror 
-                @error('tags')
-                <div class="mb-3 text-danger">
-                    {{$message}}
-                </div>
-                @enderror 
+                <div class="col-12 col-md-6 col-xl-12">
+                    <div class="">
+                        <div class="row g-0 h-100">
+                            <div class=" col-4"  
+                                    style="  
+                                    background-image: url('{{Storage::temporaryUrl($Data->thumbnail_path,now()->addMinutes(30))}}');
+                                    background-repeat: no-repeat ;
+                                    background-size: contain;
+                                    border-top-left-radius: 15px;
+                                    border-bottom-left-radius: 15px;
+                                    min-height: 300px;
+                                    ">
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body d-flex flex-column pt-0 pb-0 h-100 justify-content-center">
+                                    <div class="d-flex flex-column"> 
+                                        <form action="{{route('dashboard.puttoalbum')}}" method="POST" novalidate>
+                                            @csrf   
+                                            <div class="mb-3">  
+                                                <div class="row mb-3">
+                                                    <input type="hidden" value="{{$Data->id}}" class="form-control" id="judulalbum" name="gambar_id" /> 
+                                                    <label class="font-weight-bold col-sm-2 col-form-label">Daftar Koleksiku:</label>
+                                                    <div class="col-sm-10">
+                                                        <select id="select2Multiple" class="form-select" name="album_id" >
+                                                            <option selected> <i>Pilih Koleksimu...</i></option>
+                                                            @foreach ($Album as $koleksi)
+                                                                <option value="{{$koleksi->id}}">{{ $koleksi->judulalbum }}</option> 
+                                                            @endforeach
+                                                        </select>  
+                                                    </div>
+                                                </div> 
+                                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
+                                                <button id="submit" type="submit" class="btn btn-primary" >Simpan</button>
+                                            </div>
 
-                <section class="scroll-section" id="labelSize">
-                    <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-3 col-form-label">Judul Album</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="judulalbum" name="judulalbum" /> 
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div> 
-                    <div class="row mb-3">
-                        <label for="colFormLabel" class="col-sm-3 col-form-label">Deskripsi</label>
-                        <div class="col-sm-9">
-                            <textarea type="text" class="form-control" rows="5" id="deskripsi" name="deskripsi" ></textarea> 
-                        </div>
-                    </div> 
-                    <div class="row mb-3">
-                        <label  for="colFormLabel" class="col-sm-3 col-form-label">Tags</label>
-                        <div class="col-sm-9">
-                            <input 
-                                    id="tagsBasic"
-                                    name="tags" 
-                            />
-                            <small class="form-text text-muted">Isian ini berfungsi agar semua yang memiliki tag serupa masuk ke dalam album ini.</small>
-                            <!-- <input class="form-control" type="text" data-role="tagsinput" name="tags"> -->
-                        </div>
-                    </div>   
-                </section> 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Batal</button>
-                <button id="submit" type="submit" class="btn btn-primary" >Kirim</button>
-            </div>
-            </form>
+                    </div>
+                </div> 
+            </div> 
         </div>
     </div>
 </div>

@@ -31,6 +31,7 @@
     <script src="/js/cs/datatable.extend.js"></script>
     <script src="/js/plugins/datatable.boxedvariations.js"></script>
     <script src="/js/forms/controls.tag.js"></script> 
+    <script src="/js/components/toasts.js"></script>
 @endsection
 
 @push('show.album')
@@ -78,7 +79,8 @@
         <div class="">
   
           <button id="modaleditAlbum" type="button" class="btn btn-icon btn-icon-start btn-primary mb-1" 
-              href="">
+              data-bs-toggle="modal"        
+              data-bs-target="#editModalAlbum">
                   <i data-acorn-icon="plus"></i>
                   <span>Edit Album</span>
           </button> 
@@ -173,8 +175,8 @@
         var id = $("#albumid").val(); 
         var judulalbum = $("#editjudulalbum").val();
         var deskripsi = $("#editdeskripsi").val();
-        // var tags = $("#tagsBasic").val();
-        var url="{{route('album.index') }}" + "/"+id;  
+        var tags = $("#tagsBasic").val();
+        var url="{{route('album.index') }}" + "/"+id;
       
         $.ajax({
           headers: {
@@ -182,11 +184,12 @@
           },
           url: url,
           type: "PUT",
+          cache: false,
           data: {
             id: id,
             judulalbum: judulalbum,
             deskripsi: deskripsi,
-            // tags: tags 
+            tags: tags 
           },
           dataType: 'json',
           success: function (data) {
@@ -197,20 +200,7 @@
           }
       });
     });
-
-      
-    $("#modaleditAlbum").click(function (e) {
-
-    event.preventDefault();
-    var id = "{{$albumid}}"; 
-    $.get(id + '/edit', function (data) {
-      $('#editModalAlbum').modal('show');  
-      $('#albumid').val(data.data.id);
-      $('#editjudulalbum').val(data.data.judulalbum);
-      $('#editdeskripsi').val(data.data.deskripsi); 
-      // $('#tagsBasic').val(data.tags); 
-    })
-    }); 
+ 
 </script>
    
   @endsection

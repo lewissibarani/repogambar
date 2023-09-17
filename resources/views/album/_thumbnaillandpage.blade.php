@@ -3,7 +3,7 @@ use Illuminate\Support\Collection;
 $thumb=array();
 $koleksigambar= new Collection();
 @endphp
-
+ 
 @foreach($childkoleksi as $koleksi)
         @if(isset($koleksi['gambar'])) 
                 @php

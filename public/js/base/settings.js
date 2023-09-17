@@ -30,7 +30,7 @@ class Settings {
   get options() {
     return {
       attributes: {
-        placement: 'vertical',
+        placement: 'horizontal',
         behaviour: 'unpinned',
         layout: 'fluid',
         radius: 'rounded',
