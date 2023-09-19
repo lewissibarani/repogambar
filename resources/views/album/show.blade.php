@@ -140,7 +140,7 @@
                     <a href="{{route('dashboard.detailgambar',['gambar_id'=>$datas->id])}}">
                         <div class="card hover-img-scale-up hover-reveal">
                             <img class="card-img sh-35 scale"  
-                            src="{{Storage::temporaryUrl($datas->thumbnail_path,now()->addMinutes(30))}}" 
+                            src="{{$datas->thumbnail_path}}" 
                             src=""
                             alt="card image" />
                             <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">

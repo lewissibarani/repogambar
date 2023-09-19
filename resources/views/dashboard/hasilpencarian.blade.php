@@ -1,6 +1,6 @@
 @php 
     $html_tag_data = ["override"=>'{"attributes" : { "placement": "horizontal"}}']; 
-    $title = 'Beranda';
+    $title = 'Hasil Pencarian Aset: '.$Katakunci;
     $path = public_path();
     $description = 'Beranda';
     $breadcrumbs = ["/"=>"Home","/Dashboard"=>"Beranda"];
@@ -47,7 +47,7 @@
                         <div class="page-title-container">
                             <div class="row g-0">
                                 <div class="col-auto mb-2 mb-md-0 me-auto">
-                                    <div class="w-auto sw-md-30">
+                                    <div class="w-auto sw-md-100">
                                         <h1 class="mb-0 pb-0 display-4" id="title">{{ $title }}</h1>
                                         @include('_layout.breadcrumb',['breadcrumbs'=>$breadcrumbs])
                                     </div>

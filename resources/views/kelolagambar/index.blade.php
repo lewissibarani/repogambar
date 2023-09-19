@@ -194,7 +194,7 @@
                                                                 data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="Download File"
-                                                                href="/{{$datas->gambar->file->path}}">
+                                                                href="{{route('dashboard.downloadfile',$datas->gambar->file->id)}}">
                                                                 <i data-acorn-icon="attachment"></i>
                                                                 </a>
                                                         </button>
@@ -208,7 +208,7 @@
                                                                 data-bs-toggle="tooltip"
                                                                 data-bs-placement="top"
                                                                 title="Download Gambar"
-                                                                href="/{{$datas->gambar->path}}">
+                                                                href="{{route('dashboard.downloadgambar',$datas->gambar->id)}}">
                                                                 <i data-acorn-icon="file-image"></i>
                                                                 </a>
                                                         </button>    

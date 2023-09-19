@@ -18,9 +18,9 @@
         </a>
     </div>  
     <div class="user-container d-flex"  style="margin-left :3em;  "> 
-        <a href="#jenislayanan" class="nav-link text-dark">
+        <a href="#koleksi" class="nav-link text-dark">
             <i data-acorn-icon="support" class="icon" data-acorn-size="18"></i>
-            <span class="label">Jenis Layanan</span>
+            <span class="label">Daftar Koleksi</span>
         </a>
     </div> 
     {{-- <div class="user-container d-flex"  style="margin-left :3em; margin-right: 50px;"> 

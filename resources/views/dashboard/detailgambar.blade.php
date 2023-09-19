@@ -59,7 +59,7 @@
  
 // Calling getimagesize() function
 
-$imageinfo = getimagesize(Storage::temporaryUrl($Data->path,now()->addMinutes(30)));
+$imageinfo = getimagesize($Data->path);
 $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
 
 @endphp
@@ -68,15 +68,19 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
 @section('css')
     <link rel="stylesheet" href="/css/vendor/glide.core.min.css"/>
     <link rel="stylesheet" href="/css/vendor/baguetteBox.min.css"/>
+    <link rel="stylesheet" href="/css/vendor/select2.min.css"/>
+    <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css"/>
 @endsection
 
 @section('js_vendor')
     <script src="/js/vendor/glide.min.js"></script>
     <script src="/js/vendor/baguetteBox.min.js"></script>
+    <script src="/js/vendor/select2.full.min.js"></script>
 @endsection
 
 @section('js_page')
     <script src="/js/cs/glide.custom.js"></script>
+    <script src="/js/forms/controls.select2.js"></script>
     <!-- <script src="/js/pages/blog.detail.js"></script> -->
 @endsection
 
@@ -115,10 +119,10 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                 <div class="glide__track" data-glide-el="track">
                                     <ul class="glide__slides gallery-glide-custom">
                                         <li class="glide__slide p-0">
-                                            <a href="/{{$Data->path}}">
+                                            <a href="#">
                                                 <img
                                                     alt="detail"
-                                                    src="{{Storage::temporaryUrl($Data->path,now()->addMinutes(30))}}"
+                                                    src="{{$Data->path}}"
                                                     class="responsive border-0 img-fluid mb-3 sh-80 w-100"
                                                 />
                                             </a>
@@ -275,7 +279,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                             data-bs-toggle="tooltip"
                                             data-bs-placement="top"
                                             title="Download Gambar" 
-                                            href="{{$download_link}}"
+                                            href="{{route('dashboard.downloadgambar', $Data->id)}}"
                                     >
                                     <h3 class="text-white"><i data-acorn-icon="download"></i> Download</h3>
                                     </a>
@@ -293,7 +297,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                         <div class="dropdown-menu dropdown-menu-lg-end mw-100"  aria-labelledby="btnGroupDrop1">
                                             <div class="row" style="width: 500px;">
                                                 <h5 class="font-weight-bold dropdown-item disabled">TIPE FILE</h5>
-                                                <a class="dropdown-item"  download="{{$Data->nama_gambar}}" href="{{$download_link_gambar}}">
+                                                <a class="dropdown-item"  download="{{$Data->nama_gambar}}" href="{{route('dashboard.downloadgambar', $Data->id)}}">
                                                     <div class="row">
                                                         <div class="col-2">
                                                             Gambar
@@ -303,7 +307,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                                         </div>
                                                     </div>
                                                 </a>
-                                                <a class="dropdown-item" href="{{$download_link_file}}">
+                                                <a class="dropdown-item" download="{{$Data->file->nama_file}}" href="{{route('dashboard.downloadfile', $Data->file->id)}}">
 
                                                     <div class="row">
                                                         <div class="col-2">
@@ -335,7 +339,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                                     <div class="row g-0 h-100">
                                                         <div class="col-4 card-img card-img-horizontal sw-10 sw-sm-14"
                                                         
-                                                             style="background-position: center; background-image: url('{{Storage::temporaryUrl($rekomendasi->thumbnail_path,now()->addMinutes(30))}}')">
+                                                             style="background-position: center; background-image: url('{{$rekomendasi->thumbnail_path}}')">
                                                             
                                                         </div>
                                                         <div class="col position-static">

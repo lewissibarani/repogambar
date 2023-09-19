@@ -79,7 +79,7 @@
                                     id="image_input"   /> 
                             </div>   
                             <div class="col-md-12 mb-2"> 
-                                <img class ="card-img scale" id="preview-image-before-upload" src="/{{$Data->gambar->thumbnail_path}}"
+                                <img class ="card-img scale" id="preview-image-before-upload" src="{{$Data->gambar->thumbnail_path}}"
                                 alt="preview image"  > 
                                 <input type="hidden" value="{{$Data->gambar->id}}" class="form-control" name="id_gambar" />
                                         @error('image')
@@ -123,16 +123,24 @@
                                     {{date_format($Data->created_at,"d M Y")}}
                                     </label>                  
                                 </div>
-                            </div>
+                            </div> 
+                            
                             <div class="row mb-3">
-                                <label class="font-weight-bold col-sm-2 col-form-label">Penggunaan</label>
+                                <label class="font-weight-bold col-sm-2 col-form-label">Kategori File</label>
                                 <div class="col-sm-10">
-                                    <label class=" col-sm-12 col-form-label">
-                                    {{$Data->kegunaan->kegunaan }}
-                                        <input type="hidden" value="{{ $Data->kegunaan->kegunaan }}" class="form-control" name="idKegunaan" />  
-                                    </label>               
+                                    <select id="select2Multiple" class="form-select" name="kategori_file" > 
+                                        @foreach ($Kategori_File as $kategori)
+
+                                        <option value="{{ $kategori->id}}" {{ ( $kategori->id == $Data->gambar->kategori_file) ? 'selected' : '' }}> {{ $kategori->nama_kategori }}</option>
+
+                                        <!-- <option value="{{ $kategori->id}}">{{ $kategori->nama_kategori }}</option>  -->
+                                        @endforeach
+                                    </select> 
+                                    {{-- <small class="form-text text-muted">Tuliskan minimal 3 tags. Setiap tag dipisahkan dengan tanda koma</small> --}}
+                                    <!-- <input class="form-control" type="text" data-role="tagsinput" name="tags"> -->
                                 </div>
                             </div>
+
                             <div class="row mb-3">
                                 <label class="font-weight-bold col-sm-2 col-form-label">Status</label>
                                 <div class="col-sm-10">

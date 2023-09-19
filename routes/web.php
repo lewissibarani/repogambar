@@ -77,7 +77,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [KontributorsController::class, 'showprofile']);
         Route::get('Profiluser/{user_id}', [KontributorsController::class, 'showprofile'])->name('kontributor.profil'); 
         Route::get('UploadKarya', [KontributorsController::class, 'uploadkarya'])->name('kontributor.uploadkarya');
-        Route::get('Store', [KontributorsController::class, 'store']); 
+        Route::post('Store', [KontributorsController::class, 'store'])->name('kontributor.store');
     });
 
    

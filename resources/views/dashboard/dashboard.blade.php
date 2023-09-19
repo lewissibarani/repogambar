@@ -74,7 +74,7 @@
                 </div>
             
                 <!-- Title End -->
-                <!-- <form id="searchGambarForm" action="{{route('dashboard.halamandepan')}}" method="POST"> -->
+                <form id="searchGambarForm" action="{{route('dashboard.halamandepan')}}" method="POST">
                     @csrf
                     <div class="row"> 
 
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                <!-- </form>    -->
+                </form>   
 
                 <!-- Tags Start -->
                 <div class="col-12 col-sm-6 col-xl-12"

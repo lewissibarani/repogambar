@@ -140,28 +140,19 @@ class DashboardsController extends Controller
 
         if($tipe_hasil=="Gambar"){
             //mencari berdasarkan judul
-            $ResultbyJudul=Gambar::with('file','source')->where('judul','like',"%".$katakunci."%"); 
+            $ResultbyJudul=Gambar::with('file','source')->where('judul','like',"%".$katakunci."%") 
+            ->when($tipe_aset!=="null", function($query){
+                return $query->where('kategori_file',$tipe_aset);
+           }); 
 
-            if($tipe_aset!=="null" ){ 
-            $ResultbyJudul->where('kategori_file',$tipe_aset);
-            } 
             //mencari berdasarkan Tag kemudian di gabung dengan Result berdasarkan Judul
-            $Data=Gambar::with('file','source')->withAnyTag([$katakunci]);
-
-            if($tipe_aset!=="null" ){
-            $Data->where('kategori_file',$tipe_aset);
-            } 
-
-            $Data->union($ResultbyJudul)
-            ->orderBy('created_at', 'asc')
+            $Data=Gambar::with('file','source')->withAnyTag([$katakunci])->union($ResultbyJudul)
             ->where('booleantayang', 1)
-            ->paginate(20);
-
-            // $Data = Gambar::with('user','kegunaan','source')
-            // ->orderBy('created_at', 'desc')
-            // ->where('judul','like',"% sawit%")
-            // ->where('booleantayang', 1)
-            // ->paginate(20);
+            ->orderBy('created_at', 'asc')
+             
+            ->when($tipe_aset!=="null", function($query){
+                return $query->where('kategori_file',$tipe_aset);
+           })->paginate(20); 
  
             //Filter
             $Katakunci=$katakunci; 
@@ -192,7 +183,7 @@ class DashboardsController extends Controller
             $Katakunci=$katakunci;
 
             return view('dashboard.hasilpencariankoleksi',
-            compact(['Data',
+            compact(['DataAlbum',
                      'Katakunci',
                      'Tags',  
                      'TagsTipeFile'
@@ -277,14 +268,20 @@ class DashboardsController extends Controller
     }
 
     public function downloadGambar ($gambar_id)
-    {  
+    {   
+        
+      
+
         $gambar = Gambar::find($gambar_id); 
 
         $gambar->increment('download');  
-        $path= $gambar->path;
- 
+        $gambarname= $gambar->nama_gambar;
+        $url = Storage::disk('s3')->url('storage/uploadedGambar/'.$gambarname); 
+        
+        return response()->streamDownload(function ()  use ($url){
+            echo file_get_contents($url);
+        },$gambarname); 
 
-        return Storage::download($path);
  
     } 
 
@@ -292,9 +289,14 @@ class DashboardsController extends Controller
     {  
         $file = File::find($file_id); 
 
-        $file->increment('download');  
-        $path= $file->path; 
-        return Storage::download($path); 
+        $file->increment('download'); 
+
+        $filename= $file->nama_file; 
+        $url = Storage::disk('s3')->url('storage/file/'.$filename); 
+
+        return response()->streamDownload(function ()  use ($url){
+            echo file_get_contents($url);
+        },$filename); 
     } 
 
     public function puttoalbum (Request $request)

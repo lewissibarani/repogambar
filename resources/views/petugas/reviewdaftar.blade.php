@@ -151,7 +151,7 @@
                                             <td class="text-alternate"> 
                                                 <img class="card-img sh-50 scale" 
                                                 style="max-height:80px;"
-                                                src="/{{$datas->transaksi->gambar->thumbnail_path}}"
+                                                src="{{$datas->transaksi->gambar->thumbnail_path}}"
                                                 alt="card image" />
                                             </td>
                                             <td style="vertical-align: middle;" class="text-alternate"> <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">

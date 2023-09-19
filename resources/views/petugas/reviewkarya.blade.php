@@ -47,10 +47,10 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 col-xl-6">
-                                        <a href="/{{$Data->transaksi->gambar->path}}">
+                                        <a href="{{$Data->transaksi->gambar->path}}">
                                             <img
                                                     alt="detail"
-                                                    src="/{{$Data->transaksi->gambar->path}}"
+                                                    src="{{$Data->transaksi->gambar->path}}"
                                                     class="responsive border-0 rounded-md img-fluid"
                                             />
                                         </a> 
@@ -136,7 +136,7 @@
                                                         <form id="createGambarForm" action="{{route('review.unpublish', $Data->id)}}" method="POST" novalidate>
                                                         @csrf
                                                         <div class="form-group"> 
-                                                            <input type="text" name="tugasreviewid" value="{{$Data->id}}">
+                                                            <input type="hidden" name="tugasreviewid" value="{{$Data->id}}">
                                                             <textarea type="text" rows="5" name="komentar" 
                                                             placeholder="Tuliskan alasan penolakan dengan singkat dan jelas.  "
                                                             class="form-control mb-3" ></textarea>

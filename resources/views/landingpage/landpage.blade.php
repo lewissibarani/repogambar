@@ -265,7 +265,7 @@
     </section><!-- End About Us Section -->
  
     <!-- ======= Services Section ======= -->
-    <section id="jenislayanan" class="scroll-section services ">
+    <!-- <section id="jenislayanan" class="scroll-section services ">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -334,7 +334,7 @@
  
 
       </div>
-    </section><!-- End Services Section -->
+    </section>End Services Section -->
  
  
 

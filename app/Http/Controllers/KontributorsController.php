@@ -7,11 +7,14 @@ use App\Models\User;
 use App\Models\Gambar;
 use App\Models\TugasReview;
 use App\Models\User_Petugas;
-use App\Models\File;
+use App\Models\File; 
+use App\Models\Transaksi; 
+use App\Models\PembagianTugas; 
 use App\Models\Kategori_File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Image;
 
 class KontributorsController extends Controller
 {
@@ -28,7 +31,7 @@ class KontributorsController extends Controller
         $User=User::find($iduser);
 
         //Data Gambar yang pernah diupload
-        $Gambar=Gambar::with('tagged','source','kegunaan','user','file','gambarView','likeCounter')->where('idUser', $iduser)->orderBy('id', 'DESC')->get();
+        $Gambar=Gambar::with('tagged','source','kegunaan','user','file','gambarView','likeCounter')->where('idUser', $iduser)->orderBy('id', 'DESC')->paginate(15);
         
         //Data Gambar yang pernah disukai user 
         $GambarLiked=Gambar::whereLikedBy($iduser)->with('likeCounter','user')->orderBy('id', 'DESC')->get();
@@ -59,17 +62,18 @@ class KontributorsController extends Controller
         return view('kontributor.uploadkarya',compact('Kategoris'));
     }
 
-    public function store ($request)
+    public function store (Request $request)
     {
-        $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+ 
 
         $this->validate($request, [
+            'kategori_file'=>'required',
             'image' => 'required|image',
             'file' => 'mimes:zip,rar|file|max:30000',
             'tags' => 'required',
         ]);
 
-        $gambar_name="";
+        $nameImage="";
         $filezip=null;
         $fileid=null;
         $source_id=3;
@@ -77,32 +81,47 @@ class KontributorsController extends Controller
         $tipe_gambar=null;
 
         if($request->file('image')){ 
-            $gambar_name=date('YmdHi').$request->file('image')->getClientOriginalName();
-            $gambar= $request->file('image')->storeAs(
-                'public/uploadedGambar', $gambar_name
-            );    
-            $gambar_size=Storage::size('public/uploadedGambar/'.$gambar_name);
-            $tipe_gambar=\File::extension(Storage::url('public/uploadedGambar/'.$gambar_name)); 
-            //Membuat thumbnail  
-            $this->createThumbnail($storagePath.'public/uploadedGambar/'.$gambar_name, $storagePath.'public/thumbnail/'.$gambar_name, 1000);
-            $gambar= $request->file('image')->storeAs(
-                'public/thumbnail', $gambar_name
-            );
+            $nameImage=date('YmdHi').$request->file('image')->getClientOriginalName();
+            $image= $request->file('image');
+ 
+            ini_set('memory_limit','2048M');
+
+            //membuat thumbnail
+            $width = config('imageresize.size.width'); // your max width
+            $height =  config('imageresize.size.height'); // your max height 
+            $thumbImage = Image::make($image->getRealPath()); 
+            $thumbImage->height() > $thumbImage->width() ? $width=null : $height=null;
+            $thumbImage->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+            }); 
+            
+            Storage::disk('s3')->put('storage/thumbnail/'.$nameImage, $thumbImage->stream());
+            $thumbnailPath = Storage::disk('s3')->url('storage/thumbnail/'.$nameImage);  
+           
+            //menyimpan gambar original   
+            Storage::disk('s3')->putFileAs('storage/uploadedGambar',$image,$nameImage); 
+            $Path = Storage::disk('s3')->url('storage/uploadedGambar/'.$nameImage);  
+
+            
+            $gambar_size=$image->getSize(); 
+            $tipe_gambar=$image->extension();  
+            
         }
 
         if($request->file('file')){ 
             $file_name=date('YmdHi').$request->file('file')->getClientOriginalName();
-            $file= $request->file('file')->storeAs(
-                'public/file/', $file_name
-            );
+            $file= $request->file('file');
 
-            //Memghilangkan spesial character di path
-            $file_name = str_replace(Array("\n", "\r", "\n\r"), '', $file_name); 
+            //menyimpan file original 
+            $file_path = Storage::disk('s3')->putFileAs('storage/file',$file, $file_name); 
+            $url_file = Storage::disk('s3')->url('storage/file/'.$file_name);
+ 
+
             $filezip =File::create([
-                'path' => 'storage/file/'.$file_name,
+                'path' => $url_file,
                 'nama_file' => $file_name,
-                'size' => Storage::size('public/file/'.$file_name),  
-                'type' => \File::extension(Storage::url('public/file/'.$file_name)),
+                'size' => $file->getSize(),  
+                'type' => $file->extension(),
                 'kategori_file' => $request->kategori_file,
                 'download' => 0
                 ]);
@@ -112,26 +131,33 @@ class KontributorsController extends Controller
 
         $gambars=Gambar::create([
             'judul' => $request->judul,
-            'link' => "-",
-            'idKegunaan' => 0,
+            'link' => "Upload Karya Pribadi",
+            'idKegunaan' => "Upload Karya Pribadi",
             'idUser' => Auth::id(),
-            'path' =>'storage/uploadedGambar/'.$gambar_name,
-            'thumbnail_path' =>'storage/thumbnail/'.$gambar_name,
+            'path' =>$Path,
+            'thumbnail_path' =>$thumbnailPath,
             'ukuran' =>$gambar_size,
-            'nama_gambar' =>$gambar_name,
+            'nama_gambar' =>$nameImage,
             'source_id' => 3,
             'file_id' => $fileid,
+            'kategori_file' => $request->kategori_file,
             'tipe_gambar' => $tipe_gambar,
             'views' => 0,
             'download'=>0,
             'booleantayang'=>0,
         ]);
+ 
+        //Menyimpan Tags  
+        $gambars->tag($this->convertArray($request->tags));
 
-        $this->pembagiantugasreview($gambars->id);
+        $transaksiid= $this->storetransaksi($gambars->judul, $gambars->id);
+        $this->pembagiantugasreview($transaksiid);
+
+        return redirect()->route('kontributor.profil',["user_id"=>Auth::id()])->with('message', 'Karya kamu sudah diajukan.');
 
     }
 
-    public function pembagiantugasreview($gambarid)
+    public function pembagiantugasreview($transaksiid)
     {
         
         //start of distribusi petugas
@@ -141,37 +167,79 @@ class KontributorsController extends Controller
         $petugas_id=$petugas->users_id;
 
         $gambars=TugasReview::create([
-            'gambarid' => $gambarid,
-            'petugasid' =>$petugas_id,
-            'statusreviewid' => 0,
-            'komentar'=>'-',
+            'transaksiid' => $transaksiid,
+            'petugasid' =>$petugas_id, 
             'created_at'=>date("Y-m-d H:i:s"),
         ]);
 
     }
-    
-    public function editgambar ()
-    {
-        
+
+    public function pemberian_id_permintaan($kodesatker){
+        $lastnumber=0;
+        $permintaan = Transaksi::where(DB::raw('substr(id_permintaan, 1, 12)'), '=' , $kodesatker)->latest("id")->first();
+        if($permintaan!=null)
+        {
+            $lastnumber_2 = $permintaan->id_permintaan;
+            $sisa_digit_terakhir = substr($lastnumber_2, 12);
+            $lastnumber = $sisa_digit_terakhir +1;
+        } 
+        return $lastnumber;
     }
 
-    public function createThumbnail($src, $dest, $desired_width) 
-    {
+    public function storetransaksi($judulpermintaan,$gambar_id)
+    {  
+
+        $idpembuatkarya= Auth::id();
+
+        //---start proses pemberian id permintaan
+        $kodesatker = Auth::user()->kodesatker;
+        $digiterakhir_idpermintaan= $this->pemberian_id_permintaan($kodesatker);
+        $id_permintaan = $kodesatker.$digiterakhir_idpermintaan;
+        //---end proses pemberian id permintaan
  
-        $source_image = imagecreatefromjpeg($src);
-        $width = imagesx($source_image);
-        $height = imagesy($source_image);
+        $create_transaksi=Transaksi::create([ 
+            'jenispermintaanid' => 2,
+            'judulPermintaan' => $judulpermintaan,
+            'idStatus' => 1,
+            'idKegunaan' => 4,
+            'alasanDitolak' => NULL,
+            'linkPermintaan' => "NULL", 
+            'idUserPeminta' => $idpembuatkarya, 
+            'gambar_id' => $gambar_id, 
+            'kegunaan_lainnya' => NULL,
+            'id_permintaan' => $id_permintaan,
+        ]);
+        
+        //start of distribusi petugas
+        $petugas = User_Petugas::where('aktif',1)->orderBy('updated_at', 'asc')->first();
+        $count_task = $petugas->count_task +1;
+        $petugas->update(['count_task' => $count_task]);
+        $petugas_id=$petugas->users_id;
 
-        /* find the "desired height" of this thumbnail, relative to the desired width  */
-        $desired_height = floor($height * ($desired_width / $width));
+        PembagianTugas::create([
+            'permintaan_id' => $create_transaksi->id,
+            'seenboolean' => '0',
+            'user_id' =>$petugas_id,
+        ]);
+        //end of distribusi tugas
 
-        /* create a new, "virtual" image */
-        $virtual_image = imagecreatetruecolor($desired_width, $desired_height);
+        //Start nambah statistik permintaan pada tabel user
+        $peminta = User::find($idpembuatkarya);
+        $peminta->increment('sums_upload'); 
+        $peminta->save(); 
 
-        /* copy source image at a resized size */
-        imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
+        return $create_transaksi->id; 
+    }
 
-        /* create the physical thumbnail image to its destination */
-        imagejpeg($virtual_image, $dest);
-    } 
+    private function convertArray($array)
+    {
+        $converted_array=array();
+        foreach(json_decode($array, true) as $key=> $data )
+        {
+            array_push($converted_array,$data['value']);
+        }
+        return $converted_array;
+    }
+     
+ 
 }

@@ -29,7 +29,7 @@
             <a
                     href="{{route('album.show',['album'=>$datas->id])}}"
                     class="w-100 h-100 rounded bg-cover-center d-block"
-                    style="background-image: url('{{Storage::temporaryUrl($thumb[0],now()->addMinutes(30))}}')"
+                    style="background-image: url('{{$thumb[0]}}')"
             >
         </a>
         </div>
@@ -68,7 +68,7 @@
             <a
                     href="{{route('album.show',['album'=>$datas->id])}}"
                     class="w-100 h-100 rounded-md-start bg-cover-center d-block" 
-                    style="background-image: url('{{Storage::temporaryUrl($thumb[0],now()->addMinutes(30))}}')"
+                    style="background-image: url('{{$thumb[0]}}')"
             >
           </a>
         </div>
@@ -77,14 +77,14 @@
                 <a
                         href="{{route('album.show',['album'=>$datas->id])}}"
                         class="w-100 h-100 rounded-md-top-end bg-cover-center d-block"
-                        style="background-image: url('{{Storage::temporaryUrl($thumb[1],now()->addMinutes(30))}}')"
+                        style="background-image: url('{{$thumb[1]}}')"
                 ></a>
             </div>
             <div class="d-flex flex-grow-1">
                 <a
                         href="{{route('album.show',['album'=>$datas->id])}}"
                         class="w-100 h-100 rounded-md-bottom-end bg-cover-center d-block"
-                        style="background-image: url('{{Storage::temporaryUrl($thumb[2],now()->addMinutes(30))}}')"
+                        style="background-image: url('{{$thumb[2]}}')"
                 ></a>
             </div>
         </div> 

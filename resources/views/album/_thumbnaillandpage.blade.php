@@ -20,9 +20,9 @@ $koleksigambar= new Collection();
     @endforeach
     <div class="col h-100">
         <a
-                href="{{Storage::temporaryUrl($thumb[0],now()->addMinutes(30))}}"
+                href="{{$thumb[0]}}"
                 class="w-100 h-100 rounded bg-cover-center d-block"
-                style="background-image: url('{{Storage::temporaryUrl($thumb[0],now()->addMinutes(30))}}')"
+                style="background-image: url('{{$thumb[0]}}')"
         >
     </a>
     </div>
@@ -36,17 +36,17 @@ $koleksigambar= new Collection();
     @endforeach
     <div class="col h-100">
         <a
-                href="{{Storage::temporaryUrl($thumb[0],now()->addMinutes(30))}}"
+                href="{{$thumb[0]}}"
                 class="w-100 h-100 rounded-md-start bg-cover-center d-block"
-                style="background-image: url('{{Storage::temporaryUrl($thumb[0],now()->addMinutes(30))}}')"
+                style="background-image: url('$thumb[0]}}')"
         >
         </a>
     </div>
     <div class="col d-flex flex-column justify-content-stretch h-100"> 
             <a
-                    href="{{Storage::temporaryUrl($thumb[1],now()->addMinutes(30))}}"
+                    href="{{$thumb[1]}}"
                     class="w-100 h-100 rounded-md-end bg-cover-center d-block"
-                    style="background-image: url('{{Storage::temporaryUrl($thumb[1],now()->addMinutes(30))}}')"
+                    style="background-image: url('{{$thumb[1]}}')"
             >
         </a> 
     </div> 
@@ -59,25 +59,25 @@ $koleksigambar= new Collection();
     @endforeach
     <div class="col h-100">
         <a
-                href="{{Storage::temporaryUrl($thumb[0],now()->addMinutes(30))}}"
+                href="{{$thumb[0]}}"
                 class="w-100 h-100 rounded-md-start bg-cover-center d-block" 
-                style="background-image: url('{{Storage::temporaryUrl($thumb[0],now()->addMinutes(30))}}')"
+                style="background-image: url('{{$thumb[0]}}')"
         >
       </a>
     </div>
     <div class="col d-flex flex-column justify-content-stretch h-100">
         <div class="d-flex mb-1 flex-grow-1">
             <a
-                    href="{{Storage::temporaryUrl($thumb[1],now()->addMinutes(30))}}"
+                    href="{{$thumb[1]}}"
                     class="w-100 h-100 rounded-md-top-end bg-cover-center d-block"
-                    style="background-image: url('{{Storage::temporaryUrl($thumb[1],now()->addMinutes(30))}}')"
+                    style="background-image: url('{{$thumb[1]}}')"
             ></a>
         </div>
         <div class="d-flex flex-grow-1">
             <a
-                    href="{{Storage::temporaryUrl($thumb[2],now()->addMinutes(30))}}"
+                    href="{{$thumb[2]}}"
                     class="w-100 h-100 rounded-md-bottom-end bg-cover-center d-block"
-                    style="background-image: url('{{Storage::temporaryUrl($thumb[2],now()->addMinutes(30))}}')"
+                    style="background-image: url('{{$thumb[2]}}')"
             ></a>
         </div>
     </div> 

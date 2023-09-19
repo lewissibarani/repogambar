@@ -1,6 +1,6 @@
 @php 
     $html_tag_data = ["override"=>'{"attributes" : { "placement": "horizontal"}}']; 
-    $title = 'Beranda';
+    $title = 'Hasil Pencarian Koleksi: '. $Katakunci;
     $path = public_path();
     $description = 'Beranda';
     $breadcrumbs = ["/"=>"Home","/Dashboard"=>"Beranda"];
@@ -47,7 +47,7 @@
                         <div class="page-title-container">
                             <div class="row g-0">
                                 <div class="col-auto mb-2 mb-md-0 me-auto">
-                                    <div class="w-auto sw-md-30">
+                                    <div class="w-auto sw-md-100">
                                         <h1 class="mb-0 pb-0 display-4" id="title">{{ $title }}</h1>
                                         @include('_layout.breadcrumb',['breadcrumbs'=>$breadcrumbs])
                                     </div>
@@ -58,13 +58,7 @@
                                     data-title="Tombol Permintaan" data-intro="Klik tombol ini untuk melakukan permintaan gambar" data-step="1" >
                                         <i data-acorn-icon="plus"></i>
                                         <span>Buat Permintaan Gambar</span>
-                                    </a> &nbsp &nbsp
-                                    <!-- Tour Button Start -->
-                                    <button type="button" class="btn btn-outline-primary btn-icon btn-icon-end w-100 w-sm-auto" id="dashboardTourButton">
-                                        <i data-acorn-icon="flag"></i>    
-                                        <span>Perkenalan Website</span> 
-                                    </button>
-                                    <!-- Tour Button End --> 
+                                    </a>  
                                 </div> 
                                     
                             </div>  
@@ -74,7 +68,7 @@
                 </div>
             
                 <!-- Title End -->
-                <form id="searchGambarForm" action="{{route('dashboard.hasilpencarian')}}" method="POST">
+                <form id="searchGambarForm" action="{{route('dashboard.halamandepan')}}" method="POST">
                     @csrf
                     <div class="row"> 
 
@@ -82,11 +76,11 @@
                             <div class="input-group mb-3" 
                             data-title="Mesin Pencari Gambar" data-intro="Masukkan kata kunci gambar yang ingin dicari" data-step="2">
                                     <button id="tipepencarianButton" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Gambar
+                                    Koleksi
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a id="tipepencarianList" class="dropdown-item" href="#">Koleksi</a>
+                                            <a id="tipepencarianList" class="dropdown-item" href="#">Gambar</a>
                                         </li> 
                                         <!-- <li>
                                             <hr class="dropdown-divider" />
@@ -99,8 +93,8 @@
                                 value="{{$Katakunci}}"
                                 name="katakunci"/> 
 
-                                <input type="hidden" id="tipeasetFilter" name="tipeasetFilter"/> 
-                                <input type="hidden" id="tipepencarianFilter" name="tipepencarianFilter"/>  
+                                <input type="hidden"  value="null" id="tipeasetFilter" name="tipeasetFilter"/> 
+                                <input type="hidden"  value="Koleksi" id="tipepencarianFilter" name="tipepencarianFilter"/>  
 
                                 <button type="submit" class="btn btn-icon btn-icon-start btn-primary stretched-link" >
                                 <i data-acorn-icon="search" class="me-1"></i>  
@@ -129,25 +123,12 @@
                 <!-- Tags End -->
 
                 <div class="row">
-                    <div class="col-12 col-xl-12 col-xxl-12 mb-5">
-                    {{$Data->count()}}  
+                    <div class="col-12 col-xl-12 col-xxl-12 mb-5"> 
                                 <!-- Grid Start -->  
                                     <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" id="masonryCardsExample"> 
-                                    @include('dashboard.dataSearchGambar')  
+                                    @include('dashboard.dataSearchKoleksi')  
                                     </div>
-                                <!-- Grid End -->   
-                        
-                        <!-- Data Loader -->
-                        <!-- <div class="auto-load text-center" style="display: none;">
-                            <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
-                                <path fill="#000"
-                                    d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
-                                    <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
-                                        from="0 50 50" to="360 50 50" repeatCount="indefinite" />
-                                </path>
-                            </svg>
-                        </div> -->
+                                <!-- Grid End -->    
                         
                     </div> 
                 </div>

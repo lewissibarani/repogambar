@@ -1,40 +1,35 @@
 @php
-    $html_tag_data = []; 
+    $html_tag_data = [];
     $title = 'Upload Karya';
     $description = 'Empty Page';
-    $breadcrumbs = ["/"=>"Home", "/Kontributor/UploadKarya"=>"Upload Karya"]
+    $breadcrumbs = ["/"=>"Home", ""=>"Halaman Kontributor", ""=>"Upload Karya"]
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
-@livewireStyles
-@section('css') 
-<link rel="stylesheet" href="/css/main.css"/> 
+@section('css')
+<link rel="stylesheet" href="/css/vendor/datatables.min.css"/>
+<link rel="stylesheet" href="/css/main.css"/>
 <link rel="stylesheet" href="/css/tag.css"/>
-<link rel="stylesheet" href="/css/wizard.css"/>
 <link rel="stylesheet" href="/css/vendor/select2.min.css"/>
 <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css"/>
-<link rel="stylesheet" href="/css/vendor/tagify.css"/> 
+<link rel="stylesheet" href="/css/vendor/tagify.css"/>
 @endsection
-
 
 @section('js_vendor')
 <script src="/js/vendor/bootstrap-submenu.js"></script>
 <script src="/js/vendor/mousetrap.min.js"></script>
 <script src="/js/vendor/select2.full.min.js"></script>
-<script src="/js/vendor/tagify.min.js"></script>  
-<script src="/js/vendor/progressbar.min.js"></script> 
+<script src="/js/vendor/tagify.min.js"></script>
+<script src="/js/cs/scrollspy.js"></script>
 @endsection
 
 @section('js_page')
 <script src="/js/forms/controls.select2.js"></script>
-<script src="/js/forms/controls.tag.js"></script>  
-<script src="/js/pages/dashboard.visual.js"></script>
+<script src="/js/forms/controls.tag.js"></script>
 @endsection
-  
 
-
-@section('content') 
-<div class="container" style="width: 65%;">
+@section('content')
+<div class="container">
         <!-- Title and Top Buttons Start -->
         <div class="page-title-container">
             <div class="row">
@@ -46,16 +41,120 @@
                 <!-- Title End -->
             </div>
         </div>
-        <!-- Title and Top Buttons End -->  
-            <livewire:wizard />   
-</div> 
-@livewireScripts 
-{{-- <script>
-    window.livewire_app_url='{{route('app.index')}}';
-</script> --}}
+        <!-- Title and Top Buttons End -->
 
-{{-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  --}} 
-{{-- <script type="text/javascript">
+        <!-- Content Start --> 
+        <div class="card mb-5">
+
+            <div class="row card-body" style="margin-bottom:-50px;">
+                <form id="petugasModalForm" action="{{route('kontributor.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf 
+                    @if(session()->has('message'))
+                        <div class="alert alert-danger">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+            </div>
+            <div class="row">
+                <div class="col-4">  
+                    <div class="card-body">
+
+                    <div class="col-sm-12 col-form-label card no-shadow"> 
+                                <input type="file" class="form-control" 
+                                name="image"
+                                id="image_input"  /> 
+                        </div>   
+                        <div class="col-md-12 mb-2"> 
+                            <img class="card-img scale" id="preview-image-before-upload" hidden>
+                            <div class="container-image-preview">
+                                    <div class ="drop-container"
+                                        alt="preview image">  
+                                        <div class="drop-title">Pratinjau Gambar</div>
+                                    </div>
+                                        
+                            </div>
+                            <div> 
+                                Catatan: Gunakan gambar yang berdimensi dibawah 6000px panjang atau lebar dan ukuran file dibawah 30MB
+                            </div> 
+                                          
+                            
+                        </div> 
+                    </div> 
+
+                </div>
+                <div class="col-8">
+                    <div class="card-body">  
+                                <div class="col-sm-10">            
+                                </div> 
+                            <div class="row mb-3">   
+                                <div class="col-sm-12"> 
+                                    <div class="mb-3 filled">
+                                        <i data-acorn-icon="edit"></i>
+                                    <input type="text" class="input-judul"  placeholder="Judul Karya" name="judul" />  
+                                    
+                                        <small class="form-text text-muted">Sesuaikan judul dengan karya yang akan di upload.</small>  
+                                    </div> 
+                                </div> 
+                            </div> 
+
+                            <div class="row mb-3">
+                                <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">File  <span class="font-italic"> (Optional) </span> </label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-12 col-form-label card no-shadow">
+                                        <input type="file" class="form-control" name="file"   />
+                                    </div>   
+                                </div>
+                            </div>
+
+                           
+                            <div class="row mb-3">
+                                <label class="font-weight-bold col-sm-2 col-form-label">Kategori File</label>
+                                <div class="col-sm-10">
+                                    <select id="select2Multiple" class="form-select" name="kategori_file" >
+                                        <option selected> <i>Pilih...</i></option>
+                                        @foreach ($Kategoris as $kategori)
+                                            <option value="{{ $kategori->id}}">{{ $kategori->nama_kategori }}</option> 
+                                        @endforeach
+                                    </select>  
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="font-weight-bold col-sm-2 col-form-label">Tags</label>
+                                <div class="col-sm-10">
+                                    <input 
+                                            id="tagsBasic"
+                                            name="tags"
+                                    />
+                                    <small class="form-text text-muted">Tuliskan minimal 3 tags. Setiap tag dipisahkan dengan tanda koma</small>
+                                        
+                                </div>
+                            </div>
+                            <div class="modal-footer"> 
+                                <button type="submit" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
+                            </div>
+
+                        </form>
+                        
+                        </div>
+                    </div>
+                    <!-- Content End -->
+                </div>
+            </div>  
+        </div> 
+</div> 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
       
 $(document).ready(function (e) {
  
@@ -75,6 +174,5 @@ $(document).ready(function (e) {
    
 });
  
-</script> --}} 
-
+</script>
 @endsection

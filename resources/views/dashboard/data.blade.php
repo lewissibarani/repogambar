@@ -1,6 +1,3 @@
-@php
-$ENDPOINT = "/Dashboard"; 
-@endphp  
 <!-- @if(App::environment() == 'production') 
 @php
 $ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";  
@@ -12,14 +9,14 @@ $ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";
 <div class="col"> 
     <div class="card hover-img-scale-up hover-reveal">
             <img class="card-img sh-50 scale"  
-            src="{{Storage::temporaryUrl($datas->thumbnail_path,now()->addMinutes(30))}}" 
+            src="{{$datas->thumbnail_path}}" 
             alt="card image" />
             <div class="card-img-overlay d-flex flex-column justify-content-between reveal-content">
                 <div class="row g-0">
                 </div>
                 <div class="row g-0">
                     <div class="col pe-2">
-                        <a href="{{$ENDPOINT}}/DetailGambar/{{$datas->id}}" class="stretched-link">
+                        <a href="{{route('dashboard.detailgambar',['gambar_id'=>$datas->id])}}" class="stretched-link">
                             <h5 class="heading text-white mb-1">{{$datas->judul}}</h5>
                         </a>
                         <div class="d-inline-block">
