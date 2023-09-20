@@ -2,7 +2,10 @@
 
     $image_info_file=null;
     $file_size_MB=null;
+    $fileid=#;
+    $file_name="";
     $file_size="-";
+    $routedownload="#";
     $target_download=$Data->path;
     $target_download_nama=$Data->nama_gambar;
     $tipe_file_raster_atau_vector="Raster";
@@ -11,6 +14,8 @@
     $download_link_file='#';
     if($Data->file_id!==null)
     {
+        $routedownload=route('dashboard.downloadfile', $Data->file->id);
+        $file_name=$Data->file->nama_file;
         $target_download=$Data->file->path;
         $target_download_nama=$Data->file->nama_file;
         $image_info_file= "dan Vector";
@@ -307,7 +312,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                                         </div>
                                                     </div>
                                                 </a>
-                                                <a class="dropdown-item" download="{{$Data->file->nama_file}}" href="{{route('dashboard.downloadfile', $Data->file->id)}}">
+                                                <a class="dropdown-item" download="{{$file_name}}" href="{{$routedownload}}">
 
                                                     <div class="row">
                                                         <div class="col-2">
