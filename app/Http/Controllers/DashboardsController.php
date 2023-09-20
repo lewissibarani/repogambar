@@ -132,6 +132,7 @@ class DashboardsController extends Controller
 
     public function result_pencarian( $katakunci, $tipe_aset, $tipe_hasil ) 
     {   
+
          //Menampilkan Tags
          $Tags= Tag::where('count', '>', 0)->paginate(10);
 
@@ -141,7 +142,7 @@ class DashboardsController extends Controller
         if($tipe_hasil=="Gambar"){
             //mencari berdasarkan judul
             $ResultbyJudul=Gambar::with('file','source')->where('judul','like',"%".$katakunci."%") 
-            ->when($tipe_aset!=="null", function($query){
+            ->when($tipe_aset!=="null", function($query) use ($tipe_aset){
                 return $query->where('kategori_file',$tipe_aset);
            }); 
 
@@ -150,7 +151,7 @@ class DashboardsController extends Controller
             ->where('booleantayang', 1)
             ->orderBy('created_at', 'asc')
              
-            ->when($tipe_aset!=="null", function($query){
+            ->when($tipe_aset!=="null", function($query) use ($tipe_aset){
                 return $query->where('kategori_file',$tipe_aset);
            })->paginate(20); 
  
@@ -325,4 +326,5 @@ class DashboardsController extends Controller
         //         'Rekomendasi'
         //         ]));
     } 
+ 
 }

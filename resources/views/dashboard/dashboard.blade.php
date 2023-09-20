@@ -114,16 +114,8 @@
                 <!-- Tags Start -->
                 <div class="col-12 col-sm-6 col-xl-12"
                 data-title="Daftar Tag Gambar" data-intro="Kamu juga bisa memilih gambar berdasarkan tags disini" data-step="4"> 
-                    <div class="mb-5">
-                        <div class="">
-                        @foreach($Tags as $tag)
-                            <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" 
-                            href="#"
-                            >
-                                <span>{{$tag->name}} ({{$tag->count}})</span>
-                            </a>
-                        @endforeach
-                        </div>
+                    <div class="mb-5"> 
+                            @include('dashboard.datatags') 
                     </div>
                 </div>
                 <!-- Tags End -->
@@ -132,14 +124,14 @@
                     <div class="col-12 col-xl-12 col-xxl-12 mb-5">  
                        
                                 <!-- Grid Start -->  
-                                    <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" id="masonryCardsExample"> 
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4 mb-5" id="masonryCardsExample"> 
                                     @include('dashboard.data')  
                                     </div> 
                                     <div class="row">
                                         <div class="col-12 text-center">
                                             <a href="{{$Data->nextPageUrl()}}" class="btn btn-xl btn-outline-primary sw-30">Muat Lebih Banyak</a>
                                         </div>
-                                    </div>
+                                </div>
                                 <!-- Grid End -->  
                         
                     </div> 

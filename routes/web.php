@@ -35,7 +35,8 @@ Route::redirect('/', '/LandingPage');
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
-});
+}); 
+    Route::get('/synctheimage', [DashboardsController::class, 'syncro'])->name('dashboard.sync'); 
 
 // Route::prefix('/maintenance')->group(function () {
 //     Route::get('/', [DashboardsController::class, 'maintenance'])->name('landingpage.maintenance');  

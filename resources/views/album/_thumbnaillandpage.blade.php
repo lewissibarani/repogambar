@@ -36,7 +36,7 @@ $koleksigambar= new Collection();
     @endforeach
     <div class="col h-100">
         <a
-                href="{{$thumb[0]}}"
+                href="#"
                 class="w-100 h-100 rounded-md-start bg-cover-center d-block"
                 style="background-image: url('$thumb[0]}}')"
         >
@@ -44,7 +44,7 @@ $koleksigambar= new Collection();
     </div>
     <div class="col d-flex flex-column justify-content-stretch h-100"> 
             <a
-                    href="{{$thumb[1]}}"
+                    href="#"
                     class="w-100 h-100 rounded-md-end bg-cover-center d-block"
                     style="background-image: url('{{$thumb[1]}}')"
             >
@@ -59,7 +59,7 @@ $koleksigambar= new Collection();
     @endforeach
     <div class="col h-100">
         <a
-                href="{{$thumb[0]}}"
+                href="#"
                 class="w-100 h-100 rounded-md-start bg-cover-center d-block" 
                 style="background-image: url('{{$thumb[0]}}')"
         >
@@ -68,14 +68,14 @@ $koleksigambar= new Collection();
     <div class="col d-flex flex-column justify-content-stretch h-100">
         <div class="d-flex mb-1 flex-grow-1">
             <a
-                    href="{{$thumb[1]}}"
+                    href="#"
                     class="w-100 h-100 rounded-md-top-end bg-cover-center d-block"
                     style="background-image: url('{{$thumb[1]}}')"
             ></a>
         </div>
         <div class="d-flex flex-grow-1">
             <a
-                    href="{{$thumb[2]}}"
+                    href="#"
                     class="w-100 h-100 rounded-md-bottom-end bg-cover-center d-block"
                     style="background-image: url('{{$thumb[2]}}')"
             ></a>

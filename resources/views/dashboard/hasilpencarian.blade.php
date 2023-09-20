@@ -115,15 +115,7 @@
                 <div class="col-12 col-sm-6 col-xl-12"
                 data-title="Daftar Tag Gambar" data-intro="Kamu juga bisa memilih gambar berdasarkan tags disini" data-step="4"> 
                     <div class="mb-5">
-                        <div class="">
-                        @foreach($Tags as $tag)
-                            <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" 
-                            href="#"
-                            >
-                                <span>{{$tag->name}} ({{$tag->count}})</span>
-                            </a>
-                        @endforeach
-                        </div>
+                        @include('dashboard.datatags') 
                     </div>
                 </div>
                 <!-- Tags End -->
