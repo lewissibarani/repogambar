@@ -33,7 +33,7 @@
                                     id="tagsBasic" 
                                     name="edittags"  
                                     data-role="tagsinput" 
-                                    value={{$Tags}}
+                                    value="{{$Tags}}"
                             />
                             <small class="form-text text-muted">Isikan tags berfungsi yang memiliki sesuai dengan album ini.</small> 
                         </div>
