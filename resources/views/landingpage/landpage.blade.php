@@ -85,18 +85,23 @@
               Pikart hadir untuk memudahkan pegawai BPS baru untuk saling berbagi aset media digital. Website ini berfungsi untuk melayani permintaan gambar shutterstock dan freepik bagi pegawai BPS di seluruh Indonesia.
               <br> 
               </p> 
-              <!-- Search Input Start -->   
-              <div class="card w-75 mb-7">
-                <div class="card-body p-0 d-flex flex-row align-items-center px-3 py-3 ">
-                    <input class="form-control border-0 shadow-none " placeholder="Cari Aset..."  />
-                    <div class="d-flex flex-row">  
-                        <button class="sumbit" id="chatSendButton" type="button" style="border: none;background: none">
-                            <i data-acorn-icon="search"></i>
-                        </button>
-                    </div> 
+              <!-- Search Input Start -->    
+              <form id="" action="{{route('dashboard.halamandepan')}}" method="POST">
+                <div class="card w-75 mb-7">
+                  <div class="card-body p-0 d-flex flex-row align-items-center px-3 py-3 ">
+                      @csrf
+                      <input class="form-control border-0 shadow-none " placeholder="Cari Aset..."  />
+                      <input type="hidden" value="null" id="tipeasetFilter" name="tipeasetFilter"/> 
+                      <input type="hidden" value="Gambar" id="tipepencarianFilter" name="tipepencarianFilter"/>  
+                      <div class="d-flex flex-row">  
+                          <button class="sumbit" id="chatSendButton" type="button" style="border: none;background: none">
+                              <i data-acorn-icon="search"></i>
+                          </button>
+                      </div>
+                  </div>  
+                <!-- Search Input End -->
                 </div>  
-              <!-- Search Input End -->
-              </div> 
+              </form>
                   <a type="button" href="{{route('kelolagambar.index')}}" class="btn-xl btn-primary  rounded-xl mt-1"> 
                     <span class="label">Buat Permintaan</span>
                   </a>   
