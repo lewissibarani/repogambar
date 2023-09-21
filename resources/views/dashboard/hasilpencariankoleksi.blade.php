@@ -160,6 +160,11 @@ $(document).ready(function(){
 
     $("#tipepencarianList").click(function(){
         if( $("#tipepencarianList").html()=="Gambar"){
+
+            $(".side-menu-container").animate({
+                width: "show"
+            }); 
+
             $("#tipepencarianList").html("Koleksi");
             $("#tipepencarianButton").html("Gambar"); 
 
@@ -167,7 +172,12 @@ $(document).ready(function(){
             $("#tipepencarianFilter").val("Gambar"); 
             
 
-        } else   {
+        } else {
+
+            $(".side-menu-container").animate({
+                width: "hide"
+            }); 
+
             $("#tipepencarianList").html("Gambar");
             $("#tipepencarianButton").html("Koleksi");  
 
