@@ -1,6 +1,5 @@
   
- <!-- Add Edit Modal Start -->
-                
+ <!-- Add Edit Modal Start --> 
  <div class="modal large fade" id="storeModalAlbum" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

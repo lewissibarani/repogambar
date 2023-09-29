@@ -99,7 +99,7 @@
     var ENDPOINT = "{{route('album.create')}}";
     if ('{{ env('APP_ENV') }}' == 'production')
     {
-        ENDPOINT = "https://webapps.bps.go.id/pikart/album/create";
+        ENDPOINT = '{{ env('APP_URL') }}'+'/pikart/album/create';
     }
       
    

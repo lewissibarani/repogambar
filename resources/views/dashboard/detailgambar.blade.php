@@ -1,5 +1,4 @@
-@php
-
+@php 
     $image_info_file=null;
     $file_size_MB=null;
     $fileid=#;
@@ -64,8 +63,9 @@
  
 // Calling getimagesize() function
 
-$imageheight = Image::make($Data->path)->height();
-$imagewidth = Image::make($Data->path)->width();
+$Path = Storage::disk('s3')->url('storage/uploadedGambar/'.$Data->nama_gambar);  
+$imageheight = Image::make($Path)->height();
+$imagewidth = Image::make($Path)->width();
 
 
 $imageekstension=$Data->tipe_gambar;
