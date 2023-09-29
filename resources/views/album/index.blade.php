@@ -99,7 +99,7 @@
     var ENDPOINT = "{{route('album.create')}}";
     if ('{{ env('APP_ENV') }}' == 'production')
     {
-        ENDPOINT = '{{ env('APP_URL') }}'+'/pikart/album/create';
+        ENDPOINT = '{{ env('APP_URL') }}'+'/album/create';
     }
       
    
