@@ -64,8 +64,11 @@
  
 // Calling getimagesize() function
 
-$imageinfo = getimagesize($Data->path);
-$imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
+$imageheight = Image::make($Data->path)->height();
+$imagewidth = Image::make($Data->path)->width();
+
+
+$imageekstension=$Data->tipe_gambar;
 
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
@@ -210,7 +213,7 @@ $imageinfo_tipe_file=str_replace("image/","",$imageinfo['mime']);
                                             {{$tipe_file_raster_atau_vector}}
                                         </p>
                                         <p>
-                                            {{$imageinfo[0]}} x {{$imageinfo[1]}} pixels | {{$imageinfo_tipe_file}} {{$image_info_file}}| {{$image_size}} MB
+                                            {{$imageheight}} x {{$imagewidth}} pixels | {{$imageekstension}} {{$image_info_file}}| {{$image_size}} MB
                                         </p>
                                     </div>
                                 </div>
