@@ -139,7 +139,7 @@ class DashboardsController extends Controller
          //Filter Tipe File
          $TagsTipeFile= Kategori_File::all();
 
-        if($tipe_hasil=="Gambar"){
+        if($tipe_hasil=="Gambar" || $tipe_hasil=="null"){
             //mencari berdasarkan judul
             $ResultbyJudul=Gambar::with('file','source')->where('judul','like',"%".$katakunci."%") 
             ->when($tipe_aset!=="null", function($query) use ($tipe_aset){
@@ -219,13 +219,16 @@ class DashboardsController extends Controller
 
 
     public function viewGambar ($gambar_id)
-    {
+    {  
 
         //Daftar Koleksiku
         $Album= Album::with('user','gambar','children','parents')->where('creatorid',Auth::id())->get();
 
         // Catat View Gambar
-        $gambar = Gambar::with('user')->find($gambar_id);
+        $gambar = Gambar::with('user','tagged')->find($gambar_id);
+
+        //menampilkan tags
+        $Tags = $gambar->tagNames();
  
 
         if($gambar->showGambar()){// this will test if the user viwed the gambar or not
@@ -263,7 +266,8 @@ class DashboardsController extends Controller
         compact([   'Data',
                     'Album',
                     'Rekomendasi',
-                    'Transaksi'
+                    'Transaksi',
+                    'Tags',
                 ]));
         
     }

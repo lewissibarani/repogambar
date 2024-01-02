@@ -174,11 +174,7 @@ $imageekstension=$Data->tipe_gambar;
                                 </div>
                                 
                                 <div class="mb-2">
-                                    @foreach($Data->tags as $tag)
-                                        <a class="btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1" href="/hasilpencarian/katakunci/{{$tag->name}}">
-                                            <span>{{ $tag->name }}({{ $tag->count }})</span>
-                                        </a>
-                                    @endforeach
+                                    @include('dashboard.datatags') 
                                 </div>                            
                             </div>
                             <!-- <div>
