@@ -165,7 +165,7 @@ class AdobeBPSController extends Controller
 
             DB::beginTransaction();
                 try {
-                    $file_name=date('Y_m_d_H_i_s').'BAST_'.Auth::user()->kodesatker."_".Auth::user()->name."_2024";
+                    $file_name=date('Y_m_d_H_i_s').'BAST_'.Auth::user()->kodesatker."_".Auth::user()->name."_2024.pdf";
                     $file = $request->file('bast_input'); 
 
                     //menyimpan file original 
