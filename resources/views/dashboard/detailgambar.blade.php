@@ -174,7 +174,7 @@ $imageekstension=$Data->tipe_gambar;
                                 </div>
                                 
                                 <div class="mb-2">
-                                    @include('dashboard.datatags') 
+                                    @include('dashboard.datatags_view_gambar') 
                                 </div>                            
                             </div>
                             <!-- <div>

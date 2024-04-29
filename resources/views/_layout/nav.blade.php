@@ -233,7 +233,7 @@
                     <i data-acorn-icon="notebook-1" class="icon" data-acorn-size="18"></i>
                     <span class="label">Permintaan Gambar</span>
                 </a>
-            </li> 
+            </li>  
             @if( Auth::user()->level<=3)
             <li>
                 <a href="/Petugas/Index">
@@ -260,14 +260,34 @@
                             </li>  
                 </ul>
             </li> 
-            @endif 
-            
+            @endif  
             <li>
                 <a href="/Kontributor/Profiluser/{{Auth::user()->id}}">
                     <i data-acorn-icon="camera" class="icon" data-acorn-size="18"></i>
                     <span class="label">Halaman Kontributor</span>
                 </a>
             </li> 
+            <li>
+                <a href="" > 
+                    <span class="label font-weight-bold">Adobe-BPS &nbsp </span> <span class="badge bg-primary">New</span>
+                </a> 
+                <ul id="interfaceComponents"> 
+
+                            <li>
+                                <a href="{{route('adobebps.index')}}">
+                                    <span class="label">Kirim Laporan</span>
+                                </a>
+                            </li>   
+                            @if( Auth::user()->level<=3)
+                            <li>
+                                <a href="{{route('adobebps.templatelaporan')}}">
+                                    <span class="label">Dokumen Penting Adobe</span>
+                                </a>
+                            </li> 
+                            @endif 
+                </ul> 
+            </li> 
+
         </ul>
     </div>
     <!-- Menu End -->

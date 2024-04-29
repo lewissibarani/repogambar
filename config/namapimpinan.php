@@ -9,5 +9,7 @@ return [
         'deputimetod' => 'Dr. Eng. Imam Machdi M.T.', 
         'sestama' => 'Ir. Atqo Mardiyanto M.Si.', 
         'inspektur' => '-', 
-    ]
-];
+    ],
+    'start_tanggal_adobe' => '1-May-2024',
+    'end_tanggal_adobe' => '30-April-2025', 
+]; 

@@ -9,6 +9,7 @@ use App\Http\Controllers\KontributorsController;
 use App\Http\Controllers\LikesController; 
 use App\Http\Controllers\LandpageSettingController; 
 use App\Http\Controllers\AlbumController; 
+use App\Http\Controllers\AdobeBPSController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -33,14 +34,16 @@ Route::redirect('/', '/LandingPage');
 |
 */ 
 
-Route::get('/linkstorage', function () {
-    Artisan::call('storage:link');
-}); 
-    Route::get('/synctheimage', [DashboardsController::class, 'syncro'])->name('dashboard.sync'); 
+// Route::get('/linkstorage', function () {
+//     Artisan::call('storage:link');
+// }); 
+
+Route::get('/synctheimage', [DashboardsController::class, 'syncro'])->name('dashboard.sync'); 
 
 // Route::prefix('/maintenance')->group(function () {
 //     Route::get('/', [DashboardsController::class, 'maintenance'])->name('landingpage.maintenance');  
 // });
+
 Route::prefix('/LandingPage')->group(function () {
     Route::get('/', [DashboardsController::class, 'landingpage'])->name('landingpage.landpage');  
 });
@@ -48,7 +51,7 @@ Route::prefix('/LandingPage')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
-    // Route::redirect('/', '/LandingPage'); 
+    
     Route::post('/like-post/{id}',[LikesController::class,'likePost'])->name('like.post');
     Route::post('/unlike-post/{id}',[LikesController::class,'unlikePost'])->name('unlike.post');
     
@@ -59,9 +62,18 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('album', AlbumController::class)->missing(function (Request $request) {
         return Redirect::route('album.index');
-        }); 
+        });
 
-        Route::resource('album/{albumid}/edit', AlbumController::class)->middleware('owneralbum');
+    Route::post('adobebps/BAST',[AdobeBPSController::class, 'storeBAST'])->name('adobebps.storeBAST'); 
+    Route::post('adobebps/storelaporan',[AdobeBPSController::class, 'storelaporan'])->name('adobebps.storelaporan'); 
+    Route::post('adobebps/uploaddokumenstore',[AdobeBPSController::class, 'uploaddokumenstore'])->name('adobebps.uploaddokumenstore'); 
+    Route::get('adobebps/templatelaporan',[AdobeBPSController::class, 'templatelaporan'])->name('adobebps.templatelaporan'); 
+    Route::resource('adobebps', AdobeBPSController::class)->missing(function (Request $request) {
+        return Redirect::route('adobebps.index');
+        });  
+   
+
+    Route::resource('album/{albumid}/edit', AlbumController::class)->middleware('owneralbum');
 
     Route::prefix('Dashboard')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard'])->name('dashboard.halamandepan');  
@@ -96,6 +108,7 @@ Route::middleware('auth')->group(function () {
         Route::post('Store', [KelolaGambarController::class, 'store'])->name('kelolagambar.store');
         // Route::view('Update', 'kelolagambar/update');
     });
+ 
     
     Route::prefix('Petugas')->group(function () {
         Route::get('/', [PetugasController::class, 'index']);

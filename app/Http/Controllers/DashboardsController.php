@@ -227,8 +227,8 @@ class DashboardsController extends Controller
         // Catat View Gambar
         $gambar = Gambar::with('user','tagged')->find($gambar_id);
 
-        //menampilkan tags
-        $Tags = $gambar->tagNames();
+        //menampilkan tags 
+        $Tags = $gambar->tagNames(); 
  
 
         if($gambar->showGambar()){// this will test if the user viwed the gambar or not

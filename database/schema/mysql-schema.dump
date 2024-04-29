@@ -1,0 +1,444 @@
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+DROP TABLE IF EXISTS `album`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `album` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `judulalbum` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `albumparentid` bigint(20) DEFAULT NULL,
+  `deskripsi` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `creatorid` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `failed_jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `file`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `file` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `size` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `download` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `gambar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gambar` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `album_id` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `judul` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idKegunaan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `idUser` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ukuran` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_gambar` longtext COLLATE utf8mb4_unicode_ci,
+  `source_id` bigint(20) DEFAULT NULL,
+  `thumbnail_path` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_id` bigint(20) DEFAULT NULL,
+  `kategori_file` bigint(20) DEFAULT NULL,
+  `tipe_gambar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `views` bigint(20) NOT NULL,
+  `download` bigint(20) NOT NULL,
+  `booleantayang` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `gambar_views`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gambar_views` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `gambar_id` int(10) unsigned NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `session_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(10) unsigned DEFAULT NULL,
+  `ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `agent` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `jenispermintaan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jenispermintaan` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `jenispermintaan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `kategori_file`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `kategori_file` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nama_kategori` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `kegunaan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `kegunaan` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `kegunaan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `level_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `level_users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `level` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `like_transcation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `like_transcation` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `likeable_like_counters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `likeable_like_counters` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `likeable_id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `likeable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `count` bigint(20) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `likeable_counts` (`likeable_id`,`likeable_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `likeable_likes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `likeable_likes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `likeable_id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `likeable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `likeable_likes_unique` (`likeable_id`,`likeable_type`,`user_id`),
+  KEY `likeable_likes_user_id_index` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notifications` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifiable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifiable_id` bigint(20) unsigned NOT NULL,
+  `data` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `read_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `pembagiantugas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pembagiantugas` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `permintaan_id` bigint(255) DEFAULT NULL,
+  `seenboolean` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `permintaan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `permintaan` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `jenispermintaanid` bigint(20) NOT NULL,
+  `judulPermintaan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idStatus` bigint(20) NOT NULL,
+  `idKegunaan` bigint(20) NOT NULL,
+  `alasanDitolak` longtext COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `linkPermintaan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idUserPeminta` bigint(20) NOT NULL,
+  `gambar_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_permintaan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kegunaan_lainnya` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `posts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `posts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `searchresult_transcation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `searchresult_transcation` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `source`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `source` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `sumber_gambar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `tagging_tag_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tagging_tag_groups` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `slug` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tagging_tag_groups_slug_index` (`slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `tagging_tagged`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tagging_tagged` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `taggable_id` int(10) unsigned NOT NULL,
+  `taggable_type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tag_name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tag_slug` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tagging_tagged_taggable_id_index` (`taggable_id`),
+  KEY `tagging_tagged_taggable_type_index` (`taggable_type`),
+  KEY `tagging_tagged_tag_slug_index` (`tag_slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `tagging_tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tagging_tags` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `slug` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `suggest` tinyint(1) NOT NULL DEFAULT '0',
+  `count` int(10) unsigned NOT NULL DEFAULT '0',
+  `tag_group_id` int(10) unsigned DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `tagging_tags_slug_index` (`slug`),
+  KEY `tagging_tags_tag_group_id_foreign` (`tag_group_id`),
+  CONSTRAINT `tagging_tags_tag_group_id_foreign` FOREIGN KEY (`tag_group_id`) REFERENCES `tagging_tag_groups` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tags` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `tugasreview`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tugasreview` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `petugasid` bigint(20) DEFAULT NULL,
+  `transaksiid` int(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `aboutme` longtext COLLATE utf8mb4_unicode_ci,
+  `kodesatker` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `satker` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profilepicture` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nohp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `level` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `nip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nipbaru` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `alamatkantor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `golongan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jabatan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sums_upload` bigint(20) DEFAULT NULL,
+  `sums_download` bigint(20) DEFAULT NULL,
+  `sum_permintaan` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `users_petugas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users_petugas` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `users_id` bigint(20) NOT NULL,
+  `count_task` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `aktif` tinyint(1) NOT NULL,
+  `countreviewtask` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1);
+INSERT INTO `migrations` VALUES (2,'2014_10_12_100000_create_password_resets_table',1);
+INSERT INTO `migrations` VALUES (3,'2019_08_19_000000_create_failed_jobs_table',1);
+INSERT INTO `migrations` VALUES (4,'2022_01_25_073126_create_gambar_table',1);
+INSERT INTO `migrations` VALUES (5,'2022_01_25_073536_create_searchresult_transcation',1);
+INSERT INTO `migrations` VALUES (6,'2022_01_25_074058_create_like_transcation',1);
+INSERT INTO `migrations` VALUES (7,'2022_01_25_075001_create_permintaan_transcation',1);
+INSERT INTO `migrations` VALUES (8,'2022_01_27_031749_create_level_users_table',1);
+INSERT INTO `migrations` VALUES (9,'2022_01_27_032050_create_tags_table',1);
+INSERT INTO `migrations` VALUES (10,'2022_01_25_075001_create_permintaan',2);
+INSERT INTO `migrations` VALUES (11,'2022_06_13_063402_create_status_table',2);
+INSERT INTO `migrations` VALUES (12,'2022_06_13_063651_create_kegunaan_table',2);
+INSERT INTO `migrations` VALUES (13,'2022_06_16_035431_create_test1_table',3);
+INSERT INTO `migrations` VALUES (14,'2022_06_17_070935_add_gambar_table',4);
+INSERT INTO `migrations` VALUES (15,'2022_06_17_072926_create_pembagiantugas_table',4);
+INSERT INTO `migrations` VALUES (16,'2022_06_17_073049_create_transaksi_table',4);
+INSERT INTO `migrations` VALUES (17,'2022_06_20_073034_add_level_table',4);
+INSERT INTO `migrations` VALUES (18,'2022_06_20_073833_add_kegunaan_table',5);
+INSERT INTO `migrations` VALUES (19,'2022_06_22_020453_tambah_kolom_permintaan_table',6);
+INSERT INTO `migrations` VALUES (20,'2022_06_22_025656_tambah_kolom_id_user_permintaan_table',7);
+INSERT INTO `migrations` VALUES (21,'2022_06_22_063121_add_current_timestamp_permintaan_table',8);
+INSERT INTO `migrations` VALUES (22,'2022_06_24_191455_add_profilepicture_to_users_table',8);
+INSERT INTO `migrations` VALUES (23,'2022_06_27_053140_add_kolom_gambar_id',9);
+INSERT INTO `migrations` VALUES (25,'2022_06_27_053530_add_kolom_user_id',10);
+INSERT INTO `migrations` VALUES (26,'2022_06_30_074028_tambah_kolom_gambar_source',11);
+INSERT INTO `migrations` VALUES (27,'2022_06_30_074448_buat_tabel_source',11);
+INSERT INTO `migrations` VALUES (28,'2014_01_07_073615_create_tagged_table',12);
+INSERT INTO `migrations` VALUES (29,'2014_01_07_073615_create_tags_table',12);
+INSERT INTO `migrations` VALUES (30,'2016_06_29_073615_create_tag_groups_table',12);
+INSERT INTO `migrations` VALUES (31,'2016_06_29_073615_update_tags_table',12);
+INSERT INTO `migrations` VALUES (32,'2020_03_13_083515_add_description_to_tags_table',12);
+INSERT INTO `migrations` VALUES (33,'2022_07_07_030405_create_posts_table',13);
+INSERT INTO `migrations` VALUES (34,'2022_07_13_082513_create_notifications_table',13);
+INSERT INTO `migrations` VALUES (35,'2022_07_21_071823_tambah_kolom_idpermintaan',13);
+INSERT INTO `migrations` VALUES (36,'2022_07_21_074007_create_user_petugas',13);
+INSERT INTO `migrations` VALUES (37,'2022_07_21_080246_tambah_kolom_idpermintaan_2',14);
+INSERT INTO `migrations` VALUES (38,'2022_07_25_071244_add_column_users_petugas',15);
+INSERT INTO `migrations` VALUES (39,'2022_07_26_044101_add_column_table_transaksi',16);
+INSERT INTO `migrations` VALUES (40,'2022_08_24_062310_create_file_table',17);
+INSERT INTO `migrations` VALUES (41,'2022_08_24_070715_add_file_id_to_gambar',18);
+INSERT INTO `migrations` VALUES (42,'2022_08_26_041716_add_kolom_size_file',19);
+INSERT INTO `migrations` VALUES (43,'2022_09_06_061427_add_type_gambar',20);
+INSERT INTO `migrations` VALUES (44,'2022_10_05_113154_add_nip_nipbaru_alamatkantor_foto_olongan_jabatan_table_user',21);

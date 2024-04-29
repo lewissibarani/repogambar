@@ -18,6 +18,7 @@ use App\Providers\PetugasPermintaan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Image;
+use App\Exceptions\InvalidOrderException;
 
 class PetugasController extends Controller
 {
@@ -71,7 +72,7 @@ class PetugasController extends Controller
     }
 
     public function store (Request $request)
-    { 
+    {  
         if($this->cek_sudah_di_layani_apa_belum($request->transaksi_id)){
  
             $this->validate($request, [
@@ -95,12 +96,10 @@ class PetugasController extends Controller
             if($request->file('image')){  
                     
                 //constant
-                    $image = $request->file('image');  
+                    $image = $request->file('image');   
+                    $nameImage =  date('YmdHi').$request->file('image')->getClientOriginalName(); 
+                    ini_set('memory_limit','2048M'); 
 
-                    $nameImage =  date('YmdHi').$request->file('image')->getClientOriginalName();
-
-                    ini_set('memory_limit','2048M');
-                
                     //membuat thumbnail
                     $width = config('imageresize.size.width'); // your max width
                     $height =  config('imageresize.size.height'); // your max height
@@ -216,12 +215,12 @@ class PetugasController extends Controller
         }
 
         return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
+     
         
     }
 
     public function edit_store (Request $request)
-    {  
-             
+    {    
             $this->validate($request, [
                 'edit_image' => 'image',
                 'edit_file' => 'mimes:zip,rar|file|max:30000',
@@ -302,9 +301,8 @@ class PetugasController extends Controller
                 
                 
             } 
-             //Menyimpan Judul, Oriptah image, thumbail dan file
-             
-                
+
+            //Menyimpan Judul, Oriptah image, thumbail dan file              
             $gambars->judul = $request->edit_judul;  
             $gambars->path = $Path;
             $gambars->thumbnail_path = $thumbnailPath;  
@@ -314,77 +312,77 @@ class PetugasController extends Controller
             //Menyimpan Tags  
             $gambars->retag($this->convertArray($request->tags));
 
+            //Menyimpan Model 
             $gambars->save();
             
-            return redirect()->route('petugas.index')->with('message', 'Permintaan berhasil Diupdate');
-            
-        
+            return redirect()->route('petugas.index')->with('message', 'Permintaan berhasil Diupdate');  
+       
     }
 
     public function tolak (Request $request)
-    {
-        if($this->cek_sudah_di_layani_apa_belum($request->transaksi_id)){
+    {  
+                if($this->cek_sudah_di_layani_apa_belum($request->transaksi_id)){
 
-        $this->validate($request, [
-            'alasanDitolak' => 'required',
-        ]);
-        
-        //mencari id transaksi permitaan gambar di tabel pembagian tugas
-        $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
+                $this->validate($request, [
+                    'alasanDitolak' => 'required',
+                ]);
+                
+                //mencari id transaksi permitaan gambar di tabel pembagian tugas
+                $id_permintaan = PembagianTugas::find($request->bagitugas_id)->permintaan_id;
 
-        //merubah status permintaan gambar menjadi selesai
-        $permintaan = Transaksi::where('id', $id_permintaan)
-        ->update([  'gambar_id' => $request->id,
-                    'idStatus' => 2,
-                    'alasanDitolak' => $request->alasanDitolak]);
-        
-        $permintaan = Transaksi::where('id', $id_permintaan)->first();
+                //merubah status permintaan gambar menjadi selesai
+                $permintaan = Transaksi::where('id', $id_permintaan)
+                ->update([  'gambar_id' => $request->id,
+                            'idStatus' => 2,
+                            'alasanDitolak' => $request->alasanDitolak]);
+                
+                $permintaan = Transaksi::where('id', $id_permintaan)->first();
 
-        //Start Read The Notification  
-        $Notifikasi = DB::table('notifications')->where(
-            [
-                ['type', '=', 'App\Notifications\PermintaanNotification']
-            ]
-        )->get();
-        
-        foreach ($Notifikasi as $notification) {  
-            if(json_decode($notification->data)->kode_permintaan_id==$permintaan->id_permintaan)
-            {
-                $Notifikasi = DB::table('notifications')->where('id', $notification->id)
-                ->update([  'read_at' => date("Y-m-d H:i:s")]);
+                //Start Read The Notification  
+                $Notifikasi = DB::table('notifications')->where(
+                    [
+                        ['type', '=', 'App\Notifications\PermintaanNotification']
+                    ]
+                )->get();
+                
+                foreach ($Notifikasi as $notification) {  
+                    if(json_decode($notification->data)->kode_permintaan_id==$permintaan->id_permintaan)
+                    {
+                        $Notifikasi = DB::table('notifications')->where('id', $notification->id)
+                        ->update([  'read_at' => date("Y-m-d H:i:s")]);
+                    }
+                }
+                //End Read The Notification
+
+                return redirect()->route('petugas.index');
             }
-        }
-        //End Read The Notification
-
-        return redirect()->route('petugas.index');
-    }
-    return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
+            return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani'); 
+    
         
     }
 
     public function layani_tolak ($transaksi_id, $permintaan_id)
-    {
-        if($this->cek_sudah_di_layani_apa_belum($transaksi_id)){
-        $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
-        ->where('user_id',Auth::id())
-        ->where('permintaan_id', $transaksi_id)
-        ->first();
+    { 
+            if($this->cek_sudah_di_layani_apa_belum($transaksi_id)){
+            $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan')
+            ->where('user_id',Auth::id())
+            ->where('permintaan_id', $transaksi_id)
+            ->first();
 
-        if(Auth::user()->level<=2){
-                $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan') 
-                ->where('permintaan_id', $transaksi_id)
-                ->first();
-                }
+            if(Auth::user()->level<=2){
+                    $Data = PembagianTugas::with('user','permintaan','permintaan.user','permintaan.status','permintaan.kegunaan') 
+                    ->where('permintaan_id', $transaksi_id)
+                    ->first();
+                    }
 
-        return view('petugas.layani_tolak', 
-        compact(['transaksi_id',
-                'permintaan_id',
-                'Data'
-            ]));
-        }
-        return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
-
-        
+            return view('petugas.layani_tolak', 
+            compact(['transaksi_id',
+                    'permintaan_id',
+                    'Data'
+                ]));
+            }
+            return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
+       
     }
 
     public function layani ($transaksi_id, $permintaan_id)
@@ -412,8 +410,7 @@ class PetugasController extends Controller
                     'Kategori_File'
                 ]));
         }
-        return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');
-
+        return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani'); 
     }
 
     public function edit_layani ($id_transaksi)
@@ -480,9 +477,7 @@ class PetugasController extends Controller
 
         return $result;
     }
-
   
-
     public function cek_sudah_di_layani_apa_belum($permintaan_id){
         if(Transaksi::find($permintaan_id)->idStatus!==3)
         {
@@ -490,13 +485,11 @@ class PetugasController extends Controller
         }
         else {
             return false;
-        }
-        
+        } 
     }
 
     public function statistik()
-    {
-
+    { 
         return view('petugas.statistik', 
         compact(['User','User_Petugas'
             ]));

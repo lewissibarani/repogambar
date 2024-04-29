@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(Kategori_FileSeeder::class);
+        $this->call(Adobe_Jenis_DokumenSeeder::class);
     }
 }
