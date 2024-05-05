@@ -278,11 +278,12 @@
                                     <span class="label">Kirim Laporan</span>
                                 </a>
                             </li>   
-                            <li>
+
+                            <!-- <li>
                                 <a href="{{route('adobebps.indexstatistik')}}">
                                     <span class="label">Statistik Laporan</span>
                                 </a>
-                            </li> 
+                            </li>  -->
                             @if( Auth::user()->level<=3)
                             
                             <li>
