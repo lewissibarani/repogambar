@@ -28,8 +28,15 @@ class AdobeBPSController extends Controller
     public function index()
     { 
 
-        $User=User::find(Auth::id()); 
-
+        $userkodesatker = Auth::user()->kodesatker;
+        $User=false; 
+        //trim kodesatker  
+        $adobepj = AdobePJ::where('email',Auth::user()->email)->first(); 
+        if($adobepj)
+        {
+            $User=User::find(Auth::id()); 
+        }  
+        
         //Dokumen Bulan
         $Bulan = Bulan::all();
 
@@ -100,7 +107,7 @@ class AdobeBPSController extends Controller
     {
          //Data BAST
         //  $Data = AdobePJ::select('*')->groupBy('kodesatkerid')->select('kodesatkerid', DB::raw('count(*) as total'))->get();  
-        $Data = AdobePJ::with('getAdobeTransaksiBAST')->get(); 
+        $Data = AdobePJ::with('getnamasatker','getAdobeTransaksiBAST','getAdobeTransaksiBAST.dokumen')->get();  
         $Provinsi = Namasatker::orderBy('kodesatker')->get();
         $DataBAST = AdobeTransaksiBAST::with('user','dokumen','periode')->get();
         $CountLisensi = $Data->count();

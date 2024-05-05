@@ -1,9 +1,9 @@
 <div  style="margin: auto; position: relative; height: 50vh; "> 
-            <canvas id="barChartProvinsi"></canvas>
+            <canvas id="barChartPemanfaatanProvinsi"></canvas>
  </div>
 
 <script>
-    var ctx = document.getElementById('barChartProvinsi').getContext('2d');
+    var ctx = document.getElementById('barChartPemanfaatanProvinsi').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {

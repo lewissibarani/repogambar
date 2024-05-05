@@ -19,6 +19,18 @@
     $aboutme        = "adboutme";
     $phone        = "phone";
     $email        = "email";
+
+    //data pj adobe_pj
+        $namauser = "";
+        $nipuser  = "";
+        $jabatanuser = "";
+        $profilepicture = "";
+    if($User){
+        $namauser = $User->name;
+        $nipuser  =  $User->nipbaru;
+        $jabatanuser = $User->jabatan;
+        $profilepicture = $User->profilepicture;
+    }  
     
 @endphp
 
@@ -83,12 +95,12 @@
                         <div class="d-flex align-items-center flex-column ">
                             <div class="mb-5 d-flex align-items-center flex-column">
                                 <div class="sw-13 position-relative mb-3">
-                                    <img src="{{$User->profilepicture}}" class="img-fluid rounded-xl" alt="thumb" />
+                                    <img src="{{$profilepicture}}" class="img-fluid rounded-xl" alt="thumb" />
                                 </div>
-                                <div class="h5 mb-0">{{$User->name}}</div>
-                                <div class="text-muted">{{$User->nipbaru}}</div>
+                                <div class="h5 mb-0">{{$namauser}}</div>
+                                <div class="text-muted">{{$nipuser}}</div>
                                 <div class="text-muted"> 
-                                    <span class="align-middle">{{$User->jabatan}}</span>
+                                    <span class="align-middle">{{$jabatanuser}}</span>
                                 </div>
                             </div> 
                         </div>

@@ -91,8 +91,13 @@
                                             {{$string2}} 
                                     </td>
                                     <td class="text-alternate">{{$datas->nama}}</td> 
-                                    <td class="text-alternate">
-                                        Unduh  
+                                    <td class="text-alternate">  
+                                        @if(is_null($datas->getAdobeTransaksiBAST))
+                                            Belum Upload BAST 
+                                        @else
+                                            <a href="{{$datas->getAdobeTransaksiBAST->dokumen->path}}" > Unduh </a>
+                                        @endif
+                                          
                                     </td>  
                                     <td class="text-alternate"> {{$datas->updated_at}} </td> 
                                 </tr>

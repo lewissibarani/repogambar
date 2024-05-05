@@ -15,11 +15,15 @@ class AdobePJ extends Model
 
     public function getAdobeTransaksiBAST ()
     {
-        return $this->hasOne('App\Models\AdobeTransaksiBAST' ,'kodesatkerid','kodesatker')->latest();
+        return $this->hasOne('App\Models\AdobeTransaksiBAST' ,'kodesatkerid','kodesatkerid')->latest();
+    }
+    public function getnamasatker ()
+    {
+        return $this->hasOne('App\Models\Namasatker' ,'kodesatker','kodesatkerid');
     }
     public function getAdobeTransaksiKuesioner ()
     {
-        return $this->hasOne('App\Models\AdobeTransaksiKuesioner' ,'kodesatkerid','kodesatker')->latest();
+        return $this->hasOne('App\Models\AdobeTransaksiKuesioner' ,'kodesatkerid','kodesatkerid')->latest();
     }
 
 }

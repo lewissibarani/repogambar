@@ -75,7 +75,7 @@
                         <div class="p-2 bd-highlight">
                             <button type="button" class="btn btn-success btn-icon btn-icon-start rounded-xl mt-1" 
                             data-bs-toggle="modal"        
-                            data-bs-target="#modalrinciankuesioner">
+                            data-bs-target="#_modalrinciankuesioner">
                             <i data-acorn-icon="file-chart"></i> 
                                 <span>Rincian Kuesioner</span>
                             </button>
@@ -90,16 +90,15 @@
         <div class="row" >
             <div class="col-12 col-lg-12">  
 
-                        <div class="card hover-scale-up cursor-pointer mb-3">
+                        <!-- <div class="card hover-scale-up cursor-pointer mb-3">
                             <div class="card-body">
                                 <div class="">
                                     <h2 class="small-title">Progress BAST  Per Provinsi</h2>  
                                 </div>
                                 <div class="scroll-out"> 
-                                @include('adobebps.rincianbastprovinsi'); 
                                 </div>
                             </div>
-                        </div> 
+                        </div>  -->
                         <!-- <div class="card hover-scale-up cursor-pointer mb-4 ">
                             <div class="card-body">
                                 <div class="">
@@ -128,7 +127,7 @@
                                         <h2 class="small-title">Progress Pengisian Kuesioner Pemanfaatan</h2>  
                                     </div>
                                     <div class="scroll-out"> 
-                                    @include('adobebps.rincianchartprovinsi'); 
+                                     
                                     </div>
                                          
                                     
@@ -141,7 +140,7 @@
             </div> --> 
         </div>   
 
-        <div class="row mb-5">
+        <!-- <div class="row mb-5">
             <div class="col-12 col-sm-12 col-lg-12">
                 <div class="card hover-scale-up cursor-pointer">
                     <div class="h-100 row g-0 card-body align-items-center">  
@@ -149,11 +148,10 @@
                             <h2 class="small-title">Progress Pengisian Kuesioner Pemanfaatan</h2>  
                         </div>
                         <div class="scroll-out"> 
-                        @include('adobebps.rincianchartprovinsi'); 
                         </div> 
                     </div>  
                 </div>
             </div>  
-        </div>
+        </div> -->
  
 @endsection
