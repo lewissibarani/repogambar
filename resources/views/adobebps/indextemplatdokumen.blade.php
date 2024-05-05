@@ -144,41 +144,7 @@
                         </div>
                     </section>
                     <!-- Hover End -->
-                    </div>
-
-                <!-- Add Edit Modal Start -->
-                <div class="modal modal-left large fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title font-weight-bold" id="modalTitle">Form Permintaan Gambar</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="createGambarForm" action="{{route('kelolagambar.store')}}" method="POST" novalidate>
-                                @csrf
-                                @error('judulPermintaan')
-                                <div class="mb-3 text-danger">
-                                    {{$message}}
-                                </div>
-                                @enderror
-                                @error('idkegunaan')
-                                <div class="mb-3 text-danger">
-                                    {{$message}}
-                                </div>
-                                @enderror
-                                @error('linkPermintaan')
-                                <div class="mb-3 text-danger">
-                                    {{$message}}
-                                </div>
-                                @enderror
-                                @include('adobebps.tabledokumenpenting')
- 
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add Edit Modal End -->
+                    </div> 
 
         </div>
     </div> 

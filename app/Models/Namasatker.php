@@ -4,14 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\AdobeTransaksiBAST;
-use App\Models\Namasatker;
 
-
-class AdobePJ extends Model
+class Namasatker extends Model
 {
-    use HasFactory;
-    protected $table = 'adobe_pj'; 
+    use HasFactory; 
+    protected $table = 'namasatker'; 
 
     public function getAdobeTransaksiBAST ()
     {
@@ -21,5 +18,4 @@ class AdobePJ extends Model
     {
         return $this->hasOne('App\Models\AdobeTransaksiKuesioner' ,'kodesatkerid','kodesatker')->latest();
     }
-
 }

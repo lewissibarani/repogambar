@@ -278,7 +278,13 @@
                                     <span class="label">Kirim Laporan</span>
                                 </a>
                             </li>   
+                            <li>
+                                <a href="{{route('adobebps.indexstatistik')}}">
+                                    <span class="label">Statistik Laporan</span>
+                                </a>
+                            </li> 
                             @if( Auth::user()->level<=3)
+                            
                             <li>
                                 <a href="{{route('adobebps.templatelaporan')}}">
                                     <span class="label">Dokumen Penting Adobe</span>

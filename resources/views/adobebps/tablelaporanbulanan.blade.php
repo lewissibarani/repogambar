@@ -106,7 +106,7 @@
                                             <td class="text-alternate">  
                                                             <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
                                                                 data-bs-toggle="modal"        
-                                                                data-bs-target="#_kuesioner{{$bulan->namabulan}}"
+                                                                data-bs-target="#_kuesioner{{$bulan->id}}"
                                                                 data-bs-placement="top"
                                                                 title="Isi Kuesioner"> 
                                                                 <i data-acorn-icon="pen"></i>  

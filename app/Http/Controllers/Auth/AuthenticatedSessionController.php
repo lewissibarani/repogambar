@@ -121,10 +121,27 @@ class AuthenticatedSessionController extends Controller
                 $user = $provider->getResourceOwner($token);
 
                 $email = $user->getEmail();
+                $kodesatker = $user->getKodeOrganisasi(); 
+                $kodesatker_trim = substr($kodesatker, 0,4);
+                if($kodesatker_trim=="0000"){
+                    $kodesatker_trim=substr($kodesatker,-5);
+                }
+                $golongan = $user->getGolongan();
+                $jabatan = $user->getJabatan(); 
+                $foto = $user->getUrlFoto();
+
                 $id = User::where('email', $email)->first();
 
                 if (!empty($id)) {
+                    //selalu update kode satker user kalau ada yang mutasi tetap update
+                    $id->kodesatker = $kodesatker_trim;
+                    $id->golongan = $golongan;
+                    $id->jabatan = $jabatan;
+                    $id->profilepicture = $foto;
+                    $id->save();
+
                     $id = $id->id;
+                   
                 } else {
                     $newUser = User::create([
                         'name' => $user->getName(),

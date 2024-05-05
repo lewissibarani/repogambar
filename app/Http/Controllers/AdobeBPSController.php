@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User; 
+use App\Models\Namasatker; 
 use App\Models\Bulan; 
 use App\Models\AdobeDokumen; 
+use App\Models\AdobePJ; 
 use App\Models\AdobePeriode; 
 use App\Models\AdobeTransaksiBAST;
 use App\Models\AdobeJenisDokumen;
@@ -94,13 +96,109 @@ class AdobeBPSController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function indexstatistik()
     {
-         //Data User
-         $User=User::find(Auth::id());
+         //Data BAST
+        //  $Data = AdobePJ::select('*')->groupBy('kodesatkerid')->select('kodesatkerid', DB::raw('count(*) as total'))->get();  
+        $Data = AdobePJ::with('getAdobeTransaksiBAST')->get(); 
+        $Provinsi = Namasatker::orderBy('kodesatker')->get();
+        $DataBAST = AdobeTransaksiBAST::with('user','dokumen','periode')->get();
+        $CountLisensi = $Data->count();
 
+        //data nama provinsi 
+        $provinsi_array = []; 
+        foreach($Provinsi as $provinsi){
+            if(substr($provinsi->kodesatker, -2)=="00"){
+                $string = $provinsi->namasatker;
+                $string1 = str_replace("BADAN PUSAT STATISTIK", "", $string);
+                $string2 = str_replace("PROP. ", "", $string1); 
+                $string3 = str_replace("KEPULAUAN", "KEP.", $string2); 
+                array_push($provinsi_array,$string3);
+            }
+            
+        }
 
-         return view('adobebps.index',compact('User'));   
+        //datachartbast
+        // $array_data_bast = [];
+        // foreach($Provinsi as $databast_provinsi)
+        // {   
+        //     $kodesatker = $databast_provinsi->kodesatker;
+        //     if(substr($databast_provinsi->kodesatker, -2)=="00"){
+        //         $check = AdobeTransaksiBAST::where('kodesatker','=',$kodesatker)->first();
+        //         if(!$check){
+        //             array_push($array_data_bast,0);
+        //         } else {
+        //             $getallprovinsi = AdobeTransaksiBAST::where('kodesatker','=',$kodesatker)->get();
+
+        //             $pembilang = ; 
+
+        //             $pembagi = ;
+        //             $hasil = ;
+        //             array_push($array_data_bast,$string3);
+        //         }
+        //     }
+           
+        // }
+
+        // $array_data_bast = [];
+        // foreach( $DataBAST as $databast){
+        //     array_push($array_data_bast,$databast->getAdobeTransaksiBAST-> ?? '0');
+        // }
+        // $string = $datas->getnamasatker->namasatker ?? '';  
+        // 
+
+        // Replace this with your actual data retrieval logic
+        $piechart1 = [ 
+            'labels' => ['Belum Kirim', 'Sudah Kirim'],
+            'data' => [70, 30,],
+        ];
+
+        $piechart2 = [ 
+            'labels' => ['Belum Kirim', 'Sudah Kirim'],
+            'data' => [70, 30,],
+        ];
+
+        //data chart
+        $bulan_array = [];
+        $Bulan = Bulan::all();
+        foreach($Bulan as $bulan){
+            array_push($bulan_array,$bulan->namabulan);
+        }
+ 
+        //backgroundColor
+        $warna1="#1ddba9";
+        $warna2="#4a3dff"; 
+        $backgroundColor=[];
+        $warna="";  
+
+        foreach($bulan_array as $warnabulan){  
+            if($warna=="#1ddba9" ){
+                array_push($backgroundColor,$warna2);
+                $warna=$warna2;
+            } else { 
+            array_push($backgroundColor,$warna1);
+            $warna=$warna1;  
+            }
+        } 
+        
+        $dataradar = [
+            'labels' => ['Category A', 'Category B', 'Category C', 'Category D', 'Category E','Category A', 'Category B', 'Category C', 'Category D', 'Category E'],
+            'data' => [25, 30, 15, 10, 20,25, 30, 15, 10, 20],
+        ];
+
+        $data = [
+            'labels' => $bulan_array,
+            'data' => [65, 59, 80, 81, 56,65, 59, 80, 81, 56, 81, 56],
+            'backgroundColor' => $backgroundColor,
+        ];
+
+        $dataprovinsi = [
+            'labels' => $provinsi_array,
+            'data' => [65, 59, 80, 81, 56,65, 59, 80, 81, 56, 81, 56],
+        ];
+
+         return view('adobebps.indexstatistik',
+                compact('Data','data','CountLisensi','dataprovinsi','piechart1','piechart2','dataradar'));   
     }
 
     /**
@@ -176,6 +274,7 @@ class AdobeBPSController extends Controller
                     $fileDokumen = AdobeDokumen::create([
                     'jenisdokumenid' => 1,
                     'path' => $url_file,
+                    'kodesatker' => Auth::user()->kodesatker,
                     'filename'=>'BAST_'.Auth::user()->kodesatker."_".Auth::user()->name."_2024",
                     ]);
 

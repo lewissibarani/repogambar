@@ -18,6 +18,7 @@ class AdobeTransaksiBAST extends Model
         'userid',
         'dokumenid',
         'periodeid',   
+        'kodesatkerid',
     ];
  
 

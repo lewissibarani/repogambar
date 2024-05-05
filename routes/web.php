@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
         return Redirect::route('album.index');
         });
 
+    Route::get('adobebps/statistik',[AdobeBPSController::class, 'indexstatistik'])->name('adobebps.indexstatistik'); 
     Route::post('adobebps/BAST',[AdobeBPSController::class, 'storeBAST'])->name('adobebps.storeBAST'); 
     Route::post('adobebps/storelaporan',[AdobeBPSController::class, 'storelaporan'])->name('adobebps.storelaporan'); 
     Route::post('adobebps/uploaddokumenstore',[AdobeBPSController::class, 'uploaddokumenstore'])->name('adobebps.uploaddokumenstore'); 
