@@ -367,7 +367,7 @@ class AdobeBPSController extends Controller
                     $fileDokumen = AdobeDokumen::create([
                     'jenisdokumenid' => 1,
                     'path' => $url_file,
-                    'kodesatker' => Auth::user()->kodesatker,
+                    'kodesatkerid' => Auth::user()->kodesatker,
                     'filename'=>'BAST_'.Auth::user()->kodesatker."_".Auth::user()->name."_2024",
                     ]);
 
