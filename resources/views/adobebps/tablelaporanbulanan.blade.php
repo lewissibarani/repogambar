@@ -1,6 +1,4 @@
 @php     
-    
-    
 @endphp  
   <!-- Hover Start -->
   <section class="scroll-section" id="hover">
