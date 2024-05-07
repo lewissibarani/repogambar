@@ -59,21 +59,48 @@ class AdobeBPSController extends Controller
     public function storelaporan(Request $request)
     {  
         $this->validate($request, [
-            'pertanyaan1' => 'required', 
-            'pertanyaan2' => 'required', 
+            'memakaiadobe' => 'required',  
         ]);
 
         $res = [];  
 
             DB::beginTransaction();
-                try {  
+                try {   
                    //record database  
                     $fileDokumen = AdobeTransaksiKuesioner::create([
                     'userid' => Auth::id(),
                     'periodeid' => 1,
                     'bulanid' => $request->idbulan,
-                    'apakahmemakaiadobe'=>$request->pertanyaan1,
-                    'memakaiadobeuntukapa'=>$request->pertanyaan2
+                    'kodesatkerid' => Auth::user()->kodesatker,
+                    'memakaiadobe'=>$request->memakaiadobe,
+                    'acrobat'=>$request->acrobat,
+                    'aero'=>$request->aero, 
+                    'aftereffect'=>$request->aftereffect,
+                    'animate'=>$request->animate,
+                    'audition'=>$request->audition,
+                    'dimension'=>$request->dimension,
+                    'dreamweaver'=>$request->dreamweaver,
+                    'express'=>$request->express,
+                    'fresco'=>$request->fresco,
+                    'illustrator'=>$request->illustrator,
+                    'incopy'=>$request->incopy,
+                    'indesign'=>$request->indesign,
+                    'lightroom'=>$request->lightroom,
+                    'photoshop'=>$request->photoshop,
+                    'premierepro'=>$request->premierepro,
+                    'premiererush'=>$request->premiererush,
+                    'xd'=>$request->xd,
+                    'publikasi'=>$request->publikasi,
+                    'brs'=>$request->brs,
+                    'infografis'=>$request->infografis,
+                    'flyer_vb'=>$request->flyer_vb,
+                    'spanduk'=>$request->spanduk,
+                    'video'=>$request->video,
+                    'website'=>$request->website,
+                    'dashboard'=>$request->dashboard,
+                    'suratdokumen'=>$request->suratdokumen,
+                    'lainnya'=>$request->lainnya,
+                    'jumlah_lain'=>$request->jumlah_lain,
                     ]);
 
                     DB::commit();
@@ -84,7 +111,66 @@ class AdobeBPSController extends Controller
                     DB::rollback();
                     $res = ['message' => $e->getMessage()];
                     // something went wrong
-                } 
+                }
+        
+        return redirect()->route('adobebps.index')->with($res); 
+    }
+
+    public function storeeditlaporan(Request $request)
+    {  
+        $this->validate($request, [
+            'memakaiadobe' => 'required',  
+        ]);
+        $res = [];  
+
+            DB::beginTransaction();
+                try {   
+                    $fileDokumen = AdobeTransaksiKuesioner::find($request->idkuesioner); 
+
+                   //record database      
+                    $fileDokumen->memakaiadobe = $request->memakaiadobe;
+                    $fileDokumen->acrobat = $request->acrobat;
+                    $fileDokumen->aero = $request->aero;
+                    $fileDokumen->aftereffect = $request->aftereffect;
+                    $fileDokumen->animate=$request->animate;
+                    $fileDokumen->audition=$request->audition;
+                    $fileDokumen->dimension=$request->dimension;
+                    $fileDokumen->dreamweaver=$request->dreamweaver;
+                    $fileDokumen->express=$request->express;
+                    $fileDokumen->fresco=$request->fresco;
+                    $fileDokumen->illustrator=$request->illustrator;
+                    $fileDokumen->incopy=$request->incopy;
+                    $fileDokumen->indesign=$request->indesign;
+                    $fileDokumen->lightroom=$request->lightroom;
+                    $fileDokumen->photoshop=$request->photoshop;
+                    $fileDokumen->premierepro=$request->premierepro;
+                    $fileDokumen->premiererush=$request->premiererush;
+                    $fileDokumen->xd=$request->xd;
+                    $fileDokumen->publikasi=$request->publikasi;
+                    $fileDokumen->brs=$request->brs;
+                    $fileDokumen->infografis=$request->infografis;
+                    $fileDokumen->flyer_vb=$request->flyer_vb;
+                    $fileDokumen->spanduk=$request->spanduk;
+                    $fileDokumen->video=$request->video;
+                    $fileDokumen->website=$request->website;
+                    $fileDokumen->dashboard=$request->dashboard;
+                    $fileDokumen->suratdokumen=$request->suratdokumen;
+                    $fileDokumen->lainnya=$request->lainnya;
+                    $fileDokumen->jumlah_lain=$request->jumlah_lain; 
+
+                    $timestamp_from_array = date('Y-m-d h:i:s');
+                    $fileDokumen->updated_at=date('Y-m-d h:i:s' , strtotime( $timestamp_from_array ) + 7 * 3600 ); 
+                    $fileDokumen->save();
+                    DB::commit();
+                    // all good
+                    $res = ['message' => 'Data updated!'];
+
+                } catch (\Exception $e) {  
+
+                    DB::rollback();
+                    $res = ['message' => $e->getMessage()];
+                    // something went wrong
+                }
         
         return redirect()->route('adobebps.index')->with($res); 
     }

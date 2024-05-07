@@ -1,17 +1,19 @@
 <!-- Add Edit Modal Start -->
-<div class="modal large fade" id="kuesioner{{$bulan->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+<div class="modal large fade" id="kuesioneredit{{$bulan->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title font-weight-bold" id="modalTitle">Kuesioner Pemanfaatan Adobe {{$bulan->namabulan}}</h5>
+                                <h5 class="modal-title font-weight-bold" id="modalTitle">Edit Kuesioner {{$bulan->namabulan}}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="createGambarForm" action="{{ route('adobebps.storelaporan') }}" method="POST" novalidate>
+                                <form id="createGambarForm" action="{{route('adobebps.storeeditlaporan')}}" method="POST" novalidate>
                                 @csrf  
                                 <section class="scroll-section" id="labelSize"> 
                                 <input class="form-check-input" type="hidden" 
                                                 name="idbulan" id="gridRadios1" value="{{$bulan->id}}" > 
+                                <input class="form-check-input" type="hidden" 
+                                                name="idkuesioner" id="gridRadios1" value="{{$dataslaporan->id}}" > 
                                     <div class="row mb-12">
                                         <label for="colFormLabel" class="fw-bold col-sm-3 col-form-label">
                                             Apakah selama bulan {{$bulan->namabulan}} memanfaatkan linsensi Adobe CC pengadaan tahun 2024 ?
@@ -19,11 +21,12 @@
                                         <div class="col-sm-10">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="memakaiadobe" id="gridRadios1" 
-                                                value="1" checked="" >
+                                                value="1" <?php echo ($dataslaporan->memakaiadobe=='1')?'checked':'' ?>>
                                                 <label class="form-check-label" for="gridRadios1">Ya</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="memakaiadobe" id="gridRadios2" value="2">
+                                                <input class="form-check-input" type="radio" name="memakaiadobe" 
+                                                id="gridRadios2" value="2" <?php echo ($dataslaporan->memakaiadobe=='2')?'checked':'' ?>>
                                                 <label class="form-check-label" for="gridRadios2">Tidak</label>
                                             </div> 
                                         </div>
@@ -34,80 +37,116 @@
                                         </label>
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <div class="form-check"> 
-                                                    <input class="form-check-input" type="checkbox" name="acrobat" id="acrobat" value="1"  >
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->acrobat==1)? "checked" : "" }}
+                                                    name="acrobat" id="acrobat" value="1">
                                                     <label class="form-check-label" for="acrobat">Acrobat</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="aero" id="aero" value="1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                    {{ ($dataslaporan->aero==1)? "checked" : "" }}
+                                                    name="aero" id="aero" value="1">
                                                     <label class="form-check-label" for="aero">Aero</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="aftereffect" id="aftereffect" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->aftereffect==1)? "checked" : "" }} 
+                                                    name="aftereffect" id="aftereffect" value="1">
                                                     <label class="form-check-label" for="aftereffect">After Effect</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="animate" id="animate" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->animate==1)? "checked" : "" }}  
+                                                    name="animate" id="animate" value="1">
                                                     <label class="form-check-label" for="animate">Animate</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="audition" id="audition" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->audition==1)? "checked" : "" }}   
+                                                    name="audition" id="audition" value="1">
                                                     <label class="form-check-label" for="audition">Audition</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="behance" id="behance" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->behance==1)? "checked" : "" }}
+                                                    name="behance" id="behance" value="1">
                                                     <label class="form-check-label" for="behance">Behance</label>
                                                 </div>  
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="dimension" id="dimension" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->dimension==1)? "checked" : "" }} 
+                                                    name="dimension" id="dimension" value="1">
                                                     <label class="form-check-label" for="dimension">Dimension</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="dreamweaver" id="dreamweaver" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->dreamweaver==1)? "checked" : "" }}
+                                                    name="dreamweaver" id="dreamweaver" value="1">
                                                     <label class="form-check-label" for="dreamweaver">Dreamweaver</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="express" id="express" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->express==1)? "checked" : "" }} 
+                                                    name="express" id="express" value="1">
                                                     <label class="form-check-label" for="express">Express</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="fresco" id="fresco" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->fresco==1)? "checked" : "" }}  
+                                                    name="fresco" id="fresco" value="1">
                                                     <label class="form-check-label" for="fresco">Fresco</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="illustrator" id="illustrator" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->illustrator==1)? "checked" : "" }}   
+                                                    name="illustrator" id="illustrator" value="1">
                                                     <label class="form-check-label" for="illustrator">Illustrator</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="incopy" id="incopy" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->incopy==1)? "checked" : "" }}
+                                                    name="incopy" id="incopy" value="1">
                                                     <label class="form-check-label" for="incopy">InCopy</label>
                                                 </div>  
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="indesign" id="indesign" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->indesign==1)? "checked" : "" }}
+                                                    name="indesign" id="indesign" value="1">
                                                     <label class="form-check-label" for="indesign">InDesign</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="lightroom" id="lightroom" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->lightroom==1)? "checked" : "" }} 
+                                                    name="lightroom" id="lightroom" value="1">
                                                     <label class="form-check-label" for="lightroom">Lightroom</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="photoshop" id="photoshop" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->photoshop==1)? "checked" : "" }}
+                                                    name="photoshop" id="photoshop" value="1">
                                                     <label class="form-check-label" for="photoshop">Photoshop</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="prmierepro" id="prmierepro" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->prmierepro==1)? "checked" : "" }}
+                                                    name="prmierepro" id="prmierepro" value="1">
                                                     <label class="form-check-label" for="prmierepro">Premiere Pro</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="premiererush" id="premiererush" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->premiererush==1)? "checked" : "" }}
+                                                    name="premiererush" id="premiererush" value="1">
                                                     <label class="form-check-label" for="premiererush">Premiere Rush</label>
                                                 </div> 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="xd" id="xd" value="1">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    {{ ($dataslaporan->xd==1)? "checked" : "" }}
+                                                    name="xd" id="xd" value="1">
                                                     <label class="form-check-label" for="xd">XD</label>
                                                 </div> 
                                             </div>
@@ -124,31 +163,41 @@
                                                 <div class="row mb-3">
                                                     <label for="colFormLabel" class="col-sm-5 col-form-label">Publikasi : </label>
                                                     <div class="col-sm-3">
-                                                        <input type="text" name="publikasi" class="form-control" id="colFormLabel" placeholder="0">
+                                                        <input type="text" name="publikasi" class="form-control" 
+                                                        value="{{$dataslaporan->publikasi}}"
+                                                        id="colFormLabel" placeholder="0">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="colFormLabel" class="col-sm-5 col-form-label">BRS : </label>
                                                     <div class="col-sm-3">
-                                                        <input type="text" name="brs" class="form-control" id="colFormLabel" placeholder="0">
+                                                        <input type="text" name="brs" class="form-control" 
+                                                        value="{{$dataslaporan->brs}}"
+                                                        id="colFormLabel" placeholder="0">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="colFormLabel" class="col-sm-5 col-form-label">Infografis : </label>
                                                     <div class="col-sm-3">
-                                                        <input type="text" name="infografis" class="form-control" id="colFormLabel" placeholder="0">
+                                                        <input type="text" name="infografis" class="form-control" 
+                                                        value="{{$dataslaporan->infografis}}" 
+                                                        id="colFormLabel" placeholder="0">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="colFormLabel" class="col-sm-5 col-form-label">Flyer/VB : </label>
                                                     <div class="col-sm-3">
-                                                        <input type="text" name="flyer_vb" class="form-control" id="colFormLabel" placeholder="0">
+                                                        <input type="text" name="flyer_vb" class="form-control" 
+                                                        value="{{$dataslaporan->flyer_vb}}"  
+                                                        id="colFormLabel" placeholder="0">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="colFormLabel" class="col-sm-5 col-form-label">Spanduk : </label>
                                                     <div class="col-sm-3">
-                                                        <input type="text" name="spanduk" class="form-control" id="colFormLabel" placeholder="0">
+                                                        <input type="text" name="spanduk" class="form-control" 
+                                                        value="{{$dataslaporan->spanduk}}"   
+                                                        id="colFormLabel" placeholder="0">
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,39 +207,49 @@
                                                 <div class="row mb-3">
                                                     <label for="colFormLabel" class="col-sm-5 col-form-label">Surat/Dokumen : </label>
                                                     <div class="col-sm-3">
-                                                        <input type="text" name="surat" class="form-control" id="colFormLabel" placeholder="0">
+                                                        <input type="text" name="surat" class="form-control" 
+                                                        value="{{$dataslaporan->surat}}"    
+                                                        id="colFormLabel" placeholder="0">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="colFormLabel" class="col-sm-5 col-form-label">Website : </label>
                                                     <div class="col-sm-3">
-                                                        <input type="text" name="website" class="form-control" id="colFormLabel" placeholder="0">
+                                                        <input type="text" name="website" class="form-control" 
+                                                        value="{{$dataslaporan->website}}"   
+                                                        id="colFormLabel" placeholder="0">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="colFormLabel" class="col-sm-5 col-form-label">Dashboard : </label>
                                                     <div class="col-sm-3">
-                                                        <input type="text" name="dashboard" class="form-control" id="colFormLabel" placeholder="0">
+                                                        <input type="text" name="dashboard" class="form-control" 
+                                                        value="{{$dataslaporan->dashboard}}"    
+                                                        id="colFormLabel" placeholder="0">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="colFormLabel" class="col-sm-5 col-form-label">Video : </label>
                                                     <div class="col-sm-3">
-                                                        <input type="text" name="video" class="form-control" id="colFormLabel" placeholder="0">
+                                                        <input type="text" name="video" class="form-control" 
+                                                        value="{{$dataslaporan->video}}"    
+                                                        id="colFormLabel" placeholder="0">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="colFormLabel" class="col-sm-2 col-form-label">Lainnya: </label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" name="lainnya" class="form-control" id="colFormLabel" placeholder="">
+                                                        <input type="text" name="lainnya" class="form-control" 
+                                                        value="{{$dataslaporan->lainnya}}"
+                                                        id="colFormLabel" placeholder="">
                                                     </div>
                                                     <label for="colFormLabel" class="col-sm-3 col-form-label">Sejumlah : </label>
                                                     <div class="col-sm-3">
-                                                        <input type="text" name="jumlah_lain" class="form-control" id="colFormLabel" placeholder="0">
+                                                        <input type="text" name="jumlah_lain" class="form-control" 
+                                                        value="{{$dataslaporan->jumlah_lain}}"
+                                                        id="colFormLabel" placeholder="0">
                                                     </div>
-                                                </div>
-                                                 
-
+                                                </div> 
                                             </div>
                                         </div>
                                     </div>   

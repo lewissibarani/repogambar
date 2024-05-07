@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::get('adobebps/statistik',[AdobeBPSController::class, 'indexstatistik'])->name('adobebps.indexstatistik'); 
     Route::post('adobebps/BAST',[AdobeBPSController::class, 'storeBAST'])->name('adobebps.storeBAST'); 
     Route::post('adobebps/storelaporan',[AdobeBPSController::class, 'storelaporan'])->name('adobebps.storelaporan'); 
+    Route::post('adobebps/storeeditlaporan',[AdobeBPSController::class, 'storeeditlaporan'])->name('adobebps.storeeditlaporan'); 
     Route::post('adobebps/uploaddokumenstore',[AdobeBPSController::class, 'uploaddokumenstore'])->name('adobebps.uploaddokumenstore'); 
     Route::get('adobebps/templatelaporan',[AdobeBPSController::class, 'templatelaporan'])->name('adobebps.templatelaporan'); 
     Route::resource('adobebps', AdobeBPSController::class)->missing(function (Request $request) {

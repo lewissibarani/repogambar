@@ -103,15 +103,31 @@
                                                     @endif
                                                 @endforeach 
                                             </td>  
-                                            <td class="text-alternate">  
+                                            <td class="text-alternate">
+                                            @if(($bulan->id+4)<=date('n')) 
+                                                @if ($Data_Laporan->where('bulanid', $bulan->id)->first()) 
+                                                            @php
+                                                            $dataslaporan = $Data_Laporan->where('bulanid', $bulan->id)->first();
+                                                            @endphp
                                                             <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
                                                                 data-bs-toggle="modal"        
-                                                                data-bs-target="#_kuesioner{{$bulan->id}}"
-                                                                data-bs-placement="top"
-                                                                title="Isi Kuesioner"> 
+                                                                data-bs-target="#kuesioneredit{{$bulan->id}}" 
+                                                                data-bs-placement="top" > 
                                                                 <i data-acorn-icon="pen"></i>  
                                                             </button> 
-                                                            @include('adobebps.formPemanfaatan')     
+                                                            @include('adobebps.formeditPemanfaatan') 
+                                                @else 
+                                                            <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
+                                                                data-bs-toggle="modal"        
+                                                                data-bs-target="#kuesioner{{$bulan->id}}"
+                                                                data-bs-placement="top" > 
+                                                                <i data-acorn-icon="pen"></i>  
+                                                            </button> 
+                                                            @include('adobebps.formPemanfaatan')
+                                                @endif
+                                            @else
+                                                <p class="fst-italic">Belum bisa diisi</p>
+                                            @endif
                                             </td>                             
                                         </tr>
                                     @endforeach
