@@ -416,27 +416,23 @@ class AdobeBPSController extends Controller
     {
         //
     }
+ 
+    public function sync(){ 
+       
+        $adobepj = AdobeTransaksiBAST::with('user')->get();
+        foreach ($adobepj as $pj){
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+            $kodesatker = $pj->user->kodesatker;
+            $kodesatker_trim =  $kodesatker;
+            if( strlen($kodesatker)==12){
+                $kodesatker_trim = substr($kodesatker, 0,4);
+                if($kodesatker_trim=="0000"){
+                    $kodesatker_trim=substr($kodesatker,-5);
+                }
+            }  
+            $pj->update(['kodesatkerid' => $kodesatker_trim]);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+       
     }
 }
