@@ -72,6 +72,7 @@
                             <thead>
                             <tr>
                                 <th class="text-muted text-small text-uppercase">No</th> 
+                                <th class="text-muted text-small text-uppercase">Kode Satker</th>
                                 <th class="text-muted text-small text-uppercase">Nama Satker</th>
                                 <th class="text-muted text-small text-uppercase">Nama Penaggung Jawab </th> 
                                 <th class="text-muted text-small text-uppercase">BAST</th> 
@@ -82,6 +83,7 @@
                             @foreach ($Data as $datas) 
                                 <tr style="height:50px;">
                                     <td class="">{{$datas->id}}</td>
+                                    <td class="">{{$datas->kodesatkerid}}</td>
                                     <td class="text-alternate">   
                                     @php 
                                         $string = $datas->getnamasatker->namasatker ?? '';
