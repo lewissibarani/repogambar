@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
         return Redirect::route('album.index');
         });
 
+    Route::get('adobebps/syncerrorbast',[AdobeBPSController::class, 'syncerrorbast'])->name('adobebps.syncerrorbast'); 
     Route::get('adobebps/syncbast',[AdobeBPSController::class, 'sync'])->name('adobebps.syncbast'); 
     Route::get('adobebps/statistik',[AdobeBPSController::class, 'indexstatistik'])->name('adobebps.indexstatistik'); 
     Route::post('adobebps/BAST',[AdobeBPSController::class, 'storeBAST'])->name('adobebps.storeBAST'); 

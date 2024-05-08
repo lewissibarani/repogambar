@@ -441,4 +441,22 @@ class AdobeBPSController extends Controller
 
        
     }
+    public function syncerrorbast(){ 
+       
+        $adobepj = AdobeTransaksiBAST::with('user')->get();
+        foreach ($adobepj as $pj){ 
+            $kodesatker = $pj->user->kodesatker;
+            $kodesatker_trim=$pj->user->kodesatker;
+            if( strlen($kodesatker)==12){
+                $kodesatker_trim = substr($kodesatker, 0,4);
+                if($kodesatker_trim=="0000"){
+                    $kodesatker_trim=substr($kodesatker,-5);
+                }
+            }  
+
+            $pj->update(['kodesatkerid' => $kodesatker_trim]);
+        }
+
+       
+    }
 }
