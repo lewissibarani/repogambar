@@ -373,7 +373,6 @@ class AdobeBPSController extends Controller
                     $fileDokumen = AdobeDokumen::create([
                     'jenisdokumenid' => 1,
                     'path' => $url_file,
-                    'kodesatkerid' => Auth::user()->kodesatker,
                     'filename'=>'BAST_'.Auth::user()->kodesatker."_".Auth::user()->name."_2024",
                     ]);
 
@@ -381,6 +380,7 @@ class AdobeBPSController extends Controller
                     $transaksi = AdobeTransaksiBAST::create([
                     'dokumenid' => $fileDokumen->id,
                     'userid' => Auth::id(),
+                    'kodesatkerid' => Auth::user()->kodesatker, 
                     'periodeid' => 1, 
                     ]);
 
