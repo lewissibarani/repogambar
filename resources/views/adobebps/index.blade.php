@@ -1,6 +1,14 @@
 @php
     $html_tag_data  = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
-    $title          = 'PJ Lisensi Adobe';
+    $title          = 'Satker anda tidak mendapat lisensi adobe';
+    $namasatker     = "";
+    if(!is_null($adobepj)){
+        foreach($adobepj as $satkername){
+            $namasatker = $satkername->getnamasatker->namasatker;
+            break;
+        }
+    $title          = 'Aktivitas Pemanfaatan Adobe CC Satker: '.$namasatker; 
+    }
     $title_tabel    = 'Kuesioner Pemanfaatan Adobe';
     $description    = 'Portfolio Home Page';
     $breadcrumbs    = ["/"=>"Home", "/Kontributor/Profiluser"=>"Adobe-BPS"];
@@ -15,8 +23,7 @@
         } 
 
     //Kuesioner Pemanfaatan
-    $Dilihat        = 0; 
-    $aboutme        = "adboutme";
+    $Dilihat        = 0;  
     $phone        = "phone";
     $email        = "email";
 
@@ -25,12 +32,7 @@
         $nipuser  = "";
         $jabatanuser = "";
         $profilepicture = "";
-    if($User){
-        $namauser = $User->name;
-        $nipuser  =  $User->nipbaru;
-        $jabatanuser = $User->jabatan;
-        $profilepicture = $User->profilepicture;
-    }  
+ 
     
 @endphp
 
@@ -63,7 +65,7 @@
             <div class="row">
                 <!-- Title Start -->
                 <div class="col-12 col-md-7">
-                    <h1 class="mb-0 pb-0 display-4" id="title">{{ $title }}</h1>
+                    <h4 class="mb-0 pb-0 display-6" id="title">{{ $title }}</h4>
                     @include('_layout.breadcrumb',['breadcrumbs'=>$breadcrumbs])
                 </div>
                 <!-- Title End -->
@@ -91,19 +93,7 @@
                 <!-- Biography Start -->
                 <!-- <h2 class="small-title">Profil Kontributor</h2> -->
                 <div class="card">
-                    <div class="card-body mb-n5">
-                        <div class="d-flex align-items-center flex-column ">
-                            <div class="mb-5 d-flex align-items-center flex-column">
-                                <div class="sw-13 position-relative mb-3">
-                                    <img src="{{$profilepicture}}" class="img-fluid rounded-xl" alt="thumb" />
-                                </div>
-                                <div class="h5 mb-0">{{$namauser}}</div>
-                                <div class="text-muted">{{$nipuser}}</div>
-                                <div class="text-muted"> 
-                                    <span class="align-middle">{{$jabatanuser}}</span>
-                                </div>
-                            </div> 
-                        </div>
+                    <div class="card-body mb-n5"> 
 
                         <div class="mb-5">
                             <div class="row g-0 align-items-center mb-2">
@@ -149,15 +139,19 @@
                                             <div class="sh-5 d-flex align-items-center lh-1-25">% Pemanfaatan</div>
                                         </div>
                                         <div class="col-auto">
-                                            <div class="sh-5 d-flex align-items-center">{{$Dilihat}}%</div>
+                                            <div class="sh-5 d-flex align-items-center">{{$persentase_pemanfaatan}}%</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>  
                             
                         </div> 
-                        <div class="mb-5">
-                            <p class="text-small text-muted mb-2">CONTACT</p>
+                        <!-- <div class="mb-5">
+                            <p class="text-small text-muted mb-2">CONTACT</p> 
+                            <a href="#" class="d-block body-link">
+                                <i data-acorn-icon="user" class="me-2" data-acorn-size="17"></i>
+                                <span class="align-middle">{{$email}}</span>
+                            </a>
                             <a href="#" class="d-block body-link mb-1">
                                 <i data-acorn-icon="phone" class="me-2" data-acorn-size="17"></i>
                                 <span class="align-middle">{{$phone}}</span>
@@ -166,7 +160,11 @@
                                 <i data-acorn-icon="email" class="me-2" data-acorn-size="17"></i>
                                 <span class="align-middle">{{$email}}</span>
                             </a>
-                        </div>
+                            <a href="#" class="d-block body-link">
+                                <i data-acorn-icon="email" class="me-2" data-acorn-size="17"></i>
+                                <span class="align-middle">{{$email}}</span>
+                            </a>
+                        </div> -->
                     </div>
                 </div>
                 <!-- Biography End -->

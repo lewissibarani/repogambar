@@ -93,13 +93,23 @@
                                     <td class="text-alternate">{{$datas->nama}}</td> 
                                     <td class="text-alternate">  
                                         @if(is_null($datas->getAdobeTransaksiBAST))
-                                            Belum Upload BAST 
+                                            <p class="fst-italic"> Belum Upload BAST </p> 
                                         @else
                                             <a href="{{$datas->getAdobeTransaksiBAST->dokumen->path}}" > Unduh </a>
                                         @endif
                                           
                                     </td>  
-                                    <td class="text-alternate"> {{$datas->updated_at}} </td> 
+                                    <td class="text-alternate"> 
+                                        @if(is_null($datas->getAdobeTransaksiBAST))
+                                            - 
+                                        @else
+                                        @php
+                                            $timestamp_from_array = $datas->getAdobeTransaksiBAST->dokumen->created_at;
+                                            $tanggal_upload_bast =date('Y-m-d h:i:s' , strtotime( $timestamp_from_array ) + 7 * 3600 );
+                                        @endphp
+                                            <p class="fst-italic" > {{$tanggal_upload_bast}} </p>
+                                        @endif 
+                                    </td> 
                                 </tr>
                             @endforeach
                             </tbody>

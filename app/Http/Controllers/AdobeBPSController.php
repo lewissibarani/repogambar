@@ -26,34 +26,40 @@ class AdobeBPSController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
-
-        $userkodesatker = Auth::user()->kodesatker;
-        $User=false; 
-        //trim kodesatker  
-        $adobepj = AdobePJ::where('email',Auth::user()->email)->first(); 
-        if($adobepj)
+    {  
+        $Data_Laporan   = null;
+        $Data_BAST      = null;
+        $persentase_pemanfaatan = null;
+        $userkodesatker = Auth::user()->kodesatker; 
+        $adobepj        = AdobePJ::with('getnamasatker')->where('kodesatkerid',Auth::user()->kodesatker)->get();  
+        //cek apakah satker yang login dapat adobe atau tidak
+        if(!is_null($adobepj))
         {
-            $User=User::find(Auth::id()); 
-        }  
-        
+            $Data_Laporan = AdobeTransaksiKuesioner::with('user','periode','bulan')
+            ->where('kodesatkerid', '=', Auth::user()->kodesatker)
+            ->where('periodeid', '=', 1)  
+            ->orderBy('updated_at','DESC')
+            ->get();
+
+            $pembilang_pemanfaatan = DB::table('adobe_transaksi_kuesioner')
+             ->select(DB::raw('count(*) as bulan'))
+             ->where('kodesatkerid', '=', Auth::user()->kodesatker)
+             ->groupBy('bulanid')
+             ->get()
+             ->count();
+            $pembagi = 12;
+            $persentase_pemanfaatan =  round($pembilang_pemanfaatan/$pembagi);
+
+            $Data_BAST = AdobeTransaksiBAST::with('user','periode','dokumen')
+            ->where('kodesatkerid', '=', Auth::user()->kodesatker) 
+            ->where('periodeid', '=', 1)  
+            ->orderBy('updated_at','DESC')->first();
+        }
+
         //Dokumen Bulan
-        $Bulan = Bulan::all();
+        $Bulan = Bulan::all(); 
 
-        //Daftar Adobe Dokumen Laporan
-        $Data_Laporan = AdobeTransaksiKuesioner::with('user','periode','bulan')
-                        ->where('userid', '=', Auth::id())
-                        ->where('periodeid', '=', 1)  
-                        ->orderBy('updated_at','DESC')
-                        ->get();
-
-        //Daftar Adobe Dokumen BAST
-        $Data_BAST = AdobeTransaksiBAST::with('user','periode','dokumen')
-                                ->where('userid', '=', Auth::id())
-                                ->where('periodeid', '=', 1)  
-                                ->orderBy('updated_at','DESC')->first();
-
-        return view('adobebps.index',compact('Data_Laporan','User','Bulan','Data_BAST'));   
+        return view('adobebps.index',compact('adobepj','Data_Laporan','Bulan','Data_BAST','persentase_pemanfaatan'));   
     } 
     
     public function storelaporan(Request $request)
