@@ -369,7 +369,7 @@ class AdobeBPSController extends Controller
                     $file_path = Storage::disk('s3')->putFileAs('storage/file/',$file,$file_name); 
                     $url_file = Storage::disk('s3')->url('storage/file/'.$file_name); 
 
-                   //record database  
+                   //record dokumen  
                     $fileDokumen = AdobeDokumen::create([
                     'jenisdokumenid' => 1,
                     'path' => $url_file,
