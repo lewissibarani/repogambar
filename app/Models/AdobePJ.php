@@ -21,6 +21,10 @@ class AdobePJ extends Model
     {
         return $this->hasOne('App\Models\Namasatker' ,'kodesatker','kodesatkerid');
     }
+    public function getuser ()
+    {
+        return $this->hasOne('App\Models\User' ,'id','userid');
+    }
     public function getAdobeTransaksiKuesioner ()
     {
         return $this->hasOne('App\Models\AdobeTransaksiKuesioner' ,'kodesatkerid','kodesatkerid')->latest();

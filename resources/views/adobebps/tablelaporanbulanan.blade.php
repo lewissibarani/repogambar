@@ -7,7 +7,7 @@
                                 <!-- Hover Controls Start -->
                                 <div class="row">
                                     <div class="col-12 d-flex align-items-start justify-content-left"> 
-                                        <h1 class="mb-0 pb-0 display-4" id="title">{{ $title_tabel }}</h1>   
+                                        <h3 class="modal-title" id="">{{ $title_tabel }}</h3>   
                                     </div>
 
                                     <div class="col-12 col-sm-7 col-lg-9 col-xxl-10 text-end mb-1">

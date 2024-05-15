@@ -99,7 +99,8 @@ class Select2Controls {
       templateSelection: function formatText(item) {
         if (jQuery(item.element).val()) {
           return jQuery(
-            '<div><span class="align-middle d-inline-block option-circle me-2 rounded-xl ' +
+            // '<div><span class="align-middle d-inline-block option-circle me-2 rounded-xl ' +
+            '<div><span  ' +
               jQuery(item.element).data('class') +
               '"></span> <span class="align-middle d-inline-block lh-1">' +
               item.text +
@@ -110,7 +111,8 @@ class Select2Controls {
       templateResult: function formatText(item) {
         if (jQuery(item.element).val()) {
           return jQuery(
-            '<div><span class="align-middle d-inline-block option-circle me-2 rounded-xl ' +
+            // '<div><span class="align-middle d-inline-block option-circle me-2 rounded-xl ' +
+            '<div><span ' +
               jQuery(item.element).data('class') +
               '"></span> <span class="align-middle d-inline-block lh-1">' +
               item.text +

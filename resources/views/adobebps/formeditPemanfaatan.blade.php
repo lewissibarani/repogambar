@@ -16,7 +16,7 @@
                                                 name="idkuesioner" id="gridRadios1" value="{{$dataslaporan->id}}" > 
                                     <div class="row mb-12">
                                         <label for="colFormLabel" class="fw-bold col-sm-3 col-form-label">
-                                            Apakah selama bulan {{$bulan->namabulan}} memanfaatkan linsensi Adobe CC pengadaan tahun 2024 ?
+                                            Apakah selama bulan {{$bulan->namabulan}} memanfaatkan lisensi Adobe CC pengadaan tahun 2024 ?
                                         </label>
                                         <div class="col-sm-10">
                                             <div class="form-check">

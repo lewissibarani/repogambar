@@ -11,35 +11,30 @@
 
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
-@section('css')
-    <link rel="stylesheet" href="/css/vendor/baguetteBox.min.css"/>
+@section('css') 
     <link rel="stylesheet" href="/css/vendor/datatables.min.css"/> 
 
 @endsection
 
-@section('js_vendor')
-    <script src="/js/vendor/baguetteBox.min.js"></script> 
-    <script src="/js/cs/scrollspy.js"></script>
+@section('js_vendor') 
     <script src="/js/vendor/datatables.min.js"></script>
 @endsection
 
 @section('js_page')
-    <script src="/js/pages/portfolio.home.js"></script>
     <script src="/js/cs/datatable.extend.js"></script>
     <script src="/js/plugins/datatable.boxedvariations.js"></script>
-    <script src="/js/cs/responsivetab.js"></script>
 
 @endsection
 
 @push('pushcss')
   <style> 
-  main { 
+  /* main { 
     padding-left: calc(var(--nav-size) + var(--main-spacing-horizontal));
     padding-right: var(--main-spacing-horizontal);
     padding-top: var(--main-spacing-vertical);
     padding-bottom: var(--main-spacing-vertical);
     background:#f2f5fa;
-  } 
+  }  */
   </style>  
 
 @endpush

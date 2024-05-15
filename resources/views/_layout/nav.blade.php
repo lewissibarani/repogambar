@@ -102,6 +102,7 @@
                 <i data-acorn-icon="light-off" class="dark" data-acorn-size="18"></i>
             </a>
         </li>
+
         <li class="list-inline-item">
             <a href="#" data-bs-toggle="dropdown" data-bs-target="#notifications" aria-haspopup="true" aria-expanded="false" class="notification-button">
                 <div class="position-relative d-inline-flex">
@@ -161,6 +162,87 @@
                                     @endif
                                 </div>
                             </li>
+
+                            @elseif( $notification->type=='App\Notifications\ResponPengajuanGantiPJ') 
+                            <li class="pb-1 border-bottom border-separator-light ">
+                                <div class="row align-items-start ">
+                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
+                                        <div class="">
+                                            <!-- <img src="$notification->data['pppembuatajuan']" class="sw-5 sh-5 rounded-xl" alt="..." /> -->
+                                        </div>
+                                    </div>
+                                    <div class=" col align-self-center">
+                                        <div class="p-3">
+                                            <a href=" {{route('adobebps.sudahdibaca',[
+                                                'id'=>$notification->id,
+                                                'userid'=>$notification->notifiable_id, 
+                                                ])}}"
+                                            > 
+                                            {{$notification->data['pesan_notifikasi']}}
+                                            </a>
+                                            <div class="d-flex flex-row">
+                                                <div class="mark-as-read">
+                                                    <span id="tanggal-mark-as-read" class="text-primary text-small"><b> {{$notification->updated_at}}</b></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @if ( $notification->read_at==null)
+                                    <div id="icon-mark-as-read" class="col col-lg-1 align-self-center">
+                                        <div class="sw-1 me-3">
+                                            <div class="bg-gradient-light sw-1 sh-1 rounded-xl d-flex justify-content-center align-items-center">
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    @else
+                                    <div id="icon-mark-as-read" class="col col-lg-1 align-self-center">
+                                        <div class="sw-1 me-3">
+                                            <div class="sw-1 sh-1 rounded-xl d-flex justify-content-center align-items-center border border-primary">
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                            </li>
+
+                            @elseif( $notification->type=='App\Notifications\PengajuanGantiPJ') 
+                            <li class="pb-1 border-bottom border-separator-light ">
+                                <div class="row align-items-start ">
+                                    <div class="col-2 align-self-center "style="margin-b:350px;" >
+                                        <div class="">
+                                            <img src="{{$notification->data['pppembuatajuan']}}" class="sw-5 sh-5 rounded-xl" alt="..." />
+                                        </div>
+                                    </div>
+                                    <div class=" col align-self-center">
+                                        <div class="p-3">
+                                            <a href="{{route('adobebps.indexpengajuanPJ')}}" 
+                                            >
+                                            Ada permintaan baru penggantian PJ Adobe.</a>
+                                            <div class="d-flex flex-row">
+                                                <div class="mark-as-read">
+                                                    <span id="tanggal-mark-as-read" class="text-primary text-small"><b> {{$notification->updated_at}}</b></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @if ( $notification->read_at==null)
+                                    <div id="icon-mark-as-read" class="col col-lg-1 align-self-center">
+                                        <div class="sw-1 me-3">
+                                            <div class="bg-gradient-light sw-1 sh-1 rounded-xl d-flex justify-content-center align-items-center">
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    @else
+                                    <div id="icon-mark-as-read" class="col col-lg-1 align-self-center">
+                                        <div class="sw-1 me-3">
+                                            <div class="sw-1 sh-1 rounded-xl d-flex justify-content-center align-items-center border border-primary">
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                            </li>
+
                             @else
                             <li class="pb-1 border-bottom border-separator-light ">
                                 <div class="row align-items-start ">
@@ -216,6 +298,7 @@
                 </div>
             </div>
         </li>
+        
     </ul> 
     <!-- Icons Menu End -->
 
@@ -289,6 +372,11 @@
                             <li>
                                 <a href="{{route('adobebps.templatelaporan')}}">
                                     <span class="label">Dokumen Penting Adobe</span>
+                                </a>
+                            </li> 
+                            <li>
+                                <a href="{{route('adobebps.indexpengajuanPJ')}}">
+                                    <span class="label">Daftar Pemutakhiran Penanggung Jawab Adobe</span>
                                 </a>
                             </li> 
                             @endif 

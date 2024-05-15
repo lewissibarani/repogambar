@@ -70,8 +70,7 @@
                                 data-order='[[ 0, "asc" ]]'
                         >
                             <thead>
-                            <tr>
-                                <th class="text-muted text-small text-uppercase">No</th> 
+                            <tr> 
                                 <th class="text-muted text-small text-uppercase">Kode Satker</th>
                                 <th class="text-muted text-small text-uppercase">Nama Satker</th>
                                 <th class="text-muted text-small text-uppercase">Nama Penaggung Jawab </th> 
@@ -81,8 +80,7 @@
                             </thead>
                             <tbody>
                             @foreach ($Data as $datas) 
-                                <tr style="height:50px;">
-                                    <td class="">{{$datas->id}}</td>
+                                <tr style="height:50px;"> 
                                     <td class="">{{$datas->kodesatkerid}}</td>
                                     <td class="text-alternate">   
                                     @php 

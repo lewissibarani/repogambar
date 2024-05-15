@@ -7,15 +7,20 @@ use App\Models\User;
 use App\Models\Namasatker; 
 use App\Models\Bulan; 
 use App\Models\AdobeDokumen; 
-use App\Models\AdobePJ; 
+use App\Models\AdobePJ;  
 use App\Models\AdobePeriode; 
 use App\Models\AdobeTransaksiBAST;
+use App\Models\AdobeTransaksiPJ;
 use App\Models\AdobeJenisDokumen;
 use App\Models\AdobeTemplatDokumen;
 use App\Models\AdobeTransaksiKuesioner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PengajuanGantiPJ;
+use App\Notifications\ResponPengajuanGantiPJ;
+
 
 
 class AdobeBPSController extends Controller
@@ -29,9 +34,11 @@ class AdobeBPSController extends Controller
     {  
         $Data_Laporan   = null;
         $Data_BAST      = null;
-        $persentase_pemanfaatan = null;
+        $persentase_pemanfaatan = null; 
+
         $userkodesatker = Auth::user()->kodesatker; 
-        $adobepj        = AdobePJ::with('getnamasatker')->where('kodesatkerid',Auth::user()->kodesatker)->get();  
+        $UserPJSatker   = User::where('kodesatker',Auth::user()->kodesatker)->get();
+        $adobepj        = AdobePJ::with('getnamasatker','getuser')->where('kodesatkerid',Auth::user()->kodesatker)->get();  
         //cek apakah satker yang login dapat adobe atau tidak
         if(!is_null($adobepj))
         {
@@ -53,13 +60,13 @@ class AdobeBPSController extends Controller
             $Data_BAST = AdobeTransaksiBAST::with('user','periode','dokumen')
             ->where('kodesatkerid', '=', Auth::user()->kodesatker) 
             ->where('periodeid', '=', 1)  
-            ->orderBy('updated_at','DESC')->first();
+            ->orderBy('updated_at','DESC')->first(); 
         }
 
         //Dokumen Bulan
         $Bulan = Bulan::all(); 
 
-        return view('adobebps.index',compact('adobepj','Data_Laporan','Bulan','Data_BAST','persentase_pemanfaatan'));   
+        return view('adobebps.index',compact('UserPJSatker','adobepj','Data_Laporan','Bulan','Data_BAST','persentase_pemanfaatan'));   
     } 
     
     public function storelaporan(Request $request)
@@ -407,9 +414,125 @@ class AdobeBPSController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function ajukanpengganti(Request $request)
+    { 
+
+        $res = [];  
+
+            DB::beginTransaction();
+                try { 
+
+                   //record  
+                    $TransaksiPJ = AdobeTransaksiPJ::create([
+                    'userid' => Auth::id(),
+                    'email_adobe_lama_id' => $request->pjsaatini,
+                    'email_adobe_baru' => $request->emailpengganti, 
+                    'pengganti_id' => $request->pjpengganti, 
+                    'nohp' => $request->nohppengganti, 
+                    'alasan' => $request->alasan, 
+                    'status' => "diproses", 
+                    'petugasid' => null, 
+                    ]); 
+
+                    $user = User::find(5);
+                    $TransaksiPJ_Notification = $TransaksiPJ::with('getuser_pembuatajuan','getpjlama','getuserpjbaru','getuserpetugas')->find($TransaksiPJ->id);
+                    Notification::send($user, new PengajuanGantiPJ($TransaksiPJ_Notification));
+
+                    DB::commit();
+                    // all good
+                    $res = ['message' => 'Pengajuan berhasil, silahkan menunggu notifikasi dari petugas kami!'];
+
+                } catch (\Exception $e) { 
+                    DB::rollback();  
+                    $res = ['message' => $e->getMessage()];
+                    // something went wrong
+                } 
+        
+        return redirect()->route('adobebps.index')->with($res);
+    }
+
+    public function indexpengajuanPJ()
+    { 
+        
+        $user = User::find(5); //all notification di attach ke lewis.anggi@bps.go.id
+        $Daftarnotifikasi = $user->notifications;  
+
+        //Mark As Read All Notifikasi
+        foreach ($user->unreadNotifications as $notification) {
+            if($notification->type =='App\Notifications\PengajuanGantiPJ'){ 
+                $notification->markAsRead();
+            }
+        }
+        $KoleksiAdobeTransaksiPJ = AdobeTransaksiPJ::with('getuser_pembuatajuan','getpjlama','getuserpjbaru','getuserpetugas')->get(); 
+        
+        return view('adobebps.indexpengajuanPJ', compact('Daftarnotifikasi','KoleksiAdobeTransaksiPJ'));
+
+    }
+    public function pengajuandisetujui($id_adobe_pj)
+    { 
+        $res = [];  
+        DB::beginTransaction();
+        try {  
+        //Get Latest Periode
+        $periode = AdobePeriode::latest('created_at')->first();
+
+        $AdobeTransaksiPJ = AdobeTransaksiPJ::with('getuser_pembuatajuan','getpjlama','getuserpjbaru','getuserpetugas')->find($id_adobe_pj); //all notification di attach ke lewis.anggi@bps.go.id 
+        $AdobeTransaksiPJ->status = "disetujui";
+        $AdobeTransaksiPJ->petugasid = Auth::id();
+        $AdobeTransaksiPJ->save(); 
+
+        $AdobePJ = AdobePJ::find($AdobeTransaksiPJ->email_adobe_lama_id);  
+
+        $AdobePJ->email =  $AdobeTransaksiPJ->email_adobe_baru ;
+        $AdobePJ->nama =  $AdobeTransaksiPJ->getuserpjbaru->name ;
+        $AdobePJ->nohp =  $AdobeTransaksiPJ->nohp ;
+        $AdobePJ->adobe_periode_id =  $periode->id ;
+        $AdobePJ->userid =  $AdobeTransaksiPJ->pengganti_id ;
+
+        $timestamp_from_array = date('Y-m-d h:i:s');
+        $AdobePJ->updated_at=date('Y-m-d h:i:s' , strtotime( $timestamp_from_array ) + 7 * 3600 ); 
+        $AdobePJ->save();
+  
+        $user = User::find($AdobeTransaksiPJ->userid);
+        Notification::send($user, new ResponPengajuanGantiPJ($AdobeTransaksiPJ));
+
+        DB::commit();
+        // all good
+
+        } catch (\Exception $e) { 
+            DB::rollback();  
+            // something went wrong
+            $res = ['message' => $e->getMessage()];
+        } 
+ 
+        return redirect()->route('adobebps.indexpengajuanPJ')->with($res);
+
+    }
+    public function pengajuanditolak($id_adobe_pj)
+    { 
+        
+        $res = [];  
+        DB::beginTransaction();
+        try { 
+        
+        $AdobePJ = AdobeTransaksiPJ::with('getuser_pembuatajuan','getpjlama','getuserpjbaru','getuserpetugas')->find($id_adobe_pj); //all notification di attach ke lewis.anggi@bps.go.id 
+        $AdobePJ->status = "ditolak";
+        $AdobePJ->petugasid = Auth::id();
+        $AdobePJ->save();
+
+        $user = User::find($AdobePJ->userid);
+        Notification::send($user, new ResponPengajuanGantiPJ($AdobePJ));
+
+        DB::commit();
+        // all good
+
+        } catch (\Exception $e) { 
+            DB::rollback();  
+            // something went wrong
+            $res = ['message' => $e->getMessage()];
+        } 
+ 
+        return redirect()->route('adobebps.indexpengajuanPJ')->with($res);
     }
 
     /**
@@ -418,45 +541,30 @@ class AdobeBPSController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function sudahdibaca($id,$userid)
     {
-        //
-    }
- 
-    public function sync(){ 
-       
-        $adobepj = AdobeTransaksiBAST::with('user')->get();
-        foreach ($adobepj as $pj){
+        $res = [];  
+        $user = User::find($userid);  
+        DB::beginTransaction();
+        try { 
 
-            $kodesatker = $pj->user->kodesatker;
-            $kodesatker_trim =  $kodesatker;
-            if( strlen($kodesatker)==12){
-                $kodesatker_trim = substr($kodesatker, 0,4);
-                if($kodesatker_trim=="0000"){
-                    $kodesatker_trim=substr($kodesatker,-5);
-                }
-            }  
-            $pj->update(['kodesatkerid' => $kodesatker_trim]);
-        }
+        //Mark As Read All Notifikasi
+        foreach ($user->unreadNotifications as $notification) {
+            if($notification->id == $id  ){ 
+                $notification->markAsRead();
+            }
+        } 
 
-       
-    }
-    public function syncerrorbast(){ 
-       
-        $adobepj = AdobeTransaksiBAST::with('user')->get();
-        foreach ($adobepj as $pj){ 
-            $kodesatker = $pj->user->kodesatker;
-            $kodesatker_trim=$pj->user->kodesatker;
-            if( strlen($kodesatker)==12){
-                $kodesatker_trim = substr($kodesatker, 0,4);
-                if($kodesatker_trim=="0000"){
-                    $kodesatker_trim=substr($kodesatker,-5);
-                }
-            }  
+        DB::commit();
+        // all good
 
-            $pj->update(['kodesatkerid' => $kodesatker_trim]);
-        }
+        } catch (\Exception $e) { 
+            DB::rollback();  
+            // something went wrong
+            $res = ['message' => $e->getMessage()];
+        } 
 
-       
-    }
+        return redirect()->route('adobebps.index')->with($res);
+
+    } 
 }

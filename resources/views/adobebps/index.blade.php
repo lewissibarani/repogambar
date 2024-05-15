@@ -1,17 +1,24 @@
 @php
     $html_tag_data  = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
     $title          = 'Satker anda tidak mendapat lisensi adobe';
+
+    //Inforasi PJ dan Lisensi 
+
     $namasatker     = "";
     if(!is_null($adobepj)){
         foreach($adobepj as $satkername){
             $namasatker = $satkername->getnamasatker->namasatker;
             break;
         }
-    $title          = 'Aktivitas Pemanfaatan Adobe CC Satker: '.$namasatker; 
+    $title          = 'Aktivitas Pemanfaatan Adobe CC Satker: '.$namasatker;  
+
     }
     $title_tabel    = 'Kuesioner Pemanfaatan Adobe';
     $description    = 'Portfolio Home Page';
-    $breadcrumbs    = ["/"=>"Home", "/Kontributor/Profiluser"=>"Adobe-BPS"];
+    $breadcrumbs    = ["/"=>"Home", 
+                       route('adobebps.index')=>"Adobe-BPS",
+                       route('adobebps.index')=>"Kirim Laporan", 
+                       ];
     
     //BAST
     $linkdownloadbast = "Belum Upload";
@@ -21,12 +28,7 @@
             $sudahuploadbast= true;
             $linkdownloadbast = $Data_BAST->dokumen->path; 
         } 
-
-    //Kuesioner Pemanfaatan
-    $Dilihat        = 0;  
-    $phone        = "phone";
-    $email        = "email";
-
+  
     //data pj adobe_pj
         $namauser = "";
         $nipuser  = "";
@@ -41,20 +43,27 @@
 @section('css')
     <link rel="stylesheet" href="/css/vendor/baguetteBox.min.css"/>
     <link rel="stylesheet" href="/css/vendor/datatables.min.css"/> 
+    <link rel="stylesheet" href="/css/vendor/select2.min.css"/>
+    <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css"/>
 
 @endsection
 
 @section('js_vendor')
+    <script src="/js/vendor/jquery.validate/jquery.validate.min.js"></script>
+    <script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
     <script src="/js/vendor/baguetteBox.min.js"></script> 
     <script src="/js/cs/scrollspy.js"></script>
     <script src="/js/vendor/datatables.min.js"></script>
+    <script src="/js/vendor/select2.full.min.js"></script>
+
 @endsection
 
-@section('js_page')
-    <script src="/js/pages/portfolio.home.js"></script>
+@section('js_page') 
     <script src="/js/cs/datatable.extend.js"></script>
-    <script src="/js/plugins/datatable.boxedvariations.js"></script>
-    <script src="/js/cs/responsivetab.js"></script>
+    <script src="/js/plugins/datatable.boxedvariations.js"></script> 
+    <script src="/js/forms/controls.select2.js"></script> 
+    <script src="/js/forms/validation.js"></script>
+
 
 @endsection
 
@@ -94,6 +103,18 @@
                 <!-- <h2 class="small-title">Profil Kontributor</h2> -->
                 <div class="card">
                     <div class="card-body mb-n5"> 
+                        <div class="mb-3">
+                             <!-- Upload Dokumen Button Start -->
+                             <button type="button" class="btn col-12 btn-info btn-icon btn-icon-start add-datatable" 
+                                    data-bs-toggle="modal"        
+                                    data-bs-target="#formpenggantianpj">
+                                    <i data-acorn-icon="edit"></i> 
+                                        <span>Update Penanggung Jawab</span>
+                                </button>   
+                                @include('adobebps.formpenggantianpj')   
+
+                                <!-- Upload Dokumen Button End -->  
+                        </div>
 
                         <div class="mb-5">
                             <div class="row g-0 align-items-center mb-2">
@@ -146,25 +167,47 @@
                             </div>  
                             
                         </div> 
-                        <!-- <div class="mb-5">
-                            <p class="text-small text-muted mb-2">CONTACT</p> 
-                            <a href="#" class="d-block body-link">
-                                <i data-acorn-icon="user" class="me-2" data-acorn-size="17"></i>
-                                <span class="align-middle">{{$email}}</span>
-                            </a>
-                            <a href="#" class="d-block body-link mb-1">
-                                <i data-acorn-icon="phone" class="me-2" data-acorn-size="17"></i>
-                                <span class="align-middle">{{$phone}}</span>
-                            </a>
-                            <a href="#" class="d-block body-link">
-                                <i data-acorn-icon="email" class="me-2" data-acorn-size="17"></i>
-                                <span class="align-middle">{{$email}}</span>
-                            </a>
-                            <a href="#" class="d-block body-link">
-                                <i data-acorn-icon="email" class="me-2" data-acorn-size="17"></i>
-                                <span class="align-middle">{{$email}}</span>
-                            </a>
-                        </div> -->
+                        <div class="mb-5">
+                            
+                            <a href="#" class="d-block body-link"> 
+                                <span class="align-middle">  
+                                    <div class=" d-flex justify-content-between align-items-center"> 
+                                        <SPAN class=" text-muted">DAFTAR LISENSI : </SPAN> 
+                                        <span class="badge bg-primary rounded-pill">{{$adobepj->count()}} lisensi</span>
+                                    </div>  
+                                    <div class="scroll-track-visible sh-35">
+                                        <ul class="list-group ">
+                                        @php  
+                                        foreach ($adobepj as $pj)
+                                        {
+                                        $pp = "no-link";
+                                        if(!is_null($pj->getuser))  {
+                                            $pp = $pj->getuser->profilepicture;
+                                        }
+                                      echo '<div class="row align-items-start ">'.
+                                               ' <div class="col-2 align-self-center " style="margin-b:350px;"> '.
+                                                   ' <img src="'.$pp.'" class="card-img rounded-xl sh-6 sw-6" alt="thumb">'.
+                                                '</div>'.
+                                                '<div class="col-10 align-self-center " style="margin-b:350px;"> '.
+                                                   ' <div class="list-group-item" style="border:0px">'.
+                                                        '<div class="d-flex w-100 justify-content-between">'.
+                                                        '<h5 class="mb-1">'.$pj->nama.'</h5>'.
+                                                        '</div>'.
+                                                        '<p class="mb-1">'.$pj->email.'</p>'.
+                                                        '<small>'.$pj->nohp.'</small>'.
+                                                    '</div>'.
+                                                '</div> '.
+                                            '</div>';
+                                        }
+                                        @endphp  
+                                        </ul> 
+                                    </div>
+                                </span>
+                            </a> 
+                            <br/> 
+                        </div>
+
+                        
                     </div>
                 </div>
                 <!-- Biography End -->

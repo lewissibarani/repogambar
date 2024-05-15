@@ -28,6 +28,10 @@ class EventServiceProvider extends ServiceProvider
         PetugasPermintaan::class => [
             SendNewPetugasNotification::class,
         ],
+
+        PengajuanGantiPJ::class => [
+            SendPengajuanGantiPJNotification::class, 
+        ],
     ];
 
     /**
