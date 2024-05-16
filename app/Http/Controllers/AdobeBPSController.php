@@ -571,23 +571,27 @@ class AdobeBPSController extends Controller
     { 
  
             $User=User::all();
-            foreach($User as $user){
-                $kodesatker = $user->kodesatker;
-                //proses trimming
-                $kodesatker_trim = substr($kodesatker, 0,4);
-                    if($kodesatker_trim=="0000"){
-                        $kodesatker_trim=substr($kodesatker,-5);
-                    }
-                  
-                //get model and save ;
-                $user->kodesatker = $kodesatker_trim;
-                $user->save();
+            foreach($User as $user){ 
+                    $kodesatker = $user->kodesatker;
+                    if(strlen($kodesatker)==12){
+                        //proses trimming
+                        $kodesatker_trim = substr($kodesatker, 0,4);
+                        if($kodesatker_trim=="0000"){
+                            $kodesatker_trim=substr($kodesatker,-5);
+                        }
+                        
+                        //get model and save ;
+                        $user->kodesatker = $kodesatker_trim;
+                        $user->save();
 
-                if(!$user->save()){
-                    echo 'Tidak tersave <br/>';
-                }else{
-                    echo $user->name.'-'.$user->kodesatker.'<br/>';
-                }
+                        if(!$user->save()){
+                            echo 'Tidak tersave <br/>';
+                        }else{
+                            echo $user->name.'-'.$user->kodesatker.'<br/>';
+                        }
+
+                    }
+                    
 
                
             } 
