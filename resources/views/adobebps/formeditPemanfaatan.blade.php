@@ -209,8 +209,8 @@
                                                     <div class="row mb-3">
                                                         <label for="colFormLabel" class="col-sm-5 col-form-label">Surat/Dokumen : </label>
                                                         <div class="col-sm-3">
-                                                            <input type="text" name="surat" class="form-control" 
-                                                            value="{{$dataslaporan->surat}}"    
+                                                            <input type="text" name="suratdokumen" class="form-control" 
+                                                            value="{{$dataslaporan->suratdokumen}}"    
                                                             id="colFormLabel" placeholder="0">
                                                         </div>
                                                     </div>
