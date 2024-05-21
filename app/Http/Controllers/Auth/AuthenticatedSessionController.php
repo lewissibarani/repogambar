@@ -152,7 +152,7 @@ class AuthenticatedSessionController extends Controller
                         'golongan' => $user->getGolongan(),
                         'jabatan' => $user->getJabatan(),
                         'profilepicture' => $user->getUrlFoto(),
-                        'kodesatker' =>$user->getKodeOrganisasi(),
+                        'kodesatker' =>$kodesatker_trim,
                         'satker' =>$user->getEselon(),
                         'password' =>Hash::make('pks2022'),
                         'sums_download' =>0,
