@@ -19,12 +19,16 @@
 @section('js_vendor') 
     <script src="/js/vendor/list.js"></script> 
     <script src="/js/vendor/datatables.min.js"></script>
+    <script src="/js/vendor/progressbar.min.js"></script>
+
 @endsection
 
 @section('js_page')
     <script src="/js/plugins/lists.js"></script> 
     <script src="/js/cs/datatable.extend.js"></script>
     <script src="/js/plugins/datatable.boxedvariations.js"></script>
+    <script src="/js/plugins/progressbars.js"></script>
+
 
 @endsection
 
@@ -43,6 +47,7 @@
 
 @section('content')
  <!-- <div class="" style="padding:10px; background: #e8e8e8;"> -->
+        
         <div class="row">
             <div class="col-12">
                 <div class="page-title-container">
@@ -50,13 +55,11 @@
                         @include('_layout.breadcrumb',['breadcrumbs'=>$breadcrumbs])  
                 </div>
             </div>
-        </div>
+        </div> 
+        
 
-        <section id="CTA" class="cta scroll-section " style="  padding-bottom: 20px;"> 
-            
-
-            <div class="row" >
-
+        <section id="CTA" class="cta scroll-section " style="  padding-bottom: 20px;">  
+            <div class="row" > 
                 <div class="col-12 col-sm-8 col-lg-8 col-xxl-8" >
                     <!-- <div class="row"> 
                         <div class="card text-white bg-quaternary mb-3"> 
@@ -68,27 +71,80 @@
                     </div> -->
 
                     <div class="row">
-                        <h2 class="small-title">Rincian Laporan Pemanfaatan</h2>   
-                        <div class="card" >
-                            <div class="card-body" >
-                                <div class="row"> 
-                                    <div class="card text-white bg-info mb-3"> 
-                                        <div class="card-body"> 
-                                            <h5 class="card-title text-white">Penting!</h5>
-                                            <ul>
-                                                <li>
-                                                    Kuesioner pemanfaatan dapat diisi oleh seluruh pegawai di satker yang mendapatkan adobe cc.
-                                                </li>
-                                                <li>
-                                                    Minimal ada 1 pegawai pada satker tersebut yang mengisi kuesioner pemanfaatan.
-                                                </li>
-                                                <li>
-                                                    Untuk informasi lebih lanjut dapat menghubungi admin: Lewis (082191492198) dan Catur (085743011307).
-                                                </li> 
-                                            </ul>
+
+                    <div class="col-12 mb-5 h-100-card">
+                        <div class="card h-100 bg-gradient-light">
+                            <div class="card-body row g-0">
+                                <div class="col-6">
+                                    <div class="cta-3 text-white fw-bold">OVERVIEW</div>
+                                    <div class="mb-3 cta-3 text-white">Pengumpulan BAST & Laporan Pemanfaatan</div>
+                                    <div class="row gx-2">
+                                        <div class="col">
+                                            <div class="text-muted mb-3 mb-sm-0 pe-3 text-white">
+                                                <ul>
+                                                    <li>
+                                                        Upload BAST dan pengisian kuesioner pemanfaatan dapat dilakukan oleh seluruh pegawai di satker yang mendapatkan adobe cc.
+                                                    </li>
+                                                    <li>
+                                                        Minimal ada 1 pegawai pada satker tersebut yang melakukan upload BAST dan mengisi kuesioner pemanfaatan.
+                                                    </li>
+                                                    <li>
+                                                        Untuk informasi lebih lanjut dapat menghubungi admin: Lewis (082191492198) dan Catur (085743011307).
+                                                    </li> 
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <a href="{{route('adobebps.index')}}" class="btn btn-icon btn-icon-start btn-white">
+                                                <i data-acorn-icon="send"></i>
+                                                <span>Mulai Isi Laporan</span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-6">
+                                    <div class="card  justify-content-center">
+                                        <div class="card-body">
+                                            <div class="row g-0 d-flex w-100 align-items-center">
+                                                <div class="col  sh-8 d-flex flex-column custom-legend-container">
+                                                    <div class="text-small text-muted text">LISENSI</div>
+                                                    <div class="cta-1 text-primary value"> {{$jumlahlisensi}}</div>
+                                                </div> 
+                                                <div class="col sh-8 d-flex flex-column custom-legend-container">
+                                                    <div class="text-small text-muted text">BAST DIUPLOAD</div>
+                                                    <div class="cta-1 text-primary value"> {{$jumlahuploadbast}}</div>
+                                                </div> 
+                                                <div class="col sh-8 d-flex flex-column custom-legend-container">
+                                                    <div class="text-small text-muted text">SATKER</div>
+                                                    <div class="cta-1 text-primary value"> {{$jumlahtotalbast}}</div>
+                                                </div> 
+                                                <div class="col ">
+                                                    <div class="sw-13 "> 
+                                                        <label class="mb-3 d-flex justify-content-center fw-bold">Progress BAST</label>
+                                                        <div class="sw-13 d-flex justify-content-center">
+                                                            <div role="progressbar" 
+                                                            data-jumlahuploadbast = {{$jumlahuploadbast}}
+                                                            data-jumlahtotalbast = {{$jumlahtotalbast}}
+                                                            class=" progress-bar-circle" 
+                                                            id="progressCirclePercent">
+                                                            </div>
+                                                        </div> 
+                                                        
+                                                    </div>
+                                                </div> 
+                                            </div> 
+                                        </div>
+                                    </div> 
+                                </div> 
+
+                            </div>
+                        </div>
+                    </div> 
+                        
+                        <h2 class="small-title">Rincian Laporan Pemanfaatan</h2>   
+                        <div class="card" >
+                            <div class="card-body" > 
                                 <!-- Hover Controls Start -->
                                 <div class="row">  
                                     <div class="col-12 col-sm-7 col-lg-9 col-xxl-10 mb-1">
@@ -200,7 +256,7 @@
 
                 <!-- Sort and Filter Start -->
                 <div class="col-4 mb-5"> 
-                        <section class="scroll-section" id="sortAndFilterTitle">
+                        <section class="scroll-section" id="sortAndFilterTitle"> 
                             <h2 class="small-title">Rincian BAST Per Provinsi</h2>
                             <div class="row g-2" id="sortAndFilter">
                                 <div class="col-12">
@@ -331,12 +387,8 @@
                                     <div class="card">
                                         <div class="card-body">
                                         
-                                        <div class="row"> 
-                                            <div class="card text-white bg-info"> 
-                                                <div class="card-body"> 
-                                                    <p class="card-text">Scroll kebawah untuk melihat seluruh penanggung jawab.</p>
-                                                </div>
-                                            </div>
+                                        <div class="row">  
+                                            
                                         </div>
                                         
                                         <div class="row g-0 h-100 align-content-center mb-2 custom-sort d-none d-sm-flex">

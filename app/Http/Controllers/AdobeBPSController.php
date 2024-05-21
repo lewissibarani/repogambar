@@ -204,10 +204,25 @@ class AdobeBPSController extends Controller
      */
     public function indexstatistik()
     {
-         //Data BAST  dan Laporan Pemanfaatan
-        $Data = AdobePJ::with('getnamasatker','getAdobeTransaksiBAST','getAdobeTransaksiBAST.dokumen','transaksikuesioner')->get();  
         $Periode = AdobePeriode::latest()->take(1)->first();
         $Periode_id = $Periode->id; 
+
+         //Data BAST  dan Laporan Pemanfaatan
+        $Data = AdobePJ::with('getnamasatker','getAdobeTransaksiBAST','getAdobeTransaksiBAST.dokumen','transaksikuesioner')->get();
+        $jumlahlisensi = AdobePJ::with('getnamasatker','getAdobeTransaksiBAST','getAdobeTransaksiBAST.dokumen','transaksikuesioner')->get()->count();
+        $jumlahtotalbast =  DB::table('adobe_pj')
+        ->selectRaw('kodesatkerid as Satker_id')
+        ->groupBy('kodesatkerid') 
+        ->get()
+        ->count(); 
+        
+        $jumlahuploadbast = DB::table('adobe_transaksi_bast')
+        ->selectRaw('kodesatkerid as Satker_id')
+        ->groupBy('kodesatkerid') 
+        ->get()
+        ->count();
+
+        
 
         $Bulan = Bulan::all();
         $Provinsi = Namasatker::orderBy('kodesatker')->get();
@@ -307,7 +322,9 @@ class AdobeBPSController extends Controller
         ];
 
          return view('adobebps.indexstatistik',
-                compact('Data','data','CountLisensi','dataprovinsi','piechart1','piechart2','dataradar','Provinsi','Bulan','Periode_id'));   
+                compact('Data','data','CountLisensi','dataprovinsi',
+                        'piechart1','piechart2','dataradar','Provinsi',
+                        'Bulan','Periode_id','jumlahtotalbast','jumlahuploadbast','jumlahlisensi'));   
     }
 
     /**

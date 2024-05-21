@@ -94,16 +94,20 @@ class ProgressBars {
     }
 
     if (document.querySelector('#progressCirclePercent')) {
+      const val_upload = document.querySelector('#progressCirclePercent').getAttribute('data-jumlahuploadbast');
+      const val_total = document.querySelector('#progressCirclePercent').getAttribute('data-jumlahtotalbast');
+      const val = val_upload/val_total*100; 
       new ProgressBar.Circle(document.querySelector('#progressCirclePercent'), {
         color: Globals.primary,
+        strokeWidth: 15,  
         trailColor: Globals.separator,
-        val: 75,
+        val: val,
         max: 100,
-        duration: 500,
+        duration: 3000,
         step: function (state, bar) {
           bar.setText(Math.round(bar.value() * 100) + '%');
         },
-      }).animate(75 / 100);
+      }).animate(val / 100);
     }
 
     if (document.querySelector('#progressCircleValue')) {
@@ -254,16 +258,21 @@ class ProgressBars {
     }
 
     if (document.querySelector('#progressColorsQuaternary')) {
+      const val_upload = document.querySelector('#progressColorsQuaternary').getAttribute('data-jumlahuploadbast');
+      const val_total = document.querySelector('#progressColorsQuaternary').getAttribute('data-jumlahtotalbast');
+      const val = val_upload/val_total*100;
+
       new ProgressBar.SemiCircle(document.querySelector('#progressColorsQuaternary'), {
         color: Globals.quaternary,
-        trailColor: Globals.separator,
-        val: 15,
-        max: 20,
-        duration: 500,
+        strokeWidth: 6, 
+        trailColor: Globals.separator, 
+        val: val,
+        max: 100,
+        duration: 3000,
         step: function (state, bar) {
-          bar.setText(Math.round(bar.value() * 20) + '/' + 20);
+          bar.setText(Math.round(bar.value() * 100) + '%');
         },
-      }).animate(15 / 20);
+      }).animate( val / 100);
     }
   }
 }
