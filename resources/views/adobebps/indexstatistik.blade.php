@@ -93,11 +93,11 @@
                                 <div class="row">  
                                     <div class="col-12 col-sm-7 col-lg-9 col-xxl-10 mb-1">
                                         <div class="d-inline-block">
-                                            <button class="btn btn-icon btn-icon-only btn-outline-muted btn-sm datatable-print" type="button" data-datatable="#datatableHover_BAST">
+                                            <button class="btn btn-icon btn-icon-only btn-outline-muted btn-sm datatable-print" type="button" data-datatable="#datatableHover_Laporan">
                                                 <i data-acorn-icon="print"></i>
                                             </button>
 
-                                            <div class="d-inline-block datatable-export" data-datatable="#datatableHover_BAST">
+                                            <div class="d-inline-block datatable-export" data-datatable="#datatableHover_Laporan">
                                                 <button
                                                         class="btn btn-icon btn-icon-only btn-outline-muted btn-sm dropdown"
                                                         data-bs-toggle="dropdown"
@@ -112,7 +112,7 @@
                                                     <button class="dropdown-item export-cvs" type="button">Cvs</button>
                                                 </div>
                                             </div>  
-                                            <div class="dropdown-as-select d-inline-block datatable-length" data-datatable="#datatableHover_BAST"> 
+                                            <div class="dropdown-as-select d-inline-block datatable-length" data-datatable="#datatableHover_Laporan"> 
                                                 <button
                                                         class="btn btn-outline-muted btn-sm dropdown-toggle"
                                                         type="button"
@@ -134,7 +134,7 @@
                                     <div class="col-12 col-sm-5 col-lg-3 col-xxl-2 mb-1">
                                         <div class="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 border border-separator bg-foreground search-sm">
                                             
-                                            <input class="form-control form-control-sm datatable-search" placeholder="Search" data-datatable="#datatableHover_BAST" />
+                                            <input class="form-control form-control-sm datatable-search" placeholder="Search" data-datatable="#datatableHover_Laporan" />
                                             <span class="search-magnifier-icon">
                                             <i data-acorn-icon="search"></i>
                                             </span>
@@ -150,7 +150,7 @@
                                 <div class="table-responsive-sm">
                                 <table
                                 class="table data-table-pagination data-table-standard responsive hover"
-                                id="datatableHover_BAST"
+                                id="datatableHover_Laporan"
                                 data-order='[[ 0, "asc" ]]'
                                 >
                                     <thead>
@@ -216,7 +216,27 @@
                                         <div class="col-12 col-sm-auto d-flex justify-content-end">
                                             <div class="btn-group">
                                                 <div class="dropdown">
-                                                <button
+                                                        <button class="btn btn-icon btn-icon-only btn-outline-muted btn-sm datatable-print" type="button" data-datatable="#datatableHover_BAST">
+                                                            <i data-acorn-icon="print"></i>
+                                                        </button>
+
+                                                        <div class="d-inline-block datatable-export" data-datatable="#datatableHover_BAST">
+                                                            <button
+                                                                    class="btn btn-icon btn-icon-only btn-outline-muted btn-sm dropdown"
+                                                                    data-bs-toggle="dropdown"
+                                                                    type="button"
+                                                                    data-bs-offset="0,3"
+                                                            >
+                                                                <i data-acorn-icon="download"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end">
+                                                                <button class="dropdown-item export-copy" type="button">Copy</button>
+                                                                <button class="dropdown-item export-excel" type="button">Excel</button>
+                                                                <button class="dropdown-item export-cvs" type="button">Cvs</button>
+                                                            </div>
+                                                        </div>  
+
+                                                        <button
                                                                 class="btn btn-outline-primary dropdown-toggle mb-1"
                                                                 type="button"
                                                                 data-bs-toggle="dropdown"
@@ -391,6 +411,9 @@
                         </section>
                     </div>
                     <!-- Sort and Filter End -->  
+                    <div class="d-none">
+                        @include('adobebps.hidden_RincianBAST'); 
+                    </div>
                 </div>    
         </section> 
 

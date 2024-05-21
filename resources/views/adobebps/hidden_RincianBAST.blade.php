@@ -6,11 +6,11 @@
                                 <div class="row">  
                                     <div class="col-12 col-sm-7 col-lg-9 col-xxl-10 mb-1">
                                         <div class="d-inline-block">
-                                            <button class="btn btn-icon btn-icon-only btn-outline-muted btn-sm datatable-print" type="button" data-datatable="#datatableHover_BAST">
+                                            <!-- <button class="btn btn-icon btn-icon-only btn-outline-muted btn-sm datatable-print" type="button" data-datatable="#datatableHover_BAST">
                                                 <i data-acorn-icon="print"></i>
-                                            </button>
+                                            </button> -->
 
-                                            <div class="d-inline-block datatable-export" data-datatable="#datatableHover_BAST">
+                                            <!-- <div class="d-inline-block datatable-export" data-datatable="#datatableHover_BAST">
                                                 <button
                                                         class="btn btn-icon btn-icon-only btn-outline-muted btn-sm dropdown"
                                                         data-bs-toggle="dropdown"
@@ -24,7 +24,7 @@
                                                     <button class="dropdown-item export-excel" type="button">Excel</button>
                                                     <button class="dropdown-item export-cvs" type="button">Cvs</button>
                                                 </div>
-                                            </div>  
+                                            </div>   -->
                                             <div class="dropdown-as-select d-inline-block datatable-length" data-datatable="#datatableHover_BAST"> 
                                                 <button
                                                         class="btn btn-outline-muted btn-sm dropdown-toggle"
