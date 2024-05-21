@@ -60,6 +60,7 @@ class BoxedVariations {
       columnDefs: [
         // Adding Name content as an anchor with a target #
         {
+          width: 10,
           targets: 0,
           render: function (data, type, row, meta) {
             return '<a class="list-item-heading body" href="#">' + data + '</a>';

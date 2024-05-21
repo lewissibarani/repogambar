@@ -25,7 +25,8 @@
         "rtconner/laravel-tagging": "^4.1",
         "tonysm/rich-text-laravel": "^1.7"
     },
-    "require-dev": { 
+    "require-dev": {
+        "beyondcode/laravel-query-detector": "^1.8",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",

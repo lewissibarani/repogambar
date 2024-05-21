@@ -24,10 +24,10 @@ class AdobePJ extends Model
     public function getuser ()
     {
         return $this->hasOne('App\Models\User' ,'id','userid');
-    }
-    public function getAdobeTransaksiKuesioner ()
+    } 
+    public function transaksikuesioner () 
     {
-        return $this->hasOne('App\Models\AdobeTransaksiKuesioner' ,'kodesatkerid','kodesatkerid')->latest();
-    }
+        return $this->hasMany('App\Models\AdobeTransaksiKuesioner' ,'kodesatkerid','kodesatkerid');
+    } 
 
 }

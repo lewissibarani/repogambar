@@ -93,7 +93,7 @@ class Lists {
     if (document.getElementById('pagination')) {
       var pagination = new List('pagination', {
         valueNames: ['name', 'category', 'sale'],
-        page: 3,
+        page: 10,
         pagination: [
           {
             includeDirectionLinks: true,

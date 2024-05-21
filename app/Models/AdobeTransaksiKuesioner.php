@@ -54,5 +54,9 @@ class AdobeTransaksiKuesioner extends Model
     { 
         return $this->hasOne('App\Models\AdobePeriode','id', 'periodeid');
     }
+    public function getsatker ()
+    { 
+        return $this->hasOne('App\Models\Namasatker','kodesatker', 'kodesatkerid');
+    }
 
 }

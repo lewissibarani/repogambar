@@ -76,6 +76,11 @@
       el.addEventListener('click', this._onExportClick.bind(this));
     });
 
+    // Filter By listeners
+    document.querySelectorAll('.datatable-export .dropdown-item').forEach((el) => {
+      el.addEventListener('click', this._onExportClick.bind(this));
+    });
+
     // Print listeners
     document.querySelectorAll('.datatable-print').forEach((el) => {
       el.addEventListener('click', this._onPrintClick.bind(this));
