@@ -226,6 +226,7 @@ class AdobeBPSController extends Controller
         $rightjoinquery = DB::table('adobe_transaksi_bast')
             ->selectRaw('count( DISTINCT adobe_transaksi_bast.kodesatkerid) as jumlah_bast_upload, count( DISTINCT namasatker) as jumlah_bast_total, max(kodeeselondua) as kodeeselondua , max(namaeselondua) as namaeselondua')
             ->rightJoin('namasatker', 'namasatker.kodesatker', '=', 'adobe_transaksi_bast.kodesatkerid')
+            ->rightjoin ('adobe_pj' ,' adobe_pj.kodesatkerid', '=', 'namasatker.kodesatker')
             ->groupBy('kodeeselondua') 
             ->get();
          
