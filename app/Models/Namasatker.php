@@ -14,8 +14,14 @@ class Namasatker extends Model
     {
         return $this->hasOne('App\Models\AdobeTransaksiBAST' ,'kodesatkerid','kodesatker')->latest();
     }
-    public function getAdobeTransaksiKuesioner ()
+
+    public function getAdobeTransaksiBAST_Many ()
     {
+        return $this->hasMany('App\Models\AdobeTransaksiBAST' ,'kodesatkerid','kodesatker'); 
+    }
+
+    public function getAdobeTransaksiKuesioner ()
+    { 
         return $this->hasOne('App\Models\AdobeTransaksiKuesioner' ,'kodesatkerid','kodesatker')->latest();
     }
 }

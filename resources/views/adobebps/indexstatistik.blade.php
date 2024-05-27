@@ -308,12 +308,28 @@
                                                                     Silahkan centang salah satu kotak untuk menyaring satker anda.
                                                                 </div>
                                                                 @php 
-                                                                $i=0;
+                                                                $i=0; 
+                                                                $jumlahbastdiuploadsatker_pusat = 0;
+                                                                $jumlahbasttotalsatker_pusat = 0;
+                                                                foreach ( $rightjoinquery as $pusatdatadropdownbast)
+                                                                    {
+                                                                        if($pusatdatadropdownbast->kodeeselondua =="0000"){
+                                                                            $jumlahbastdiuploadsatker_pusat = $pusatdatadropdownbast->jumlah_bast_upload;
+                                                                            $jumlahbasttotalsatker_pusat = $pusatdatadropdownbast->jumlah_bast_total;
+                                                                        } 
+                                                                    }
+                                                                        
+                                                                $className_pusat = $jumlahbastdiuploadsatker_pusat == $jumlahbasttotalsatker_pusat ? 'form-check-label text-success' : 'form-check-label text-danger';
+                                                                
                                                                 @endphp
                                                                         <div class="form-check mb-2">
                                                                             <input type="checkbox" class="form-check-input filter" id="categoryPagination{{$i}}" 
                                                                             data-filter="0000" />
-                                                                            <label class="form-check-label" for="categoryPagination{{$i}}">Pusat</label>
+                                                                            <label class="{{$className_pusat}}" for="categoryPagination{{$i}}">Pusat  
+                                                                            <span class="{{$className_pusat}}">
+                                                                            ({{$jumlahbastdiuploadsatker_pusat}}/{{$jumlahbasttotalsatker_pusat}})
+                                                                            </span>
+                                                                            </label>
                                                                         </div> 
 
                                                                         <div class=" text-muted mb-3">
@@ -322,13 +338,26 @@
                                                                         
                                                                         <div class="row"> 
                                                                         @foreach($Provinsi as $data)  
-                                                                                @if(strlen($data->kodesatker)==4)   
+                                                                                @if(strlen($data->kodesatker)==4)    
+
                                                                                     @if(substr($data->kodesatker,-2)=="00")  
-                                                                                        @php 
+                                                                                        @php  
+                                                                                        $jumlahbastdiuploadsatker=0;
+                                                                                        $jumlahbasttotalsatker=0;  
+                                                                                        foreach ( $rightjoinquery as $datadropdownbast)
+                                                                                        {
+                                                                                            if($datadropdownbast->kodeeselondua == $data->kodesatker){
+                                                                                                $jumlahbastdiuploadsatker = $datadropdownbast->jumlah_bast_upload;
+                                                                                                $jumlahbasttotalsatker = $datadropdownbast->jumlah_bast_total;
+                                                                                            }
+                                                                                        }
+
+                                                                                        $className = $jumlahbastdiuploadsatker == $jumlahbasttotalsatker ? 'text-success' : 'text-danger';
                                                                                         $i++; 
                                                                                         $kodeprovinsi = $data->kodesatker; 
                                                                                         $kodeprovinsi_trim = substr($data->kodesatker,0,2); 
-                                                                                        $kodeprovinsi_trim = $kodeprovinsi_trim."00";
+                                                                                        $kodeprovinsi_trim = $kodeprovinsi_trim."00";  
+
                                                                                         $namasatker = substr($data->namasatker,28);
                                                                                         $namasatker = str_replace("KEPULAUAN","KEP.",substr($data->namasatker,28));
                                                                                         @endphp
@@ -341,7 +370,13 @@
                                                                                         <div class="form-check mb-2">
                                                                                             <input type="checkbox" class="form-check-input filter" id="categoryPagination{{$i}}" 
                                                                                             data-filter="{{$kodeprovinsi_trim}}" />
-                                                                                            <label class="form-check-label" for="categoryPagination{{$i}}">{{$namasatker}}</label>
+                                                                                            <label  
+                                                                                            class="form-check-label" 
+                                                                                            for="categoryPagination{{$i}}">{{$namasatker}} 
+                                                                                            <span class="{{$className}}">
+                                                                                            ({{$jumlahbastdiuploadsatker}}/{{$jumlahbasttotalsatker}})
+                                                                                            </span>
+                                                                                            </label>
                                                                                         </div> 
                                                                                         @if($i==19)
                                                                                             </div>

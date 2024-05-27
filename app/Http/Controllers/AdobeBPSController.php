@@ -222,10 +222,17 @@ class AdobeBPSController extends Controller
         ->get()
         ->count();
 
+        //Query Buat Drowdown BAST
+        $rightjoinquery = DB::table('adobe_transaksi_bast')
+            ->selectRaw('count( DISTINCT adobe_transaksi_bast.kodesatkerid) as jumlah_bast_upload, count( DISTINCT namasatker) as jumlah_bast_total, max(kodeeselondua) as kodeeselondua , max(namaeselondua) as namaeselondua')
+            ->rightJoin('namasatker', 'namasatker.kodesatker', '=', 'adobe_transaksi_bast.kodesatkerid')
+            ->groupBy('kodeeselondua') 
+            ->get();
+         
         
 
         $Bulan = Bulan::all();
-        $Provinsi = Namasatker::orderBy('kodesatker')->get();
+        $Provinsi = Namasatker::with('getAdobeTransaksiBAST_Many')->orderBy('kodesatker')->get();
         $DataBAST = AdobeTransaksiBAST::with('user','dokumen','periode')->get();
         $CountLisensi = $Data->count();
 
@@ -241,80 +248,20 @@ class AdobeBPSController extends Controller
             }
             
         }
-
-        //datachartbast
-        // $array_data_bast = [];
-        // foreach($Provinsi as $databast_provinsi)
-        // {   
-        //     $kodesatker = $databast_provinsi->kodesatker;
-        //     if(substr($databast_provinsi->kodesatker, -2)=="00"){
-        //         $check = AdobeTransaksiBAST::where('kodesatker','=',$kodesatker)->first();
-        //         if(!$check){
-        //             array_push($array_data_bast,0);
-        //         } else {
-        //             $getallprovinsi = AdobeTransaksiBAST::where('kodesatker','=',$kodesatker)->get();
-
-        //             $pembilang = ; 
-
-        //             $pembagi = ;
-        //             $hasil = ;
-        //             array_push($array_data_bast,$string3);
-        //         }
-        //     }
-           
-        // }
-
-        // $array_data_bast = [];
-        // foreach( $DataBAST as $databast){
-        //     array_push($array_data_bast,$databast->getAdobeTransaksiBAST-> ?? '0');
-        // }
-        // $string = $datas->getnamasatker->namasatker ?? '';  
-        // 
-
-        // Replace this with your actual data retrieval logic
-        $piechart1 = [ 
-            'labels' => ['Belum Kirim', 'Sudah Kirim'],
-            'data' => [70, 30,],
-        ];
-
-        $piechart2 = [ 
-            'labels' => ['Belum Kirim', 'Sudah Kirim'],
-            'data' => [70, 30,],
-        ];
-
+  
         //data chart
         $bulan_array = [];
         $Bulan = Bulan::all();
         foreach($Bulan as $bulan){
             array_push($bulan_array,$bulan->namabulan);
         }
- 
-        //backgroundColor
-        $warna1="#1ddba9";
-        $warna2="#4a3dff"; 
-        $backgroundColor=[];
-        $warna="";  
-
-        foreach($bulan_array as $warnabulan){  
-            if($warna=="#1ddba9" ){
-                array_push($backgroundColor,$warna2);
-                $warna=$warna2;
-            } else { 
-            array_push($backgroundColor,$warna1);
-            $warna=$warna1;  
-            }
-        } 
-        
+   
         $dataradar = [
             'labels' => ['Category A', 'Category B', 'Category C', 'Category D', 'Category E','Category A', 'Category B', 'Category C', 'Category D', 'Category E'],
             'data' => [25, 30, 15, 10, 20,25, 30, 15, 10, 20],
         ];
 
-        $data = [
-            'labels' => $bulan_array,
-            'data' => [65, 59, 80, 81, 56,65, 59, 80, 81, 56, 81, 56],
-            'backgroundColor' => $backgroundColor,
-        ];
+         
 
         $dataprovinsi = [
             'labels' => $provinsi_array,
@@ -322,9 +269,10 @@ class AdobeBPSController extends Controller
         ];
 
          return view('adobebps.indexstatistik',
-                compact('Data','data','CountLisensi','dataprovinsi',
-                        'piechart1','piechart2','dataradar','Provinsi',
-                        'Bulan','Periode_id','jumlahtotalbast','jumlahuploadbast','jumlahlisensi'));   
+                compact('Data','CountLisensi','dataprovinsi',
+                        'dataradar','Provinsi',
+                        'Bulan','Periode_id','jumlahtotalbast','jumlahuploadbast','jumlahlisensi', 
+                        'rightjoinquery'));   
     }
 
     /**
