@@ -129,8 +129,8 @@ class AuthenticatedSessionController extends Controller
 
                 //proses sync kode untuk papua dikarenakan jkd belum update kodesatker 
                 $key=0; 
-                $arraykodesatker_benar=['9502','9503','9504','9604','9605','9608','9702','9703'];
-                $arraykodesatker_salah=['9413','9414','9415','9404','9410','9411','9402','9430'];
+                $arraykodesatker_benar=['9502','9503','9504','9604','9605','9608','9702','9703','9271'];
+                $arraykodesatker_salah=['9413','9414','9415','9404','9410','9411','9402','9430','9171'];
 
                 foreach($arraykodesatker_salah as $array){ 
                 if ($kodesatker_trim==$array){
