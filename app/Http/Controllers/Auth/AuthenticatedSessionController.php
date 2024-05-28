@@ -117,7 +117,7 @@ class AuthenticatedSessionController extends Controller
             
             // Opsional: Setelah mendapatkan token, anda dapat melihat data profil pengguna
             try {
-                
+                 
                 $user = $provider->getResourceOwner($token);
 
                 $email = $user->getEmail();
@@ -126,6 +126,20 @@ class AuthenticatedSessionController extends Controller
                 if($kodesatker_trim=="0000"){
                     $kodesatker_trim=substr($kodesatker,-5);
                 }
+
+                //proses sync kode untuk papua dikarenakan jkd belum update kodesatker 
+                $key=0; 
+                $arraykodesatker_benar=['9502','9503','9504','9604','9605','9608','9702','9703'];
+                $arraykodesatker_salah=['9413','9414','9415','9404','9410','9411','9402','9430'];
+
+                foreach($arraykodesatker_salah as $array){ 
+                if ($kodesatker_trim==$array){
+                    $kodesatker_trim = $arraykodesatker_benar[$key];
+                }
+                $key++;
+                } 
+                //proses sync selesai
+
                 $golongan = $user->getGolongan();
                 $jabatan = $user->getJabatan(); 
                 $foto = $user->getUrlFoto();
