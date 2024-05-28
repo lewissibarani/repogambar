@@ -86,24 +86,41 @@
                                             <td class="text-alternate">{{$bulan->id}}</td> 
                                             <td class="fw-bold">{{$bulan->namabulan}}</td> 
                                             <td class="text-alternate"> 
-                                                @foreach ($Data_Laporan as $data_laporan)
-                                                    @if($data_laporan->bulanid==$bulan->id) 
-                                                        {{$data_laporan->user->name}}
-                                                        @break
-                                                    @endif
-                                                @endforeach 
+                                                @if ($Data_Laporan
+                                                ->where('bulanid', $bulan->id)
+                                                ->where('userid', Auth::id())
+                                                ->first())
+                                                    @foreach ($Data_Laporan as $data_laporan)
+                                                        @if($data_laporan->bulanid==$bulan->id) 
+                                                            {{$data_laporan->user->name}}
+                                                            @break
+                                                        @endif
+                                                    @endforeach 
+                                                @else
+                                                -
+                                                @endif
                                             </td>  
                                             <td class="text-alternate"> 
-                                                @foreach ($Data_Laporan as $data_laporan)
-                                                    @if($data_laporan->bulanid==$bulan->id) 
-                                                        {{$data_laporan->updated_at}}
-                                                        @break
-                                                    @endif
-                                                @endforeach 
+                                                @if ($Data_Laporan
+                                                ->where('bulanid', $bulan->id)
+                                                ->where('userid', Auth::id())
+                                                ->first())
+                                                    @foreach ($Data_Laporan as $data_laporan)
+                                                        @if($data_laporan->bulanid==$bulan->id) 
+                                                            {{$data_laporan->updated_at}}
+                                                            @break
+                                                        @endif
+                                                    @endforeach 
+                                                @else
+                                                -
+                                                @endif
                                             </td>  
                                             <td class="text-alternate">
                                             @if(($bulan->id+4)<=date('n')) 
-                                                @if ($Data_Laporan->where('bulanid', $bulan->id)->first()) 
+                                                @if ($Data_Laporan
+                                                ->where('bulanid', $bulan->id)
+                                                ->where('userid', Auth::id())
+                                                ->first()) 
                                                             @php
                                                             $dataslaporan = $Data_Laporan->where('bulanid', $bulan->id)->first();
                                                             @endphp
