@@ -211,8 +211,7 @@
                                 >
                                     <thead>
                                     <tr> 
-                                        <th scope="col" class="col-1 text-muted text-small text-uppercase">Kode Satker</th>
-                                        <th scope="col" class="col-1 text-muted text-small text-uppercase">Nama Satker</th>
+                                        <th scope="col" class="col-1 text-muted text-small text-uppercase">Kode Provinsi/ Satker</th>  
                                         <th scope="col" class="col-1 text-muted text-small text-uppercase">Nama Penanggung Jawab </th> 
                                         @foreach($Bulan as $bulan)
                                             <th  scope="col" class="col text-muted text-small text-uppercase">{{$bulan->singkatan}}</th>
@@ -221,25 +220,29 @@
                                     </thead>
                                     <tbody>
                                     @foreach ($Data as $datas) 
-                                        <tr style="height:50px;"> 
-                                            <td class="">{{$datas->kodesatkerid}}</td>
-                                            <td class="text-alternate">   
-                                            @php 
-                                                $string = $datas->getnamasatker->namasatker ?? '';
-                                                $string1 = str_replace("BADAN PUSAT STATISTIK", "BPS", $string); 
-                                                $string2 = str_replace("KEPULAUAN", "KEP.", $string1);  
-                                            @endphp 
-                                                    {{$string2}} 
-                                            </td>
-                                            <td class="text-alternate">{{$datas->nama}}</td>  
+                                        <tr style="height:50px;">  
+                                            <td class=""><span class="fw-bold">{{$datas->getnamasatker->kodeeselondua ?? ''}}</span>/{{$datas->kodesatkerid}}</td> 
+                                            <td class="text-alternate">
+                                                {{$datas->nama}}    
+                                                @php 
+                                                    $string = $datas->getnamasatker->namasatker ?? '';
+                                                    $string1 = str_replace("BADAN PUSAT STATISTIK", "BPS", $string); 
+                                                    $string2 = str_replace("KEPULAUAN", "KEP.", $string1);  
+                                                @endphp 
+                                                <div class="text-small text-muted position sale">
+                                                    {{$string2}}  
+                                                </div>
+                                            </td>  
                                             @foreach($Bulan as $bulan) 
-                                                <td class="text-alternate">  
-                                                    @if(!is_null($datas->transaksikuesioner->where('bulanid',$bulan->id)->where('periodeid',$Periode_id)->first())) 
-                                                        <i data-acorn-icon="check-circle" class="text-success"></i> 
-                                                    @else 
-                                                    -
-                                                    @endif 
-                                                </td>  
+                                            <td class="text-alternate">  
+                                                @if(!is_null($datas->transaksikuesioner->where('bulanid',$bulan->id)->where('periodeid',$Periode_id)->first())) 
+                                                <div class="border border-success sw-2 sh-2 rounded-xl d-flex justify-content-center align-items-center">
+                                                v
+                                                </div> 
+                                                @else 
+                                                -
+                                                @endif 
+                                            </td>  
                                             @endforeach 
                                         </tr>
                                     @endforeach
