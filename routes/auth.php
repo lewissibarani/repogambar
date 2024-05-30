@@ -15,10 +15,15 @@ Route::middleware('guest')->group(function () {
     Route::get('loginpage', [AuthenticatedSessionController::class, 'loginpage'])
                 ->name('loginpage');
 
-    Route::get('register', [RegisteredUserController::class, 'create'])
-                ->name('register');
+    Route::get('loginbpk',[AuthenticatedSessionController::class, 'loginbpk'])->name('loginbpk');
+    Route::post('register',[AuthenticatedSessionController::class, 'register'])->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+
+
+    // Route::get('register', [RegisteredUserController::class, 'create'])
+    //             ->name('register');
+
+    // Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'actionSso'])
                 ->name('login');

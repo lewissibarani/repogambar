@@ -183,6 +183,8 @@
                                         $pp = "no-link";
                                         if(!is_null($pj->getuser))  {
                                             $pp = $pj->getuser->profilepicture;
+                                        }else{  
+                                            $pp = URL::to('/').'/img/illustration/user-profile-picture-'.rand(1,6).'.jpg';
                                         }
                                       echo '<div class="row align-items-start ">'.
                                                ' <div class="col-2 align-self-center " style="margin-b:350px;"> '.

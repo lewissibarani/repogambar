@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -21,6 +23,10 @@ class AuthenticatedSessionController extends Controller
     public function create()
     {
         return view('pages.authentication.login');
+    }
+    public function loginbpk()
+    {
+        return view('pages.authentication.register');
     }
 
     /**
@@ -35,6 +41,42 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        return redirect()->intended(RouteServiceProvider::HOME);
+    }
+
+    public function register(Request $request)
+    {
+
+        $res = [];  
+        DB::beginTransaction();
+        try { 
+        
+            $newUser = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'level' => 4,
+                'nip' => '-',
+                'nipbaru' => '-', 
+                'golongan' => '-',
+                'jabatan' => '-',
+                'profilepicture' => '-',
+                'kodesatker' =>$request->kodesatker,
+                'satker' =>$request->satker,
+                'password' =>Hash::make($request->password),
+                'sums_download' =>0,
+                'sums_upload' =>0,
+                'sum_permintaan' =>0, 
+            ]); 
+
+        DB::commit();
+        // all good
+
+        } catch (\Exception $e) { 
+            DB::rollback();  
+            // something went wrong
+            $res = ['message' => $e->getMessage()];
+        } 
+   
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -76,11 +118,11 @@ class AuthenticatedSessionController extends Controller
 
     //         // Gunakan token ini untuk berinteraksi dengan API di sisi pengguna
     // } 
-    // public function loginpage()
-    // {  
 
-    //     return view('auth.login');
-    // } 
+    public function loginpage()
+    {  
+        return view('pages.authentication.login');
+    } 
     public function actionSso(Request $request)
     {
 

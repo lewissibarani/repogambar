@@ -132,7 +132,10 @@
                                         <tr style="height:50px;">
                                             <td>{{$datas->id}}</td>
                                             <td class="text-alternate">{{$datas->jenisdokumen}}</td> 
-                                            <td class="text-alternate"><a class="" href="{{$datas->path}}">Unduh</a></td> 
+                                            <td class="text-alternate">
+                                                <a class="" href="{{$datas->path}}">Unduh</a> | 
+                                                <a class="" href="{{route('adobebps.deletedokumen', ['dokumen_id'=>$datas->id])}}">Hapus</a>
+                                            </td> 
                                             <td class="text-alternate">{{$datas->getuser->name}}</td>
                                             <td class="text-alternate"> {{$datas->updated_at}} </td> 
                                         </tr>

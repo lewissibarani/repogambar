@@ -53,8 +53,13 @@
                     .
                 </p>
             </div>
+            @if(session()->has('message'))
+                <div class="alert alert-info">
+                {!! session()->get('message') !!}
+                </div>
+            @endif
             <div>
-                <form id="registerForm" class="tooltip-end-bottom" action="register" method="POST" novalidate>
+                <form id="registerForm" class="tooltip-end-bottom" action="{{route('register')}}" method="POST" novalidate>
                     @csrf
                     @error('email')
                     <div class="mb-3 text-danger">
@@ -73,10 +78,10 @@
                         <i data-acorn-icon="lock-off"></i>
                         <input class="form-control" name="password" type="password" placeholder="Password" />
                     </div>
-                    <div class="mb-3 filled form-group tooltip-end-top">
+                    <!-- <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="phone"></i>
                         <input class="form-control" placeholder="No Handphone" name="nohp" />
-                    </div>
+                    </div> -->
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="building-small"></i>
                         <input class="form-control" placeholder="Kode Satuan Kerja" name="kodesatker" />

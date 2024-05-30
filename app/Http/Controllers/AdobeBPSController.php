@@ -282,11 +282,38 @@ class AdobeBPSController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function deletedokumen($dokumenid)
+    {   
+        $res = []; 
+        
+        DB::beginTransaction();
+            try { 
+                $file=AdobeTemplatDokumen::find($dokumenid); 
+
+                //url file yang mau dihapus   
+                $url_file = Storage::disk('s3')->url('storage/file/'.$file->jenisdokumen);  
+                Storage::disk('s3')->delete($url_file); 
+
+                //delete database  
+                $file->forceDelete();
+
+                DB::commit();
+                // all good
+                $res = ['message' => 'Data Deleted!'];
+
+            } catch (\Exception $e) {
+                DB::rollback();
+                $res = ['message' => $e->getMessage()];
+                // something went wrong
+            } 
+        
+        return redirect()->route('adobebps.templatelaporan')->with($res);
+    }
     public function uploaddokumenstore(Request $request)
     { 
         $this->validate($request, [
             'namadokumen' => 'required', 
-            'filedokumen' => 'mimes:docx,pdf|file|max:30000',  
+            'filedokumen' => 'mimes:docx,pdf,jpg,png|file|max:30000',  
         ]);
 
         $res = []; 
@@ -304,7 +331,7 @@ class AdobeBPSController extends Controller
 
                    //record database  
                     $fileDokumen = AdobeTemplatDokumen::create([
-                    'jenisdokumen' => $request->namadokumen,
+                    'jenisdokumen' => $file_name,
                     'path' => $url_file,
                     'uploadedby'=>Auth::id()
                     ]);
