@@ -15,7 +15,7 @@ Route::middleware('guest')->group(function () {
     Route::get('loginpage', [AuthenticatedSessionController::class, 'loginpage'])
                 ->name('loginpage');
 
-    Route::get('loginbpk',[AuthenticatedSessionController::class, 'loginbpk'])->name('loginbpk');
+    Route::post('loginbpk',[AuthenticatedSessionController::class, 'loginbpk'])->name('loginbpk');
     Route::post('register',[AuthenticatedSessionController::class, 'register'])->name('register');
 
 

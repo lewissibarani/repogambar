@@ -23,18 +23,26 @@
             <span class="label">Daftar Koleksi</span>
         </a>
     </div> 
-    {{-- <div class="user-container d-flex"  style="margin-left :3em; margin-right: 50px;"> 
+    <!-- <div class="user-container d-flex"  style="margin-left :3em; margin-right: 50px;"> 
         <a href="#portofolio" class="nav-link text-dark">
             <i data-acorn-icon="tv" class="icon" data-acorn-size="18"></i>
             <span class="label">Portofolio</span>
         </a>
-    </div>  --}}
+    </div>   -->
     <div class="user-container d-flex"  style="margin-left :3em;  "> 
         <a href="/Dashboard" class="btn btn-primary  rounded-xl"> 
             <i data-acorn-icon="login" class="icon" data-acorn-size="18"></i>
             <span class="label">Login Pikart</span>
         </a>
     </div> 
+    @if (Auth::guest())
+    <div class="user-container d-flex"  style="margin-left :1em;  "> 
+        <a href="{{route('loginpage')}}" class="btn btn-warning  rounded-xl"> 
+            <i data-acorn-icon="login" class="icon" data-acorn-size="18"></i>
+            <span class="label">Login BPK</span>
+        </a>
+    </div> 
+    @endif
     
     <!-- User Menu End -->
 

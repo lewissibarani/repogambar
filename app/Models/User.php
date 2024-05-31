@@ -46,6 +46,13 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'is_bpk' => 'boolean',
+        ];
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
