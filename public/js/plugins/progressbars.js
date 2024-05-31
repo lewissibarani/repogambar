@@ -101,7 +101,7 @@ class ProgressBars {
         color: Globals.primary,
         strokeWidth: 15,  
         trailColor: Globals.separator,
-        val: val,
+        val: Math.floor(val),
         max: 100,
         duration: 3000,
         step: function (state, bar) {
