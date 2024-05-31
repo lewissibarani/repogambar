@@ -569,9 +569,9 @@ class Charts {
   // Standard horizontal bar chart
   _initHorizontalBarChart() {
     if (document.getElementById('horizontalBarChart')) {
-      const label = document.querySelector('#horizontalBarChart').getAttribute('data-aplikasilabel');
-      const data = document.querySelector('#horizontalBarChart').getAttribute('data-aplikasidata');
-      const barChart = document.getElementById('horizontalBarChart').getContext('2d');
+      const label = document.querySelector('#horizontalBarChart').getAttribute('data-aplikasilabel'); 
+      const barChart = document.getElementById('horizontalBarChart').getContext('2d'); 
+      console.log(label[1]);
       this._horizontalBarChart = new Chart(barChart, {
         type: 'horizontalBar',
         options: {
