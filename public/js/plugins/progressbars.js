@@ -101,9 +101,9 @@ class ProgressBars {
         color: Globals.primary,
         strokeWidth: 15,  
         trailColor: Globals.separator,
-        val: Math.floor(val),
+        val: val,
         max: 100,
-        duration: 3000,
+        duration: 2000,
         step: function (state, bar) {
           bar.setText(Math.floor(bar.value() * 100) + '%');
         },
