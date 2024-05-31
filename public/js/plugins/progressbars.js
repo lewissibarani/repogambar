@@ -105,7 +105,7 @@ class ProgressBars {
         max: 100,
         duration: 3000,
         step: function (state, bar) {
-          bar.setText(Math.round(bar.value() * 100) + '%');
+          bar.setText(Math.floor(bar.value() * 100) + '%');
         },
       }).animate(val / 100);
     }
