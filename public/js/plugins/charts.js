@@ -569,6 +569,8 @@ class Charts {
   // Standard horizontal bar chart
   _initHorizontalBarChart() {
     if (document.getElementById('horizontalBarChart')) {
+      const label = document.querySelector('#horizontalBarChart').getAttribute('data-aplikasilabel');
+      const data = document.querySelector('#horizontalBarChart').getAttribute('data-aplikasidata');
       const barChart = document.getElementById('horizontalBarChart').getContext('2d');
       this._horizontalBarChart = new Chart(barChart, {
         type: 'horizontalBar',
@@ -610,13 +612,13 @@ class Charts {
           tooltips: ChartsExtend.ChartTooltip(),
         },
         data: {
-          labels: ['January', 'February', 'March', 'April'],
+          labels: label,
           datasets: [
             {
-              label: 'Breads',
+              label: 'Jumlah Pengguna',
               borderColor: Globals.primary,
               backgroundColor: 'rgba(' + Globals.primaryrgb + ',0.1)',
-              data: [456, 479, 324, 569],
+              data: data,
               borderWidth: 2,
             },
           ],

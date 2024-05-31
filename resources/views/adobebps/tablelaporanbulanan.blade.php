@@ -91,7 +91,7 @@
                                                 ->where('userid', Auth::id())
                                                 ->first())
                                                     @foreach ($Data_Laporan as $data_laporan)
-                                                        @if($data_laporan->bulanid==$bulan->id) 
+                                                        @if($data_laporan->bulanid==$bulan->id && $data_laporan->userid==Auth::id()) 
                                                             {{$data_laporan->user->name}}
                                                             @break
                                                         @endif
@@ -106,7 +106,7 @@
                                                 ->where('userid', Auth::id())
                                                 ->first())
                                                     @foreach ($Data_Laporan as $data_laporan)
-                                                        @if($data_laporan->bulanid==$bulan->id) 
+                                                        @if($data_laporan->bulanid==$bulan->id && $data_laporan->userid==Auth::id()) 
                                                             {{$data_laporan->updated_at}}
                                                             @break
                                                         @endif
@@ -120,7 +120,7 @@
                                                 @if ($Data_Laporan
                                                 ->where('bulanid', $bulan->id)
                                                 ->where('userid', Auth::id())
-                                                ->first()) 
+                                                ->first())
                                                             @php
                                                             $dataslaporan = $Data_Laporan->where('bulanid', $bulan->id)->first();
                                                             @endphp
