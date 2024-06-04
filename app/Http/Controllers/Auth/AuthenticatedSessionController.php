@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
-
 
 
 class AuthenticatedSessionController extends Controller
@@ -26,27 +24,9 @@ class AuthenticatedSessionController extends Controller
     {
         return view('pages.authentication.login');
     }
-    public function loginbpk(LoginRequest $request)
+    public function loginbpk()
     {
-
-        $credentials = $request->getCredentials();
-
-        if(!Auth::validate($credentials)):
-            return redirect()->to('loginpage')
-                ->withErrors(trans('auth.failed'));
-        endif;
-
-        $user = Auth::getProvider()->retrieveByCredentials($credentials);
-
-        Auth::login($user);
-
-        return $this->authenticated($request, $user);
-
-    }
-
-    protected function authenticated(Request $request, $user) 
-    {
-        return redirect()->route('adobebps.indexstatistik');
+        return view('pages.authentication.register');
     }
 
     /**
@@ -108,11 +88,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Session::flush();
-        
-        Auth::logout();
- 
-        return redirect()->route('landingpage.landpage');
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('login');
     }
 
     // public function actionSso(Request $request)

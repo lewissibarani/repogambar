@@ -20,7 +20,7 @@
         <div class="w-100 w-lg-75 w-xxl-50">
             <div>
                 <div class="mb-5">
-                    <h1 class="display-3 text-white">Pikart</h1>
+                    <h1 class="display-3 text-white">SIMRAD</h1>
                     <h1 class="display-3 text-white">Badan Pusat Statistik</h1>
                 </div>
                 <p class="h6 text-white lh-1-5 mb-5">
@@ -38,34 +38,24 @@
     <div class="sw-lg-70 min-h-100 bg-foreground d-flex justify-content-center align-items-center shadow-deep py-5 full-page-content-right-border">
         <div class="sw-lg-50 px-5">
             <div class="sh-11">
-                <!-- <a href="/">
+                <a href="/">
                     <div class="logo-default"></div>
-                </a> -->
+                </a>
             </div>
             <div class="mb-5">
                 <h2 class="cta-1 mb-0 text-primary">Selamat Datang,</h2>
-                <h2 class="cta-1 mb-0 text-primary">Auditor Badan Pemeriksa Keuangan.</h2>
                 <!-- <h2 class="cta-1 text-primary">let's get started!</h2> -->
             </div>
-            @if(isset ($errors) && count($errors) > 0)
-                <div class="alert alert-warning" role="alert">
-                    <ul class="list-unstyled mb-0">
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <div class="mb-5">
                 <p class="h6">Silahkan login terlebih dahulu</p>
-                <!-- <p class="h6">
+                <p class="h6">
                     Jika belum memiliki akun, silahkan
                     <a href="{{route('register')}}">daftar</a>
                     .
-                </p> -->
+                </p>
             </div>
             <div>
-                <form id="loginForm" class="tooltip-end-bottom" action="{{route('loginbpk')}}" method="POST" novalidate>
+                <form id="loginForm" class="tooltip-end-bottom" action="login" method="POST" novalidate>
                     @csrf
                     @error('email')
                     <div class="mb-3 text-danger">
@@ -85,7 +75,7 @@
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-acorn-icon="lock-off"></i>
                         <input class="form-control pe-7" name="password" type="password" placeholder="Password" />
-                        <!-- <a class="text-small position-absolute t-3 e-3" href="/Pages/Authentication/ForgotPassword">Forgot?</a> -->
+                        <a class="text-small position-absolute t-3 e-3" href="/Pages/Authentication/ForgotPassword">Forgot?</a>
                     </div>
                     <button type="submit" class="btn btn-lg btn-primary">Login</button>
                 </form>

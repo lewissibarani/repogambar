@@ -21,11 +21,8 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(): void
+    public function boot()
     {
-        Gate::define('bpk',function(User $user) : bool {
-            return (bool) $user->is_bpk;
-        });
         $this->registerPolicies();
 
         //
