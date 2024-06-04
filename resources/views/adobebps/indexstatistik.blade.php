@@ -506,10 +506,9 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="sh-35">
-                                        @php 
-                                        $jumlahaplikasi= '[456, 479, 324, 569]'; 
-                                        @endphp
-                                        <canvas id="horizontalBarChart"    >
+                                       
+                                        <canvas id="horizontalBarChart"  
+                                             >
                                         </canvas>
                                     </div>
                                 </div>

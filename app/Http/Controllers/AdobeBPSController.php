@@ -50,13 +50,12 @@ class AdobeBPSController extends Controller
 
             $pembilang_pemanfaatan = DB::table('adobe_transaksi_kuesioner')
              ->select(DB::raw('count(*) as bulan'))
-             ->where(['kodesatkerid' => Auth::user()->kodesatker,
-                     'memakaiadobe' => '1']) 
+             ->where('kodesatkerid', '=', Auth::user()->kodesatker)
              ->groupBy('bulanid')
              ->get()
              ->count();
-            $pembagi = 12; 
-            $persentase_pemanfaatan =  round($pembilang_pemanfaatan/$pembagi*100);
+            $pembagi = 12;
+            $persentase_pemanfaatan =  round($pembilang_pemanfaatan/$pembagi);
 
             $Data_BAST = AdobeTransaksiBAST::with('user','periode','dokumen')
             ->where('kodesatkerid', '=', Auth::user()->kodesatker) 
