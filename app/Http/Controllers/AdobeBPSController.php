@@ -50,12 +50,13 @@ class AdobeBPSController extends Controller
 
             $pembilang_pemanfaatan = DB::table('adobe_transaksi_kuesioner')
              ->select(DB::raw('count(*) as bulan'))
-             ->where('kodesatkerid', '=', Auth::user()->kodesatker)
+             ->where(['kodesatkerid' => Auth::user()->kodesatker,
+                     'memakaiadobe' => '1']) 
              ->groupBy('bulanid')
              ->get()
              ->count();
-            $pembagi = 12;
-            $persentase_pemanfaatan =  round($pembilang_pemanfaatan/$pembagi);
+            $pembagi = 12; 
+            $persentase_pemanfaatan =  round($pembilang_pemanfaatan/$pembagi*100);
 
             $Data_BAST = AdobeTransaksiBAST::with('user','periode','dokumen')
             ->where('kodesatkerid', '=', Auth::user()->kodesatker) 
@@ -226,7 +227,7 @@ class AdobeBPSController extends Controller
         $rightjoinquery = DB::table('adobe_transaksi_bast')
             ->selectRaw('count( DISTINCT adobe_transaksi_bast.kodesatkerid) as jumlah_bast_upload, count( DISTINCT namasatker) as jumlah_bast_total, max(kodeeselondua) as kodeeselondua , max(namaeselondua) as namaeselondua')
             ->rightJoin('namasatker', 'namasatker.kodesatker', '=', 'adobe_transaksi_bast.kodesatkerid')
-            ->rightjoin ('adobe_pj' ,' adobe_pj.kodesatkerid', '=', 'namasatker.kodesatker')
+            ->rightjoin ('adobe_pj' , 'adobe_pj.kodesatkerid', '=', 'namasatker.kodesatker')
             ->groupBy('kodeeselondua') 
             ->get();
          
