@@ -35,7 +35,10 @@
                                                     </div>
                                                     <div id="passwordHelpBlock" class="form-text">
                                                         2. Tuliskan email yang sama dengan yang diatas, jika hanya ingin mengupdate nama dan  no. hp penanggung jawab.
-                                                    </div> 
+                                                    </div>
+                                                    <div id="passwordHelpBlock" class="form-text">
+                                                        3. Tuliskan email yang sama dengan email "Akun yang akan diganti", jika hanya ingin update no handphone dan nama penanggung jawab.
+                                                    </div>
                                                     <div class="invalid-feedback">Silahkan isi.</div>
                                                 </div>
                                             </div>
