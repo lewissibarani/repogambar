@@ -21,6 +21,7 @@
     <script src="/js/vendor/datatables.min.js"></script>
     <script src="/js/vendor/progressbar.min.js"></script>
 
+    <script src="/js/vendor/moment-with-locales.min.js"></script> 
     <script src="/js/vendor/Chart.bundle.min.js"></script>
     <script src="/js/vendor/chartjs-plugin-rounded-bar.min.js"></script>
     <script src="/js/vendor/chartjs-plugin-crosshair.js"></script>
@@ -68,7 +69,7 @@
         
 
         <section id="CTA" class="cta scroll-section " style="  padding-bottom: 20px;">  
-            <div class="row" > 
+            <div class="row " > 
                 <div class="col-12 col-sm-8 col-lg-8 col-xxl-8" >  
                     <div class="row mb-3">  
                         <div class="card h-100 bg-gradient-light">
@@ -255,259 +256,264 @@
                     </div>  
                 </div>  
 
-                <!-- Sort and Filter Start -->
-                <div class="col-4 mb-5"> 
-                        <section class="scroll-section" id="sortAndFilterTitle"> 
-                            <h2 class="small-title">Rincian BAST Per Provinsi</h2>
-                            <div class="row g-2" id="sortAndFilter">
-                                <div class="col-12">
-                                    <div class="row gx-2">
-                                        <div class="col-12 col-sm mb-1 mb-sm-0">
-                                            <div class="search-input-container shadow rounded-md bg-foreground mb-2">
-                                                <input class="form-control search" type="text" autocomplete="off" placeholder="Search" />
-                                                <span class="search-magnifier-icon">
-                        <i data-acorn-icon="search"></i>
-                      </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-auto d-flex justify-content-end">
-                                            <div class="btn-group">
-                                                <div class="dropdown">
-                                                        <button class="btn btn-icon btn-icon-only btn-outline-muted btn-sm datatable-print" type="button" data-datatable="#datatableHover_BAST">
-                                                            <i data-acorn-icon="print"></i>
-                                                        </button>
+                <div class="col-4 mb-3"> 
+                    <div class="row h-100">
 
-                                                        <div class="d-inline-block datatable-export" data-datatable="#datatableHover_BAST">
-                                                            <button
-                                                                    class="btn btn-icon btn-icon-only btn-outline-muted btn-sm dropdown"
-                                                                    data-bs-toggle="dropdown"
-                                                                    type="button"
-                                                                    data-bs-offset="0,3"
-                                                            >
-                                                                <i data-acorn-icon="download"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end">
-                                                                <button class="dropdown-item export-copy" type="button">Copy</button>
-                                                                <button class="dropdown-item export-excel" type="button">Excel</button>
-                                                                <button class="dropdown-item export-cvs" type="button">Cvs</button>
-                                                            </div>
-                                                        </div>  
+                     
 
-                                                        <button
-                                                                class="btn btn-outline-primary dropdown-toggle mb-1"
-                                                                type="button"
-                                                                data-bs-toggle="dropdown"
-                                                                data-bs-auto-close="outside"
-                                                                aria-haspopup="true"
-                                                                aria-expanded="false"
-                                                        >
-                                                            Satker
-                                                        </button>
-                                                        <div class="dropdown-menu sw-70 dropdown-menu-end">
-                                                            <div class="px-4 py-3">
-                                                                <div class=" text-muted mb-3">
-                                                                    Silahkan centang salah satu kotak untuk menyaring satker anda.
-                                                                </div>
-                                                                @php 
-                                                                $i=0; 
-                                                                $jumlahbastdiuploadsatker_pusat = 0;
-                                                                $jumlahbasttotalsatker_pusat = 0;
-                                                                foreach ( $rightjoinquery as $pusatdatadropdownbast)
-                                                                    {
-                                                                        if($pusatdatadropdownbast->kodeeselondua =="0000"){
-                                                                            $jumlahbastdiuploadsatker_pusat = $pusatdatadropdownbast->jumlah_bast_upload;
-                                                                            $jumlahbasttotalsatker_pusat = $pusatdatadropdownbast->jumlah_bast_total;
-                                                                        } 
-                                                                    }
-                                                                        
-                                                                $className_pusat = $jumlahbastdiuploadsatker_pusat == $jumlahbasttotalsatker_pusat ? 'form-check-label text-success' : 'form-check-label text-danger';
-                                                                
-                                                                @endphp
-                                                                        <div class="form-check mb-2">
-                                                                            <input type="checkbox" class="form-check-input filter" id="categoryPagination{{$i}}" 
-                                                                            data-filter="0000" />
-                                                                            <label class="{{$className_pusat}}" for="categoryPagination{{$i}}">Pusat  
-                                                                            <span class="{{$className_pusat}}">
-                                                                            ({{$jumlahbastdiuploadsatker_pusat}}/{{$jumlahbasttotalsatker_pusat}})
-                                                                            </span>
-                                                                            </label>
-                                                                        </div> 
 
-                                                                        <div class=" text-muted mb-3">
-                                                                            Provinsi:
+                        <div class="col-12 mb-7 h-50">
+                             <!-- Sort and Filter Start -->
+                            <section class="scroll-section" id="sortAndFilterTitle"> 
+                                        <h2 class="small-title">Rincian BAST Per Provinsi</h2>
+                                        <div class="row g-2" id="sortAndFilter">
+                                            <div class="col-12">
+                                                <div class="row gx-2">
+                                                    <div class="col-12 col-sm mb-1 mb-sm-0">
+                                                        <div class="search-input-container shadow rounded-md bg-foreground mb-2">
+                                                            <input class="form-control search" type="text" autocomplete="off" placeholder="Search" />
+                                                            <span class="search-magnifier-icon">
+                                                                <i data-acorn-icon="search"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-auto d-flex justify-content-end">
+                                                        <div class="btn-group">
+                                                            <div class="dropdown">
+                                                                    <button class="btn btn-icon btn-icon-only btn-outline-muted btn-sm datatable-print" type="button" data-datatable="#datatableHover_BAST">
+                                                                        <i data-acorn-icon="print"></i>
+                                                                    </button>
+
+                                                                    <div class="d-inline-block datatable-export" data-datatable="#datatableHover_BAST">
+                                                                        <button
+                                                                                class="btn btn-icon btn-icon-only btn-outline-muted btn-sm dropdown"
+                                                                                data-bs-toggle="dropdown"
+                                                                                type="button"
+                                                                                data-bs-offset="0,3"
+                                                                        >
+                                                                            <i data-acorn-icon="download"></i>
+                                                                        </button>
+                                                                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end">
+                                                                            <button class="dropdown-item export-copy" type="button">Copy</button>
+                                                                            <button class="dropdown-item export-excel" type="button">Excel</button>
+                                                                            <button class="dropdown-item export-cvs" type="button">Cvs</button>
                                                                         </div>
+                                                                    </div>  
+
+                                                                    <button
+                                                                            class="btn btn-outline-primary dropdown-toggle mb-1"
+                                                                            type="button"
+                                                                            data-bs-toggle="dropdown"
+                                                                            data-bs-auto-close="outside"
+                                                                            aria-haspopup="true"
+                                                                            aria-expanded="false"
+                                                                    >
+                                                                        Satker
+                                                                    </button>
+                                                                    <div class="dropdown-menu sw-70 dropdown-menu-end">
+                                                                        <div class="px-4 py-3">
+                                                                            <div class=" text-muted mb-3">
+                                                                                Silahkan centang salah satu kotak untuk menyaring satker anda.
+                                                                            </div>
+                                                                            @php 
+                                                                            $i=0; 
+                                                                            $jumlahbastdiuploadsatker_pusat = 0;
+                                                                            $jumlahbasttotalsatker_pusat = 0;
+                                                                            foreach ( $rightjoinquery as $pusatdatadropdownbast)
+                                                                                {
+                                                                                    if($pusatdatadropdownbast->kodeeselondua =="0000"){
+                                                                                        $jumlahbastdiuploadsatker_pusat = $pusatdatadropdownbast->jumlah_bast_upload;
+                                                                                        $jumlahbasttotalsatker_pusat = $pusatdatadropdownbast->jumlah_bast_total;
+                                                                                    } 
+                                                                                }
+                                                                                    
+                                                                            $className_pusat = $jumlahbastdiuploadsatker_pusat == $jumlahbasttotalsatker_pusat ? 'form-check-label text-success' : 'form-check-label text-danger';
+                                                                            
+                                                                            @endphp
+                                                                                    <div class="form-check mb-2">
+                                                                                        <input type="checkbox" class="form-check-input filter" id="categoryPagination{{$i}}" 
+                                                                                        data-filter="0000" />
+                                                                                        <label class="{{$className_pusat}}" for="categoryPagination{{$i}}">Pusat  
+                                                                                        <span class="{{$className_pusat}}">
+                                                                                        ({{$jumlahbastdiuploadsatker_pusat}}/{{$jumlahbasttotalsatker_pusat}})
+                                                                                        </span>
+                                                                                        </label>
+                                                                                    </div> 
+
+                                                                                    <div class=" text-muted mb-3">
+                                                                                        Provinsi:
+                                                                                    </div>
+                                                                                    
+                                                                                    <div class="row"> 
+                                                                                    @foreach($Provinsi as $data)  
+                                                                                            @if(strlen($data->kodesatker)==4)    
+
+                                                                                                @if(substr($data->kodesatker,-2)=="00")  
+                                                                                                    @php  
+                                                                                                    $jumlahbastdiuploadsatker=0;
+                                                                                                    $jumlahbasttotalsatker=0;  
+                                                                                                    foreach ( $rightjoinquery as $datadropdownbast)
+                                                                                                    {
+                                                                                                        if($datadropdownbast->kodeeselondua == $data->kodesatker){
+                                                                                                            $jumlahbastdiuploadsatker = $datadropdownbast->jumlah_bast_upload;
+                                                                                                            $jumlahbasttotalsatker = $datadropdownbast->jumlah_bast_total;
+                                                                                                        }
+                                                                                                    }
+
+                                                                                                    $className = $jumlahbastdiuploadsatker == $jumlahbasttotalsatker ? 'text-success' : 'text-danger';
+                                                                                                    $i++; 
+                                                                                                    $kodeprovinsi = $data->kodesatker; 
+                                                                                                    $kodeprovinsi_trim = substr($data->kodesatker,0,2); 
+                                                                                                    $kodeprovinsi_trim = $kodeprovinsi_trim."00";  
+
+                                                                                                    $namasatker = substr($data->namasatker,28);
+                                                                                                    $namasatker = str_replace("KEPULAUAN","KEP.",substr($data->namasatker,28));
+                                                                                                    @endphp
+                                                                                                    @if($i==1)
+                                                                                                        <div class="col">
+                                                                                                    @endif
+                                                                                                    @if($i==20)
+                                                                                                        <div class="col">
+                                                                                                    @endif
+                                                                                                    <div class="form-check mb-2">
+                                                                                                        <input type="checkbox" class="form-check-input filter" id="categoryPagination{{$i}}" 
+                                                                                                        data-filter="{{$kodeprovinsi_trim}}" />
+                                                                                                        <label  
+                                                                                                        class="form-check-label" 
+                                                                                                        for="categoryPagination{{$i}}">{{$namasatker}} 
+                                                                                                        <span class="{{$className}}">
+                                                                                                        ({{$jumlahbastdiuploadsatker}}/{{$jumlahbasttotalsatker}})
+                                                                                                        </span>
+                                                                                                        </label>
+                                                                                                    </div> 
+                                                                                                    @if($i==19)
+                                                                                                        </div>
+                                                                                                    @endif
+                                                                                                    @if($i==38)
+                                                                                                        </div>
+                                                                                                    @endif
+                                                                                                @endif
+                                                                                            @endif
+                                                                                    
+                                                                                    @endforeach   
+                                                                            </div>
                                                                         
-                                                                        <div class="row"> 
-                                                                        @foreach($Provinsi as $data)  
-                                                                                @if(strlen($data->kodesatker)==4)    
-
-                                                                                    @if(substr($data->kodesatker,-2)=="00")  
-                                                                                        @php  
-                                                                                        $jumlahbastdiuploadsatker=0;
-                                                                                        $jumlahbasttotalsatker=0;  
-                                                                                        foreach ( $rightjoinquery as $datadropdownbast)
-                                                                                        {
-                                                                                            if($datadropdownbast->kodeeselondua == $data->kodesatker){
-                                                                                                $jumlahbastdiuploadsatker = $datadropdownbast->jumlah_bast_upload;
-                                                                                                $jumlahbasttotalsatker = $datadropdownbast->jumlah_bast_total;
-                                                                                            }
-                                                                                        }
-
-                                                                                        $className = $jumlahbastdiuploadsatker == $jumlahbasttotalsatker ? 'text-success' : 'text-danger';
-                                                                                        $i++; 
-                                                                                        $kodeprovinsi = $data->kodesatker; 
-                                                                                        $kodeprovinsi_trim = substr($data->kodesatker,0,2); 
-                                                                                        $kodeprovinsi_trim = $kodeprovinsi_trim."00";  
-
-                                                                                        $namasatker = substr($data->namasatker,28);
-                                                                                        $namasatker = str_replace("KEPULAUAN","KEP.",substr($data->namasatker,28));
-                                                                                        @endphp
-                                                                                        @if($i==1)
-                                                                                            <div class="col">
-                                                                                        @endif
-                                                                                        @if($i==20)
-                                                                                            <div class="col">
-                                                                                        @endif
-                                                                                        <div class="form-check mb-2">
-                                                                                            <input type="checkbox" class="form-check-input filter" id="categoryPagination{{$i}}" 
-                                                                                            data-filter="{{$kodeprovinsi_trim}}" />
-                                                                                            <label  
-                                                                                            class="form-check-label" 
-                                                                                            for="categoryPagination{{$i}}">{{$namasatker}} 
-                                                                                            <span class="{{$className}}">
-                                                                                            ({{$jumlahbastdiuploadsatker}}/{{$jumlahbasttotalsatker}})
-                                                                                            </span>
-                                                                                            </label>
-                                                                                        </div> 
-                                                                                        @if($i==19)
-                                                                                            </div>
-                                                                                        @endif
-                                                                                        @if($i==38)
-                                                                                            </div>
-                                                                                        @endif
-                                                                                    @endif
-                                                                                @endif
-                                                                          
-                                                                        @endforeach   
-                                                                </div>
-                                                               
+                                                                        </div>
+                                                                    </div>
                                                             </div>
                                                         </div>
-                                                </div>
-                                            </div>
-                                            <!-- Sort for smaller screens -->
-                                            <div class="btn-group d-inline-block d-sm-none ms-1">
-                                                <div class="dropdown">
-                                                    <button
-                                                            class="btn btn-foreground-alternate shadow dropdown-toggle mb-1"
-                                                            type="button"
-                                                            data-bs-toggle="dropdown"
-                                                            data-bs-auto-close="outside"
-                                                            aria-haspopup="true"
-                                                            aria-expanded="false"
-                                                    >
-                                                        Sort
-                                                    </button>
-                                                    <div class="dropdown-menu sw-25 dropdown-menu-end custom-sort">
-                                                        <div class="dropdown-item cursor-pointer sort"  style="visibility:collapse;" data-sort="kodeprovinsi">Kode Provinsi</div> 
-                                                        <div class="dropdown-item cursor-pointer sort" data-sort="namapj">Nama PJ</div>
-                                                        <div class="dropdown-item cursor-pointer sort" data-sort="status">Status BAST</div> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                        
-                                        <div class="row">  
-                                            
-                                        </div>
-                                        
-                                        <div class="row g-0 h-100 align-content-center mb-2 custom-sort d-none d-sm-flex">
-                                            <div class=" ">
-                                                <div class="text-muted text-small cursor-pointer sort" style="visibility:collapse;"  data-sort="category">KODE PROVINSI</div>
-                                            </div> 
-                                            <div class="col-8 col-sm-8 ">
-                                                <div class="text-muted text-small cursor-pointer sort" data-sort="namapj">NAMA PJ</div>
-                                            </div>
-                                            <div class="col-4 col-sm-4 ">
-                                                <div class="text-muted text-small cursor-pointer sort" data-sort="status">STATUS BAST</div>
-                                            </div> 
-                                        </div> 
-                                            <div class="list scroll-out" >
-                                                <div class="scroll-by-count" data-count="8" data-childSelector=".scroll-child">
-                                                @foreach($Data as $datatable) 
-                                                <div class="h-auto sh-sm-5 mb-3 mb-sm-0 scroll-child">
-                                                    <div class="row g-0 h-100 align-content-center">  
-                                                            @if(strlen($datatable->kodesatkerid)==5)
-                                                                <div style="visibility:collapse;">
-                                                                    <a href="#" class="body-link category">0000</a>
-                                                                </div>  
-                                                            @else 
-                                                                @php   
-                                                                    $kodeprovinsi = $datatable->kodesatkerid; 
-                                                                    $kodeprovinsi_trim_bast = substr($datatable->kodesatkerid,0,2);  
-                                                                    $kodeprovinsi_trim_bast = $kodeprovinsi_trim_bast."00";  
-                                                                @endphp
-                                                                <div style="visibility:collapse;">
-                                                                    <a href="#" class="body-link category">{{$kodeprovinsi_trim_bast }}</a>
-                                                                </div> 
-                                                            @endif 
-                                                                <div class="col-8">
-                                                                    <!-- class="name" and class="position" provides the data -->
-                                                                    <div class="name">
-                                                                     {{$datatable->nama}}  
-                                                                    </div>
-                                                                    <div class="text-small text-muted position sale">
-                                                                        @php
-                                                                        $string = $datatable->getnamasatker->namasatker ?? '';
-                                                                        $string1 = str_replace("BADAN PUSAT STATISTIK", "BPS", $string); 
-                                                                        $string2 = str_replace("KEPULAUAN", "KEP.", $string1); 
-                                                                        $string3 = str_replace("DIREKTORAT ", "DIR. ", $string2); 
-                                                                        @endphp 
-                                                                        {{$string3}} 
-                                                                    </div>
+                                                        <!-- Sort for smaller screens -->
+                                                        <div class="btn-group d-inline-block d-sm-none ms-1">
+                                                            <div class="dropdown">
+                                                                <button
+                                                                        class="btn btn-foreground-alternate shadow dropdown-toggle mb-1"
+                                                                        type="button"
+                                                                        data-bs-toggle="dropdown"
+                                                                        data-bs-auto-close="outside"
+                                                                        aria-haspopup="true"
+                                                                        aria-expanded="false"
+                                                                >
+                                                                    Sort
+                                                                </button>
+                                                                <div class="dropdown-menu sw-25 dropdown-menu-end custom-sort">
+                                                                    <div class="dropdown-item cursor-pointer sort"  style="visibility:collapse;" data-sort="kodeprovinsi">Kode Provinsi</div> 
+                                                                    <div class="dropdown-item cursor-pointer sort" data-sort="namapj">Nama PJ</div>
+                                                                    <div class="dropdown-item cursor-pointer sort" data-sort="status">Status BAST</div> 
                                                                 </div>
-                                                                <div class="col-4">
-                                                                    @if(is_null($datatable->getAdobeTransaksiBAST))
-                                                                    –  
-                                                                    @else
-                                                                    <div>
-                                                                        <a href="{{$datatable->getAdobeTransaksiBAST->dokumen->path}}" > Unduh </a> 
-                                                                    </div>
-                                                                        @php
-                                                                        $timestamp_from_array = $datatable->getAdobeTransaksiBAST->dokumen->created_at;
-                                                                        $tanggal_upload_bast  = date('Y-m-d h:i:s' , strtotime( $timestamp_from_array ) + 7 * 3600 );
-                                                                    @endphp 
-                                                                    <div class="text-muted text-small"> {{$tanggal_upload_bast}} </div> 
-                                                                @endif   
-                                                                </div> 
-
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                @endforeach 
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="card">
+                                                    <div class="card-body"> 
+                                                    
+                                                    <div class="row g-0 h-100 align-content-center mb-2 custom-sort d-none d-sm-flex">
+                                                        <div class=" ">
+                                                            <div class="text-muted text-small cursor-pointer sort" style="visibility:collapse;"  data-sort="category">KODE PROVINSI</div>
+                                                        </div> 
+                                                        <div class="col-8 col-sm-8 ">
+                                                            <div class="text-muted text-small cursor-pointer sort" data-sort="namapj">NAMA PJ</div>
+                                                        </div>
+                                                        <div class="col-4 col-sm-4 ">
+                                                            <div class="text-muted text-small cursor-pointer sort" data-sort="status">STATUS BAST</div>
+                                                        </div> 
+                                                    </div> 
+                                                        <div class="list scroll-out" >
+                                                            <div class="scroll-by-count" data-count="10" data-childSelector=".scroll-child">
+                                                            @foreach($Data as $datatable) 
+                                                            <div class=" sh-sm-5 mb-3 mb-sm-0 scroll-child">
+                                                                <div class="row g-0 align-content-center">  
+                                                                        @if(strlen($datatable->kodesatkerid)==5)
+                                                                            <div style="visibility:collapse;">
+                                                                                <a href="#" class="body-link category">0000</a>
+                                                                            </div>  
+                                                                        @else 
+                                                                            @php   
+                                                                                $kodeprovinsi = $datatable->kodesatkerid; 
+                                                                                $kodeprovinsi_trim_bast = substr($datatable->kodesatkerid,0,2);  
+                                                                                $kodeprovinsi_trim_bast = $kodeprovinsi_trim_bast."00";  
+                                                                            @endphp
+                                                                            <div style="visibility:collapse;">
+                                                                                <a href="#" class="body-link category">{{$kodeprovinsi_trim_bast }}</a>
+                                                                            </div> 
+                                                                        @endif 
+                                                                            <div class="col-8">
+                                                                                <!-- class="name" and class="position" provides the data -->
+                                                                                <div class="name">
+                                                                                {{$datatable->nama}}  
+                                                                                </div>
+                                                                                <div class="text-small text-muted position sale">
+                                                                                    @php
+                                                                                    $string = $datatable->getnamasatker->namasatker ?? '';
+                                                                                    $string1 = str_replace("BADAN PUSAT STATISTIK", "BPS", $string); 
+                                                                                    $string2 = str_replace("KEPULAUAN", "KEP.", $string1); 
+                                                                                    $string3 = str_replace("DIREKTORAT ", "DIR. ", $string2); 
+                                                                                    @endphp 
+                                                                                    {{$string3}} 
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                @if(is_null($datatable->getAdobeTransaksiBAST))
+                                                                                –  
+                                                                                @else
+                                                                                <div>
+                                                                                    <a href="{{$datatable->getAdobeTransaksiBAST->dokumen->path}}" > Unduh </a> 
+                                                                                </div>
+                                                                                    @php
+                                                                                    $timestamp_from_array = $datatable->getAdobeTransaksiBAST->dokumen->created_at;
+                                                                                    $tanggal_upload_bast  = date('Y-m-d h:i:s' , strtotime( $timestamp_from_array ) + 7 * 3600 );
+                                                                                @endphp 
+                                                                                <div class="text-muted text-small"> {{$tanggal_upload_bast}} </div> 
+                                                                            @endif   
+                                                                            </div> 
+
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach 
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                            </section>
+                            <div class="d-none">
+                            @include('adobebps.hidden_RincianBAST'); 
                             </div>
-                        </section>
-                    </div>
-                    <!-- Sort and Filter End -->  
-                    <div class="d-none">
-                        @include('adobebps.hidden_RincianBAST'); 
-                    </div>
+                        </div>   
+                        <!-- Sort and Filter End -->    
+
+                        
+                    </div>  
                 </div>  
-                <!-- Sort and Filter End -->  
- 
             </div>    
         </section> 
 
-       
  
 @endsection
+
+
+

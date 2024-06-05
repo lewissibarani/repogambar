@@ -55,17 +55,13 @@
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="audition" id="audition" value="1">
                                                         <label class="form-check-label" for="audition">Audition</label>
-                                                    </div> 
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="behance" id="behance" value="1">
-                                                        <label class="form-check-label" for="behance">Behance</label>
-                                                    </div>  
-                                                </div>
-                                                <div class="col-sm-4">
+                                                    </div>   
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="dimension" id="dimension" value="1">
                                                         <label class="form-check-label" for="dimension">Dimension</label>
                                                     </div> 
+                                                </div>
+                                                <div class="col-sm-4">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="dreamweaver" id="dreamweaver" value="1">
                                                         <label class="form-check-label" for="dreamweaver">Dreamweaver</label>
@@ -85,13 +81,13 @@
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="incopy" id="incopy" value="1">
                                                         <label class="form-check-label" for="incopy">InCopy</label>
-                                                    </div>  
-                                                </div>
-                                                <div class="col-sm-4">
+                                                    </div>   
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="indesign" id="indesign" value="1">
                                                         <label class="form-check-label" for="indesign">InDesign</label>
                                                     </div> 
+                                                </div>
+                                                <div class="col-sm-4">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="lightroom" id="lightroom" value="1">
                                                         <label class="form-check-label" for="lightroom">Lightroom</label>
@@ -101,8 +97,8 @@
                                                         <label class="form-check-label" for="photoshop">Photoshop</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="prmierepro" id="prmierepro" value="1">
-                                                        <label class="form-check-label" for="prmierepro">Premiere Pro</label>
+                                                        <input class="form-check-input" type="checkbox" name="premierepro" id="premierepro" value="1">
+                                                        <label class="form-check-label" for="premierepro">Premiere Pro</label>
                                                     </div> 
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="premiererush" id="premiererush" value="1">

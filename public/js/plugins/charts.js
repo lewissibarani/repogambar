@@ -569,8 +569,10 @@ class Charts {
   // Standard horizontal bar chart
   _initHorizontalBarChart() {
     if (document.getElementById('horizontalBarChart')) {
-      const label = document.querySelector('#horizontalBarChart').getAttribute('data-aplikasilabel');
-      const data = document.querySelector('#horizontalBarChart').getAttribute('data-aplikasidata');
+      const label = ['January', 'February', 'March']; 
+      const data  = [364, 504, 605];
+      console.log(data+label);
+
       const barChart = document.getElementById('horizontalBarChart').getContext('2d');
       this._horizontalBarChart = new Chart(barChart, {
         type: 'horizontalBar',

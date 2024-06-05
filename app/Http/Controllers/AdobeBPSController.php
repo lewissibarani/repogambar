@@ -250,31 +250,26 @@ class AdobeBPSController extends Controller
             }
             
         }
-  
-        //data chart
+   
         $bulan_array = [];
         $Bulan = Bulan::all();
         foreach($Bulan as $bulan){
             array_push($bulan_array,$bulan->namabulan);
         }
    
-        $dataradar = [
-            'labels' => ['Category A', 'Category B', 'Category C', 'Category D', 'Category E','Category A', 'Category B', 'Category C', 'Category D', 'Category E'],
-            'data' => [25, 30, 15, 10, 20,25, 30, 15, 10, 20],
-        ];
-
-         
-
-        $dataprovinsi = [
-            'labels' => $provinsi_array,
-            'data' => [65, 59, 80, 81, 56,65, 59, 80, 81, 56, 81, 56],
+        $data_chart_horizontal_bar = [
+            'datapenggunaan_label' => ['Acrobat', 'Aero', 'After Effect', 'Animate', 'Audition','Dimension',
+                                       'Dreamweaver','Express','Fresco','Illustrator',  'Incopy','Indesign',
+                                       'Lightroom','Photoshop','Premierepro','Premiererush','XD'
+                                      ], 
+            'datapenggunaan_data' => [65, 59, 80, 81, 56,65, 59, 80, 81, 56,65, 59, 80, 81, 56,65, 59]
         ];
 
          return view('adobebps.indexstatistik',
-                compact('Data','CountLisensi','dataprovinsi',
-                        'dataradar','Provinsi',
+                compact('Data','CountLisensi','Provinsi',
                         'Bulan','Periode_id','jumlahtotalbast','jumlahuploadbast','jumlahlisensi', 
-                        'rightjoinquery'));   
+                        'rightjoinquery',
+                        'data_chart_horizontal_bar'));   
     }
 
     /**

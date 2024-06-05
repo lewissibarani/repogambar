@@ -68,21 +68,15 @@
                                                         {{ ($dataslaporan->audition==1)? "checked" : "" }}   
                                                         name="audition" id="audition" value="1">
                                                         <label class="form-check-label" for="audition">Audition</label>
-                                                    </div> 
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" 
-                                                        {{ ($dataslaporan->behance==1)? "checked" : "" }}
-                                                        name="behance" id="behance" value="1">
-                                                        <label class="form-check-label" for="behance">Behance</label>
-                                                    </div>  
-                                                </div>
-                                                <div class="col-sm-4">
+                                                    </div>   
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" 
                                                         {{ ($dataslaporan->dimension==1)? "checked" : "" }} 
                                                         name="dimension" id="dimension" value="1">
                                                         <label class="form-check-label" for="dimension">Dimension</label>
                                                     </div> 
+                                                </div>
+                                                <div class="col-sm-4">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" 
                                                         {{ ($dataslaporan->dreamweaver==1)? "checked" : "" }}
@@ -113,14 +107,15 @@
                                                         name="incopy" id="incopy" value="1">
                                                         <label class="form-check-label" for="incopy">InCopy</label>
                                                     </div>  
-                                                </div>
-                                                <div class="col-sm-4">
+                                                    
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" 
                                                         {{ ($dataslaporan->indesign==1)? "checked" : "" }}
                                                         name="indesign" id="indesign" value="1">
                                                         <label class="form-check-label" for="indesign">InDesign</label>
                                                     </div> 
+                                                </div>
+                                                <div class="col-sm-4"> 
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" 
                                                         {{ ($dataslaporan->lightroom==1)? "checked" : "" }} 
@@ -135,9 +130,9 @@
                                                     </div> 
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" 
-                                                        {{ ($dataslaporan->prmierepro==1)? "checked" : "" }}
-                                                        name="prmierepro" id="prmierepro" value="1">
-                                                        <label class="form-check-label" for="prmierepro">Premiere Pro</label>
+                                                        {{ ($dataslaporan->premierepro==1)? "checked" : "" }}
+                                                        name="premierepro" id="premierepro" value="1">
+                                                        <label class="form-check-label" for="premierepro">Premiere Pro</label>
                                                     </div> 
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" 
