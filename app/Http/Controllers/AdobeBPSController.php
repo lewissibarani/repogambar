@@ -264,27 +264,76 @@ class AdobeBPSController extends Controller
         ->groupBy('kodesatkerid') 
         ->get();  
         
-        $datapenggunaan_data_selindo = DB::table('adobe_transaksi_kuesioner')
-        ->selectRaw('   count(acrobat) as Acrobat,
-                        count(aero) as Aero,
-                        count(aftereffect) as Aftereffect,
-                        count(animate) as Animate,
-                        count(audition) as Audition,
-                        count(dimension) as Dimension,
-                        count(dreamweaver) as Dreamweaver,
-                        count(express) as Express,
-                        count(fresco) as Fresco,
-                        count(illustrator) as Illustrator,
-                        count(incopy) as Incopy,
-                        count(indesign) as Indesign,
-                        count(lightroom) as Lightroom,
-                        count(photoshop) as Photoshop,
-                        count(premierepro) as Premierepro,
-                        count(premiererush) as Premiererush,
-                        count(xd) as Xd
+        $RAWQUERY_datapenggunaan_data_selindo = DB::table('adobe_transaksi_kuesioner')
+        ->selectRaw('   MAX(userid) as userid,
+                        MAX(kodesatkerid) as kodesatkerid,
+                        sum(acrobat) as Acrobat,
+                        sum(aero) as Aero,
+                        sum(aftereffect) as Aftereffect,
+                        sum(animate) as Animate,
+                        sum(audition) as Audition,
+                        sum(dimension) as Dimension,
+                        sum(dreamweaver) as Dreamweaver,
+                        sum(express) as Express,
+                        sum(fresco) as Fresco,
+                        sum(illustrator) as Illustrator,
+                        sum(incopy) as Incopy,
+                        sum(indesign) as Indesign,
+                        sum(lightroom) as Lightroom,
+                        sum(photoshop) as Photoshop,
+                        sum(premierepro) as Premierepro,
+                        sum(premiererush) as Premiererush,
+                        sum(xd) as Xd
                     ') 
             ->where('periodeid', '=', $Periode_id)  
-            ->get();   
+            ->groupBy('userid') ;
+
+            //buat data selindo
+            $datapenggunaan_data_selindo = DB::table($RAWQUERY_datapenggunaan_data_selindo)
+            ->selectRaw('   MAX(userid) as userid, 
+                            MAX(kodesatkerid) as kodesatkerid, 
+                            count(acrobat) as Acrobat,
+                            count(aero) as Aero,
+                            count(aftereffect) as Aftereffect,
+                            count(animate) as Animate,
+                            count(audition) as Audition,
+                            count(dimension) as Dimension,
+                            count(dreamweaver) as Dreamweaver,
+                            count(express) as Express,
+                            count(fresco) as Fresco,
+                            count(illustrator) as Illustrator,
+                            count(incopy) as Incopy,
+                            count(indesign) as Indesign,
+                            count(lightroom) as Lightroom,
+                            count(photoshop) as Photoshop,
+                            count(premierepro) as Premierepro,
+                            count(premiererush) as Premiererush,
+                            count(xd) as Xd
+                        ')->get();
+
+            //buat diolah lagi untuk dapat per satker
+            $datapenggunaan_data_selindo_per_satker = DB::table($RAWQUERY_datapenggunaan_data_selindo)
+            ->selectRaw('   MAX(userid) as userid, 
+                            MAX(kodesatkerid) as kodesatkerid, 
+                            count(acrobat) as Acrobat,
+                            count(aero) as Aero,
+                            count(aftereffect) as Aftereffect,
+                            count(animate) as Animate,
+                            count(audition) as Audition,
+                            count(dimension) as Dimension,
+                            count(dreamweaver) as Dreamweaver,
+                            count(express) as Express,
+                            count(fresco) as Fresco,
+                            count(illustrator) as Illustrator,
+                            count(incopy) as Incopy,
+                            count(indesign) as Indesign,
+                            count(lightroom) as Lightroom,
+                            count(photoshop) as Photoshop,
+                            count(premierepro) as Premierepro,
+                            count(premiererush) as Premiererush,
+                            count(xd) as Xd
+                        ')->groupBy('kodesatkerid')->get();
+
         $datapenggunaan_data=[$datapenggunaan_data_selindo[0]->Acrobat,
                               $datapenggunaan_data_selindo[0]->Aero,
                               $datapenggunaan_data_selindo[0]->Aftereffect,
@@ -303,10 +352,8 @@ class AdobeBPSController extends Controller
                               $datapenggunaan_data_selindo[0]->Premiererush, 
                               $datapenggunaan_data_selindo[0]->Xd, 
                             ];
-        $datapenggunaan_data_selindo = AdobeTransaksiKuesioner::all(); 
-        $datapenggunaan_data_selindo_json = AdobeTransaksiKuesioner::all()->toJson();   
-       
-
+                            
+        $datapenggunaan_data_selindo_json = $datapenggunaan_data_selindo_per_satker->toJson();    
         $data_chart_horizontal_bar = [
             'datapenggunaan_label' => ['Acrobat', 'Aero', 'After Effect', 'Animate', 'Audition','Dimension',
                                        'Dreamweaver','Express','Fresco','Illustrator',  'Incopy','Indesign',
@@ -321,7 +368,8 @@ class AdobeBPSController extends Controller
                         'Bulan','Periode_id','jumlahtotalbast','jumlahuploadbast','jumlahlisensi', 
                         'rightjoinquery',
                         'data_chart_horizontal_bar',
-                        'unikSatker','datapenggunaan_data_selindo_json'
+                        'unikSatker',
+                        'datapenggunaan_data_selindo_json'
                     ));   
     }
 

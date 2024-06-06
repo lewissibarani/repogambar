@@ -274,7 +274,22 @@
                                     <div class="card-body">
                                         <div class="col-12 mb-2"> 
                                              <!-- Basic Single Start -->  
-                                                
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <div class="w-100"> 
+                                                            <select id="select2Basic"> 
+                                                            <option value="BPS Seluruh Indonesia">BPS Seluruh Indonesia</option> 
+                                                                @foreach ($unikSatker as $uniksatker)
+                                                                    <option value="{{$uniksatker->Kodesatker}}">{{$uniksatker->Namasatker}}</option> 
+                                                                @endforeach 
+                                                            </select>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-4 d-flex align-items-end">
+                                                        <button onclick="val()" id="submit" type="submit" class="btn btn-primary " >Lihat Grafik</button>
+                                                    </div>
+
+                                                </div>
                                                     
                                             <!-- Basic Single End -->
                                         </div>
@@ -558,6 +573,12 @@
             },
             options: {
                 responsive: true,
+                // plugins: {
+                //     title: {
+                //         display: true,
+                //         text: ''
+                //     }
+                // },
                 maintainAspectRatio:false, 
                 indexAxis: 'y', 
                 scales: {
@@ -577,11 +598,68 @@
     var barChart = document.getElementById('barChart_datapenggunaan').getContext('2d');
     var myChart = new Chart(barChart, config);
 
-    function val() {
-        d = document.getElementById("select2Basic").value;
-        const datapenggunaan_data=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 
-                            ];
-        myChart.config.data.datasets.data = datapenggunaan_data;
+    function val() {  
+        
+        const KODESATKER    = document.getElementById("select2Basic").value;
+        const DATASET       = JSON.parse(@json($datapenggunaan_data_selindo_json)); 
+        let Acrobat = 0; let Aero = 0; let Aftereffect = 0; let Animate = 0;
+        let Audition = 0; let Dimension = 0; let Dreamweaver = 0;
+        let Express = 0; let Fresco = 0;  let Illustrator = 0;
+        let Incopy = 0; let Indesign = 0;  let Lightroom = 0;
+        let Photoshop = 0; let Premierepro = 0; let Premiererush = 0;  let Xd = 0; 
+        if(KODESATKER=='BPS Seluruh Indonesia'){
+
+            myChart.data.datasets[0] =  {
+                    label: 'Jumlah Pengguna',
+                    data: @json($data_chart_horizontal_bar['datapenggunaan_data']),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1 
+                } 
+
+        }else{
+
+            // GET DATA PER SATKER 
+        for (const key in DATASET) {
+            if(KODESATKER==DATASET[key].kodesatkerid){
+                Acrobat = DATASET[key].Acrobat ; 
+                Aero = DATASET[key].Aero ;
+                Aftereffect = DATASET[key].Aftereffect; 
+                Animate = DATASET[key].Animate;
+                Audition = DATASET[key].Audition; 
+                Dimension = DATASET[key].Dimension;
+                Dreamweaver = DATASET[key].Dreamweaver; 
+                Express = DATASET[key].Express;
+                Fresco = DATASET[key].Fresco;
+                Illustrator = DATASET[key].Illustrator;
+                Incopy = DATASET[key].Incopy;
+                Indesign = DATASET[key].Indesign;
+                Lightroom = DATASET[key].Lightroom; 
+                Photoshop = DATASET[key].Photoshop;
+                Premierepro = DATASET[key].Premierepro ;
+                Premiererush = DATASET[key].Premiererush;
+                Xd = DATASET[key].Xd;
+            } 
+        }
+        
+        
+        const datapenggunaan_data=[Acrobat,Aero,Aftereffect,Animate,Audition,Dimension,Dreamweaver,
+              Express,Fresco,Illustrator,Incopy,Indesign,Lightroom,Photoshop,
+              Premierepro,Premiererush,Xd];
+ 
+
+        myChart.data.datasets[0] =  {
+                    label: 'Jumlah Pengguna',
+                    data: datapenggunaan_data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                    
+                } 
+        }
+        
+        // myChart.config.data.datasets.data = datapenggunaan_data; 
+        // myChart.options.plugins.title.text = KODESATKER; 
         myChart.update();
     }
 </script> 
