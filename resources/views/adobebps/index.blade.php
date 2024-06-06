@@ -71,27 +71,39 @@
     <div class="container">
         <!-- Title and Top Buttons Start -->
         <div class="page-title-container">
-            <div class="row">
+            <div class="row"> 
+                 <!-- Search Start-->
+                 <section class="scroll-section mb-3" id="search"> 
+                        <div class="card w-100 sh-25 sh-sm-19">
+                            <img src="/img/banner/cta-wide-3.webp" class="card-img h-100" alt="card image" />
+                            <div class="card-img-overlay d-flex flex-column justify-content-between bg-transparent">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="cta-3 text-black">Jika satker anda terpilih sebagai sample pemeriksaan BPK,</div>
+                                        <div class="mb-3 cta-3 text-primary">Silahkan download tata cara pembuktian Adobe Lisensi pada link dibawah ini:</div>
+                                        <div class="row gx-2"> 
+                                            <div class="col-12 col-sm-auto">
+                                                <a href="https://bucket.bps.go.id/0320-dds-pikart/storage/file/2024_06_06_08_19_05Pembuktian%20Sederhana%20Adobe%20License.pdf" 
+                                                class="btn btn-icon btn-icon-start btn-dark stretched-link">
+                                                    <i data-acorn-icon="download"></i>
+                                                    <span>Download</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Search End--> 
+
+                    
                 <!-- Title Start -->
                 <div class="col-12 col-md-7">
                     <h4 class="mb-0 pb-0 display-6" id="title">{{ $title }}</h4>
-                    @include('_layout.breadcrumb',['breadcrumbs'=>$breadcrumbs])
+                    <!-- @include('_layout.breadcrumb',['breadcrumbs'=>$breadcrumbs]) -->
                 </div>
                 <!-- Title End -->
-
-                <!-- Top Buttons Start -->
-                <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
-                    <!-- Upload Dokumen Button Start -->
-                    <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
-                        data-bs-toggle="modal"        
-                        data-bs-target="#tambahlaporanadobe">
-                        <i data-acorn-icon="upload"></i> 
-                            <span>Upload BAST</span>
-                    </button>
-                    @include('adobebps.formBAST')   
-                    <!-- Upload Dokumen Button End --> 
-                </div>
-                <!-- Top Buttons End -->
             </div>
         </div>
         <!-- Title and Top Buttons End -->
@@ -104,16 +116,30 @@
                 <div class="card">
                     <div class="card-body mb-n5"> 
                         <div class="mb-3">
-                             <!-- Upload Dokumen Button Start -->
-                             <button type="button" class="btn col-12 btn-info btn-icon btn-icon-start add-datatable" 
-                                    data-bs-toggle="modal"        
-                                    data-bs-target="#formpenggantianpj">
-                                    <i data-acorn-icon="edit"></i> 
-                                        <span>Update Penanggung Jawab</span>
-                                </button>   
-                                @include('adobebps.formpenggantianpj')   
+                             <!-- Upload Dokumen Button Start --> 
+                             <div class="row">
+                                <div class="col-6">
+                                    <button type="button" class="btn col-12 btn-primary btn-icon btn-icon-start add-datatable" 
+                                        data-bs-toggle="modal"        
+                                        data-bs-target="#tambahlaporanadobe">
+                                        <i data-acorn-icon="upload"></i> 
+                                            <span>Upload BAST</span>
+                                    </button>
+                                    @include('adobebps.formBAST')   
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" class="btn col-12 btn-info btn-icon btn-icon-start add-datatable" 
+                                        data-bs-toggle="modal"        
+                                        data-bs-target="#formpenggantianpj">
+                                        <i data-acorn-icon="edit"></i> 
+                                            <span>Update PJ</span>
+                                    </button>   
+                                    @include('adobebps.formpenggantianpj')    
+                                </div>
+                             </div>
+                           
 
-                                <!-- Upload Dokumen Button End -->  
+                            
                         </div>
 
                         <div class="mb-5">
