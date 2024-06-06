@@ -156,7 +156,7 @@
                                                     <div class="row mb-3">
                                                         <label for="colFormLabel" class="col-sm-5 col-form-label">Surat/Dokumen : </label>
                                                         <div class="col-sm-3">
-                                                            <input type="text" name="surat" class="form-control" id="colFormLabel" placeholder="0">
+                                                            <input type="text" name="suratdokumen" class="form-control" id="colFormLabel" placeholder="0">
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">

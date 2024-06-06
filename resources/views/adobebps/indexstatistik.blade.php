@@ -269,12 +269,12 @@
                         <!-- Horizontal Bar Chart Start -->
                         <div class="col-12 mb-7 h-50" >
                             <section class="scroll-section h-100" id="horizontalBarChartTitle">
-                                <h2 class="small-title">Grafik Penggunaan Software Adobe BPS Selindo</h2>
+                                <h2 class="small-title">Grafik Penggunaan Software Adobe Selindo</h2>
                                 <div class="card mb-5 h-100">
                                     <div class="card-body">
                                         <div class="col-12 mb-2"> 
                                              <!-- Basic Single Start -->  
-                                                 
+                                                
                                                     
                                             <!-- Basic Single End -->
                                         </div>

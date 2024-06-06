@@ -11,13 +11,15 @@ class AdobeTransaksiKuesioner extends Model
     protected $table = 'adobe_transaksi_kuesioner';
     protected $fillable = [
         'userid',
-        'bulanid',
+        'bulanid', 
         'periodeid',   
         'kodesatkerid', 
         'suratdokumen',
         'dashboard',
         'website',
         'video',
+        'flyer_vb',
+        'spanduk',
         'infografis',
         'brs',
         'publikasi',
