@@ -134,7 +134,14 @@
                                             <td class="text-alternate">{{$datas->jenisdokumen}}</td> 
                                             <td class="text-alternate">
                                                 <a class="" href="{{$datas->path}}">Unduh</a> | 
-                                                <a class="" href="{{route('adobebps.deletedokumen', ['dokumen_id'=>$datas->id])}}">Hapus</a>
+                                                <a class="" href="{{route('adobebps.deletedokumen', ['dokumen_id'=>$datas->id])}}">Hapus</a> |
+                                                <button id="myInput" 
+                                                data-link="{{$datas->path}}"
+                                                style=" background: none;
+                                                        border: none;
+                                                        outline: none;
+                                                        box-shadow: none;"
+                                                onclick="copytoclipboard()"><span class="text-primary"> Copy Link </span></button>
                                             </td> 
                                             <td class="text-alternate">{{$datas->getuser->name}}</td>
                                             <td class="text-alternate"> {{$datas->updated_at}} </td> 
@@ -151,4 +158,20 @@
 
         </div>
     </div> 
+<script>
+function copytoclipboard() {
+  // Get the text field
+  var copyText = document.getElementById("myInput").getAttribute('data-link');;
+
+  // Select the text field
+//   copyText.select();
+//   copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText);
+  
+  // Alert the copied text
+  alert("Copied the link: " + copyText);
+}
+</script>
 @endsection
