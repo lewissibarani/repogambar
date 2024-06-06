@@ -242,10 +242,16 @@
                                             </td>  
                                             @foreach($Bulan as $bulan) 
                                             <td class="text-alternate">  
-                                                @if(!is_null($datas->transaksikuesioner->where('bulanid',$bulan->id)->where('periodeid',$Periode_id)->first())) 
-                                                <div class="border border-success sw-2 sh-2 rounded-xl d-flex justify-content-center align-items-center">
-                                                v
-                                                </div> 
+                                                @if(!is_null($datas->transaksikuesioner->where('bulanid',$bulan->id)->where('periodeid',$Periode_id)->first()))  
+                                                    @if($datas->transaksikuesioner->where('bulanid',$bulan->id)->where('periodeid',$Periode_id)->first()->memakaiadobe==1)
+                                                    <div class="border border-success sw-2 sh-2 rounded-xl d-flex justify-content-center align-items-center">
+                                                    <span class="text-success">v</span>
+                                                    </div> 
+                                                    @else
+                                                    <div class="border border-danger sw-2 sh-2 rounded-xl d-flex justify-content-center align-items-center">
+                                                    <span class="text-danger">x</span>
+                                                    </div>
+                                                    @endif  
                                                 @else 
                                                 -
                                                 @endif 
