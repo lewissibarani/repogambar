@@ -13,6 +13,8 @@
 
 @section('css') 
     <link rel="stylesheet" href="/css/vendor/datatables.min.css"/> 
+    <link rel="stylesheet" href="/css/vendor/select2.min.css"/>
+    <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css"/>
 
 @endsection
 
@@ -20,6 +22,8 @@
     <script src="/js/vendor/list.js"></script> 
     <script src="/js/vendor/datatables.min.js"></script>
     <script src="/js/vendor/progressbar.min.js"></script>
+    
+    <script src="/js/vendor/select2.full.min.js"></script>  
 
     <script src="/js/vendor/moment-with-locales.min.js"></script> 
     <script src="/js/vendor/Chart.bundle.min.js"></script>
@@ -38,6 +42,9 @@
 
     <script src="/js/cs/charts.extend.js"></script>
     <script src="/js/plugins/charts.js"></script>
+
+    <script src="/js/forms/controls.select2.js"></script>
+
 
 
 @endsection
@@ -259,7 +266,27 @@
                 <div class="col-4 mb-3"> 
                     <div class="row h-100">
 
-                     
+                        <!-- Horizontal Bar Chart Start -->
+                        <div class="col-12 mb-7 h-50" >
+                            <section class="scroll-section h-100" id="horizontalBarChartTitle">
+                                <h2 class="small-title">Grafik Penggunaan Software Adobe BPS Selindo</h2>
+                                <div class="card mb-5 h-100">
+                                    <div class="card-body">
+                                        <div class="col-12 mb-2"> 
+                                             <!-- Basic Single Start -->  
+                                                 
+                                                    
+                                            <!-- Basic Single End -->
+                                        </div>
+                                        <div style="position: relative; height: 600px"> 
+                                            <canvas id="barChart_datapenggunaan" 
+                                            ></canvas> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <!-- Horizontal Bar Chart End -->
 
 
                         <div class="col-12 mb-7 h-50">
@@ -510,9 +537,54 @@
                     </div>  
                 </div>  
             </div>    
-        </section> 
+        </section>  
 
- 
+<script>   
+
+
+    const config = {
+            scaleSteps: 20, // number of ticks
+            type: 'bar',
+            data: {
+                labels: @json($data_chart_horizontal_bar['datapenggunaan_label']),
+                datasets: [{
+                    label: 'Jumlah Pengguna',
+                    data: @json($data_chart_horizontal_bar['datapenggunaan_data']),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                    
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio:false, 
+                indexAxis: 'y', 
+                scales: {
+                        x: {
+                            grid: {
+                            display: false
+                            }
+                        },
+                        y: {
+                            grid: {
+                            display: false
+                            }
+                        }
+                        }
+            }
+        };
+    var barChart = document.getElementById('barChart_datapenggunaan').getContext('2d');
+    var myChart = new Chart(barChart, config);
+
+    function val() {
+        d = document.getElementById("select2Basic").value;
+        const datapenggunaan_data=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 
+                            ];
+        myChart.config.data.datasets.data = datapenggunaan_data;
+        myChart.update();
+    }
+</script> 
 @endsection
 
 

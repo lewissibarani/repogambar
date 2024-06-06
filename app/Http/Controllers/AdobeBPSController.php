@@ -256,20 +256,73 @@ class AdobeBPSController extends Controller
         foreach($Bulan as $bulan){
             array_push($bulan_array,$bulan->namabulan);
         }
-   
+
+        //Setting Chart Bar supaya menampilkan data pemanfaatan selindo
+        $unikSatker  = DB::table('adobe_pj')
+        ->selectRaw('min( adobe_pj.kodesatkerid) as Kodesatker, max(namasatker) as Namasatker')
+        ->Join('namasatker', 'namasatker.kodesatker', '=', 'adobe_pj.kodesatkerid') 
+        ->groupBy('kodesatkerid') 
+        ->get();  
+        
+        $datapenggunaan_data_selindo = DB::table('adobe_transaksi_kuesioner')
+        ->selectRaw('   count(acrobat) as Acrobat,
+                        count(aero) as Aero,
+                        count(aftereffect) as Aftereffect,
+                        count(animate) as Animate,
+                        count(audition) as Audition,
+                        count(dimension) as Dimension,
+                        count(dreamweaver) as Dreamweaver,
+                        count(express) as Express,
+                        count(fresco) as Fresco,
+                        count(illustrator) as Illustrator,
+                        count(incopy) as Incopy,
+                        count(indesign) as Indesign,
+                        count(lightroom) as Lightroom,
+                        count(photoshop) as Photoshop,
+                        count(premierepro) as Premierepro,
+                        count(premiererush) as Premiererush,
+                        count(xd) as Xd
+                    ') 
+            ->where('periodeid', '=', $Periode_id)  
+            ->get();   
+        $datapenggunaan_data=[$datapenggunaan_data_selindo[0]->Acrobat,
+                              $datapenggunaan_data_selindo[0]->Aero,
+                              $datapenggunaan_data_selindo[0]->Aftereffect,
+                              $datapenggunaan_data_selindo[0]->Animate,
+                              $datapenggunaan_data_selindo[0]->Audition,
+                              $datapenggunaan_data_selindo[0]->Dimension,
+                              $datapenggunaan_data_selindo[0]->Dreamweaver,
+                              $datapenggunaan_data_selindo[0]->Express,
+                              $datapenggunaan_data_selindo[0]->Fresco,
+                              $datapenggunaan_data_selindo[0]->Illustrator,
+                              $datapenggunaan_data_selindo[0]->Incopy,
+                              $datapenggunaan_data_selindo[0]->Indesign, 
+                              $datapenggunaan_data_selindo[0]->Lightroom,
+                              $datapenggunaan_data_selindo[0]->Photoshop,
+                              $datapenggunaan_data_selindo[0]->Premierepro,
+                              $datapenggunaan_data_selindo[0]->Premiererush, 
+                              $datapenggunaan_data_selindo[0]->Xd, 
+                            ];
+        $datapenggunaan_data_selindo = AdobeTransaksiKuesioner::all(); 
+        $datapenggunaan_data_selindo_json = AdobeTransaksiKuesioner::all()->toJson();   
+       
+
         $data_chart_horizontal_bar = [
             'datapenggunaan_label' => ['Acrobat', 'Aero', 'After Effect', 'Animate', 'Audition','Dimension',
                                        'Dreamweaver','Express','Fresco','Illustrator',  'Incopy','Indesign',
-                                       'Lightroom','Photoshop','Premierepro','Premiererush','XD'
+                                       'Lightroom','Photoshop','Premiere Pro','Premiere Rush','XD'
                                       ], 
-            'datapenggunaan_data' => [65, 59, 80, 81, 56,65, 59, 80, 81, 56,65, 59, 80, 81, 56,65, 59]
+            'datapenggunaan_data' => $datapenggunaan_data
         ];
+        //Finish Setting Chart Bar supaya menampilkan data pemanfaatan selindo
 
          return view('adobebps.indexstatistik',
                 compact('Data','CountLisensi','Provinsi',
                         'Bulan','Periode_id','jumlahtotalbast','jumlahuploadbast','jumlahlisensi', 
                         'rightjoinquery',
-                        'data_chart_horizontal_bar'));   
+                        'data_chart_horizontal_bar',
+                        'unikSatker','datapenggunaan_data_selindo_json'
+                    ));   
     }
 
     /**

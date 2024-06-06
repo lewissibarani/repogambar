@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 
 class AuthenticatedSessionController extends Controller
@@ -24,9 +25,23 @@ class AuthenticatedSessionController extends Controller
     {
         return view('pages.authentication.login');
     }
-    public function loginbpk()
+
+    public function loginbpk(LoginRequest $request)
     {
-        return view('pages.authentication.register');
+
+        $credentials = $request->getCredentials();
+
+        if(!Auth::validate($credentials)):
+            return redirect()->to('loginpage')
+                ->withErrors(trans('auth.failed'));
+        endif;
+
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+
+        Auth::login($user);
+
+        return $this->authenticated($request, $user);
+
     }
 
     /**

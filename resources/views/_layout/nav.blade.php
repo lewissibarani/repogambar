@@ -14,8 +14,14 @@
     <div class="user-container d-flex">
 
         @auth
+        @php
+        $pp=Auth::user()->profilepicture;
+            if(Auth::user()->profilepicture==null || Auth::user()->profilepicture=="-"){
+                $pp = URL::to('/').'/img/illustration/user-profile-picture-'.rand(1,6).'.jpg'; 
+            }
+        @endphp
         <a href="#" class="d-flex user position-relative" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img class="profile" alt="profile" src="{{ Auth::user()->profilepicture}}" />
+            <img class="profile" alt="profile" src="{{ $pp }}" />
             <div class="name">{{ Auth::user()->name }}</div>
         </a>
         <div class="dropdown-menu dropdown-menu-end user-menu wide w-120"> 
@@ -26,7 +32,7 @@
 
                     <div class="row mg-bottom-lv2-i"> 
                         <div class="sw-10 me-1 mb-1 d-inline-block">
-                            <img src="{{ Auth::user()->profilepicture}}" class="img-fluid rounded-md" alt="thumb">
+                        <img src="{{$pp }}" class="img-fluid rounded-md" alt="thumb">
                         </div> 
 
                         <div class="col mg-none pd-none">
@@ -70,12 +76,12 @@
                         <hr class="full-width mg-bottom-lv2">
 
                         <li>
-                            <form id="logoutForm" action="{{route('logout')}}" method="post">
+                            <form id="logoutForm" action="{{route('logout')}}" method="post" novalidate>
                             @csrf
-                                <a href="" onclick="document.getElementById('logoutForm').submit();">
+                                <button type="submit" class="btn btn-primary">
                                     <i data-acorn-icon="logout" class="me-2" data-acorn-size="17"></i>
                                     <span class="align-middle">Logout</span>
-                                </a>
+                                </button>
                             </form>
                             <!-- <a href="route('logout')"
                                     onclick="event.preventDefault();

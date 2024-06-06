@@ -3,7 +3,7 @@
     <div class="logo position-relative">
         <a href="/" class="text-dark"> 
             <!-- Logo can be added directly --> 
-            {{-- <img src="/img/logo/logo-light.svg" alt="logo" /> --}}
+             <!-- <img src="/img/logo/logo-light.svg" alt="logo" />  -->
             <h1 class="display">P I K <strong class="">A R T</strong></h1>
             <!-- Or added via css to provide different ones for different color themes -->
             <!-- <div class="img"></div> -->
@@ -23,28 +23,36 @@
             <span class="label">Daftar Koleksi</span>
         </a>
     </div> 
-    {{-- <div class="user-container d-flex"  style="margin-left :3em; margin-right: 50px;"> 
+    <!-- <div class="user-container d-flex"  style="margin-left :3em; margin-right: 50px;"> 
         <a href="#portofolio" class="nav-link text-dark">
             <i data-acorn-icon="tv" class="icon" data-acorn-size="18"></i>
             <span class="label">Portofolio</span>
         </a>
-    </div>  --}}
+    </div>   -->
     <div class="user-container d-flex"  style="margin-left :3em;  "> 
         <a href="/Dashboard" class="btn btn-primary  rounded-xl"> 
             <i data-acorn-icon="login" class="icon" data-acorn-size="18"></i>
             <span class="label">Login Pikart</span>
         </a>
     </div> 
+    @if (Auth::guest())
+    <div class="user-container d-flex"  style="margin-left :1em;  "> 
+        <a href="{{route('loginpage')}}" class="btn btn-warning  rounded-xl"> 
+            <i data-acorn-icon="login" class="icon" data-acorn-size="18"></i>
+            <span class="label">Login BPK</span>
+        </a>
+    </div> 
+    @endif
     
     <!-- User Menu End -->
 
     <!-- Icons Menu Start -->
     <ul class="list-unstyled list-inline text-center menu-icons"> 
         <li>
-            {{-- <a href="/Dashboard">
+            <!-- <a href="/Dashboard">
                 <i data-acorn-icon="home" class="icon" data-acorn-size="18"></i>
                 <span class="label">Tentang Pikart</span>
-            </a> --}}
+            </a>  -->
         </li> 
     </ul> 
     <!-- Icons Menu End -->
@@ -52,7 +60,7 @@
     <!-- Menu Start -->
     <div class="menu-container flex-grow-1">
         <ul id="menu" class="menu" style="margin-left :3em;">
-            {{-- <li>
+             <!-- <li>
                 <a href="/Dashboard">
                     <i data-acorn-icon="home" class="icon" data-acorn-size="18"></i>
                     <span class="label">Tentang Pikart</span>
@@ -69,7 +77,7 @@
                     <i data-acorn-icon="activity" class="icon" data-acorn-size="18"></i>
                     <span class="label">Portofolio</span>
                 </a>
-            </li>  --}}
+            </li>   -->
         </ul>
     </div>
     <!-- Menu End -->
