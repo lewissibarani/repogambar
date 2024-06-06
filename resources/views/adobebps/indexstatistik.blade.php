@@ -218,7 +218,7 @@
                                     <thead>
                                     <tr> 
                                         <th scope="col" class="col-1 text-muted text-small text-uppercase">Kode Provinsi/ Satker</th>  
-                                        <th scope="col" class="col-1 text-muted text-small text-uppercase">Nama Penanggung Jawab </th> 
+                                        <th scope="col" class="col-1 text-muted text-small text-uppercase">Satker </th> 
                                         @foreach($Bulan as $bulan)
                                             <th  scope="col" class="col text-muted text-small text-uppercase">{{$bulan->singkatan}}</th>
                                         @endforeach 
@@ -229,14 +229,15 @@
                                         <tr style="height:50px;">  
                                             <td class=""><span class="fw-bold">{{$datas->getnamasatker->kodeeselondua ?? ''}}</span>/{{$datas->kodesatkerid}}</td> 
                                             <td class="text-alternate">
-                                                {{$datas->nama}}    
-                                                @php 
+                                            @php 
                                                     $string = $datas->getnamasatker->namasatker ?? '';
                                                     $string1 = str_replace("BADAN PUSAT STATISTIK", "BPS", $string); 
                                                     $string2 = str_replace("KEPULAUAN", "KEP.", $string1);  
                                                 @endphp 
+                                            {{$string2}}   
+                                                
                                                 <div class="text-small text-muted position sale">
-                                                    {{$string2}}  
+                                                      {{$datas->nama}}
                                                 </div>
                                             </td>  
                                             @foreach($Bulan as $bulan) 
@@ -640,21 +641,18 @@
                 Premiererush = DATASET[key].Premiererush;
                 Xd = DATASET[key].Xd;
             } 
-        }
-        
-        
+        } 
+
         const datapenggunaan_data=[Acrobat,Aero,Aftereffect,Animate,Audition,Dimension,Dreamweaver,
               Express,Fresco,Illustrator,Incopy,Indesign,Lightroom,Photoshop,
-              Premierepro,Premiererush,Xd];
- 
+              Premierepro,Premiererush,Xd]; 
 
         myChart.data.datasets[0] =  {
                     label: 'Jumlah Pengguna',
                     data: datapenggunaan_data,
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                    
+                    borderWidth: 1 
                 } 
         }
         
