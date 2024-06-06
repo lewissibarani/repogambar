@@ -12,7 +12,8 @@ class AdobeTransaksiKuesioner extends Model
     protected $fillable = [
         'userid',
         'bulanid', 
-        'periodeid',   
+        'periodeid',
+        'lainnya', 
         'kodesatkerid', 
         'suratdokumen',
         'dashboard',
@@ -41,6 +42,7 @@ class AdobeTransaksiKuesioner extends Model
         'aero',
         'acrobat',
         'memakaiadobe', 
+        'jumlah_lain',
     ];
 
     public function user ()

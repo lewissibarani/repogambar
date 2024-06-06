@@ -228,6 +228,5 @@ $(document).ready(function(){
   $("#show").click(function(){
     $(".nextquestion").show(500);
   });
-});
-<!-- Add Edit Modal End -->
+}); 
 </script>
