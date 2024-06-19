@@ -122,7 +122,7 @@
                                                 ->where('userid', Auth::id())
                                                 ->first())
                                                             @php
-                                                            $dataslaporan = $Data_Laporan->where('bulanid', $bulan->id)->first();
+                                                            $dataslaporan = $Data_Laporan->where('userid', Auth::id())->where('bulanid', $bulan->id)->first();
                                                             @endphp
                                                             <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
                                                                 data-bs-toggle="modal"        

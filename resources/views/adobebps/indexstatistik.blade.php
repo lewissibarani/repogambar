@@ -244,20 +244,43 @@
                                             <td class="text-alternate">  
                                                 @if(!is_null($datas->transaksikuesioner->where('bulanid',$bulan->id)->where('periodeid',$Periode_id)->first()))  
                                                     @if($datas->transaksikuesioner->where('bulanid',$bulan->id)->where('periodeid',$Periode_id)->first()->memakaiadobe==1)
-                                                    <div class="border border-success sw-2 sh-2 rounded-xl d-flex justify-content-center align-items-center"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Menggunakan Adobe"
-                                                    >
-                                                    <span class="text-success">v</span>
-                                                    </div> 
+                                                    <button type="button" 
+                                                    data-bs-toggle="modal"     
+                                                    data-bs-target=" " 
+                                                    style="
+                                                    width: 20px; 
+                                                    height: 20px; 
+                                                    padding: 5px 5px; 
+                                                    border-radius: 70px; 
+                                                    font-size: 11px; 
+                                                    text-align: center; " 
+                                                    class="btn btn-success btn-circle btn-xl">v</button>
+
                                                     @else
-                                                    <div class="border border-danger sw-2 sh-2 rounded-xl d-flex justify-content-center align-items-center"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tidak Menggunakan Adobe"
-                                                    >
-                                                    <span class="text-danger">x</span>
-                                                    </div>
+                                                    <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                                    title="Tidak Menggunakan Adobe"
+                                                    style="
+                                                    width: 20px; 
+                                                    height: 20px; 
+                                                    padding: 5px 5px; 
+                                                    border-radius: 70px; 
+                                                    font-size: 11px; 
+                                                    text-align: center; " 
+                                                    class="btn btn-danger btn-circle btn-xl">x</button> 
+
                                                     @endif  
                                                 @else 
-                                                -
+                                                <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                                    title="Belum Isi Kuesioner"
+                                                    style="
+                                                    width: 20px; 
+                                                    height: 20px; 
+                                                    padding: 5px 5px; 
+                                                    border-radius: 70px; 
+                                                    font-size: 11px; 
+                                                    text-align: center; " 
+                                                    class="btn btn-warning btn-circle btn-xl">- </button> 
+                                                
                                                 @endif 
                                             </td>  
                                             @endforeach 
@@ -664,10 +687,12 @@
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1 
                 } 
+        console.log(datapenggunaan_data);
         }
         
         // myChart.config.data.datasets.data = datapenggunaan_data; 
         // myChart.options.plugins.title.text = KODESATKER; 
+       
         myChart.update();
     }
 </script> 
