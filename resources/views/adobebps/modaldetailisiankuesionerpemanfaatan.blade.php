@@ -19,75 +19,75 @@
                                             <div class="row" id="checkboxeskuesioner">
                                                 <div class="col-sm-4">
                                                     <div class="form-check"> 
-                                                        <input class="form-check-input" type="checkbox" name="acrobat" id="acrobat" value="1"  >
+                                                        <input class="form-check-input" type="checkbox" name="acrobat" id="acrobat" textue="1"  >
                                                         <label class="form-check-label" for="acrobat">Acrobat</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="aero" id="aero" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="aero" id="aero" textue="1">
                                                         <label class="form-check-label" for="aero">Aero</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="aftereffect" id="aftereffect" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="aftereffect" id="aftereffect" textue="1">
                                                         <label class="form-check-label" for="aftereffect">After Effect</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="animate" id="animate" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="animate" id="animate" textue="1">
                                                         <label class="form-check-label" for="animate">Animate</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="audition" id="audition" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="audition" id="audition" textue="1">
                                                         <label class="form-check-label" for="audition">Audition</label>
                                                     </div>   
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="dimension" id="dimension" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="dimension" id="dimension" textue="1">
                                                         <label class="form-check-label" for="dimension">Dimension</label>
                                                     </div> 
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="dreamweaver" id="dreamweaver" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="dreamweaver" id="dreamweaver" textue="1">
                                                         <label class="form-check-label" for="dreamweaver">Dreamweaver</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="express" id="express" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="express" id="express" textue="1">
                                                         <label class="form-check-label" for="express">Express</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="fresco" id="fresco" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="fresco" id="fresco" textue="1">
                                                         <label class="form-check-label" for="fresco">Fresco</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="illustrator" id="illustrator" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="illustrator" id="illustrator" textue="1">
                                                         <label class="form-check-label" for="illustrator">Illustrator</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="incopy" id="incopy" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="incopy" id="incopy" textue="1">
                                                         <label class="form-check-label" for="incopy">InCopy</label>
                                                     </div>   
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="indesign" id="indesign" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="indesign" id="indesign" textue="1">
                                                         <label class="form-check-label" for="indesign">InDesign</label>
                                                     </div> 
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="lightroom" id="lightroom" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="lightroom" id="lightroom" textue="1">
                                                         <label class="form-check-label" for="lightroom">Lightroom</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="photoshop" id="photoshop" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="photoshop" id="photoshop" textue="1">
                                                         <label class="form-check-label" for="photoshop">Photoshop</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="premierepro" id="premierepro" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="premierepro" id="premierepro" textue="1">
                                                         <label class="form-check-label" for="premierepro">Premiere Pro</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="premiererush" id="premiererush" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="premiererush" id="premiererush" textue="1">
                                                         <label class="form-check-label" for="premiererush">Premiere Rush</label>
                                                     </div> 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="xd" id="xd" value="1">
+                                                        <input class="form-check-input" type="checkbox" name="xd" id="xd" textue="1">
                                                         <label class="form-check-label" for="xd">XD</label>
                                                     </div> 
                                                 </div>
@@ -102,78 +102,50 @@
                                             <div class="row mb-3" id="inputskuesioner">
                                                 <div class="col-sm-6">
                                                     <div class="row mb-3">
-                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Publikasi : </label>
-                                                        <div class="col-sm-3">
-                                                            <input type="text" name="publikasi" class="form-control" id="colFormLabel" placeholder="0">
-                                                        </div>
+                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Publikasi : <span class="fw-bold"> <span class="publikasi"></span> </span> </label> 
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">BRS : </label>
-                                                        <div class="col-sm-3">
-                                                            <input type="text" name="brs" class="form-control" id="colFormLabel" placeholder="0">
-                                                        </div>
+                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">BRS :  <span class="fw-bold">  <span class="brs"></span> </span> </label> 
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Infografis : </label>
-                                                        <div class="col-sm-3">
-                                                            <input type="text" name="infografis" class="form-control" id="colFormLabel" placeholder="0">
-                                                        </div>
+                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Infografis :   <span class="fw-bold"> <span class="infografis"></span> </span> </label> 
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Flyer/VB : </label>
-                                                        <div class="col-sm-3">
-                                                            <input type="text" name="flyer_vb" class="form-control" id="colFormLabel" placeholder="0">
-                                                        </div>
+                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Flyer/VB :  <span class="fw-bold"> <span class="flyer_vb"></span> </span> </label> 
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Spanduk : </label>
-                                                        <div class="col-sm-3">
-                                                            <input type="text" name="spanduk" class="form-control" id="colFormLabel" placeholder="0">
-                                                        </div>
+                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Spanduk : <span class="fw-bold"> <span class="spanduk"> </span> </span></label> 
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-6">
                                                 
                                                     <div class="row mb-3">
-                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Surat/Dokumen : </label>
-                                                        <div class="col-sm-3">
-                                                            <input type="text" name="suratdokumen" class="form-control" id="colFormLabel" placeholder="0">
-                                                        </div>
+                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Surat/Dokumen : <span class="fw-bold">  <span class="suratdokumen"></span>  </span> </label> 
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Website : </label>
-                                                        <div class="col-sm-3">
-                                                            <input type="text" name="website" class="form-control" id="colFormLabel" placeholder="0">
-                                                        </div>
+                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Website : <span class="fw-bold">  <span class="website"></span></span> </label> 
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Dashboard : </label>
-                                                        <div class="col-sm-3">
-                                                            <input type="text" name="dashboard" class="form-control" id="colFormLabel" placeholder="0">
-                                                        </div>
+                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Dashboard : <span class="fw-bold"> <span class="dashboard"></span> </span> </label> 
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Video : </label>
-                                                        <div class="col-sm-3">
-                                                            <input type="text" name="video" class="form-control" id="colFormLabel" placeholder="0">
-                                                        </div>
+                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Video : <span class="fw-bold"> <span class="video"></span> </span></label> 
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Lainnya: </label>
-                                                        <div class="col-sm-4">
-                                                            <input type="text" name="lainnya" class="form-control" id="colFormLabel" placeholder="">
-                                                        </div>
-                                                        <label for="colFormLabel" class="col-sm-3 col-form-label">Sejumlah : </label>
-                                                        <div class="col-sm-3">
-                                                            <input type="text" name="jumlah_lain" class="form-control" id="colFormLabel" placeholder="0">
-                                                        </div>
+                                                        <label for="colFormLabel" class="col-sm-5 col-form-label">Lainnya: <span class="fw-bold">  <span class="jumlah_lain"></span> </span> </label>  
                                                     </div>
                                                     
 
                                                 </div>
                                             </div>
-                                        </div>   
+                                        </div> 
+                                        
+                                        <div class="row mb-12">
+                                            <label for="colFormLabel" class="fw-bold col-sm-12 col-form-label">
+                                                 Diisi Oleh: <span class="diisioleh"></span>
+                                            </label> 
+                                        </div>
                                     </div>   
 
                                 </section> 
@@ -205,6 +177,169 @@ $.ajax({
     success:function(response){
         $('.namasatkerpemanfaatan').text(response.namasatkerpemanfaatan);
         $('.bulanpemanfaatan').text(response.bulanpemanfaatan); 
+
+        if(response.Acrobat>0){  
+            $('#acrobat').attr('checked',true);  
+            $('#acrobat').attr("disabled", false);
+        }
+        else { 
+            $('#acrobat').attr('checked',false); 
+            $('#acrobat').attr("disabled", true);  
+        }
+
+        if(response.Aero>0){  
+            $('#aero').attr('checked',true); 
+            $('#aero').attr("disabled", false);
+        }
+        else { 
+            $('#aero').attr('checked',false);  
+            $('#aero').attr("disabled", true); 
+        }
+
+        if(response.Aftereffect>0){  
+            $('#aftereffect').attr('checked',true);
+            $('#aftereffect').attr("disabled", false);   
+        }
+        else { 
+            $('#aftereffect').attr('checked',false);
+            $('#aftereffect').attr("disabled", true);  
+        }
+
+        if(response.Animate>0){  
+            $('#animate').attr('checked',true); 
+            $('#animate').attr("disabled", false);   
+        }
+        else { 
+            $('#animate').attr('checked',false); 
+            $('#animate').attr("disabled", true);  
+        }
+
+        if(response.Audition>0){  
+            $('#audition').attr('checked',true); 
+            $('#audition').attr("disabled", false);  
+
+        }
+        else { 
+            $('#audition').attr('checked',false); 
+            $('#audition').attr("disabled", true);  
+        }
+        if(response.Dimension>0){  
+            $('#dimension').attr('checked',true); 
+            $('#dimension').attr("disabled", false);   
+        }
+        else { 
+            $('#dimension').attr('checked',false); 
+            $('#dimension').attr("disabled", true);  
+        }
+        if(response.Dreamweaver>0){  
+            $('#dreamweaver').attr('checked',true); 
+            $('#dreamweaver').attr("disabled", false);   
+        }
+        else { 
+            $('#dreamweaver').attr('checked',false); 
+            $('#dreamweaver').attr("disabled", true); 
+        }
+
+        if(response.Express>0){  
+            $('#express').attr('checked',true); 
+            $('#express').attr("disabled", false);  
+        }
+        else { 
+            $('#express').attr('checked',false); 
+            $('#express').attr("disabled", true);  
+        }
+
+        if(response.Fresco>0){  
+            $('#fresco').attr('checked',true); 
+            $('#fresco').attr("disabled", false);   
+        }
+        else { 
+            $('#fresco').attr('checked',false); 
+            $('#fresco').attr("disabled", true);  
+        }
+
+        if(response.Illustrator>0){  
+            $('#illustrator').attr('checked',true); 
+            $('#illustrator').attr("disabled", false); 
+
+        }
+        else { 
+            $('#illustrator').attr('checked',false); 
+            $('#illustrator').attr("disabled", true);
+        }
+
+        if(response.Incopy>0){  
+            $('#incopy').attr('checked',true); 
+            $('#incopy').attr("disabled", false);   
+        }
+        else { 
+            $('#incopy').attr('checked',false); 
+            $('#incopy').attr("disabled", true); 
+        }
+        if(response.Indesign>0){  
+            $('#indesign').attr('checked',true); 
+            $('#indesign').attr("disabled", false);   
+        }
+        else { 
+            $('#indesign').attr('checked',false); 
+            $('#indesign').attr("disabled", true);
+        }
+
+        if(response.Lightroom>0){  
+            $('#lightroom').attr('checked',true); 
+            $('#lightroom').attr("disabled", false);  
+
+        }
+        else {
+            $('#lightroom').attr('checked',false); 
+            $('#lightroom').attr("disabled", true);  
+        }
+
+        if(response.Photoshop>0){  
+            $('#photoshop').attr('checked',true); 
+            $('#photoshop').attr("disabled", false);   
+        }
+        else { 
+            $('#photoshop').attr('checked',false); 
+            $('#photoshop').attr("disabled", true);
+        }
+        if(response.Premierepro>0){  
+            $('#premierepro').attr('checked',true); 
+            $('#premierepro').attr("disabled", false);   
+        }
+        else { 
+            $('#premierepro').attr('checked',false); 
+            $('#premierepro').attr("disabled", true);  
+        }
+        if(response.Premiererush>0){  
+            $('#premiererush').attr('checked',true); 
+            $('#premiererush').attr("disabled", false);   
+        }
+        else { 
+            $('#premiererush').attr('checked',false); 
+            $('#premiererush').attr("disabled", true);  
+        }
+        if(response.Xd>0){  
+            $('#xd').attr('checked',true); 
+            $('#xd').attr("disabled", false);   
+        }
+        else { 
+            $('#xd').attr('checked',false); 
+            $('#xd').attr("disabled", true);  
+        }
+        $(".publikasi").text(response.Publikasi);  
+        $(".brs").text(response.BRS); 
+        $(".infografis").text(response.Infografis);
+        $(".flyer_vb").text(response.Flyer_vb);  
+        $(".spanduk").text(response.Spanduk); 
+        $(".suratdokumen").text(response.Suratdokumen); 
+        $(".video").text(response.Video); 
+        $(".website").text(response.Website);
+        $(".dashboard").text(response.Dashboard);  
+        $(".jumlah_lain").text(response.Lainnya); 
+        $(".diisioleh").text(response.Pengisi.join(", ")); 
+
+        
         //open modal
         $('#modaldetailisiankuesionerpemanfaatan').modal('show');
     }

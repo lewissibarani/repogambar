@@ -701,10 +701,15 @@ class AdobeBPSController extends Controller
     {
         $KoleksiKuesioner = AdobeTransaksiKuesioner::with('user','periode','bulan','getsatker')
         ->where('kodesatkerid', '=', $kodesatker)   
-        ->where('bulanid', '=', $bulanid);
-
+        ->where('bulanid', '=', $bulanid)
+        ->get();
+         
         $pengisikuesioner = [];
-  
+
+        foreach($KoleksiKuesioner as $koleksiKuesioner){  
+            array_push($pengisikuesioner,$koleksiKuesioner->user->name);   
+        } 
+
         $namasatkerpemanfaatan = Namasatker::where('kodesatker', '=', $kodesatker)->first()->namasatker;
         $namabulan = Bulan::where('id', '=', $bulanid)->first()->namabulan;
         //return response
@@ -733,11 +738,12 @@ class AdobeBPSController extends Controller
             'Infografis' => $KoleksiKuesioner->sum(['infografis']),
             'Flyer_vb' => $KoleksiKuesioner->sum(['flyer_vb']),
             'Spanduk' => $KoleksiKuesioner->sum(['spanduk']),
+            'Suratdokumen' => $KoleksiKuesioner->sum(['suratdokumen']),
             'Video' => $KoleksiKuesioner->sum(['video']),
             'Website' => $KoleksiKuesioner->sum(['website']),
             'Dashboard' => $KoleksiKuesioner->sum(['dashboard']),
             'Lainnya' => $KoleksiKuesioner->sum(['jumlah_lain']),
-            'Pengisi' => $KoleksiKuesioner->sum(['jumlah_lain']),
+            'Pengisi' => $pengisikuesioner,
         ]);  
     }
 }
