@@ -152,7 +152,58 @@
                         <div class="card" >
                             <div class="card-body" > 
                                 <!-- Hover Controls Start -->
-                                <div class="row">  
+                                <div class="row">   
+                                    <div class="alert alert-info">
+                                        <div class="fw-bold col-1">
+                                            Catatan:  
+                                        </div>
+                                        <div class="col">
+                                                <span class="">
+                                                <button type="button"      
+                                                style="
+                                                width: 20px; 
+                                                height: 20px; 
+                                                padding: 5px 5px; 
+                                                border-radius: 70px; 
+                                                font-size: 11px; 
+                                                text-align: center; " 
+                                                class="btn btn-success btn-circle btn-xl">v</button> 
+                                                </span>
+                                                : Bisa diklik untuk melihat detail isian.
+                                        </div>  
+                                        <div class="col">
+                                                <span class="">
+                                                <button type="button"  
+                                                style="
+                                                width: 20px; 
+                                                height: 20px; 
+                                                padding: 5px 5px; 
+                                                border-radius: 70px; 
+                                                font-size: 11px; 
+                                                text-align: center; " 
+                                                class="btn btn-danger btn-circle btn-xl">x</button>
+                                                </span>
+                                                : Tidak memakai Adobe.
+                                        </div>  
+                                        <div class="col">
+                                                <span class="">
+                                                <button type="button"  
+                                                style="
+                                                width: 20px; 
+                                                height: 20px; 
+                                                padding: 5px 5px; 
+                                                border-radius: 70px; 
+                                                font-size: 11px; 
+                                                text-align: center; " 
+                                                class="btn btn-warning btn-circle btn-xl">-</button>
+                                                </span>
+                                                : Belum isi kuesioner.
+                                        </div>  
+                                    </div>
+                                    
+                                    
+                                    
+
                                     <div class="col-12 col-sm-7 col-lg-9 col-xxl-10 mb-1">
                                         <div class="d-inline-block">
                                             <button class="btn btn-icon btn-icon-only btn-outline-muted btn-sm datatable-print" type="button" data-datatable="#datatableHover_Laporan">
