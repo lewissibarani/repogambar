@@ -1,42 +1,20 @@
-@php 
-$id_pj ="";
-$bulan_id = "";
-$namabulan = "";
-@endphp
-
+ 
 <!-- Add Edit Modal Start -->
-<div class="modal large fade" id="isiankuesioner{{$id_pj}}_{{$bulan_id}}" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+<div class="modal large fade" id="modaldetailisiankuesionerpemanfaatan" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title font-weight-bold" id="modalTitle">Kuesioner Pemanfaatan Adobe {{$namabulan}}</h5>
+                                <h5 class="modal-title font-weight-bold" id="modalTitle">Kuesioner Pemanfaatan Adobe Satker <span class="namasatkerpemanfaatan"></span> bulan <span class="bulanpemanfaatan"></span> </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
+                           
                             <div class="modal-body"> 
-                                <section class="scroll-section" id="labelSize"> 
-                                <input class="form-check-input" type="hidden" 
-                                                name="idbulan" id="gridRadios1" value="{{$bulan->id}}" > 
-                                    <div class="row mb-12">
-                                        <label for="colFormLabel" class="fw-bold col-sm-3 col-form-label">
-                                            Apakah selama bulan {{$namabulan}} memanfaatkan lisensi Adobe CC pengadaan tahun 2024 ?
-                                        </label>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="memakaiadobe" id="show" 
-                                                value="1" checked="" >
-                                                <label class="form-check-label" for="gridRadios1">Ya</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="memakaiadobe" id="hide" value="2">
-                                                <label class="form-check-label" for="gridRadios2">Tidak</label>
-                                            </div> 
-                                        </div>
-                                    </div>
+                                <section class="scroll-section" id="labelSize">  
 
                                     <div class="nextquestion">
                                         <div class="row mb-12">
-                                            <label for="colFormLabel" class="fw-bold col-sm-3 col-form-label">
-                                                Aplikasi apa saja yang digunakan selama bulan {{$namabulan}} ?
+                                            <label for="colFormLabel" class="fw-bold col-sm-12 col-form-label">
+                                                Aplikasi yang digunakan selama bulan <span class="bulanpemanfaatan"></span> :
                                             </label>
                                             <div class="row" id="checkboxeskuesioner">
                                                 <div class="col-sm-4">
@@ -116,8 +94,8 @@ $namabulan = "";
                                             </div> 
                                         </div>   
                                         <div class="row mb-12">
-                                            <label for="colFormLabel" class="fw-bold col-sm-3 col-form-label">
-                                                Produk BPS apa saja yang dihasilkan menggunakan Adobe CC 2024 selama bulan {{$namabulan}} ?
+                                            <label for="colFormLabel" class="fw-bold col-sm-12 col-form-label">
+                                                Produk BPS apa saja yang dihasilkan menggunakan Adobe CC 2024 selama bulan <span class="bulanpemanfaatan"></span>  ?
                                                 <br/> 
                                                 Sebutkan jumlah produk yang dihasilkan !
                                             </label>  
@@ -209,4 +187,27 @@ $namabulan = "";
                     </div>
                 </div>
 
- 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+
+//button create post event
+ $('body').on('click', '#detailisiankuesioner', function () {
+    
+let satkerid = $(this).data('id');
+let bulanid = $(this).data('bulan'); 
+
+//fetch detail post with ajax
+$.ajax({
+    url: `/adobebps/${satkerid}/${bulanid}`,
+    type: "GET",
+    cache: false,
+    success:function(response){
+        $('.namasatkerpemanfaatan').text(response.namasatkerpemanfaatan);
+        $('.bulanpemanfaatan').text(response.bulanpemanfaatan); 
+        //open modal
+        $('#modaldetailisiankuesionerpemanfaatan').modal('show');
+    }
+});
+});
+ </script>

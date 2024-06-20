@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
         return Redirect::route('album.index');
         });
   
+    Route::get('adobebps/{satkerid}/{bulanid}',[AdobeBPSController::class, 'show'])->name('adobebps.ajaxshow');
     Route::get('adobebps/syncuserkodesatker',[AdobeBPSController::class, 'syncuserkodesatker'])->name('adobebps.syncuserkodesatker');
     Route::get('adobebps/sudahdibaca/{id}/{userid}',[AdobeBPSController::class, 'sudahdibaca'])->name('adobebps.sudahdibaca');
     Route::post('adobebps/ajukanpengganti',[AdobeBPSController::class, 'ajukanpengganti'])->name('adobebps.ajukanpengganti');

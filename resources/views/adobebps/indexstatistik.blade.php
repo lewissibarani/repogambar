@@ -225,7 +225,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($Data as $datas) 
+                                    @foreach ($Data_Laporan_Pemanfaatan as $datas) 
                                         <tr style="height:50px;">  
                                             <td class=""><span class="fw-bold">{{$datas->getnamasatker->kodeeselondua ?? ''}}</span>/{{$datas->kodesatkerid}}</td> 
                                             <td class="text-alternate">
@@ -244,9 +244,14 @@
                                             <td class="text-alternate">  
                                                 @if(!is_null($datas->transaksikuesioner->where('bulanid',$bulan->id)->where('periodeid',$Periode_id)->first()))  
                                                     @if($datas->transaksikuesioner->where('bulanid',$bulan->id)->where('periodeid',$Periode_id)->first()->memakaiadobe==1)
+                                                    @php 
+                                                    $modelkuesioner = $datas->transaksikuesioner->where('bulanid',$bulan->id)->where('periodeid',$Periode_id)->first();
+
+                                                    @endphp 
                                                     <button type="button" 
-                                                    data-bs-toggle="modal"     
-                                                    data-bs-target=" " 
+                                                    id="detailisiankuesioner"    
+                                                    data-id="{{$modelkuesioner->kodesatkerid }}"
+                                                    data-bulan="{{ $bulan->id }}"
                                                     style="
                                                     width: 20px; 
                                                     height: 20px; 
@@ -254,7 +259,7 @@
                                                     border-radius: 70px; 
                                                     font-size: 11px; 
                                                     text-align: center; " 
-                                                    class="btn btn-success btn-circle btn-xl">v</button>
+                                                    class="btn btn-success btn-circle btn-xl">v</button> 
 
                                                     @else
                                                     <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -586,9 +591,13 @@
                     </div>  
                 </div>  
             </div>    
+            @include('adobebps.modaldetailisiankuesionerpemanfaatan'); 
+ 
+            
         </section>  
-
 <script>   
+ 
+  
 
 
     const config = {
@@ -687,7 +696,6 @@
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1 
                 } 
-        console.log(datapenggunaan_data);
         }
         
         // myChart.config.data.datasets.data = datapenggunaan_data; 
@@ -695,6 +703,7 @@
        
         myChart.update();
     }
+ 
 </script> 
 @endsection
 

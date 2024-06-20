@@ -77,7 +77,7 @@ class PetugasController extends Controller
  
             $this->validate($request, [
                 'image' => 'required|image',
-                'file' => 'mimes:zip,rar|file|max:30000',
+                'file' => 'mimes:zip,rar|file|max:100000',
                 'kategori_file' => 'required',
                 'tags' => 'required',
             ]);

@@ -210,6 +210,7 @@ class AdobeBPSController extends Controller
 
          //Data BAST  dan Laporan Pemanfaatan
         $Data = AdobePJ::with('getnamasatker','getAdobeTransaksiBAST','getAdobeTransaksiBAST.dokumen','transaksikuesioner')->get();
+        $Data_Laporan_Pemanfaatan = AdobePJ::with('getnamasatker','getAdobeTransaksiBAST','getAdobeTransaksiBAST.dokumen','transaksikuesioner')->distinct()->get(['kodesatkerid']);
         $jumlahlisensi = AdobePJ::with('getnamasatker','getAdobeTransaksiBAST','getAdobeTransaksiBAST.dokumen','transaksikuesioner')->get()->count();
         $jumlahtotalbast =  DB::table('adobe_pj')
         ->selectRaw('kodesatkerid as Satker_id')
@@ -364,7 +365,9 @@ class AdobeBPSController extends Controller
         //Finish Setting Chart Bar supaya menampilkan data pemanfaatan selindo
 
          return view('adobebps.indexstatistik',
-                compact('Data','CountLisensi','Provinsi',
+                compact('Data',
+                        'Data_Laporan_Pemanfaatan',
+                        'CountLisensi','Provinsi',
                         'Bulan','Periode_id','jumlahtotalbast','jumlahuploadbast','jumlahlisensi', 
                         'rightjoinquery',
                         'data_chart_horizontal_bar',
@@ -691,4 +694,50 @@ class AdobeBPSController extends Controller
         
 
     } 
+
+    // Ajax
+
+    public function show($kodesatker , $bulanid)
+    {
+        $KoleksiKuesioner = AdobeTransaksiKuesioner::with('user','periode','bulan','getsatker')
+        ->where('kodesatkerid', '=', $kodesatker)   
+        ->where('bulanid', '=', $bulanid);
+
+        $pengisikuesioner = [];
+  
+        $namasatkerpemanfaatan = Namasatker::where('kodesatker', '=', $kodesatker)->first()->namasatker;
+        $namabulan = Bulan::where('id', '=', $bulanid)->first()->namabulan;
+        //return response
+        return response()->json([
+            'success' => true, 
+            'namasatkerpemanfaatan' => $namasatkerpemanfaatan,
+            'bulanpemanfaatan' => $namabulan, 
+            'Acrobat' => $KoleksiKuesioner->sum(['acrobat']),
+            'Aero' => $KoleksiKuesioner->sum(['aero']),
+            'Aftereffect' =>  $KoleksiKuesioner->sum(['aftereffect']),
+            'Animate' =>  $KoleksiKuesioner->sum(['animate']),
+            'Audition' =>  $KoleksiKuesioner->sum(['audition']),
+            'Dimension' =>  $KoleksiKuesioner->sum(['dimension']),
+            'Dreamweaver' =>  $KoleksiKuesioner->sum(['dreamweaver']),
+            'Express' =>  $KoleksiKuesioner->sum(['express']),
+            'Fresco' =>  $KoleksiKuesioner->sum(['fresco']),
+            'Illustrator' =>  $KoleksiKuesioner->sum(['illustrator']),
+            'Incopy' =>  $KoleksiKuesioner->sum(['incopy']),
+            'Indesign' =>   $KoleksiKuesioner->sum(['indesign']),
+            'Lightroom' =>   $KoleksiKuesioner->sum(['lightroom']),
+            'Photoshop' =>  $KoleksiKuesioner->sum(['photoshop']) ,
+            'Premierepro' =>  $KoleksiKuesioner->sum(['premierepro']),
+            'Premiererush' =>  $KoleksiKuesioner->sum(['premiererush']),
+            'Publikasi' => $KoleksiKuesioner->sum(['publikasi']),
+            'BRS' => $KoleksiKuesioner->sum(['brs']),
+            'Infografis' => $KoleksiKuesioner->sum(['infografis']),
+            'Flyer_vb' => $KoleksiKuesioner->sum(['flyer_vb']),
+            'Spanduk' => $KoleksiKuesioner->sum(['spanduk']),
+            'Video' => $KoleksiKuesioner->sum(['video']),
+            'Website' => $KoleksiKuesioner->sum(['website']),
+            'Dashboard' => $KoleksiKuesioner->sum(['dashboard']),
+            'Lainnya' => $KoleksiKuesioner->sum(['jumlah_lain']),
+            'Pengisi' => $KoleksiKuesioner->sum(['jumlah_lain']),
+        ]);  
+    }
 }
