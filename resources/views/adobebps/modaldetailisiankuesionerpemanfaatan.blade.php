@@ -180,7 +180,7 @@ $.ajax({
 
         if(response.Acrobat>0){  
             $('#acrobat').attr('checked',true);  
-            $('#acrobat').attr("disabled", false);
+            $('#acrobat').attr("disabled", true);
         }
         else { 
             $('#acrobat').attr('checked',false); 
@@ -189,7 +189,7 @@ $.ajax({
 
         if(response.Aero>0){  
             $('#aero').attr('checked',true); 
-            $('#aero').attr("disabled", false);
+            $('#aero').attr("disabled", true);
         }
         else { 
             $('#aero').attr('checked',false);  
@@ -198,7 +198,7 @@ $.ajax({
 
         if(response.Aftereffect>0){  
             $('#aftereffect').attr('checked',true);
-            $('#aftereffect').attr("disabled", false);   
+            $('#aftereffect').attr("disabled", true);   
         }
         else { 
             $('#aftereffect').attr('checked',false);
@@ -207,7 +207,7 @@ $.ajax({
 
         if(response.Animate>0){  
             $('#animate').attr('checked',true); 
-            $('#animate').attr("disabled", false);   
+            $('#animate').attr("disabled", true);   
         }
         else { 
             $('#animate').attr('checked',false); 
@@ -216,7 +216,7 @@ $.ajax({
 
         if(response.Audition>0){  
             $('#audition').attr('checked',true); 
-            $('#audition').attr("disabled", false);  
+            $('#audition').attr("disabled", true);  
 
         }
         else { 
@@ -225,7 +225,7 @@ $.ajax({
         }
         if(response.Dimension>0){  
             $('#dimension').attr('checked',true); 
-            $('#dimension').attr("disabled", false);   
+            $('#dimension').attr("disabled", true);   
         }
         else { 
             $('#dimension').attr('checked',false); 
@@ -233,7 +233,7 @@ $.ajax({
         }
         if(response.Dreamweaver>0){  
             $('#dreamweaver').attr('checked',true); 
-            $('#dreamweaver').attr("disabled", false);   
+            $('#dreamweaver').attr("disabled", true);   
         }
         else { 
             $('#dreamweaver').attr('checked',false); 
@@ -242,7 +242,7 @@ $.ajax({
 
         if(response.Express>0){  
             $('#express').attr('checked',true); 
-            $('#express').attr("disabled", false);  
+            $('#express').attr("disabled", true);  
         }
         else { 
             $('#express').attr('checked',false); 
@@ -251,7 +251,7 @@ $.ajax({
 
         if(response.Fresco>0){  
             $('#fresco').attr('checked',true); 
-            $('#fresco').attr("disabled", false);   
+            $('#fresco').attr("disabled", true);   
         }
         else { 
             $('#fresco').attr('checked',false); 
@@ -260,7 +260,7 @@ $.ajax({
 
         if(response.Illustrator>0){  
             $('#illustrator').attr('checked',true); 
-            $('#illustrator').attr("disabled", false); 
+            $('#illustrator').attr("disabled", true); 
 
         }
         else { 
@@ -270,7 +270,7 @@ $.ajax({
 
         if(response.Incopy>0){  
             $('#incopy').attr('checked',true); 
-            $('#incopy').attr("disabled", false);   
+            $('#incopy').attr("disabled", true);   
         }
         else { 
             $('#incopy').attr('checked',false); 
@@ -278,7 +278,7 @@ $.ajax({
         }
         if(response.Indesign>0){  
             $('#indesign').attr('checked',true); 
-            $('#indesign').attr("disabled", false);   
+            $('#indesign').attr("disabled", true);   
         }
         else { 
             $('#indesign').attr('checked',false); 
@@ -287,7 +287,7 @@ $.ajax({
 
         if(response.Lightroom>0){  
             $('#lightroom').attr('checked',true); 
-            $('#lightroom').attr("disabled", false);  
+            $('#lightroom').attr("disabled", true);  
 
         }
         else {
@@ -297,7 +297,7 @@ $.ajax({
 
         if(response.Photoshop>0){  
             $('#photoshop').attr('checked',true); 
-            $('#photoshop').attr("disabled", false);   
+            $('#photoshop').attr("disabled", true);   
         }
         else { 
             $('#photoshop').attr('checked',false); 
@@ -305,7 +305,7 @@ $.ajax({
         }
         if(response.Premierepro>0){  
             $('#premierepro').attr('checked',true); 
-            $('#premierepro').attr("disabled", false);   
+            $('#premierepro').attr("disabled", true);   
         }
         else { 
             $('#premierepro').attr('checked',false); 
@@ -313,7 +313,7 @@ $.ajax({
         }
         if(response.Premiererush>0){  
             $('#premiererush').attr('checked',true); 
-            $('#premiererush').attr("disabled", false);   
+            $('#premiererush').attr("disabled", true);   
         }
         else { 
             $('#premiererush').attr('checked',false); 
@@ -321,7 +321,7 @@ $.ajax({
         }
         if(response.Xd>0){  
             $('#xd').attr('checked',true); 
-            $('#xd').attr("disabled", false);   
+            $('#xd').attr("disabled", true);   
         }
         else { 
             $('#xd').attr('checked',false); 
