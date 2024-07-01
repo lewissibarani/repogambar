@@ -565,7 +565,7 @@ class AdobeBPSController extends Controller
 
     }
     public function pengajuandisetujui($id_adobe_pj)
-    { 
+    {  
         $res = [];  
         DB::beginTransaction();
         try {  
@@ -699,51 +699,56 @@ class AdobeBPSController extends Controller
 
     public function show($kodesatker , $bulanid)
     {
-        $KoleksiKuesioner = AdobeTransaksiKuesioner::with('user','periode','bulan','getsatker')
-        ->where('kodesatkerid', '=', $kodesatker)   
-        ->where('bulanid', '=', $bulanid)
-        ->get();
+        
+
+            $KoleksiKuesioner = AdobeTransaksiKuesioner::with('user','periode','bulan','getsatker')
+            ->where('kodesatkerid', '=', $kodesatker)   
+            ->where('bulanid', '=', $bulanid)
+            ->get();
+             
+            $pengisikuesioner = [];
+    
+            foreach($KoleksiKuesioner as $koleksiKuesioner){  
+                array_push($pengisikuesioner,$koleksiKuesioner->user->name);   
+            } 
+    
+            $namasatkerpemanfaatan = Namasatker::where('kodesatker', '=', $kodesatker)->first()->namasatker;
+            $namabulan = Bulan::where('id', '=', $bulanid)->first()->namabulan;
+            //return response
+            return response()->json([
+                'success' => true, 
+                'namasatkerpemanfaatan' => $namasatkerpemanfaatan,
+                'bulanpemanfaatan' => $namabulan, 
+                'Acrobat' => $KoleksiKuesioner->sum(['acrobat']),
+                'Aero' => $KoleksiKuesioner->sum(['aero']),
+                'Aftereffect' =>  $KoleksiKuesioner->sum(['aftereffect']),
+                'Animate' =>  $KoleksiKuesioner->sum(['animate']),
+                'Audition' =>  $KoleksiKuesioner->sum(['audition']),
+                'Dimension' =>  $KoleksiKuesioner->sum(['dimension']),
+                'Dreamweaver' =>  $KoleksiKuesioner->sum(['dreamweaver']),
+                'Express' =>  $KoleksiKuesioner->sum(['express']),
+                'Fresco' =>  $KoleksiKuesioner->sum(['fresco']),
+                'Illustrator' =>  $KoleksiKuesioner->sum(['illustrator']),
+                'Incopy' =>  $KoleksiKuesioner->sum(['incopy']),
+                'Indesign' =>   $KoleksiKuesioner->sum(['indesign']),
+                'Lightroom' =>   $KoleksiKuesioner->sum(['lightroom']),
+                'Photoshop' =>  $KoleksiKuesioner->sum(['photoshop']) ,
+                'Premierepro' =>  $KoleksiKuesioner->sum(['premierepro']),
+                'Premiererush' =>  $KoleksiKuesioner->sum(['premiererush']),
+                'Publikasi' => $KoleksiKuesioner->sum(['publikasi']),
+                'BRS' => $KoleksiKuesioner->sum(['brs']),
+                'Infografis' => $KoleksiKuesioner->sum(['infografis']),
+                'Flyer_vb' => $KoleksiKuesioner->sum(['flyer_vb']),
+                'Spanduk' => $KoleksiKuesioner->sum(['spanduk']),
+                'Suratdokumen' => $KoleksiKuesioner->sum(['suratdokumen']),
+                'Video' => $KoleksiKuesioner->sum(['video']),
+                'Website' => $KoleksiKuesioner->sum(['website']),
+                'Dashboard' => $KoleksiKuesioner->sum(['dashboard']),
+                'Lainnya' => $KoleksiKuesioner->sum(['jumlah_lain']),
+                'Pengisi' => $pengisikuesioner,
+            ]);  
+
          
-        $pengisikuesioner = [];
-
-        foreach($KoleksiKuesioner as $koleksiKuesioner){  
-            array_push($pengisikuesioner,$koleksiKuesioner->user->name);   
-        } 
-
-        $namasatkerpemanfaatan = Namasatker::where('kodesatker', '=', $kodesatker)->first()->namasatker;
-        $namabulan = Bulan::where('id', '=', $bulanid)->first()->namabulan;
-        //return response
-        return response()->json([
-            'success' => true, 
-            'namasatkerpemanfaatan' => $namasatkerpemanfaatan,
-            'bulanpemanfaatan' => $namabulan, 
-            'Acrobat' => $KoleksiKuesioner->sum(['acrobat']),
-            'Aero' => $KoleksiKuesioner->sum(['aero']),
-            'Aftereffect' =>  $KoleksiKuesioner->sum(['aftereffect']),
-            'Animate' =>  $KoleksiKuesioner->sum(['animate']),
-            'Audition' =>  $KoleksiKuesioner->sum(['audition']),
-            'Dimension' =>  $KoleksiKuesioner->sum(['dimension']),
-            'Dreamweaver' =>  $KoleksiKuesioner->sum(['dreamweaver']),
-            'Express' =>  $KoleksiKuesioner->sum(['express']),
-            'Fresco' =>  $KoleksiKuesioner->sum(['fresco']),
-            'Illustrator' =>  $KoleksiKuesioner->sum(['illustrator']),
-            'Incopy' =>  $KoleksiKuesioner->sum(['incopy']),
-            'Indesign' =>   $KoleksiKuesioner->sum(['indesign']),
-            'Lightroom' =>   $KoleksiKuesioner->sum(['lightroom']),
-            'Photoshop' =>  $KoleksiKuesioner->sum(['photoshop']) ,
-            'Premierepro' =>  $KoleksiKuesioner->sum(['premierepro']),
-            'Premiererush' =>  $KoleksiKuesioner->sum(['premiererush']),
-            'Publikasi' => $KoleksiKuesioner->sum(['publikasi']),
-            'BRS' => $KoleksiKuesioner->sum(['brs']),
-            'Infografis' => $KoleksiKuesioner->sum(['infografis']),
-            'Flyer_vb' => $KoleksiKuesioner->sum(['flyer_vb']),
-            'Spanduk' => $KoleksiKuesioner->sum(['spanduk']),
-            'Suratdokumen' => $KoleksiKuesioner->sum(['suratdokumen']),
-            'Video' => $KoleksiKuesioner->sum(['video']),
-            'Website' => $KoleksiKuesioner->sum(['website']),
-            'Dashboard' => $KoleksiKuesioner->sum(['dashboard']),
-            'Lainnya' => $KoleksiKuesioner->sum(['jumlah_lain']),
-            'Pengisi' => $pengisikuesioner,
-        ]);  
+       
     }
 }

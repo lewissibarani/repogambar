@@ -148,7 +148,7 @@
                         </div> 
                     </div>  
                     <div class="row">  
-                        <h2 class="small-title">Rincian Laporan Pemanfaatan</h2>   
+                        <h2 class="small-title">Rincian Laporan Pemanfaatan</h2>    
                         <div class="card" >
                             <div class="card-body" > 
                                 <!-- Hover Controls Start -->

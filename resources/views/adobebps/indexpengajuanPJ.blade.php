@@ -150,14 +150,14 @@
                                                                 <span>Lihat </span>
                                                         </a>
                                                         <a type="button" class="btn btn-success" 
-                                                        href="{{route('adobebps.pengajuandisetujui', ['id_adobe_pj'=>$id_adobe_pj])}}"> 
+                                                        href="{{route('adobebps.pengajuandisetujui', ['id_adobe_pj'=>$id_adobe_pj->id])}}"> 
                                                         Setuju
                                                         <a>  
                                                         <a type="button" class="btn btn-danger" 
-                                                        href="{{route('adobebps.pengajuanditolak',['id_adobe_pj'=>$id_adobe_pj])}}"> 
+                                                        href="{{route('adobebps.pengajuanditolak',['id_adobe_pj'=>$id_adobe_pj->id])}}"> 
                                                         Tolak 
                                                         <a>
-                                                        @include('adobebps.modallihatdetailadobepj')   
+                                                        @include('adobebps.modallihatdetailadobepj')
                                                     </td> 
                                                     <td class="text-alternate"> {{$datas->created_at}} </td> 
                                                 </tr>

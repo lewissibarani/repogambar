@@ -63,13 +63,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('album', AlbumController::class)->missing(function (Request $request) {
         return Redirect::route('album.index');
         });
-  
+
+    Route::get('adobebps/pengajuandisetujui/{id_adobe_pj}',[AdobeBPSController::class, 'pengajuandisetujui'])->name('adobebps.pengajuandisetujui'); 
+    Route::get('adobebps/pengajuanditolak/{id_adobe_pj}',[AdobeBPSController::class, 'pengajuanditolak'])->name('adobebps.pengajuanditolak'); 
     Route::get('adobebps/{satkerid}/{bulanid}',[AdobeBPSController::class, 'show'])->name('adobebps.ajaxshow');
     Route::get('adobebps/syncuserkodesatker',[AdobeBPSController::class, 'syncuserkodesatker'])->name('adobebps.syncuserkodesatker');
     Route::get('adobebps/sudahdibaca/{id}/{userid}',[AdobeBPSController::class, 'sudahdibaca'])->name('adobebps.sudahdibaca');
-    Route::post('adobebps/ajukanpengganti',[AdobeBPSController::class, 'ajukanpengganti'])->name('adobebps.ajukanpengganti');
-    Route::get('adobebps/pengajuandisetujui/{id_adobe_pj}',[AdobeBPSController::class, 'pengajuandisetujui'])->name('adobebps.pengajuandisetujui'); 
-    Route::get('adobebps/pengajuanditolak/{id_adobe_pj}',[AdobeBPSController::class, 'pengajuanditolak'])->name('adobebps.pengajuanditolak'); 
+    Route::post('adobebps/ajukanpengganti',[AdobeBPSController::class, 'ajukanpengganti'])->name('adobebps.ajukanpengganti'); 
     Route::get('adobebps/indexpengajuanPJ',[AdobeBPSController::class, 'indexpengajuanPJ'])->name('adobebps.indexpengajuanPJ'); 
     Route::get('adobebps/statistik',[AdobeBPSController::class, 'indexstatistik'])->name('adobebps.indexstatistik'); 
     Route::post('adobebps/BAST',[AdobeBPSController::class, 'storeBAST'])->name('adobebps.storeBAST'); 
@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('adobebps', AdobeBPSController::class)->missing(function (Request $request) {
         return Redirect::route('adobebps.index');
         });  
+    
    
 
     Route::resource('album/{albumid}/edit', AlbumController::class)->middleware('owneralbum');
