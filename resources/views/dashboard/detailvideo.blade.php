@@ -130,7 +130,7 @@ $imageekstension=$Data->tipe_gambar;
                                         <li class="glide__slide p-0">
                                             <a href="#"> 
                                             <video class="player">
-                                                <source src="{{$Data->path}}" type="video/{{$Data->tipe_gambar}}"></source >
+                                                <source src="{{$Data->thumbnail_path}}" type="video/{{$Data->tipe_gambar}}"></source >
                                             </video> 
                                             </a>
                                         </li>
