@@ -76,8 +76,8 @@ class PetugasController extends Controller
         if($this->cek_sudah_di_layani_apa_belum($request->transaksi_id)){
  
             $this->validate($request, [
-                'image' => 'required|image',
-                'file' => 'mimes:zip,rar|file|max:100000',
+                'image' => 'mimes:zip,rar,mov,mp4,png,jpg,jpeg|file|max:100000',
+                'file' => 'mimes:zip,rar,mov,mp4|file|max:100000',
                 'kategori_file' => 'required',
                 'tags' => 'required',
             ]);
@@ -92,10 +92,51 @@ class PetugasController extends Controller
             $url_ori="";
             $url_thumbnail="";
             $url_file="";
+ 
+            $allowed_extensions = array("webm", "mp4", "ogv","mov"); 
+            $pattern = implode ("|" , $allowed_extensions ); 
+            DB::beginTransaction();
+            try {   
 
-            if($request->file('image')){  
+                
+            if($request->file('file')){ 
+                $file_name=date('YmdHi').$request->file('file')->getClientOriginalName();
+                $file= $request->file('file');
+
+                //menyimpan file original 
+                $file_path = Storage::disk('s3')->putFileAs('storage/file/',$file,$file_name); 
+                $url_file = Storage::disk('s3')->url('storage/file/'.$file_name);
+
+                //Memghilangkan spesial character di path 
+                $filezip =File::create([
+                    'path' => $url_file,
+                    'nama_file' => $file_name,
+                    'size' => $file->getSize(),  
+                    'type' => $file->extension(),
+                    'download'=>0
+                    ]);
+
+                $fileid=$filezip->id;
+                
+            }
+
+            if($request->file('image') ){ 
+                if (preg_match("/({$pattern})$/i", $request->file('image')->getClientOriginalName()) ){
+                   
+                    $video = $request->file('image');
+                     //menyimpan Video  
+                    $nameImage =  date('YmdHi').$request->file('image')->getClientOriginalName();
+                    Storage::disk('s3')->putFileAs('storage/file',$request->file('image'), $nameImage); 
+                    $url_thumbnail = Storage::disk('s3')->url('storage/file/'.$nameImage); 
+                    $url_ori = $url_file;
+
+
+                    // get ukuran dan ekstension Video
+                    $tipe_gambar=$video->extension();  
+                    $gambar_size=$video->getSize(); 
                     
-                //constant
+                } else{
+                    //constant
                     $image = $request->file('image');   
                     $nameImage =  date('YmdHi').$request->file('image')->getClientOriginalName(); 
                     ini_set('memory_limit','2048M'); 
@@ -117,32 +158,15 @@ class PetugasController extends Controller
                     //menyimpan gambar original  
                     Storage::disk('s3')->putFileAs('storage/uploadedGambar',$image, $nameImage); 
                     $url_ori = Storage::disk('s3')->url('storage/uploadedGambar/'.$nameImage);  
-  
+
                     // get ukuran dan ekstension gambar
                     $tipe_gambar=$image->extension();  
                     $gambar_size=$image->getSize(); 
+                }
+                    
+               
             }
 
-            if($request->file('file')){ 
-                $file_name=date('YmdHi').$request->file('file')->getClientOriginalName();
-                $file= $request->file('file');
-
-                //menyimpan file original 
-                $file_path = Storage::disk('s3')->putFileAs('storage/file/',$file,$file_name); 
-                $url_file = Storage::disk('s3')->url('storage/file/'.$file_name);
-
-                //Memghilangkan spesial character di path 
-                $filezip =File::create([
-                    'path' => $url_file,
-                    'nama_file' => $file_name,
-                    'size' => $file->getSize(),  
-                    'type' => $file->extension(),
-                    'download'=>0
-                    ]);
-
-                $fileid=$filezip->id;
-                
-            }
             
             if(strpos($request->link, 'freepik')){
                 $source_id=1;
@@ -210,8 +234,18 @@ class PetugasController extends Controller
                 report($e);
                 return false;
             }
+
+            DB::commit();
+            // all good 
+            $res = ['message' => 'Data inserted!'];
+
+
+            } catch (\Exception $e) { 
+                DB::rollback(); 
+                $res = ['message' => $e->getMessage()];
+            }
             
-            return redirect()->route('petugas.index')->with('message', 'Permintaan berhasil dilayani');
+            return redirect()->route('petugas.index')->with($res);
         }
 
         return redirect()->route('petugas.index')->with('message', 'Permintaan ini sudah pernah di Layani');

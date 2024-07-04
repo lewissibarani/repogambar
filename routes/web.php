@@ -90,6 +90,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardsController::class, 'dashboard'])->name('dashboard.halamandepan');  
         Route::post('/', [DashboardsController::class, 'dashboard'])->name('dashboard.halamandepan');  
         Route::get('DetailGambar/{gambar_id}', [DashboardsController::class, 'viewGambar'])->name('dashboard.detailgambar'); 
+        Route::get('DetailVideo/{video_id}', [DashboardsController::class, 'viewVideo'])->name('dashboard.detailvideo'); 
         Route::get('Download/{gambar_id}',[DashboardsController::class, 'downloadGambar'])->name('dashboard.downloadgambar');
         Route::get('DownloadFile/{file_id}',[DashboardsController::class, 'downloadFile'])->name('dashboard.downloadfile'); 
         Route::get('Statistik',[DashboardsController::class, 'statistik'])->name('petugas.statistik');

@@ -10,6 +10,7 @@
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
 @section('css')
+<link rel="stylesheet" href="/css/vendor/plyr.css"/> 
 <link rel="stylesheet" href="/css/vendor/glide.core.min.css"/>
 <link rel="stylesheet" href="/css/vendor/baguetteBox.min.css"/>
 <link rel="stylesheet" href="/css/vendor/introjs.min.css"/>
@@ -25,6 +26,8 @@
 <script src="/js/cs/responsivetab.js"></script> 
 <script src="/js/vendor/nouislider.min.js"></script>
 <script src="/js/vendor/tagify.min.js"></script> 
+<script src="/js/vendor/plyr.min.js"></script>
+
 @endsection
 
 @section('js_page')
@@ -33,6 +36,8 @@
 <script src="/js/pages/dashboard.default.js"></script>  
 <script src="/js/forms/controls.slider.js"></script>
 <script src="/js/forms/controls.tag.js"></script> 
+<script src="/js/plugins/players.js"></script>
+
 @endsection
 
 @section('content')
@@ -254,5 +259,4 @@ $(document).ready(function(){
             });
     } 
 </script> -->
-@endsection
- 
+@endsection 

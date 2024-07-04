@@ -271,6 +271,59 @@ class DashboardsController extends Controller
                 ]));
         
     }
+    public function viewVideo ($video_id)
+    {  
+
+        //Daftar Koleksiku
+        $Album= Album::with('user','gambar','children','parents')->where('creatorid',Auth::id())->get();
+
+        // Catat View Gambar
+        $gambar = Gambar::with('user','tagged')->find($video_id);
+
+        //menampilkan tags 
+        $Tags = $gambar->tagNames(); 
+ 
+
+        if($gambar->showGambar()){// this will test if the user viwed the gambar or not
+        // return $gambar;
+        }
+
+        $gambar->increment('views');//I have a separate column for views in the gambar table. This will increment the views column in the gambars table.
+      
+
+        GambarView::createViewLog($gambar); 
+        // End of View gambar
+
+        $Data = Gambar::with('user','source','kegunaan','file')->where('id',$video_id)->first();
+        $Transaksi=Transaksi::with('gambar')->where('gambar_id',$video_id)->first();
+        // Mencari item dengan tag yang sama untuk dijadikan rekomendasi
+        $Rekomendasi= Gambar::withAnyTag($Data->tagNames())->paginate(3);
+
+        //Start Read The Notification  
+        $Notifikasi = DB::table('notifications')->where(
+            [
+                ['type', '=', 'App\Notifications\PetugasNotification']
+            ]
+        )->get();
+        
+        foreach ($Notifikasi as $notification) {  
+            if(json_decode($notification->data)->kode_permintaan_id==$Transaksi->id_permintaan)
+            {
+                $Notifikasi = DB::table('notifications')->where('id', $notification->id)
+                ->update([  'read_at' => date("Y-m-d H:i:s")]);
+            }
+        }
+        //End Read The Notification
+        
+        return view('dashboard.detailvideo', 
+        compact([   'Data',
+                    'Album',
+                    'Rekomendasi',
+                    'Transaksi',
+                    'Tags',
+                ]));
+        
+    }
 
     public function downloadGambar ($gambar_id)
     {   

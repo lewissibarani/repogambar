@@ -38,6 +38,11 @@
                             <div class="card-body">
                                 <!-- Hover Controls Start -->
                                 <div class="row">
+                                @if(session()->has('message'))
+                                    <div class="alert alert-info">
+                                    {!! session()->get('message') !!}
+                                    </div>
+                                @endif
                                     <div class="col-12 col-sm-12 col-lg-12 col-xxl-11 text-end mb-1">
                                         <div class="col-12 col-sm-5 col-lg-3 col-xxl-2 mb-1">
                                             <div class="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 border border-separator bg-foreground search-sm">

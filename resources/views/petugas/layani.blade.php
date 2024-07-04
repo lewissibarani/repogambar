@@ -75,10 +75,13 @@
                     <div class="col-sm-12 col-form-label card no-shadow"> 
                                 <input type="file" class="form-control" 
                                 name="image"
-                                id="image_input"  /> 
+                                id="image_input" /> 
                         </div>   
                         <div class="col-md-12 mb-2"> 
                             <img class="card-img scale" id="preview-image-before-upload" hidden>
+                            <video class="col-md-12 mb-2" id="container-preview-video-before-upload" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" hidden>
+                                <source id="preview-video-before-upload" type="video/mp4"></source >
+                            </video>
                             <div class="container-image-preview">
                                     <div class ="drop-container"
                                         alt="preview image">  
@@ -193,21 +196,38 @@
         </div> 
 </div> 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
+
+<script type="text/javascript"> 
       
 $(document).ready(function (e) {
  
    
    $('#image_input').change(function(){
             
+    var fileExtension = ['mov', 'mp4']; 
     let reader = new FileReader();
- 
-    reader.onload = (e) => { 
+        
+    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+       
+    
+        reader.onload = (e) => { 
+            $('.container-image-preview').attr("hidden",true);
+            $('#preview-image-before-upload').attr('src', e.target.result).removeAttr('hidden'); 
+        }
+    
+        reader.readAsDataURL(this.files[0]); 
+    }else{  
+        // alert(e.target.result);     
+
         $('.container-image-preview').attr("hidden",true);
-        $('#preview-image-before-upload').attr('src', e.target.result).removeAttr('hidden'); 
+        $('#container-preview-video-before-upload').attr("hidden",false); 
+        var $source = $('#preview-video-before-upload');
+        $source[0].src = URL.createObjectURL(this.files[0]);
+        $source.parent()[0].load();    
+         
+        
     }
- 
-    reader.readAsDataURL(this.files[0]); 
+    
    
    });
    
