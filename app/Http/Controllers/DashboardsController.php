@@ -350,7 +350,7 @@ class DashboardsController extends Controller
         $file->increment('download'); 
 
         $filename= $file->nama_file; 
-        $url = Storage::disk('s3')->url('storage/file/'.$filename); 
+        $url = $file->path; 
 
         return response()->streamDownload(function ()  use ($url){
             echo file_get_contents($url);

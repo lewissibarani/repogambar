@@ -82,8 +82,7 @@ Route::middleware('auth')->group(function () {
         return Redirect::route('adobebps.index');
         });  
     
-   
-
+    
     Route::resource('album/{albumid}/edit', AlbumController::class)->middleware('owneralbum');
 
     Route::prefix('Dashboard')->group(function () {
@@ -142,6 +141,9 @@ Route::middleware('auth')->group(function () {
         Route::post('Tolak', [PetugasController::class, 'tolak'])->name('petugas.tolak');
         Route::post('Tambah', [PetugasController::class, 'tambah'])->name('petugas.tambah');  
     });
+
+    Route::get('file-upload', [PetugasController::class, 'testing'])->name('files.index');
+    Route::post('file-upload/upload-large-files', [PetugasController::class, 'uploadLargeFiles'])->name('files.upload.large');
 
 });
 

@@ -6,6 +6,13 @@
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php80” package as the default “PHP” programming language.
+
+<IfModule mod_php7.c>
+php_value post_max_size 1000M
+php_value upload_max_filesize 1000M
+php_value memory_limit 2048M 
+</IfModule>
+
 <IfModule mime_module>
   AddHandler application/x-httpd-ea-php80 .php .php8 .phtml
 </IfModule>

@@ -151,9 +151,28 @@
 
                             <div class="row mb-3">
                                 <label for="colFormLabel" class="font-weight-bold col-sm-2 col-form-label">File  <span class="font-italic"> (Optional) </span> </label>
-                                <div class="col-sm-10">
-                                    <div class="col-sm-12 col-form-label card no-shadow">
-                                        <input type="file" class="form-control" name="file"   />
+                                <div class="col-sm-10"> 
+                                    <div class="col-sm-12 col-form-label card no-shadow"> 
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <div id="upload-container">
+                                                    <button type="button" id="browseFile" class="btn btn-primary">Browse File</button>
+                                                </div>  
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="progress sh-2 mt-2" style=" display:none; ">
+                                                    <div class="progress-bar" 
+                                                    role="progressbar" 
+                                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" 
+                                                    style="width: 75%; height: 100%">75%</div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        
+                                        <input id="file" type="text" class="form-control" name="file"  hidden />
+                                        <input id="filename" class="form-control" name="filename" hidden  />
+                                        <input id="size" type="text" class="form-control" name="size"  hidden />
+                                        <input id="extension" class="form-control" name="extension"  hidden />
                                     </div>   
                                 </div>
                             </div>
@@ -183,7 +202,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer"> 
-                                <button type="submit" class="btn btn-primary" id="addEditConfirmButton">Kirim</button>
+                                <button type="submit" class="btn btn-primary" id="tombolkirimlayani">Kirim</button>
                             </div>
 
                         </form>
@@ -195,43 +214,106 @@
             </div>  
         </div> 
 </div> 
+ 
+<!-- Resumable JS -->
+<script src="https://cdn.jsdelivr.net/npm/resumablejs@1.1.0/resumable.min.js"></script> 
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script type="text/javascript"> 
-      
-$(document).ready(function (e) {
- 
-   
-   $('#image_input').change(function(){
-            
-    var fileExtension = ['mov', 'mp4']; 
-    let reader = new FileReader();
-        
-    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-       
-    
-        reader.onload = (e) => { 
-            $('.container-image-preview').attr("hidden",true);
-            $('#preview-image-before-upload').attr('src', e.target.result).removeAttr('hidden'); 
-        }
-    
-        reader.readAsDataURL(this.files[0]); 
-    }else{  
-        // alert(e.target.result);     
 
-        $('.container-image-preview').attr("hidden",true);
-        $('#container-preview-video-before-upload').attr("hidden",false); 
-        var $source = $('#preview-video-before-upload');
-        $source[0].src = URL.createObjectURL(this.files[0]);
-        $source.parent()[0].load();    
+$(document).ready(function (e) {
+     
+   
+    $('#image_input').change(function(){
+             
+     var fileExtension = ['mov', 'mp4']; 
+     let reader = new FileReader();
          
+     if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
         
-    }
-    
-   
-   });
-   
-});
+     
+         reader.onload = (e) => { 
+             $('.container-image-preview').attr("hidden",true);
+             $('#preview-image-before-upload').attr('src', e.target.result).removeAttr('hidden'); 
+         }
+     
+         reader.readAsDataURL(this.files[0]); 
+     }else{  
+         // alert(e.target.result);     
  
+         $('.container-image-preview').attr("hidden",true);
+         $('#container-preview-video-before-upload').attr("hidden",false); 
+         var $source = $('#preview-video-before-upload');
+         $source[0].src = URL.createObjectURL(this.files[0]);
+         $source.parent()[0].load();    
+          
+         
+     }
+     
+    
+    });
+    
+ });
+
+    let browseFile = $('#browseFile');
+    let resumable = new Resumable({
+        target: '{{ route('files.upload.large') }}',
+        query:{_token:'{{ csrf_token() }}'} ,// CSRF token
+        fileType: ['mp4','mov','rar','zip'],
+        headers: {
+            'Accept' : 'application/json'
+        },
+        testChunks: false,
+        throttleProgressCallbacks: 1,
+    });
+
+    resumable.assignBrowse(browseFile[0]);
+
+    resumable.on('fileAdded', function (file) {  
+        // trigger when file picked
+        showProgress();
+        $('#tombolkirimlayani').attr('disabled', true);
+        
+        resumable.upload() // to actually start uploading.
+    });
+
+    resumable.on('fileProgress', function (file) { // trigger when file progress update
+        updateProgress(Math.floor(file.progress() * 100));
+    });
+
+    resumable.on('fileSuccess', function (file, response) { // trigger when file upload complete
+        response = JSON.parse(response)
+        $('#file').attr('value', response.path);
+        $('#filename').attr('value', response.filename);
+        $('#size').attr('value', response.size);
+        $('#extension').attr('value', response.extension);
+        $('#tombolkirimlayani').attr('disabled', false);
+        
+    });
+
+    resumable.on('fileError', function (file, response) { // trigger when there is any error
+        alert('file uploading error.')
+    });
+
+
+    let progress = $('.progress');
+    function showProgress() {
+        progress.find('.progress-bar').css('width', '0%');
+        progress.find('.progress-bar').html('0%');
+        progress.find('.progress-bar').removeClass('bg-success');
+        progress.show();
+    }
+
+    function updateProgress(value) {
+        progress.find('.progress-bar').css('width', `${value}%`)
+        progress.find('.progress-bar').html(`${value}%`)
+    }
+
+    function hideProgress() {
+        progress.hide();
+    }
+
+       
 </script>
 @endsection

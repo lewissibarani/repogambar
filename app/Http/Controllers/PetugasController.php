@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;  
+
 use Illuminate\Http\Request;
 use App\Models\Kegunaan;
 use App\Models\Transaksi;
@@ -19,6 +23,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Image;
 use App\Exceptions\InvalidOrderException;
+
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
 class PetugasController extends Controller
 {
@@ -77,7 +84,7 @@ class PetugasController extends Controller
  
             $this->validate($request, [
                 'image' => 'mimes:zip,rar,mov,mp4,png,jpg,jpeg|file|max:100000',
-                'file' => 'mimes:zip,rar,mov,mp4|file|max:100000',
+                'judul' => 'required', 
                 'kategori_file' => 'required',
                 'tags' => 'required',
             ]);
@@ -92,42 +99,34 @@ class PetugasController extends Controller
             $url_ori="";
             $url_thumbnail="";
             $url_file="";
- 
+   
             $allowed_extensions = array("webm", "mp4", "ogv","mov"); 
             $pattern = implode ("|" , $allowed_extensions ); 
+
             DB::beginTransaction();
             try {   
-
-                
-            if($request->file('file')){ 
-                $file_name=date('YmdHi').$request->file('file')->getClientOriginalName();
-                $file= $request->file('file');
-
-                //menyimpan file original 
-                $file_path = Storage::disk('s3')->putFileAs('storage/file/',$file,$file_name); 
-                $url_file = Storage::disk('s3')->url('storage/file/'.$file_name);
+ 
+            if($request->file){  
 
                 //Memghilangkan spesial character di path 
                 $filezip =File::create([
-                    'path' => $url_file,
-                    'nama_file' => $file_name,
-                    'size' => $file->getSize(),  
-                    'type' => $file->extension(),
+                    'path' => $request->file,
+                    'nama_file' => $request->filename,
+                    'size' => $request->size,  
+                    'type' => $request->extension,
                     'download'=>0
-                    ]);
-
-                $fileid=$filezip->id;
-                
+                    ]); 
+                $fileid = $filezip->id; 
             }
 
             if($request->file('image') ){ 
                 if (preg_match("/({$pattern})$/i", $request->file('image')->getClientOriginalName()) ){
-                   
+                    ini_set('memory_limit','2048M');   
                     $video = $request->file('image');
                      //menyimpan Video  
                     $nameImage =  date('YmdHi').$request->file('image')->getClientOriginalName();
-                    Storage::disk('s3')->putFileAs('storage/file',$request->file('image'), $nameImage); 
-                    $url_thumbnail = Storage::disk('s3')->url('storage/file/'.$nameImage); 
+                    Storage::disk('s3')->putFileAs('videos',$request->file('image'), $nameImage); 
+                    $url_thumbnail = Storage::disk('s3')->url('videos/'.$nameImage); 
                     $url_ori = $url_file;
 
 
@@ -686,5 +685,48 @@ class PetugasController extends Controller
             ]);
 
         $fileid=$filezip->id;
+    }
+
+    public function testing() {
+        return view('petugas.testing');
+    }
+
+    public function uploadLargeFiles(Request $request) {
+        ini_set('max_execution_time', 300);
+        $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
+
+        if (!$receiver->isUploaded()) {
+            // file not uploaded
+        }
+
+        $fileReceived = $receiver->receive(); // receive file
+        if ($fileReceived->isFinished()) { // file uploading is complete / all chunks are uploaded
+            $file = $fileReceived->getFile(); // get file
+            $extension = $file->getClientOriginalExtension();
+            $fileName = str_replace('.'.$extension, '', $file->getClientOriginalName()); //file name without extenstion
+            $fileName .= '_' . md5(time()) . '.' . $extension; // a unique file name
+
+            $disk = Storage::disk(config('filesystems.default'));
+            $path = $disk->putFileAs('file', $file, $fileName);
+            $path = Storage::disk('s3')->url('file/'.$fileName);  
+
+            $size = $file->getSize();
+
+            // delete chunked file
+            unlink($file->getPathname());
+            return [
+                'path' =>  $path,
+                'filename' => $fileName,
+                'size' =>  $size,
+                'extension' => $extension,
+            ];
+        }
+
+        // otherwise return percentage informatoin
+        $handler = $fileReceived->handler();
+        return [
+            'done' => $handler->getPercentageDone(),
+            'status' => true
+        ];
     }
 }
