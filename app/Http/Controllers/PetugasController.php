@@ -130,6 +130,13 @@ class PetugasController extends Controller
                     $url_ori = $url_file;
 
 
+                    Storage::disk('s3')->put('storage/thumbnail/'.$nameImage, $thumbImage->stream());
+                    $thumbnailPath = Storage::disk('s3')->url('storage/thumbnail/'.$nameImage);  
+   
+                   //menyimpan gambar original 
+                   Storage::disk('s3')->putFileAs('storage/uploadedGambar/',$image,$nameImage); 
+                   $Path = Storage::disk('s3')->url('storage/uploadedGambar/'.$nameImage);  
+
                     // get ukuran dan ekstension Video
                     $tipe_gambar=$video->extension();  
                     $gambar_size=$video->getSize(); 
