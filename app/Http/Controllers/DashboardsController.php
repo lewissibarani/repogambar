@@ -327,19 +327,17 @@ class DashboardsController extends Controller
 
     public function downloadGambar ($gambar_id)
     {   
-        
-      
-
+         
         $gambar = Gambar::find($gambar_id); 
 
         $gambar->increment('download');  
         $gambarname= $gambar->nama_gambar;
-        $url = Storage::disk('s3')->url('storage/uploadedGambar/'.$gambarname); 
+        // $url = Storage::disk('s3')->url('storage/uploadedGambar/'.$gambarname); 
+        $url =  $gambar->thumbnail_path;
         
         return response()->streamDownload(function ()  use ($url){
             echo file_get_contents($url);
-        },$gambarname); 
-
+        },$gambarname);  
  
     } 
 

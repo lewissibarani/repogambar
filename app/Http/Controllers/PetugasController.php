@@ -121,7 +121,7 @@ class PetugasController extends Controller
 
             if($request->file('image') ){ 
                 if (preg_match("/({$pattern})$/i", $request->file('image')->getClientOriginalName()) ){
-                    ini_set('memory_limit','2048M');   
+                    ini_set('memory_limit','2048M');
                     $video = $request->file('image');
                      //menyimpan Video  
                     $nameImage =  date('YmdHi').$request->file('image')->getClientOriginalName();
