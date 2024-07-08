@@ -83,7 +83,7 @@ class PetugasController extends Controller
         if($this->cek_sudah_di_layani_apa_belum($request->transaksi_id)){
  
             $this->validate($request, [
-                'image' => 'mimes:zip,rar,mov,mp4,png,jpg,jpeg|file|max:100000',
+                'image' => 'mimes:mp4,png,jpg,jpeg|file|max:100000',
                 'judul' => 'required', 
                 'kategori_file' => 'required',
                 'tags' => 'required',
@@ -127,15 +127,7 @@ class PetugasController extends Controller
                     $nameImage =  date('YmdHi').$request->file('image')->getClientOriginalName();
                     Storage::disk('s3')->putFileAs('videos',$request->file('image'), $nameImage); 
                     $url_thumbnail = Storage::disk('s3')->url('videos/'.$nameImage); 
-                    $url_ori = $url_file;
-
-
-                    Storage::disk('s3')->put('storage/thumbnail/'.$nameImage, $thumbImage->stream());
-                    $thumbnailPath = Storage::disk('s3')->url('storage/thumbnail/'.$nameImage);  
-   
-                   //menyimpan gambar original 
-                   Storage::disk('s3')->putFileAs('storage/uploadedGambar/',$image,$nameImage); 
-                   $Path = Storage::disk('s3')->url('storage/uploadedGambar/'.$nameImage);  
+                    $url_ori = $url_file;    
 
                     // get ukuran dan ekstension Video
                     $tipe_gambar=$video->extension();  

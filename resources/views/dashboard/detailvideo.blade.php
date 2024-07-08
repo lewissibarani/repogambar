@@ -112,10 +112,7 @@ $imageekstension=$Data->tipe_gambar;
             <div class="col-12 col-xl-8 col-xxl-9 mb-5"> 
                 <a class="btn btn-quaternary" href="{{route('petugas.edit_layani',['transaksi_id' => $Transaksi->id])}}"> Edit Karya Ini</a> 
             </div>
-            @endif
-            <video class="player">
-                <source src="" type="video/{{$Data->tipe_gambar}}"></source >
-            </video>  
+            @endif 
             <div class="col-12 col-xl-8 col-xxl-9 mb-5">
                 <div class="card mb-5">
                     <!-- Content Start -->
@@ -302,7 +299,7 @@ $imageekstension=$Data->tipe_gambar;
                                                 <a class="dropdown-item"  download="{{$Data->nama_gambar}}" href="{{route('dashboard.downloadgambar', $Data->id)}}">
                                                     <div class="row">
                                                         <div class="col-2">
-                                                            Gambar
+                                                            Preview
                                                         </div>
                                                         <div class="col-10">
                                                             <p class="font-weight-bold">{{$image_size}} MB </p>

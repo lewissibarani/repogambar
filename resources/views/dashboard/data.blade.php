@@ -37,11 +37,11 @@ $ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";
                     
                 </div>
 
-                <video style="  position: relative; left: 50%;  transform: translateX(-50%);" 
+                <video style="position: relative; left: 50%;  transform: translateX(-50%);" 
                 id="container-preview-video-before-upload" 
                 onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" 
                 muted>
-                    <source src="{{$datas->path}}" id="preview-video-before-upload" type="video/{{$datas->tipe_gambar}}"></source >
+                    <source src="{{$datas->thumbnail_path}}" id="preview-video-before-upload" type="video/{{$datas->tipe_gambar}}"></source >
                 </video>
             </div>
             
