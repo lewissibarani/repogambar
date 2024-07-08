@@ -342,7 +342,8 @@ class DashboardsController extends Controller
     } 
 
     public function downloadFile ($file_id)
-    {  
+    {   
+
         $file = File::find($file_id); 
 
         $file->increment('download'); 

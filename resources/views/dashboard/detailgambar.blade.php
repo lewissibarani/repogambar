@@ -311,7 +311,7 @@ $imageekstension=$Data->tipe_gambar;
                                                         </div>
                                                     </div>
                                                 </a>
-                                                <a class="dropdown-item" download="{{$file_name}}" href="{{$routedownload}}">
+                                                <a class="dropdown-item"  href="{{$routedownload}}">
 
                                                     <div class="row">
                                                         <div class="col-2">
