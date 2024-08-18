@@ -44,6 +44,12 @@ class AuthenticatedSessionController extends Controller
 
     }
 
+
+    protected function authenticated(Request $request, $user) 
+    {
+        return redirect()->route('adobebps.indexstatistik');
+    }
+
     /**
      * Handle an incoming authentication request.
      *

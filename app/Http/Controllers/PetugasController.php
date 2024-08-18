@@ -134,10 +134,10 @@ class PetugasController extends Controller
                     $gambar_size=$video->getSize(); 
                     
                 } else{
+                    ini_set('memory_limit','2048M');  
                     //constant
                     $image = $request->file('image');   
                     $nameImage =  date('YmdHi').$request->file('image')->getClientOriginalName(); 
-                    ini_set('memory_limit','2048M'); 
 
                     //membuat thumbnail
                     $width = config('imageresize.size.width'); // your max width
@@ -695,7 +695,9 @@ class PetugasController extends Controller
         $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
 
         if (!$receiver->isUploaded()) {
-            // file not uploaded
+            return [
+                'Message' => "Ga terupload"
+            ];
         }
 
         $fileReceived = $receiver->receive(); // receive file
