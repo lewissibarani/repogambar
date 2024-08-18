@@ -40,15 +40,15 @@ class AuthenticatedSessionController extends Controller
 
         Auth::login($user);
 
-        return $this->authenticated($request, $user);
-
-    }
-
-
-    protected function authenticated(Request $request, $user) 
-    {
         return redirect()->route('adobebps.indexstatistik');
+
     }
+
+
+    // protected function authenticated(Request $request, $user) 
+    // {
+        
+    // }
 
     /**
      * Handle an incoming authentication request.
