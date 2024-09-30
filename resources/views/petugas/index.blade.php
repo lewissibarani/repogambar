@@ -104,7 +104,7 @@
                                 <table
                                         class=" table data-table-pagination data-table-standard responsive nowrap hover"
                                         id="datatableHover"
-                                        data-order='[[ 0, "desc" ]]'
+                                        data-order='[[ 5, "asc" ]]'
                                 >
                                     <thead>
                                         <tr>
@@ -114,6 +114,7 @@
                                             <th class="text-muted text-small text-uppercase">Link</th>
                                             <th class="text-muted text-small text-uppercase">Diupdate Terakhir</th>
                                             <th class="text-muted text-small text-uppercase">Status</th>
+                                            <th class="text-muted text-small text-uppercase">Petugas</th>
                                             <th class="text-muted text-small text-uppercase">Aksi</th>
                                         </tr>
                                     </thead>
@@ -143,6 +144,10 @@
                                             <td class="text-alternate">{{$update_terakhir}}</td>
                                             <td class="text-alternate">
                                                 @php echo $datas->permintaan->status->status;
+                                                @endphp
+                                            </td>
+                                            <td class="text-alternate">
+                                                @php echo $datas->user->name;
                                                 @endphp
                                             </td>
                                             <td class="text-alternate">
