@@ -14,6 +14,7 @@ class AdobeTransaksiPJ extends Model
     protected $fillable = [
         'userid',
         'email_adobe_lama_id',
+        'email_adobe_lama',
         'email_adobe_baru',   
         'pengganti_id',   
         'nohp',

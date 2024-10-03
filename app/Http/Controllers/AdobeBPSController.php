@@ -518,10 +518,13 @@ class AdobeBPSController extends Controller
             DB::beginTransaction();
                 try { 
 
+                    $email_adobe_lama =  AdobePJ::find($request->pjsaatini);
+                    $email_adobe_lama = $email_adobe_lama->email;
                    //record  
                     $TransaksiPJ = AdobeTransaksiPJ::create([
                     'userid' => Auth::id(),
                     'email_adobe_lama_id' => $request->pjsaatini,
+                    'email_adobe_lama' => $email_adobe_lama,
                     'email_adobe_baru' => $request->emailpengganti, 
                     'pengganti_id' => $request->pjpengganti, 
                     'nohp' => $request->nohppengganti, 

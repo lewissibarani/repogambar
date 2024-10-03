@@ -22,7 +22,7 @@
                     <div class="row mb-3">
                         <label for="inputState" class="col-sm-3 col-form-label font-weight-bold">Email Semula : </label>
                         <div class="col-sm-9 col-form-label">
-                            {{$id_adobe_pj->getpjlama->email}}
+                            {{$id_adobe_pj->email_adobe_lama}}
                         </div>
                     </div>
                     <div class="row mb-3">
