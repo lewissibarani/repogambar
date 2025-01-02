@@ -116,7 +116,7 @@
                                                 @endif
                                             </td>  
                                             <td class="text-alternate">
-                                            @if(($bulan->id+4)<=date('n')) 
+                                            @if(($bulan->id+4)<=12+date('n')) 
                                                 @if ($Data_Laporan
                                                 ->where('bulanid', $bulan->id)
                                                 ->where('userid', Auth::id())
