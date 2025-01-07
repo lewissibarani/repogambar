@@ -4,7 +4,7 @@
         <a href="/" class="text-dark"> 
             <!-- Logo can be added directly --> 
              <!-- <img src="/img/logo/logo-light.svg" alt="logo" />  -->
-            <h1 class="display">P I K <strong class="">A R T</strong></h1>
+            <h1 class="display text-light">P I K <strong class="text-light">A R T</strong></h1>
             <!-- Or added via css to provide different ones for different color themes -->
             <!-- <div class="img"></div> -->
         </a>
@@ -12,17 +12,11 @@
 
     <!-- User Menu Start -->
     <div class="user-container d-flex"  style="margin-left :3em;  "> 
-        <a href="#tentangaplikasi" class="nav-link text-dark">
+        <a href="#tentangaplikasi" class="nav-link text-light">
             <i data-acorn-icon="star" class="icon" data-acorn-size="18"></i>
-            <span class="label">Tentang Aplikasi</span>
+            <span class="label">Upload Karya Pribadi</span>
         </a>
-    </div>  
-    <div class="user-container d-flex"  style="margin-left :3em;  "> 
-        <a href="#koleksi" class="nav-link text-dark">
-            <i data-acorn-icon="support" class="icon" data-acorn-size="18"></i>
-            <span class="label">Daftar Koleksi</span>
-        </a>
-    </div> 
+    </div>   
     <!-- <div class="user-container d-flex"  style="margin-left :3em; margin-right: 50px;"> 
         <a href="#portofolio" class="nav-link text-dark">
             <i data-acorn-icon="tv" class="icon" data-acorn-size="18"></i>
@@ -101,5 +95,4 @@
         <!-- Menu Button End -->
     </div>
     <!-- Mobile Buttons End -->
-</div>
-<div class="nav-shadow"></div>
+</div> 

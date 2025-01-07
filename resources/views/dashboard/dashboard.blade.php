@@ -1,12 +1,13 @@
 @php 
-    $html_tag_data = ["override"=>'{"attributes" : { "placement": "horizontal"}}']; 
+    $html_tag_data = []; 
     $title = 'Beranda';
     $path = public_path();
     $description = 'Beranda';
     $breadcrumbs = ["/"=>"Home","/Dashboard"=>"Beranda"];
     $file = "";
 
-@endphp
+@endphp 
+
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 
 @section('css')
@@ -41,8 +42,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        
+    <div class="container"> 
         <div class="row"> 
                 @include('_layout.nav_secondary') 
             <div class="col">
@@ -86,18 +86,7 @@
                         <div class="col-12 col-xl-12 col-xxl-12 mb-12">
                             <div class="input-group mb-3" 
                             data-title="Mesin Pencari Gambar" data-intro="Masukkan kata kunci gambar yang ingin dicari" data-step="2">
-                                    <button id="tipepencarianButton" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Gambar
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a id="tipepencarianList" class="dropdown-item" href="#">Koleksi</a>
-                                        </li> 
-                                        <!-- <li>
-                                            <hr class="dropdown-divider" />
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Separated link</a></li> -->
-                                    </ul> 
+                                     
                                 <input type="text" placeholder="Kata kunci pencarian..." class="form-control" 
                                 aria-label="Sizing example input" 
                                 aria-describedby="inputGroup-sizing-default"
@@ -144,9 +133,7 @@
             </div>
         </div>  
     </div>  
-    
-    
-
+     
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -199,64 +186,5 @@ $(document).ready(function(){
     });
 });
 </script>
-
-
-<!-- <script> 
-    var ENDPOINT = "{{route('dashboard.halamandepan')}}";
-    if ('{{ env('APP_ENV') }}' == 'production')
-    {
-        ENDPOINT = "https://webapps.bps.go.id/pikart/Dashboard";
-    }
-    var page = 1;
-  
-    /*------------------------------------------ 
-    Call on Scroll 
-    --------------------------------------------*/
-    $(window).scroll(function () { 
  
-        if ($(window).scrollTop() + $(window).height() >= ($(document).height() - 20)) {
-            page++;
-            infinteLoadMore(page);
-        }
-    });
-  
-    /*------------------------------------------ 
-    call infinteLoadMore() 
-    --------------------------------------------*/
-    function infinteLoadMore(page) { 
-        $.ajax({
-                url: ENDPOINT + "?page=" + page,
-                datatype: "html",
-                type: "get",
-                beforeSend: function () {
-
-                    $('.auto-load').show();
-                }
-            })
-            .done(function (response) {
-                if (response.html == '') {
-                    $('.auto-load').html("We don't have more data to display :(");
-                    return;
-                }
-  
-                $('.auto-load').hide();
-                
-                $("#masonryCardsExample").append(response.html);
-                
-                // var $msnry = $('#masonryCardsExample').masonry({
-                // itemSelector: '.col',
-                // percentPosition: true, 
-                // }); 
-
-                // $msnry.imagesLoaded().progress( function() {  
-                // $msnry.masonry('layout'); 
-                // });
-                
-
-            })
-            .fail(function (jqXHR, ajaxOptions, thrownError) {
-                console.log('Server error occured');
-            });
-    } 
-</script> -->
 @endsection 

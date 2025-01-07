@@ -373,11 +373,11 @@
   --------------------------------------------------------------*/
   #hero {  
     /* background-image: url("https://nicolaslule.com/wp-content/uploads/hero-image-flex-example-1.jpg"); */
-    background-image: url(../landpage_asset/img/landpage_image.jpg);
+    background-image: url(../landpage_asset/img/landpage_image2.jpg);
     height: 100vh;
     align-self: center;
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;  
     align-items: center;
     justify-content: center;
   }
@@ -1655,8 +1655,7 @@
     background: #00c6ff;
   }
   
-  #footer .footer-newsletter {
-    padding: 50px 0;
+  #footer .footer-newsletter { 
     background: #f3f5fa;
     text-align: center;
     font-size: 15px;

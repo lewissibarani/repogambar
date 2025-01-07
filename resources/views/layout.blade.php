@@ -36,16 +36,14 @@
                     @endforeach
                     @endisset
                 >  
-                        @include('_layout.nav') 
+                @include('_layout.nav') 
                     
             </div>   
         @endif
     <main>
         @yield('content')
-    </main>
-    @if ($title!=="Beranda")  
+    </main> 
     @include('_layout.footer')
-    @endif
 </div>
 @stack('scripts')
 @include('_layout.modal_settings')
