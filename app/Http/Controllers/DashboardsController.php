@@ -149,7 +149,7 @@ class DashboardsController extends Controller
             //mencari berdasarkan Tag kemudian di gabung dengan Result berdasarkan Judul
             $Data=Gambar::with('file','source')->withAnyTag([$katakunci])->union($ResultbyJudul)
             ->where('booleantayang', 1)
-            ->orderBy('created_at', 'asc')
+            ->orderBy('created_at', 'desc')
              
             ->when($tipe_aset!=="null", function($query) use ($tipe_aset){
                 return $query->where('kategori_file',$tipe_aset);

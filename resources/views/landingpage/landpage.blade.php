@@ -9,7 +9,7 @@
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>""]) 
 
 @section('css')
-    <link rel="stylesheet" href="/css/landpagecss.css"/>
+    <link rel="stylesheet" href="/css/landpage_css.css"/>
 @endsection
 
 @push('pushcss')

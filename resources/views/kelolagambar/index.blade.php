@@ -268,7 +268,7 @@
                                     <div class="row mb-3">
                                         <label for="colFormLabel" class="col-sm-3 col-form-label">Link</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Link Shuttertock atau Freepik..." name="linkPermintaan"/>
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Link Freepik..." name="linkPermintaan"/>
                                             <div id="passwordHelpBlock" class="form-text">
                                                 Hanya bisa satu link gambar untuk satu permintaan.
                                             </div>
