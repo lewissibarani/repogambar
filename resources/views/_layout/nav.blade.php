@@ -385,6 +385,11 @@
                                     <span class="label">Daftar Pemutakhiran Penanggung Jawab Adobe</span>
                                 </a>
                             </li> 
+                            <li>
+                                <a href="{{route('adobebps.cetaklaporan')}}">
+                                    <span class="label">Cetak Laporan</span>
+                                </a>
+                            </li> 
                             @endif 
                 </ul> 
             </li> 

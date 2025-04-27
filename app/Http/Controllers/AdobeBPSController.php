@@ -30,15 +30,23 @@ class AdobeBPSController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {  
+        $Periode = AdobePeriode::orderBy('created_at' ,'desc')->get();  
+        $CurrentPeriode = AdobePeriode::latest()->first()->id;   
+        $selectedPeriode = $request->input('periode_dropdown_option',$CurrentPeriode);  
+        $value_selectedPeriode = AdobePeriode::find($selectedPeriode)->tahun_pengadaan;  
+
         $Data_Laporan   = null;
         $Data_BAST      = null;
         $persentase_pemanfaatan = null; 
 
         $userkodesatker = Auth::user()->kodesatker; 
         $UserPJSatker   = User::where('kodesatker',Auth::user()->kodesatker)->get();
-        $adobepj        = AdobePJ::with('getnamasatker','getuser')->where('kodesatkerid',Auth::user()->kodesatker)->get();  
+        $adobepj        = AdobePJ::with('getnamasatker','getuser')
+        ->where('kodesatkerid',Auth::user()->kodesatker)
+        ->where('adobe_periode_id', '=', $selectedPeriode) 
+        ->get();  
         //cek apakah satker yang login dapat adobe atau tidak
         if(!is_null($adobepj))
         {
@@ -51,7 +59,8 @@ class AdobeBPSController extends Controller
             $pembilang_pemanfaatan = DB::table('adobe_transaksi_kuesioner')
              ->select(DB::raw('count(*) as bulan'))
              ->where(['kodesatkerid' => Auth::user()->kodesatker,
-                     'memakaiadobe' => '1']) 
+                     'memakaiadobe' => '1',
+                     'periodeid' =>$selectedPeriode]) 
              ->groupBy('bulanid')
              ->get()
              ->count();
@@ -60,14 +69,16 @@ class AdobeBPSController extends Controller
 
             $Data_BAST = AdobeTransaksiBAST::with('user','periode','dokumen')
             ->where('kodesatkerid', '=', Auth::user()->kodesatker) 
-            ->where('periodeid', '=', 1)  
+            ->where('periodeid', '=', $selectedPeriode)  
             ->orderBy('updated_at','DESC')->first(); 
         }
 
         //Dokumen Bulan
         $Bulan = Bulan::all(); 
 
-        return view('adobebps.index',compact('UserPJSatker','adobepj','Data_Laporan','Bulan','Data_BAST','persentase_pemanfaatan'));   
+        return view('adobebps.index',compact('UserPJSatker','Periode','CurrentPeriode','selectedPeriode','value_selectedPeriode',
+        'adobepj','Data_Laporan','Bulan','Data_BAST',
+        'persentase_pemanfaatan'));   
     } 
     
     public function storelaporan(Request $request)
@@ -83,7 +94,7 @@ class AdobeBPSController extends Controller
                    //record database  
                     $fileDokumen = AdobeTransaksiKuesioner::create([
                     'userid' => Auth::id(),
-                    'periodeid' => 1,
+                    'periodeid' => $request->periodeid,
                     'bulanid' => $request->idbulan,
                     'kodesatkerid' => Auth::user()->kodesatker,
                     'memakaiadobe'=>$request->memakaiadobe,
@@ -470,21 +481,21 @@ class AdobeBPSController extends Controller
 
                     //menyimpan file original 
                     $file_path = Storage::disk('s3')->putFileAs('storage/file/',$file,$file_name); 
-                    $url_file = Storage::disk('s3')->url('storage/file/'.$file_name); 
+                    $url_file = Storage::disk('s3')->url('storage/file/'.$file_name);  
 
                    //record dokumen  
                     $fileDokumen = AdobeDokumen::create([
                     'jenisdokumenid' => 1,
-                    'path' => $url_file,
+                    'path' => $filePath ,
                     'filename'=>'BAST_'.Auth::user()->kodesatker."_".Auth::user()->name."_2024",
                     ]);
 
                    //record transaksi  
-                    $transaksi = AdobeTransaksiBAST::create([
+                    $transaksi = AdobeTransaksiBAST::create([ 
                     'dokumenid' => $fileDokumen->id,
                     'userid' => Auth::id(),
                     'kodesatkerid' => Auth::user()->kodesatker, 
-                    'periodeid' => 1, 
+                    'periodeid' => $request->input('periode_bast'), 
                     ]);
 
                     DB::commit();
@@ -492,8 +503,13 @@ class AdobeBPSController extends Controller
                     $res = ['message' => 'Data inserted!'];
 
                 } catch (\Exception $e) {
-                    Storage::disk('s3')->delete($url_file);
+                    // Storage::disk('s3')->delete($url_file);
                     DB::rollback();
+                     // Delete the file if it was uploaded and the transaction failed
+                    if (isset($filePath) && Storage::exists($filePath)) {
+                        Storage::delete($filePath);  // Delete the file from the storage
+                    }
+ 
                     $res = ['message' => $e->getMessage()];
                     // something went wrong
                 }
@@ -753,5 +769,10 @@ class AdobeBPSController extends Controller
 
          
        
+    }
+
+    public function cetaklaporan(){
+        return view('adobebps.cetaklaporan');   
+
     }
 }

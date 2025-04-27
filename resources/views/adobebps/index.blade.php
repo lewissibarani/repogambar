@@ -1,18 +1,21 @@
 @php
     $html_tag_data  = ["override"=>'{"attributes" : { "layout": "boxed" }}'];
-    $title          = 'Satker anda tidak mendapat lisensi adobe';
-
+    $title          = 'Satker anda tidak mendapat lisensi adobe untuk periode ini, jika ini merupakan kesalahan silahkan menghubungi admin. (082191492198)';
+    $cek_apakah_bisa_isi_kuesioner_dan_isi_BAST = 1;
     //Inforasi PJ dan Lisensi 
 
-    $namasatker     = "";
+    $namasatker = "";
     if(!is_null($adobepj)){
         foreach($adobepj as $satkername){
-            $namasatker = $satkername->getnamasatker->namasatker;
-            break;
-        }
-    $title          = 'Aktivitas Pemanfaatan Adobe CC Satker: '.$namasatker;  
-
+            $namasatker = $satkername->getnamasatker->namasatker; 
+            $title          = 'Aktivitas Pemanfaatan Adobe CC Satker: '.$namasatker;
+        } 
     }
+
+    if($title=="Satker anda tidak mendapat lisensi adobe untuk periode ini, jika ini merupakan kesalahan silahkan menghubungi admin. (082191492198)"){
+        $cek_apakah_bisa_isi_kuesioner_dan_isi_BAST = 0;
+    }
+
     $title_tabel    = 'Kuesioner Pemanfaatan Adobe';
     $description    = 'Portfolio Home Page';
     $breadcrumbs    = ["/"=>"Home", 
@@ -53,6 +56,7 @@
     <script src="/js/vendor/jquery.validate/additional-methods.min.js"></script>
     <script src="/js/vendor/baguetteBox.min.js"></script> 
     <script src="/js/cs/scrollspy.js"></script>
+    <script src="/js/cs/responsivetab.js"></script>
     <script src="/js/vendor/datatables.min.js"></script>
     <script src="/js/vendor/select2.full.min.js"></script>
 
@@ -63,7 +67,7 @@
     <script src="/js/plugins/datatable.boxedvariations.js"></script> 
     <script src="/js/forms/controls.select2.js"></script> 
     <script src="/js/forms/validation.js"></script>
-
+    <script src="/js/components/navs.js"></script>
 
 @endsection
 
@@ -99,15 +103,40 @@
 
                     
                 <!-- Title Start -->
-                <div class="col-12 col-md-7">
-                    <h4 class="mb-0 pb-0 display-6" id="title">{{ $title }}</h4>
-                    <!-- @include('_layout.breadcrumb',['breadcrumbs'=>$breadcrumbs]) -->
+                <div class="row">
+                    <div class="col-9 col-md-9">
+                        <h4 class="mb-0 pb-0 display-6" id="title">{{ $title }}</h4>
+                        <!-- @include('_layout.breadcrumb',['breadcrumbs'=>$breadcrumbs]) -->
+                    </div> 
+                    <div class="col-3 ">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"> <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">TAHUN PENGADAAN:</a> </li>
+                            <li class="nav-item"> 
+                            <form action="{{ route('adobebps.index') }}" method="GET">
+                                @csrf
+                                <select id="select2Multiple" class="form-select" name="periode_dropdown_option" onchange="this.form.submit()">
+                                    @foreach ($Periode as $periode)
+                                    <option value="{{ $periode->id }}" 
+                                        {{ (isset($selectedPeriode) 
+                                            && $selectedPeriode 
+                                            ==  $periode->id) ? 'selected' : '' }}>
+                                    {{ $periode->tahun_pengadaan }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </form>     
+                            </li>  
+                        </ul> 
+                    </div> 
                 </div>
+               
+
+                   
                 <!-- Title End -->
             </div>
         </div>
         <!-- Title and Top Buttons End -->
-
+        @if(!$cek_apakah_bisa_isi_kuesioner_dan_isi_BAST==0) 
         <div class="row gx-4 gy-5">
             <!-- Left Side Start -->
             <div class="col-12 col-xl-4 col-xxl-3">
@@ -254,5 +283,6 @@
             </div>
             <!-- Right Side End -->
         </div> 
+        @endif
     </div>
 @endsection

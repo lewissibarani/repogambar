@@ -3,7 +3,7 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title font-weight-bold" id="modalTitle">Edit Kuesioner {{$bulan->namabulan}}</h5>
+                                <h5 class="modal-title font-weight-bold" id="modalTitle">Edit Kuesioner Tahun Pegadaan {{$value_selectedPeriode}} bulan {{$bulan->namabulan}}  </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -11,7 +11,7 @@
                                 @csrf  
                                 <section class="scroll-section" id="labelSize"> 
                                 <input class="form-check-input" type="hidden" 
-                                                name="idbulan" id="gridRadios1" value="{{$bulan->id}}" > 
+                                                name="idbulan" id="gridRadios1" value="{{$bulan->id}}" >  
                                 <input class="form-check-input" type="hidden" 
                                                 name="idkuesioner" id="gridRadios1" value="{{$dataslaporan->id}}" > 
                                     <div class="row mb-12">

@@ -3,7 +3,7 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title font-weight-bold" id="modalTitle">Kuesioner Pemanfaatan Adobe {{$bulan->namabulan}}</h5>
+                                <h5 class="modal-title font-weight-bold" id="modalTitle">Kuesioner Pemanfaatan Adobe Tahun Pegadaan {{$value_selectedPeriode}} bulan {{$bulan->namabulan}} </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -12,9 +12,11 @@
                                 <section class="scroll-section" id="labelSize"> 
                                 <input class="form-check-input" type="hidden" 
                                                 name="idbulan" id="gridRadios1" value="{{$bulan->id}}" > 
+                                <input class="form-check-input" type="hidden" 
+                                                name="idperiode" id="gridRadios1" value="{{$selectedPeriode}}" > 
                                     <div class="row mb-12">
                                         <label for="colFormLabel" class="fw-bold col-sm-3 col-form-label">
-                                            Apakah selama bulan {{$bulan->namabulan}} memanfaatkan lisensi Adobe CC pengadaan tahun 2024 ?
+                                            Apakah selama bulan {{$bulan->namabulan}} memanfaatkan lisensi Adobe CC pengadaan tahun {{$value_selectedPeriode}} ?
                                         </label>
                                         <div class="col-sm-10">
                                             <div class="form-check">

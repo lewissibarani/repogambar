@@ -3,7 +3,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title font-weight-bold" id="modalTitle">Form Unggah BAST</h5>
+                                <h5 class="modal-title font-weight-bold" id="modalTitle">Form Unggah BAST Tahun {{$value_selectedPeriode}}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -16,11 +16,14 @@
                                         <label for="inputState" class="col-sm-3 col-form-label">File PDF</label>
                                         <div class="col-sm-9">
                                         <section class="scroll-section" id="default">
+                                            <input type="text" class="form-control" 
+                                            name="periode_bast" value="{{$selectedPeriode}}" required hidden> 
+
                                             <input type="file" class="form-control" 
                                             name="bast_input"
                                             id="bast_input"  />
                                             <div id="passwordHelpBlock" class="form-text">
-                                               Link download : <a href="https://bucket.bps.go.id/0320-dds-pikart/storage/file/2024_04_29_02_01_11BERITA%20ACARA%20INSTALASI%20DAN%20AKTIVASI%202024.docx" class="text-bold">Templat BAST Adobe 2024</a>
+                                               Link download : <a href="https://bucket.bps.go.id/0320-dds-pikart/storage/file/2024_04_29_02_01_11BERITA%20ACARA%20INSTALASI%20DAN%20AKTIVASI%202024.docx" class="text-bold">Templat BAST Adobe</a>
                                             </div>
                                         </section>
                                         </div>

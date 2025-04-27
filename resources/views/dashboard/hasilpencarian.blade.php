@@ -81,18 +81,7 @@
                         <div class="col-12 col-xl-12 col-xxl-12 mb-12">
                             <div class="input-group mb-3" 
                             data-title="Mesin Pencari Gambar" data-intro="Masukkan kata kunci gambar yang ingin dicari" data-step="2">
-                                    <button id="tipepencarianButton" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Gambar
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a id="tipepencarianList" class="dropdown-item" href="#">Koleksi</a>
-                                        </li> 
-                                        <!-- <li>
-                                            <hr class="dropdown-divider" />
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Separated link</a></li> -->
-                                    </ul> 
+                                     
                                 <input type="text" placeholder="Kata kunci pencarian..." class="form-control" 
                                 aria-label="Sizing example input" 
                                 aria-describedby="inputGroup-sizing-default"
@@ -141,64 +130,6 @@
         </div>  
     </div>  
     
-    
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script> 
-
-$(document).ready(function(){
-   
  
-    $('ul#filterTipeAset li').click( function() {
-        const value = $(this).attr('value'); 
-
-        if($(this).hasClass("btn-primary")){
-            $(this).removeClass("btn-primary");
-            $(this).addClass("btn-outline-primary");   
-            $("#tipeasetFilter").val(""); 
-        } else { 
-        $('ul#filterTipeAset li').removeClass();
-        $('ul#filterTipeAset li').addClass("btn btn-sm btn-icon btn-icon-end btn-outline-primary mb-1 me-1");  
-        $(this).removeClass("btn-outline-primary"); 
-        $(this).addClass("btn-primary"); 
-        $("#tipeasetFilter").val(value); 
-        }
-         
-
-        
-        
-    });
-
-    $("#tipepencarianList").click(function(){
-        if( $("#tipepencarianList").html()=="Gambar"){
-
-            $(".side-menu-container").animate({
-                width: "show"
-            }); 
-
-            $("#tipepencarianList").html("Koleksi");
-            $("#tipepencarianButton").html("Gambar"); 
-
-             //set filter
-            $("#tipepencarianFilter").val("Gambar"); 
-            
-
-        } else {
-
-            $(".side-menu-container").animate({
-                width: "hide"
-            }); 
-
-            $("#tipepencarianList").html("Gambar");
-            $("#tipepencarianButton").html("Koleksi");  
-
-            //set filter
-            $("#tipepencarianFilter").val("Koleksi"); 
-        }
-    });
-});
-</script> 
 @endsection
  

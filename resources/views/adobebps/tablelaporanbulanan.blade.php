@@ -84,11 +84,14 @@
                                     @foreach ($Bulan as $bulan) 
                                         <tr style="height:50px;">
                                             <td class="text-alternate">{{$bulan->id}}</td> 
-                                            <td class="fw-bold">{{$bulan->namabulan}}</td> 
+                                            <td class="fw-bold"> 
+                                                    {{str_replace('2025', $value_selectedPeriode+1,$bulan->namabulan)}}  
+                                            </td> 
                                             <td class="text-alternate"> 
                                                 @if ($Data_Laporan
                                                 ->where('bulanid', $bulan->id)
                                                 ->where('userid', Auth::id())
+                                                ->where('periodeid',$selectedPeriode)
                                                 ->first())
                                                     @foreach ($Data_Laporan as $data_laporan)
                                                         @if($data_laporan->bulanid==$bulan->id && $data_laporan->userid==Auth::id()) 
@@ -104,6 +107,7 @@
                                                 @if ($Data_Laporan
                                                 ->where('bulanid', $bulan->id)
                                                 ->where('userid', Auth::id())
+                                                ->where('periodeid',$selectedPeriode)
                                                 ->first())
                                                     @foreach ($Data_Laporan as $data_laporan)
                                                         @if($data_laporan->bulanid==$bulan->id && $data_laporan->userid==Auth::id()) 
@@ -115,34 +119,52 @@
                                                 -
                                                 @endif
                                             </td>  
-                                            <td class="text-alternate">
-                                            @if(($bulan->id+4)<=12+date('n')) 
-                                                @if ($Data_Laporan
-                                                ->where('bulanid', $bulan->id)
-                                                ->where('userid', Auth::id())
-                                                ->first())
-                                                            @php
-                                                            $dataslaporan = $Data_Laporan->where('userid', Auth::id())->where('bulanid', $bulan->id)->first();
-                                                            @endphp
-                                                            <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
-                                                                data-bs-toggle="modal"        
-                                                                data-bs-target="#kuesioneredit{{$bulan->id}}" 
-                                                                data-bs-placement="top" > 
-                                                                <i data-acorn-icon="pen"></i>  
-                                                            </button> 
-                                                            @include('adobebps.formeditPemanfaatan') 
-                                                @else 
-                                                            <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
-                                                                data-bs-toggle="modal"        
-                                                                data-bs-target="#kuesioner{{$bulan->id}}"
-                                                                data-bs-placement="top" > 
-                                                                <i data-acorn-icon="pen"></i>  
-                                                            </button> 
-                                                            @include('adobebps.formPemanfaatan')
-                                                @endif
-                                            @else
-                                                <p class="fst-italic">Belum bisa diisi</p>
-                                            @endif
+                                            <td class="text-alternate"> 
+                                                @php
+                                                    // Get the current date
+                                                    $currentMonth = date('n'); // Numeric month without leading zeros (1 to 12)
+                                                    $currentYear = date('Y');  // Current year (e.g., 2024, 2025)  
+
+                                                    // Define the second period (May 2025 to April 2026)
+                                                    $startSecondPeriodMonth = 5; // May
+                                                    $startSecondPeriodYear = $value_selectedPeriode;
+                                                    $endSecondPeriodMonth = 4;   // April
+                                                    $endSecondPeriodYear = $value_selectedPeriode+1;  
+
+                                                    $isSecondPeriodAllowed = ($currentYear > $startSecondPeriodYear || 
+                                                                            ($currentYear == $startSecondPeriodYear && $currentMonth >= $startSecondPeriodMonth)) &&
+                                                                            ($currentYear < $endSecondPeriodYear || 
+                                                                            ($currentYear == $endSecondPeriodYear && $currentMonth <= $endSecondPeriodMonth));
+                                                @endphp
+                                                @if($isSecondPeriodAllowed) 
+                                                    @if ($Data_Laporan
+                                                    ->where('bulanid', $bulan->id)
+                                                    ->where('userid', Auth::id())
+                                                    ->where('periodeid',$selectedPeriode)
+                                                    ->first())
+                                                                @php
+                                                                $dataslaporan = $Data_Laporan->where('userid', Auth::id())->where('bulanid', $bulan->id)->first();
+                                                                @endphp
+                                                                <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
+                                                                    data-bs-toggle="modal"        
+                                                                    data-bs-target="#kuesioneredit{{$bulan->id}}" 
+                                                                    data-bs-placement="top" > 
+                                                                    <i data-acorn-icon="pen"></i>  
+                                                                </button> 
+                                                                @include('adobebps.formeditPemanfaatan') 
+                                                    @else 
+                                                                <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
+                                                                    data-bs-toggle="modal"        
+                                                                    data-bs-target="#kuesioner{{$bulan->id}}"
+                                                                    data-bs-placement="top" > 
+                                                                    <i data-acorn-icon="pen"></i>  
+                                                                </button> 
+                                                                @include('adobebps.formPemanfaatan')
+                                                    @endif
+                                                @else
+                                                    <p class="fst-italic">Belum bisa diisi</p>
+                                                @endif 
+
                                             </td>                             
                                         </tr>
                                     @endforeach
