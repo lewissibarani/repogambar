@@ -358,7 +358,7 @@
             </li> 
             <li>
                 <a href="" > 
-                    <span class="label font-weight-bold">Adobe-BPS &nbsp </span> <span class="badge bg-primary">New</span>
+                    <span class="label font-weight-bold">Software Perwajahan Publikasi </span>
                 </a> 
                 <ul id="interfaceComponents"> 
 
