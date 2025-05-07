@@ -613,12 +613,8 @@
                                                                                 @else
                                                                                 <div>
                                                                                     <a href="{{$datatable->getAdobeTransaksiBAST->dokumen->path}}" > Unduh </a> 
-                                                                                </div>
-                                                                                    @php
-                                                                                    $timestamp_from_array = $datatable->getAdobeTransaksiBAST->dokumen->created_at;
-                                                                                    $tanggal_upload_bast  = date('Y-m-d h:i:s' , strtotime( $timestamp_from_array ) + 7 * 3600 );
-                                                                                @endphp 
-                                                                                <div class="text-muted text-small"> {{$tanggal_upload_bast}} </div> 
+                                                                                </div> 
+                                                                                <div class="text-muted text-small"> {{$datatable->getAdobeTransaksiBAST->dokumen->created_at}} </div> 
                                                                             @endif   
                                                                             </div> 
 

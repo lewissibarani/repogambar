@@ -1,4 +1,5 @@
 @php     
+
 @endphp  
   <!-- Hover Start -->
   <section class="scroll-section" id="hover">
@@ -88,6 +89,7 @@
                                                     {{str_replace('2025', $value_selectedPeriode+1,$bulan->namabulan)}}  
                                             </td> 
                                             <td class="text-alternate"> 
+                                                
                                                 @if ($Data_Laporan
                                                 ->where('bulanid', $bulan->id)
                                                 ->where('userid', Auth::id())
@@ -121,27 +123,34 @@
                                             </td>  
                                             <td class="text-alternate"> 
                                                 @php
-                                                    // Get the current date
-                                                    $currentMonth = date('n'); // Numeric month without leading zeros (1 to 12)
-                                                    $currentYear = date('Y');  // Current year (e.g., 2024, 2025)  
+                                                // Example: fetched from your form or DB
+                                                $monthId = $bulan->id; // from your <select> or DB
+                                                $fiscalYear = $value_selectedPeriode; // from your <select> or DB
 
-                                                    // Define the second period (May 2025 to April 2026)
-                                                    $startSecondPeriodMonth = 5; // May
-                                                    $startSecondPeriodYear = $value_selectedPeriode;
-                                                    $endSecondPeriodMonth = 4;   // April
-                                                    $endSecondPeriodYear = $value_selectedPeriode+1;  
+                                                // Base: May is your first fiscal month
+                                                $offset = $monthId - 1;
+                                                $baseMonth = 5;
 
-                                                    $isSecondPeriodAllowed = ($currentYear > $startSecondPeriodYear || 
-                                                                            ($currentYear == $startSecondPeriodYear && $currentMonth >= $startSecondPeriodMonth)) &&
-                                                                            ($currentYear < $endSecondPeriodYear || 
-                                                                            ($currentYear == $endSecondPeriodYear && $currentMonth <= $endSecondPeriodMonth));
+                                                // Calculate real month & year
+                                                $realMonth = (($baseMonth - 1 + $offset) % 12) + 1;
+                                                $realYear = $fiscalYear + floor(($baseMonth - 1 + $offset) / 12);
+
+                                                // Convert to timestamps
+                                                $selectedDate = strtotime("$realYear-$realMonth-01");
+                                                $minDate = strtotime("2024-05-01");
+                                                $currentDate = strtotime(date('Y-m-01'));
+
                                                 @endphp
-                                                @if($isSecondPeriodAllowed) 
-                                                    @if ($Data_Laporan
-                                                    ->where('bulanid', $bulan->id)
-                                                    ->where('userid', Auth::id())
-                                                    ->where('periodeid',$selectedPeriode)
-                                                    ->first())
+                                                @if ($selectedDate < $minDate)
+                                                    <p class="fst-italic">Belum bisa diisi</p>
+                                                    @elseif ($selectedDate > $currentDate)
+                                                    <p class="fst-italic">Belum bisa diisi</p>
+                                                    @else  
+                                                        @if ($Data_Laporan
+                                                        ->where('bulanid', $bulan->id)
+                                                        ->where('userid', Auth::id())
+                                                        ->where('periodeid',$selectedPeriode)
+                                                        ->first())
                                                                 @php
                                                                 $dataslaporan = $Data_Laporan->where('userid', Auth::id())->where('bulanid', $bulan->id)->first();
                                                                 @endphp
@@ -152,7 +161,7 @@
                                                                     <i data-acorn-icon="pen"></i>  
                                                                 </button> 
                                                                 @include('adobebps.formeditPemanfaatan') 
-                                                    @else 
+                                                        @else 
                                                                 <button type="button" class="btn btn-primary btn-icon btn-icon-start add-datatable" 
                                                                     data-bs-toggle="modal"        
                                                                     data-bs-target="#kuesioner{{$bulan->id}}"
@@ -160,11 +169,8 @@
                                                                     <i data-acorn-icon="pen"></i>  
                                                                 </button> 
                                                                 @include('adobebps.formPemanfaatan')
-                                                    @endif
-                                                @else
-                                                    <p class="fst-italic">Belum bisa diisi</p>
-                                                @endif 
-
+                                                        @endif   
+                                                @endif  
                                             </td>                             
                                         </tr>
                                     @endforeach

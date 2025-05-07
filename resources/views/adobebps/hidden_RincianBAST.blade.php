@@ -98,12 +98,8 @@
                                             <td class="text-alternate"> 
                                                 @if(is_null($datas->getAdobeTransaksiBAST))
                                                     - 
-                                                @else
-                                                @php
-                                                    $timestamp_from_array = $datas->getAdobeTransaksiBAST->dokumen->created_at;
-                                                    $tanggal_upload_bast =date('Y-m-d h:i:s' , strtotime( $timestamp_from_array ) + 7 * 3600 );
-                                                @endphp
-                                                    <p class="fst-italic" > {{$tanggal_upload_bast}} </p>
+                                                @else 
+                                                    <p class="fst-italic" > {{$datas->getAdobeTransaksiBAST->dokumen->updated_at}} </p>
                                                 @endif 
                                             </td> 
                                         </tr>

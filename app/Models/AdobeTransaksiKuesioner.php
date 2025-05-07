@@ -43,6 +43,12 @@ class AdobeTransaksiKuesioner extends Model
         'acrobat',
         'memakaiadobe', 
         'jumlah_lain',
+        'affinitypublisher',
+        'affinitydesigner',
+        'affinityphoto',
+        'canva',
+        'foxitpdf',
+        'nitropdf',
     ];
 
     public function user ()

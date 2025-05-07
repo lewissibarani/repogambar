@@ -1,4 +1,5 @@
 <!-- Add Edit Modal Start -->
+
 <div class="modal large fade" id="kuesioner{{$bulan->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -12,8 +13,8 @@
                                 <section class="scroll-section" id="labelSize"> 
                                 <input class="form-check-input" type="hidden" 
                                                 name="idbulan" id="gridRadios1" value="{{$bulan->id}}" > 
-                                <input class="form-check-input" type="hidden" 
-                                                name="idperiode" id="gridRadios1" value="{{$selectedPeriode}}" > 
+                                <input class="form-check-input" type="text" 
+                                                name="periodeid" id="gridRadios1" value="{{$selectedPeriode}}" > 
                                     <div class="row mb-12">
                                         <label for="colFormLabel" class="fw-bold col-sm-3 col-form-label">
                                             Apakah selama bulan {{$bulan->namabulan}} memanfaatkan lisensi Adobe CC pengadaan tahun {{$value_selectedPeriode}} ?
@@ -37,7 +38,7 @@
                                                 Aplikasi apa saja yang digunakan selama bulan {{$bulan->namabulan}} ?
                                             </label>
                                             <div class="row" id="checkboxeskuesioner">
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-3">
                                                     <div class="form-check"> 
                                                         <input class="form-check-input" type="checkbox" name="acrobat" id="acrobat" value="1"  >
                                                         <label class="form-check-label" for="acrobat">Acrobat</label>
@@ -47,9 +48,23 @@
                                                         <label class="form-check-label" for="aero">Aero</label>
                                                     </div> 
                                                     <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="affinitypublisher" id="affinitypublisher" value="1">
+                                                        <label class="form-check-label" for="affinitypublisher">Affinity Publisher</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="affinitydesigner" id="affinitydesigner" value="1">
+                                                        <label class="form-check-label" for="affinitydesigner">Affinity Designer</label>
+                                                    </div> 
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="affinityphoto" id="affinityphoto" value="1">
+                                                        <label class="form-check-label" for="affinityphoto">Affinity Photo</label>
+                                                    </div>  
+                                                    <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="aftereffect" id="aftereffect" value="1">
                                                         <label class="form-check-label" for="aftereffect">After Effect</label>
-                                                    </div> 
+                                                    </div>  
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="animate" id="animate" value="1">
                                                         <label class="form-check-label" for="animate">Animate</label>
@@ -59,22 +74,30 @@
                                                         <label class="form-check-label" for="audition">Audition</label>
                                                     </div>   
                                                     <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="canva" id="canva" value="1">
+                                                        <label class="form-check-label" for="affinityphoto">Canva</label>
+                                                    </div>
+                                                    <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="dimension" id="dimension" value="1">
                                                         <label class="form-check-label" for="dimension">Dimension</label>
-                                                    </div> 
-                                                </div>
-                                                <div class="col-sm-4">
+                                                    </div>  
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="dreamweaver" id="dreamweaver" value="1">
                                                         <label class="form-check-label" for="dreamweaver">Dreamweaver</label>
-                                                    </div> 
+                                                    </div>    
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="express" id="express" value="1">
                                                         <label class="form-check-label" for="express">Express</label>
-                                                    </div> 
+                                                    </div>                                        
+                                                </div>
+                                                <div class="col-sm-3">  
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="fresco" id="fresco" value="1">
                                                         <label class="form-check-label" for="fresco">Fresco</label>
+                                                    </div> 
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="foxitpdf" id="foxitpdf" value="1">
+                                                        <label class="form-check-label" for="foxitpdf">Foxit Pro PDF</label>
                                                     </div> 
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="illustrator" id="illustrator" value="1">
@@ -87,13 +110,17 @@
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="indesign" id="indesign" value="1">
                                                         <label class="form-check-label" for="indesign">InDesign</label>
-                                                    </div> 
-                                                </div>
-                                                <div class="col-sm-4">
+                                                    </div>  
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="lightroom" id="lightroom" value="1">
                                                         <label class="form-check-label" for="lightroom">Lightroom</label>
-                                                    </div> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">   
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="nitropdf" id="nitropdf" value="1">
+                                                        <label class="form-check-label" for="nitropdf">Nitro PDF</label>
+                                                    </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="photoshop" id="photoshop" value="1">
                                                         <label class="form-check-label" for="photoshop">Photoshop</label>
@@ -109,7 +136,7 @@
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="xd" id="xd" value="1">
                                                         <label class="form-check-label" for="xd">XD</label>
-                                                    </div> 
+                                                    </div>  
                                                 </div>
                                             </div> 
                                         </div>   

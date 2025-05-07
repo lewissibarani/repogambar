@@ -35,7 +35,7 @@ class AdobeBPSController extends Controller
         $Periode = AdobePeriode::orderBy('created_at' ,'desc')->get();  
         $CurrentPeriode = AdobePeriode::latest()->first()->id;   
         $selectedPeriode = $request->input('periode_dropdown_option',$CurrentPeriode);  
-        $value_selectedPeriode = AdobePeriode::find($selectedPeriode)->tahun_pengadaan;  
+        $value_selectedPeriode = AdobePeriode::find($selectedPeriode)->tahun_pengadaan;   
 
         $Data_Laporan   = null;
         $Data_BAST      = null;
@@ -44,15 +44,14 @@ class AdobeBPSController extends Controller
         $userkodesatker = Auth::user()->kodesatker; 
         $UserPJSatker   = User::where('kodesatker',Auth::user()->kodesatker)->get();
         $adobepj        = AdobePJ::with('getnamasatker','getuser')
-        ->where('kodesatkerid',Auth::user()->kodesatker)
-        ->where('adobe_periode_id', '=', $selectedPeriode) 
+        ->where('kodesatkerid',Auth::user()->kodesatker) 
         ->get();  
         //cek apakah satker yang login dapat adobe atau tidak
         if(!is_null($adobepj))
         {
             $Data_Laporan = AdobeTransaksiKuesioner::with('user','periode','bulan')
             ->where('kodesatkerid', '=', Auth::user()->kodesatker)
-            ->where('periodeid', '=', 1)  
+            ->where('periodeid', '=', $selectedPeriode)  
             ->orderBy('updated_at','DESC')
             ->get();
 
@@ -76,7 +75,8 @@ class AdobeBPSController extends Controller
         //Dokumen Bulan
         $Bulan = Bulan::all(); 
 
-        return view('adobebps.index',compact('UserPJSatker','Periode','CurrentPeriode','selectedPeriode','value_selectedPeriode',
+        return view('adobebps.index',compact('UserPJSatker','Periode',
+        'CurrentPeriode','selectedPeriode','value_selectedPeriode',
         'adobepj','Data_Laporan','Bulan','Data_BAST',
         'persentase_pemanfaatan'));   
     } 
@@ -98,19 +98,25 @@ class AdobeBPSController extends Controller
                     'bulanid' => $request->idbulan,
                     'kodesatkerid' => Auth::user()->kodesatker,
                     'memakaiadobe'=>$request->memakaiadobe,
-                    'acrobat'=>$request->acrobat,
-                    'aero'=>$request->aero, 
+                    'acrobat'=>$request->acrobat, 
+                    'aero'=>$request->aero,  
+                    'affinitypublisher'=>$request->affinitypublisher, 
+                    'affinitydesigner'=>$request->affinitydesigner, 
+                    'affinityphoto'=>$request->affinityphoto, 
                     'aftereffect'=>$request->aftereffect,
                     'animate'=>$request->animate,
                     'audition'=>$request->audition,
+                    'canva'=>$request->canva,
                     'dimension'=>$request->dimension,
                     'dreamweaver'=>$request->dreamweaver,
                     'express'=>$request->express,
                     'fresco'=>$request->fresco,
+                    'foxitpdf'=>$request->foxitpdf,
                     'illustrator'=>$request->illustrator,
                     'incopy'=>$request->incopy,
                     'indesign'=>$request->indesign,
                     'lightroom'=>$request->lightroom,
+                    'nitropdf'=>$request->nitropdf,
                     'photoshop'=>$request->photoshop,
                     'premierepro'=>$request->premierepro,
                     'premiererush'=>$request->premiererush,
@@ -181,10 +187,7 @@ class AdobeBPSController extends Controller
                     $fileDokumen->dashboard=$request->dashboard;
                     $fileDokumen->suratdokumen=$request->suratdokumen;
                     $fileDokumen->lainnya=$request->lainnya;
-                    $fileDokumen->jumlah_lain=$request->jumlah_lain; 
-
-                    $timestamp_from_array = date('Y-m-d h:i:s');
-                    $fileDokumen->updated_at=date('Y-m-d h:i:s' , strtotime( $timestamp_from_array ) + 7 * 3600 ); 
+                    $fileDokumen->jumlah_lain=$request->jumlah_lain;  
                     $fileDokumen->save();
                     DB::commit();
                     // all good
@@ -602,10 +605,7 @@ class AdobeBPSController extends Controller
         $AdobePJ->nama =  $AdobeTransaksiPJ->getuserpjbaru->name ;
         $AdobePJ->nohp =  $AdobeTransaksiPJ->nohp ;
         $AdobePJ->adobe_periode_id =  $periode->id ;
-        $AdobePJ->userid =  $AdobeTransaksiPJ->pengganti_id ;
-
-        $timestamp_from_array = date('Y-m-d h:i:s');
-        $AdobePJ->updated_at=date('Y-m-d h:i:s' , strtotime( $timestamp_from_array ) + 7 * 3600 ); 
+        $AdobePJ->userid =  $AdobeTransaksiPJ->pengganti_id ; 
         $AdobePJ->save();
   
         $user = User::find($AdobeTransaksiPJ->userid);
