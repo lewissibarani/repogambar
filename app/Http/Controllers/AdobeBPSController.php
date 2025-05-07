@@ -44,7 +44,8 @@ class AdobeBPSController extends Controller
         $userkodesatker = Auth::user()->kodesatker; 
         $UserPJSatker   = User::where('kodesatker',Auth::user()->kodesatker)->get();
         $adobepj        = AdobePJ::with('getnamasatker','getuser')
-        ->where('kodesatkerid',Auth::user()->kodesatker) 
+        ->where('kodesatkerid',Auth::user()->kodesatker)   
+        ->where('adobe_periode_id',$selectedPeriode)   
         ->get();  
         //cek apakah satker yang login dapat adobe atau tidak
         if(!is_null($adobepj))
@@ -69,16 +70,15 @@ class AdobeBPSController extends Controller
             $Data_BAST = AdobeTransaksiBAST::with('user','periode','dokumen')
             ->where('kodesatkerid', '=', Auth::user()->kodesatker) 
             ->where('periodeid', '=', $selectedPeriode)  
-            ->orderBy('updated_at','DESC')->first(); 
-        }
+            ->orderBy('updated_at','DESC')->first();  
+        }  
+          //Dokumen Bulan
+          $Bulan = Bulan::all(); 
 
-        //Dokumen Bulan
-        $Bulan = Bulan::all(); 
-
-        return view('adobebps.index',compact('UserPJSatker','Periode',
-        'CurrentPeriode','selectedPeriode','value_selectedPeriode',
-        'adobepj','Data_Laporan','Bulan','Data_BAST',
-        'persentase_pemanfaatan'));   
+          return view('adobebps.index',compact('UserPJSatker','Periode',
+          'CurrentPeriode','selectedPeriode','value_selectedPeriode',
+          'adobepj','Data_Laporan','Bulan','Data_BAST',
+          'persentase_pemanfaatan'));  
     } 
     
     public function storelaporan(Request $request)

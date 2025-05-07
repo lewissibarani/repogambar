@@ -78,7 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::get('adobebps/deletedokumen/{dokumen_id}',[AdobeBPSController::class, 'deletedokumen'])->name('adobebps.deletedokumen');
     Route::post('adobebps/uploaddokumenstore',[AdobeBPSController::class, 'uploaddokumenstore'])->name('adobebps.uploaddokumenstore'); 
     Route::get('adobebps/templatelaporan',[AdobeBPSController::class, 'templatelaporan'])->name('adobebps.templatelaporan'); 
-    Route::get('adobebps/cetaklaporan',[AdobeBPSController::class, 'cetaklaporan'])->name('adobebps.cetaklaporan'); 
+    Route::get('adobebps/cetaklaporan',[AdobeBPSController::class, 'cetaklaporan'])->name('adobebps.cetaklaporan');  
     Route::resource('adobebps', AdobeBPSController::class)->missing(function (Request $request) {
         return Redirect::route('adobebps.index');
         });  

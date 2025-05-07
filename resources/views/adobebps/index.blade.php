@@ -3,17 +3,20 @@
     $title          = 'Satker anda tidak mendapat lisensi adobe untuk periode ini, jika ini merupakan kesalahan silahkan menghubungi admin. (082191492198)';
     $cek_apakah_bisa_isi_kuesioner_dan_isi_BAST = 1;
     //Inforasi PJ dan Lisensi 
+    $cek_apakah_penerima_lisensi=false;
 
     $namasatker = "";
     if(!is_null($adobepj)){
         foreach($adobepj as $satkername){
             $namasatker = $satkername->getnamasatker->namasatker; 
             $title          = 'Aktivitas Pemanfaatan Adobe CC Satker: '.$namasatker;
-        } 
+        }  
+        $cek_apakah_penerima_lisensi=true;
     }
 
     if($title=="Satker anda tidak mendapat lisensi adobe untuk periode ini, jika ini merupakan kesalahan silahkan menghubungi admin. (082191492198)"){
         $cek_apakah_bisa_isi_kuesioner_dan_isi_BAST = 0;
+        $title="";
     }
 
     $title_tabel    = 'Kuesioner Pemanfaatan Adobe';
@@ -128,13 +131,10 @@
                             </li>  
                         </ul> 
                     </div> 
-                </div>
-               
-
-                   
+                </div> 
                 <!-- Title End -->
             </div>
-        </div>
+        </div> 
         <!-- Title and Top Buttons End -->
         @if(!$cek_apakah_bisa_isi_kuesioner_dan_isi_BAST==0) 
         <div class="row gx-4 gy-5">
@@ -145,8 +145,8 @@
                 <div class="card">
                     <div class="card-body mb-n5"> 
                         <div class="mb-3">
-                             <!-- Upload Dokumen Button Start --> 
-                             <div class="row">
+                            <!-- Upload Dokumen Button Start --> 
+                            <div class="row">
                                 <div class="col-6">
                                     <button type="button" class="btn col-12 btn-primary btn-icon btn-icon-start add-datatable" 
                                         data-bs-toggle="modal"        
@@ -165,8 +165,8 @@
                                     </button>   
                                     @include('adobebps.formpenggantianpj')    
                                 </div>
-                             </div>
-                           
+                            </div>
+                        
 
                             
                         </div>
@@ -202,7 +202,7 @@
                                     </div>
                                 </div>
                             </div> 
- 
+
                             <div class="row g-0 align-items-center mb-2">
                                 <div class="col-auto">
                                     <div class="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
@@ -241,12 +241,12 @@
                                         }else{  
                                             $pp = URL::to('/').'/img/illustration/user-profile-picture-'.rand(1,6).'.jpg';
                                         }
-                                      echo '<div class="row align-items-start ">'.
-                                               ' <div class="col-2 align-self-center " style="margin-b:350px;"> '.
-                                                   ' <img src="'.$pp.'" class="card-img rounded-xl sh-6 sw-6" alt="thumb">'.
+                                    echo '<div class="row align-items-start ">'.
+                                            ' <div class="col-2 align-self-center " style="margin-b:350px;"> '.
+                                                ' <img src="'.$pp.'" class="card-img rounded-xl sh-6 sw-6" alt="thumb">'.
                                                 '</div>'.
                                                 '<div class="col-10 align-self-center " style="margin-b:350px;"> '.
-                                                   ' <div class="list-group-item" style="border:0px">'.
+                                                ' <div class="list-group-item" style="border:0px">'.
                                                         '<div class="d-flex w-100 justify-content-between">'.
                                                         '<h5 class="mb-1">'.$pj->nama.'</h5>'.
                                                         '</div>'.
@@ -283,6 +283,8 @@
             </div>
             <!-- Right Side End -->
         </div> 
-        @endif
+        @else
+        @include('adobebps.errorpage')   
+        @endif  
     </div>
 @endsection
